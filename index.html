@@ -128,17 +128,24 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 .dest-corpo p{font-size:.92rem;color:var(--muted)}
 
 /* Trabalhos */
-.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:34px}
-.chip{padding:10px 20px;border-radius:999px;background:var(--creme);border:1.5px solid var(--vinho);color:var(--vinho);cursor:pointer;font-weight:500;font-size:.9rem;text-transform:capitalize;transition:background .2s,color .2s}
-.chip:hover{background:#fff}
-.chip[aria-pressed="true"]{background:var(--vinho);color:var(--creme);font-weight:600}
-.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.work{padding:12px;transition:opacity .35s,transform .35s}
-.work[hidden]{display:none}
-.work.out{opacity:0;transform:scale(.96)}
-.work .ph{aspect-ratio:4/5}
-.work-info{padding:14px 6px 4px}
-.work-info h3{font-size:1.05rem;font-weight:700}
+/* Trabalhos: um carrossel por nicho */
+.nicho-bloco{margin-bottom:44px}
+.nicho-bloco:last-child{margin-bottom:0}
+.nicho-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px}
+.nicho-head h3{font-size:1.3rem;font-weight:700;text-transform:capitalize;color:var(--vinho)}
+.nicho-nav{display:flex;gap:8px;flex:none}
+.nicho-nav button{width:40px;height:40px;border-radius:50%;background:var(--creme);border:1.5px solid var(--vinho);color:var(--vinho);cursor:pointer;display:grid;place-items:center;transition:background .2s,color .2s}
+.nicho-nav button:hover{background:var(--vinho);color:var(--creme)}
+.nicho-nav button:disabled{opacity:.35;cursor:default;background:var(--creme);color:var(--vinho)}
+.carousel{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x proximity;padding:4px 4px 14px;scrollbar-width:none}
+.carousel::-webkit-scrollbar{display:none}
+.work-card{flex:0 0 auto;width:220px;scroll-snap-align:start;text-decoration:none;display:block}
+.work-card .ph{aspect-ratio:9/16;position:relative}
+.work-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.work-card .play{width:56px;height:56px}
+.work-card .play svg{width:20px;height:20px}
+.work-info{padding:12px 4px 0}
+.work-info h3{font-size:1rem;font-weight:700;color:var(--tinta)}
 .work-info p{font-size:.85rem;color:var(--muted)}
 .tag{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--vinho);margin-bottom:4px}
 
@@ -221,7 +228,7 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
 /* Responsivo */
 @media (max-width:980px){
   .dest-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}
-  .gallery,.serv-grid{grid-template-columns:repeat(2,1fr)}
+  .serv-grid{grid-template-columns:repeat(2,1fr)}
   .metrics{grid-template-columns:repeat(2,1fr)}
   .results{grid-template-columns:1fr}
 }
@@ -237,7 +244,9 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
   .sec{padding:72px 0}
 }
 @media (max-width:560px){
-  .gallery,.serv-grid{grid-template-columns:1fr}
+  .serv-grid{grid-template-columns:1fr}
+  .work-card{width:160px}
+  .nicho-head h3{font-size:1.1rem}
   .hero-stats{gap:8px}
   .stat{padding:12px 10px}
   .cta-row .btn{width:100%}
@@ -339,10 +348,9 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
 <section class="sec sec-rosa" id="trabalhos">
   <div class="wrap">
     <span class="eyebrow reveal">Trabalhos por nicho</span>
-    <h2 class="sec-title reveal">Escolha o seu <span class="hl">nicho</span></h2>
-    <p class="sec-sub reveal">Filtre e veja só os trabalhos do segmento da sua marca.</p>
-    <div class="filters reveal" id="filters" role="group" aria-label="Filtrar trabalhos por nicho"></div>
-    <div class="gallery" id="gallery" aria-live="polite"></div>
+    <h2 class="sec-title reveal">Trabalhos por <span class="hl">nicho</span></h2>
+    <p class="sec-sub reveal">Arraste ou use as setas para ver mais. Passe o mouse em cima de um vídeo para assistir a uma prévia sem som.</p>
+    <div id="nichoBlocos"></div>
   </div>
 </section>
 
@@ -484,26 +492,29 @@ const DESTAQUES = [
     titulo: "Título do conteúdo 03", contexto: "Marca 03, nicho aqui" }
 ];
 
-/* Nichos que atendo (viram os botões de filtro). */
+/* Nichos que atendo (cada um vira uma fileira de carrossel). */
 const NICHOS = ["beleza", "skincare", "moda", "comida", "casa e decoração", "pet", "tech"];
 
-/* Trabalhos da galeria.
+/* Trabalhos, organizados em carrossel por nicho.
    nicho  = precisa ser igual a um dos nichos acima.
-   formato = texto da legenda do bloco (ex.: "vídeo 9:16").
-   imagem = endereço da imagem real (ex.: "trabalhos/01.jpg"). Deixe "" para usar o degradê. */
+   formato = texto da legenda do bloco quando ainda não há vídeo (ex.: "vídeo 9:16").
+   imagem = capa/poster do vídeo (ex.: "trabalhos/01.jpg"). Deixe "" para usar o degradê.
+   video  = endereço do arquivo de vídeo (ex.: "trabalhos/01.mp4"). Deixe "" para não ativar a prévia.
+            Quando preenchido, ao passar o mouse o vídeo toca sozinho, sem som.
+   link   = para onde vai quando clicam no card (ex.: o link do Reels). Deixe "#" se ainda não tiver. */
 const TRABALHOS = [
-  { titulo: "Trabalho 01", marca: "Marca 01", nicho: "beleza",           formato: "vídeo 9:16", imagem: "" },
-  { titulo: "Trabalho 02", marca: "Marca 02", nicho: "skincare",         formato: "vídeo 9:16", imagem: "" },
-  { titulo: "Trabalho 03", marca: "Marca 03", nicho: "moda",             formato: "fotos 4:5",  imagem: "" },
-  { titulo: "Trabalho 04", marca: "Marca 04", nicho: "comida",           formato: "vídeo 9:16", imagem: "" },
-  { titulo: "Trabalho 05", marca: "Marca 05", nicho: "casa e decoração", formato: "fotos 4:5",  imagem: "" },
-  { titulo: "Trabalho 06", marca: "Marca 06", nicho: "pet",              formato: "vídeo 9:16", imagem: "" },
-  { titulo: "Trabalho 07", marca: "Marca 07", nicho: "tech",             formato: "vídeo 9:16", imagem: "" },
-  { titulo: "Trabalho 08", marca: "Marca 08", nicho: "beleza",           formato: "unboxing 9:16", imagem: "" },
-  { titulo: "Trabalho 09", marca: "Marca 09", nicho: "skincare",         formato: "fotos 4:5",  imagem: "" },
-  { titulo: "Trabalho 10", marca: "Marca 10", nicho: "moda",             formato: "vídeo 9:16", imagem: "" },
-  { titulo: "Trabalho 11", marca: "Marca 11", nicho: "comida",           formato: "fotos 4:5",  imagem: "" },
-  { titulo: "Trabalho 12", marca: "Marca 12", nicho: "tech",             formato: "unboxing 9:16", imagem: "" }
+  { titulo: "Trabalho 01", marca: "Marca 01", nicho: "beleza",           formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
+  { titulo: "Trabalho 02", marca: "Marca 02", nicho: "skincare",         formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
+  { titulo: "Trabalho 03", marca: "Marca 03", nicho: "moda",             formato: "fotos 4:5",  imagem: "", video: "", link: "#" },
+  { titulo: "Trabalho 04", marca: "Marca 04", nicho: "comida",           formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
+  { titulo: "Trabalho 05", marca: "Marca 05", nicho: "casa e decoração", formato: "fotos 4:5",  imagem: "", video: "", link: "#" },
+  { titulo: "Trabalho 06", marca: "Marca 06", nicho: "pet",              formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
+  { titulo: "Trabalho 07", marca: "Marca 07", nicho: "tech",             formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
+  { titulo: "Trabalho 08", marca: "Marca 08", nicho: "beleza",           formato: "unboxing 9:16", imagem: "", video: "", link: "#" },
+  { titulo: "Trabalho 09", marca: "Marca 09", nicho: "skincare",         formato: "fotos 4:5",  imagem: "", video: "", link: "#" },
+  { titulo: "Trabalho 10", marca: "Marca 10", nicho: "moda",             formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
+  { titulo: "Trabalho 11", marca: "Marca 11", nicho: "comida",           formato: "fotos 4:5",  imagem: "", video: "", link: "#" },
+  { titulo: "Trabalho 12", marca: "Marca 12", nicho: "tech",             formato: "unboxing 9:16", imagem: "", video: "", link: "#" }
 ];
 
 /* Seis serviços. */
@@ -579,29 +590,64 @@ $("#destGrid").innerHTML = DESTAQUES.map((d, i) => `
 /* Link ainda não definido ("#"): não rola para o topo ao clicar */
 document.querySelectorAll('#destGrid a[href="#"]').forEach(a => a.addEventListener("click", e => e.preventDefault()));
 
-/* Trabalhos e filtros */
-const filtros = $("#filters");
-["todos", ...NICHOS].forEach((n, i) => {
-  const b = document.createElement("button");
-  b.type = "button"; b.className = "chip"; b.textContent = n; b.dataset.nicho = n;
-  b.setAttribute("aria-pressed", i === 0 ? "true" : "false");
-  filtros.appendChild(b);
+/* Trabalhos: um carrossel por nicho, com prévia em vídeo ao passar o mouse */
+const iconePlayPeq = '<span class="play" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>';
+function cartaoTrabalho(t, i) {
+  const miolo = t.video
+    ? `<div class="ph ${i % 2 ? "alt" : ""}"><video class="work-video" muted loop playsinline preload="none" poster="${esc(t.imagem)}" aria-label="Prévia do vídeo: ${esc(t.titulo)}, ${esc(t.marca)}"><source src="${esc(t.video)}" type="video/mp4"></video></div>`
+    : bloco(i % 2 ? "alt" : "", t.imagem, t.titulo + ", " + t.marca, t.formato, iconePlayPeq);
+  return `
+  <a class="work-card reveal" href="${esc(t.link)}" target="_blank" rel="noopener noreferrer" aria-label="Ver trabalho: ${esc(t.titulo)}, ${esc(t.marca)}">
+    ${miolo}
+    <div class="work-info"><h3>${esc(t.titulo)}</h3><p>${esc(t.marca)}</p></div>
+  </a>`;
+}
+const nichoBlocos = $("#nichoBlocos");
+nichoBlocos.innerHTML = NICHOS.map(n => {
+  const trabalhosDoNicho = TRABALHOS.filter(t => t.nicho === n);
+  if (!trabalhosDoNicho.length) return "";
+  const idCarrossel = "carr-" + n.replace(/[^a-z0-9]+/gi, "-");
+  return `
+  <div class="nicho-bloco">
+    <div class="nicho-head">
+      <h3>${esc(n)}</h3>
+      <div class="nicho-nav">
+        <button type="button" data-alvo="${idCarrossel}" data-dir="-1" aria-label="Trabalhos anteriores de ${esc(n)}">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button type="button" data-alvo="${idCarrossel}" data-dir="1" aria-label="Próximos trabalhos de ${esc(n)}">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="carousel" id="${idCarrossel}" tabindex="0" aria-label="Trabalhos de ${esc(n)}, arraste para o lado para ver mais">
+      ${trabalhosDoNicho.map(cartaoTrabalho).join("")}
+    </div>
+  </div>`;
+}).join("");
+
+/* Setas do carrossel: rolam uma "página" por clique */
+nichoBlocos.addEventListener("click", e => {
+  const b = e.target.closest(".nicho-nav button"); if (!b) return;
+  const carr = document.getElementById(b.dataset.alvo); if (!carr) return;
+  carr.scrollBy({ left: carr.clientWidth * 0.8 * Number(b.dataset.dir), behavior: reduzir ? "auto" : "smooth" });
 });
-const galeria = $("#gallery");
-galeria.innerHTML = TRABALHOS.map((t, i) => `
-  <article class="work glass" data-nicho="${esc(t.nicho)}">
-    ${bloco(i % 3 === 1 ? "alt" : "", t.imagem, t.titulo + ", " + t.marca, t.formato)}
-    <div class="work-info"><span class="tag">${esc(t.nicho)}</span><h3>${esc(t.titulo)}</h3><p>${esc(t.marca)}</p></div>
-  </article>`).join("");
-filtros.addEventListener("click", e => {
-  const b = e.target.closest(".chip"); if (!b) return;
-  filtros.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c === b ? "true" : "false"));
-  const alvo = b.dataset.nicho;
-  galeria.querySelectorAll(".work").forEach(w => {
-    const mostrar = alvo === "todos" || w.dataset.nicho === alvo;
-    if (mostrar) { w.hidden = false; requestAnimationFrame(() => w.classList.remove("out")); }
-    else { w.classList.add("out"); w.hidden = true; }
-  });
+/* Setas do teclado também navegam quando o carrossel está focado */
+nichoBlocos.querySelectorAll(".carousel").forEach(c => c.addEventListener("keydown", e => {
+  if (e.key === "ArrowRight") { c.scrollBy({ left: c.clientWidth * 0.8, behavior: reduzir ? "auto" : "smooth" }); }
+  if (e.key === "ArrowLeft") { c.scrollBy({ left: -c.clientWidth * 0.8, behavior: reduzir ? "auto" : "smooth" }); }
+}));
+/* Links ainda não definidos ("#"): não recarregam a página ao clicar */
+nichoBlocos.querySelectorAll('a[href="#"]').forEach(a => a.addEventListener("click", e => e.preventDefault()));
+/* Prévia sem som: toca o vídeo ao passar o mouse (ou focar) e pausa ao sair */
+nichoBlocos.querySelectorAll(".work-video").forEach(v => {
+  const card = v.closest(".work-card");
+  const tocar = () => { v.currentTime = 0; v.play().catch(() => {}); };
+  const parar = () => { v.pause(); v.currentTime = 0; };
+  card.addEventListener("mouseenter", tocar);
+  card.addEventListener("mouseleave", parar);
+  card.addEventListener("focus", tocar);
+  card.addEventListener("blur", parar);
 });
 
 /* Serviços */
