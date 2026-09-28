@@ -74,11 +74,9 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 .burger[aria-expanded="true"] i:nth-child(2){opacity:0}
 .burger[aria-expanded="true"] i:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
-/* Capa */
-.hero{padding-top:calc(var(--nav-h) + 56px);position:relative;overflow:hidden}
-.blob{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0}
-.blob.b1{width:440px;height:440px;background:var(--rosa);top:-80px;right:-120px;opacity:.9}
-.blob.b2{width:300px;height:300px;background:var(--amarelo);opacity:.35;bottom:60px;left:-140px}
+/* Capa: fundo com a textura holográfica, na horizontal */
+.hero{padding-top:calc(var(--nav-h) + 56px);position:relative;overflow:hidden;background:linear-gradient(rgba(251,246,238,.6),rgba(251,246,238,.6)),url('images/capa-fundo.jpg') center/cover no-repeat}
+.blob{display:none}
 .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding-bottom:56px}
 .hero h1{font-family:var(--boho);font-weight:400;font-size:clamp(3rem,9vw,6.4rem);text-transform:none;line-height:1.05;margin-bottom:22px}
 .hero h1 .l2{color:var(--tinta)}
