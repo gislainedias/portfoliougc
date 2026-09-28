@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#FBF6EE">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&family=Poppins:ital,wght@0,400;0,500;0,600;1,500&family=Silkscreen:wght@400;700&family=Alex+Brush&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&family=Poppins:ital,wght@0,400;0,500;0,600;1,500&family=Berkshire+Swash&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js');</script>
 <style>
 :root{
@@ -24,8 +24,7 @@
   --radius:22px;
   --head:'Montserrat',system-ui,sans-serif;
   --body:'Poppins',system-ui,sans-serif;
-  --pixel:'Silkscreen',monospace; /* fonte pixelada retrô, estilo Y2K, para o nome */
-  --script:'Alex Brush',cursive; /* fonte script à mão, para frases de destaque */
+  --boho:'Berkshire Swash',cursive; /* fonte com curvas e ligaturas, estilo boho, para o nome */
   --nav-h:68px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -62,42 +61,34 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 .btn-ghost:hover{background:var(--rosa)}
 
 /* Menu */
-.nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:100;background:rgba(142,27,58,.92);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid rgba(247,211,94,.35)}
+.nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:100;background:rgba(251,246,238,.82);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid var(--glass-line)}
 .nav .wrap{height:100%;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.logo{font-family:var(--pixel);font-weight:700;font-size:1.05rem;text-decoration:none;letter-spacing:.02em;color:var(--amarelo)}
-.logo span{color:var(--creme)}
+.logo{font-family:var(--boho);font-weight:400;font-size:1.4rem;text-decoration:none;letter-spacing:.01em;color:var(--tinta)}
+.logo span{color:var(--vinho)}
 .nav-links{display:flex;gap:6px;list-style:none;align-items:center}
-.nav-links a{display:block;padding:8px 14px;border-radius:999px;text-decoration:none;font-size:.9rem;font-weight:500;color:var(--creme);transition:color .2s,background .2s}
-.nav-links a:hover{color:var(--tinta);background:var(--amarelo)}
-.burger{display:none;width:46px;height:46px;border-radius:14px;background:var(--amarelo);border:1px solid rgba(42,22,32,.2);cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px}
-.burger i{display:block;width:20px;height:2px;background:var(--tinta);border-radius:2px;transition:transform .25s,opacity .25s}
+.nav-links a{display:block;padding:8px 14px;border-radius:999px;text-decoration:none;font-size:.9rem;font-weight:500;color:var(--muted);transition:color .2s,background .2s}
+.nav-links a:hover{color:var(--vinho);background:var(--rosa)}
+.burger{display:none;width:46px;height:46px;border-radius:14px;background:var(--rosa);border:1px solid var(--glass-line);cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px}
+.burger i{display:block;width:20px;height:2px;background:var(--vinho);border-radius:2px;transition:transform .25s,opacity .25s}
 .burger[aria-expanded="true"] i:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .burger[aria-expanded="true"] i:nth-child(2){opacity:0}
 .burger[aria-expanded="true"] i:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
-/* Capa: fundo vinho estilo Y2K, como no portfólio antigo */
-.hero{padding-top:calc(var(--nav-h) + 56px);position:relative;overflow:hidden;background:radial-gradient(120% 140% at 85% -10%,#b23a5c 0%,var(--vinho) 45%,#5c1226 100%);color:var(--creme)}
+/* Capa */
+.hero{padding-top:calc(var(--nav-h) + 56px);position:relative;overflow:hidden}
 .blob{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0}
-.blob.b1{width:440px;height:440px;background:var(--amarelo);top:-80px;right:-120px;opacity:.25}
-.blob.b2{width:300px;height:300px;background:var(--rosa);opacity:.3;bottom:60px;left:-140px}
+.blob.b1{width:440px;height:440px;background:var(--rosa);top:-80px;right:-120px;opacity:.9}
+.blob.b2{width:300px;height:300px;background:var(--amarelo);opacity:.35;bottom:60px;left:-140px}
 .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding-bottom:56px}
-.hero .eyebrow{color:var(--amarelo)}
-.hero h1{font-family:var(--pixel);font-weight:700;font-size:clamp(2.1rem,6.4vw,4.2rem);text-transform:uppercase;letter-spacing:.02em;line-height:1.3;margin-bottom:22px;color:var(--amarelo);text-shadow:3px 3px 0 rgba(42,22,32,.35)}
-.hero h1 .l2{color:var(--creme)}
-.hero-lead{font-family:var(--script);font-size:clamp(1.6rem,3.4vw,2.3rem);line-height:1.2;max-width:540px;color:var(--creme);margin-bottom:30px}
-.hero-lead b{color:var(--amarelo);font-weight:400}
+.hero h1{font-family:var(--boho);font-weight:400;font-size:clamp(3rem,9vw,6.4rem);text-transform:none;line-height:1.05;margin-bottom:22px}
+.hero h1 .l2{color:var(--tinta)}
+.hero-lead{font-size:clamp(1.05rem,2.2vw,1.3rem);max-width:540px;color:var(--tinta);margin-bottom:30px}
+.hero-lead b{color:var(--vinho);font-weight:600}
 .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:38px}
 .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:540px}
-.stat{padding:16px 14px;background:rgba(0,0,0,.18);border-color:rgba(247,211,94,.3)}
-.stat b{display:block;font-family:var(--head);font-weight:900;font-size:clamp(1.6rem,4vw,2.3rem);color:var(--amarelo);line-height:1}
-.stat span{font-size:.8rem;color:var(--creme);line-height:1.3;display:block;margin-top:6px;opacity:.9}
-
-.hero .btn-lime{background:var(--amarelo);color:var(--tinta)}
-.hero .btn-ghost{border-color:var(--amarelo);color:var(--creme)}
-.hero .btn-ghost:hover{background:rgba(247,211,94,.18)}
-
-/* Renda picotada (scallop) entre a capa e o resto do site, como no portfólio antigo */
-.scallop{height:22px;background:var(--vinho);-webkit-mask-image:radial-gradient(circle at 11px 0,transparent 11px,#000 11.5px);mask-image:radial-gradient(circle at 11px 0,transparent 11px,#000 11.5px);-webkit-mask-size:22px 22px;mask-size:22px 22px;-webkit-mask-repeat:repeat-x;mask-repeat:repeat-x}
+.stat{padding:16px 14px}
+.stat b{display:block;font-family:var(--head);font-weight:900;font-size:clamp(1.6rem,4vw,2.3rem);color:var(--vinho);line-height:1}
+.stat span{font-size:.8rem;color:var(--muted);line-height:1.3;display:block;margin-top:6px}
 
 /* Blocos de foto e vídeo */
 .ph{position:relative;overflow:hidden;border-radius:var(--radius);display:flex;align-items:flex-end;justify-content:center;background:linear-gradient(155deg,var(--vinho) 0%,#b4476a 55%,var(--rosa) 100%);border:1px solid var(--glass-line)}
@@ -120,12 +111,7 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 .promises{list-style:none;display:grid;gap:12px;margin:26px 0}
 .promises li{display:flex;gap:14px;align-items:center;padding:14px 18px;font-weight:500}
 .promises .ck{flex:none;width:30px;height:30px;border-radius:50%;background:var(--amarelo);color:var(--tinta);display:grid;place-items:center}
-.sign{font-family:var(--script);font-weight:400;font-size:2.4rem;color:var(--vinho)}
-.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:8px 0 26px}
-.skill-col h4{display:inline-block;font-family:var(--pixel);font-size:.8rem;text-transform:uppercase;color:var(--vinho);background:var(--rosa);border-radius:8px;padding:6px 12px;margin-bottom:12px}
-.skill-col ul{list-style:none;display:grid;gap:8px}
-.skill-col li{font-size:.9rem;color:var(--tinta);padding-left:16px;position:relative}
-.skill-col li::before{content:"";position:absolute;left:0;top:.5em;width:6px;height:6px;background:var(--amarelo);border-radius:1px}
+.sign{font-family:var(--body);font-style:italic;font-weight:500;font-size:1.6rem;color:var(--vinho)}
 
 /* Destaques */
 .dest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
@@ -138,9 +124,6 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 .dest-corpo{padding:18px 8px 8px}
 .dest-num{display:block;font-family:var(--head);font-weight:900;font-size:clamp(2.2rem,4vw,3rem);color:var(--vinho);line-height:1}
 .dest-rot{display:inline-block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tinta);background:var(--amarelo);padding:3px 10px;border-radius:999px;font-weight:600;margin:10px 0 14px}
-.dest-metricas{display:flex;gap:16px;margin:10px 0 14px}
-.dest-metricas span{display:inline-flex;align-items:center;gap:5px;font-family:var(--head);font-weight:700;font-size:.9rem;color:var(--vinho)}
-.dest-metricas svg{color:var(--vinho);flex:none}
 .dest-corpo h3{font-size:1.2rem;font-weight:700;margin-bottom:6px}
 .dest-corpo p{font-size:.92rem;color:var(--muted)}
 
@@ -149,7 +132,7 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 .nicho-bloco{margin-bottom:44px}
 .nicho-bloco:last-child{margin-bottom:0}
 .nicho-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px}
-.nicho-head h3{display:inline-block;font-family:var(--pixel);font-weight:700;font-size:.95rem;text-transform:uppercase;letter-spacing:.03em;color:var(--vinho);background:rgba(255,255,255,.6);border:1.5px solid var(--vinho);border-radius:8px;padding:8px 14px}
+.nicho-head h3{font-size:1.3rem;font-weight:700;text-transform:capitalize;color:var(--vinho)}
 .nicho-nav{display:flex;gap:8px;flex:none}
 .nicho-nav button{width:40px;height:40px;border-radius:50%;background:var(--creme);border:1.5px solid var(--vinho);color:var(--vinho);cursor:pointer;display:grid;place-items:center;transition:background .2s,color .2s}
 .nicho-nav button:hover{background:var(--vinho);color:var(--creme)}
@@ -157,10 +140,8 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 .carousel{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x proximity;padding:4px 4px 14px;scrollbar-width:none}
 .carousel::-webkit-scrollbar{display:none}
 .work-card{flex:0 0 auto;width:220px;scroll-snap-align:start;text-decoration:none;display:block}
-/* Moldura de celular ao redor do vídeo, como no portfólio antigo */
-.work-card .ph{aspect-ratio:9/16;position:relative;background:var(--tinta);border:7px solid var(--tinta);border-radius:26px;box-shadow:0 10px 26px rgba(42,22,32,.28)}
-.work-card .ph::before{content:"";position:absolute;top:8px;left:50%;transform:translateX(-50%);width:34%;height:7px;border-radius:999px;background:rgba(251,246,238,.5);z-index:2}
-.work-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:19px}
+.work-card .ph{aspect-ratio:9/16;position:relative}
+.work-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .work-card .play{width:56px;height:56px}
 .work-card .play svg{width:20px;height:20px}
 .work-info{padding:12px 4px 0}
@@ -265,8 +246,7 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
 @media (max-width:560px){
   .serv-grid{grid-template-columns:1fr}
   .work-card{width:160px}
-  .nicho-head h3{font-size:.85rem}
-  .skills-grid{grid-template-columns:1fr}
+  .nicho-head h3{font-size:1.1rem}
   .hero-stats{gap:8px}
   .stat{padding:12px 10px}
   .cta-row .btn{width:100%}
@@ -328,10 +308,9 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
     <div class="brands-track" id="brandsTrack"></div>
   </div>
 </header>
-<div class="scallop" aria-hidden="true"></div>
 
 <!-- ============ 2. SOBRE MIM ============ -->
-<section class="sec about" id="sobre">
+<section class="sec sec-rosa about" id="sobre">
   <div class="wrap about-grid">
     <!--
       FOTO DO SOBRE: para trocar, apague a legenda e coloque aqui:
@@ -342,15 +321,14 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
     </div>
     <div>
       <span class="eyebrow reveal">Sobre mim</span>
-      <h2 class="sec-title reveal">Mas afinal, quem sou <span class="hl">eu?</span></h2>
-      <p class="reveal">Tenho 36 anos e moro no Paraná. Além de UGC, sou professora, sou LGBT e casada com outra mulher. Tenho 9 gatos (a maioria resgatados da rua) e 2 cachorros! Amo cultura pop, literatura e aprender coisas novas. Sou muito vaidosa, e emagreci mais de 35 kg pós bariátrica.</p>
-      <p class="reveal">Meu jeito de ensinar vira o meu jeito de vender: explico o seu produto de forma simples, com cara de conversa entre amigas. Cada vídeo nasce de um roteiro pensado com carinho e de um combinado claro com você.</p>
+      <h2 class="sec-title reveal">Oi, eu sou a <span class="hl">Gislaine</span></h2>
+      <p class="reveal">Sou criadora de conteúdo UGC e moro em Guaíra, no Paraná. Meu jeito de ensinar vira o meu jeito de vender: explico o seu produto de forma simples, com cara de conversa entre amigas, para o seu público entender e confiar.</p>
+      <p class="reveal">Cada vídeo nasce de um roteiro pensado com carinho e de um combinado claro com você. Sem correria, sem surpresa e com muito capricho.</p>
       <ul class="promises">
         <li class="glass reveal"><span class="ck" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Roteiro aprovado antes de gravar</li>
         <li class="glass reveal" style="--d:.08s"><span class="ck" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Uma rodada de ajuste inclusa</li>
         <li class="glass reveal" style="--d:.16s"><span class="ck" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Entrega em até 72 horas úteis</li>
       </ul>
-      <div class="skills-grid" id="skillsGrid"></div>
       <p class="sign reveal">Gislaine Dias</p>
     </div>
   </div>
@@ -387,7 +365,7 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
 </section>
 
 <!-- ============ 6. NÚMEROS E DEPOIMENTOS ============ -->
-<section class="sec" id="numeros">
+<section class="sec sec-rosa" id="numeros">
   <div class="wrap">
     <span class="eyebrow reveal">Prova real</span>
     <h2 class="sec-title reveal">Números e <span class="hl">depoimentos</span></h2>
@@ -495,32 +473,29 @@ const NUMEROS_CAPA = [
   { valor: 1,   prefixo: "", sufixo: "M", rotulo: "views somadas" }
 ];
 
-/* Faixa de marcas da capa. Lista original + marcas que aparecem no seu portfólio antigo. */
-const MARCAS = ["Eudora", "Condor", "ElevenLabs", "Cif", "Dove", "Shopee", "Coala", "Vitaxon", "Vhita", "Saint Germain", "Use By Me", "Noma Beauty", "Sace Lady", "Love Rain", "Simple Organic", "Dola"];
+/* Faixa de marcas da capa. */
+const MARCAS = ["Eudora", "Condor", "ElevenLabs", "Cif", "Dove", "Shoppe"];
 
 /* Três conteúdos de destaque.
    link  = endereço do vídeo (o card inteiro abre este link).
    capa  = endereço da imagem da capa vertical 9:16 (ex.: "capas/video1.jpg").
-           Deixe "" para mostrar o bloco com degradê.
-   curtidas / salvos = opcionais. Quando os dois estiverem preenchidos, mostra os três
-           números com ícone (olho, coração, marcador), do jeito que era no portfólio antigo. */
+           Deixe "" para mostrar o bloco com degradê. */
 const DESTAQUES = [
   { link: "https://www.instagram.com/reel/Db9EkEwJedY/", capa: "",
-    numero: "+36K", rotulo: "views no reels", curtidas: "", salvos: "",
+    numero: "+36K", rotulo: "views no reels",
     titulo: "Título do conteúdo 01", contexto: "Marca 01, nicho aqui" },
   { link: "https://www.instagram.com/usebyme.br/reel/DV_4-3EDc-v/", capa: "",
-    numero: "+14K", rotulo: "views no reels", curtidas: "217", salvos: "93",
-    titulo: "Arrume-se comigo", contexto: "Macacão Use By Me, moda" },
+    numero: "+14K", rotulo: "views no reels",
+    titulo: "Título do conteúdo 02", contexto: "Marca 02, nicho aqui" },
   { link: "#", /* COLOQUE AQUI O LINK DO TERCEIRO VÍDEO */ capa: "",
-    numero: "+", rotulo: "views no reels", curtidas: "", salvos: "",
+    numero: "+", rotulo: "views no reels",
     titulo: "Título do conteúdo 03", contexto: "Marca 03, nicho aqui" }
 ];
 
-/* Nichos que atendo (cada um vira uma fileira de carrossel). Nichos reais do seu portfólio antigo. */
-const NICHOS = ["tech e educacional", "skincare", "autocuidado", "moda", "maquiagem", "casa e rotina", "hair care", "perfumaria"];
+/* Nichos que atendo (cada um vira uma fileira de carrossel). */
+const NICHOS = ["beleza", "skincare", "moda", "comida", "casa e decoração", "pet", "tech"];
 
-/* Trabalhos, organizados em carrossel por nicho. Títulos reais tirados do seu portfólio antigo;
-   troque "marca" pelo nome da marca de cada um quando quiser deixar mais específico.
+/* Trabalhos, organizados em carrossel por nicho.
    nicho  = precisa ser igual a um dos nichos acima.
    formato = texto da legenda do bloco quando ainda não há vídeo (ex.: "vídeo 9:16").
    imagem = capa/poster do vídeo (ex.: "trabalhos/01.jpg"). Deixe "" para usar o degradê.
@@ -528,57 +503,19 @@ const NICHOS = ["tech e educacional", "skincare", "autocuidado", "moda", "maquia
             Quando preenchido, ao passar o mouse o vídeo toca sozinho, sem som.
    link   = para onde vai quando clicam no card (ex.: o link do Reels). Deixe "#" se ainda não tiver. */
 const TRABALHOS = [
-  // Tech e educacional
-  { titulo: "Recomendação de agência de viagens", marca: "Marca aqui", nicho: "tech e educacional", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Review de app de organização pessoal e financeira", marca: "Dola", nicho: "tech e educacional", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "How to Use: app de edição de fotos", marca: "Marca aqui", nicho: "tech e educacional", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Vídeo apresentando banco digital", marca: "Marca aqui", nicho: "tech e educacional", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Elevenlabs: edição de vídeo com IA", marca: "ElevenLabs", nicho: "tech e educacional", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Elevenlabs: criação de efeitos sonoros", marca: "ElevenLabs", nicho: "tech e educacional", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  // Skincare
-  { titulo: "Review: espículas de colágeno e retinol", marca: "Marca aqui", nicho: "skincare", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Problema x solução: rotina de skincare", marca: "Marca aqui", nicho: "skincare", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Apresentação de PDRN Simple Organic", marca: "Simple Organic", nicho: "skincare", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Depoimento sobre produto para combate à acne", marca: "Marca aqui", nicho: "skincare", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Review: protetor solar não oleoso", marca: "Marca aqui", nicho: "skincare", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  // Autocuidado
-  { titulo: "Apresentação de produto: Vitamina C", marca: "Vitaxon", nicho: "autocuidado", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Review: esfoliante corporal", marca: "Marca aqui", nicho: "autocuidado", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Vídeo lo-fi para suplemento 3 em 1", marca: "Vhita", nicho: "autocuidado", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Vlog para desodorante corporal", marca: "Dove", nicho: "autocuidado", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  // Moda
-  { titulo: "Criativo para óculos de sol", marca: "Saint Germain", nicho: "moda", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Recriando trend para topo de funil", marca: "Marca aqui", nicho: "moda", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Arrume-se comigo: macacão", marca: "Use By Me", nicho: "moda", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Lo-fi narrado para semijoias", marca: "Marca aqui", nicho: "moda", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Trend adaptada para camisetas", marca: "Marca aqui", nicho: "moda", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  // Maquiagem
-  { titulo: "Batom matte: teste da taça", marca: "Sace Lady", nicho: "maquiagem", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Review: lip combo", marca: "Love Rain", nicho: "maquiagem", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Depoimento: máscara de cílios", marca: "Love Rain", nicho: "maquiagem", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Problema x solução: blush líquido", marca: "Love Rain", nicho: "maquiagem", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  // Casa e rotina
-  { titulo: "Storytelling e How to Use", marca: "Cif", nicho: "casa e rotina", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Educativo: esponja biodegradável", marca: "Condor", nicho: "casa e rotina", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Demonstração de uso: utensílios de limpeza", marca: "Condor", nicho: "casa e rotina", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Problema x solução: mop auto torção", marca: "Condor", nicho: "casa e rotina", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Review: coleção Orquídea Negra", marca: "Coala Home", nicho: "casa e rotina", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Indicação: linha Home", marca: "Coala Home", nicho: "casa e rotina", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Depoimento: areia higiênica para gatos", marca: "Marca aqui", nicho: "casa e rotina", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Achadinho útil na Shopee", marca: "Shopee", nicho: "casa e rotina", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  // Hair care
-  { titulo: "Review: linha para fortalecimento do cabelo", marca: "Marca aqui", nicho: "hair care", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Unboxing: kit para cuidados capilares", marca: "Marca aqui", nicho: "hair care", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  // Perfumaria
-  { titulo: "Recriando trend sensorial", marca: "Marca aqui", nicho: "perfumaria", formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
-  { titulo: "Storytelling de perfume", marca: "Noma Beauty", nicho: "perfumaria", formato: "vídeo 9:16", imagem: "", video: "", link: "#" }
+  { titulo: "Trabalho 01", marca: "Marca 01", nicho: "beleza",           formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
+  { titulo: "Trabalho 02", marca: "Marca 02", nicho: "skincare",         formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
+  { titulo: "Trabalho 03", marca: "Marca 03", nicho: "moda",             formato: "fotos 4:5",  imagem: "", video: "", link: "#" },
+  { titulo: "Trabalho 04", marca: "Marca 04", nicho: "comida",           formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
+  { titulo: "Trabalho 05", marca: "Marca 05", nicho: "casa e decoração", formato: "fotos 4:5",  imagem: "", video: "", link: "#" },
+  { titulo: "Trabalho 06", marca: "Marca 06", nicho: "pet",              formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
+  { titulo: "Trabalho 07", marca: "Marca 07", nicho: "tech",             formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
+  { titulo: "Trabalho 08", marca: "Marca 08", nicho: "beleza",           formato: "unboxing 9:16", imagem: "", video: "", link: "#" },
+  { titulo: "Trabalho 09", marca: "Marca 09", nicho: "skincare",         formato: "fotos 4:5",  imagem: "", video: "", link: "#" },
+  { titulo: "Trabalho 10", marca: "Marca 10", nicho: "moda",             formato: "vídeo 9:16", imagem: "", video: "", link: "#" },
+  { titulo: "Trabalho 11", marca: "Marca 11", nicho: "comida",           formato: "fotos 4:5",  imagem: "", video: "", link: "#" },
+  { titulo: "Trabalho 12", marca: "Marca 12", nicho: "tech",             formato: "unboxing 9:16", imagem: "", video: "", link: "#" }
 ];
-
-/* Soft skills e hard skills, do seu portfólio antigo. */
-const SKILLS = {
-  soft: ["Criatividade consistente", "Facilidade para comunicar de forma simples", "Atenção aos detalhes visuais", "Capacidade de criar conexão sem exageros"],
-  hard: ["Edição de vídeo", "Direção criativa e estética visual", "Desenvolvimento de roteiros"]
-};
 
 /* Seis serviços. */
 const SERVICOS = [
@@ -640,22 +577,12 @@ if (reduzir) $("#brandsTrack").innerHTML = faixa;
 
 /* Destaques */
 const iconePlay = '<span class="play" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>';
-const iconeOlho = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>';
-const iconeCoracao = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-10-9.2C.5 8 2.4 4.5 6 4.5c2 0 3.6 1.1 4.5 2.6C11.4 5.6 13 4.5 15 4.5c3.6 0 5.5 3.5 4 7.3-2.5 4.6-10 9.2-10 9.2z"/></svg>';
-const iconeMarcador = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 3h12v18l-6-4-6 4z"/></svg>';
-function metricasDestaque(d) {
-  if (!d.curtidas || !d.salvos) return `<strong class="dest-num">${esc(d.numero)}</strong><span class="dest-rot">${esc(d.rotulo)}</span>`;
-  return `<div class="dest-metricas">
-    <span>${iconeOlho}${esc(d.numero.replace("+", ""))}</span>
-    <span>${iconeCoracao}${esc(d.curtidas)}</span>
-    <span>${iconeMarcador}${esc(d.salvos)}</span>
-  </div>`;
-}
 $("#destGrid").innerHTML = DESTAQUES.map((d, i) => `
   <a class="destaque glass reveal" style="--d:${i * .1}s" href="${esc(d.link)}" target="_blank" rel="noopener noreferrer" aria-label="Assistir: ${esc(d.titulo)}, ${esc(d.numero)} ${esc(d.rotulo)}">
     ${bloco(i % 2 ? "alt capa" : "capa", d.capa, "Capa do vídeo " + d.titulo, "capa do vídeo 9:16", iconePlay)}
     <div class="dest-corpo">
-      ${metricasDestaque(d)}
+      <strong class="dest-num">${esc(d.numero)}</strong>
+      <span class="dest-rot">${esc(d.rotulo)}</span>
       <h3>${esc(d.titulo)}</h3>
       <p>${esc(d.contexto)}</p>
     </div>
@@ -722,11 +649,6 @@ nichoBlocos.querySelectorAll(".work-video").forEach(v => {
   card.addEventListener("focus", tocar);
   card.addEventListener("blur", parar);
 });
-
-/* Sobre mim: soft skills e hard skills */
-$("#skillsGrid").innerHTML = `
-  <div class="skill-col reveal"><h4>Soft skills</h4><ul>${SKILLS.soft.map(s => `<li>${esc(s)}</li>`).join("")}</ul></div>
-  <div class="skill-col reveal" style="--d:.08s"><h4>Hard skills</h4><ul>${SKILLS.hard.map(s => `<li>${esc(s)}</li>`).join("")}</ul></div>`;
 
 /* Serviços */
 $("#servGrid").innerHTML = SERVICOS.map((s, i) => `
