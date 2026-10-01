@@ -105,9 +105,10 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 @keyframes marquee{to{transform:translateX(-50%)}}
 
 /* Sobre */
-.about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+.about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:stretch}
 .about-grid p{text-align:justify}
 .about-photo{aspect-ratio:4/5;max-width:440px;width:100%;transform:rotate(-2deg);box-shadow:0 24px 50px rgba(142,27,58,.2)}
+.about-photo-img{display:block;height:100%;width:auto;max-width:100%;margin:0 auto;object-fit:contain}
 .about p{color:var(--tinta);margin-bottom:18px}
 .promises{list-style:none;display:grid;gap:12px;margin:26px 0}
 .promises li{display:flex;gap:14px;align-items:center;padding:14px 18px;font-weight:500}
@@ -311,13 +312,7 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
 <!-- ============ 2. SOBRE MIM ============ -->
 <section class="sec sec-rosa about" id="sobre">
   <div class="wrap about-grid">
-    <!--
-      FOTO DO SOBRE: para trocar, apague a legenda e coloque aqui:
-      <img src="foto-sobre.jpg" alt="Gislaine Dias sorrindo" width="440" height="550" loading="lazy">
-    -->
-    <div class="ph alt about-photo reveal" role="img" aria-label="Espaço reservado para a foto da creator no formato 4:5">
-      <span class="cap">foto da creator 4:5</span>
-    </div>
+    <img class="about-photo-img reveal" src="images/foto-sobre.png" alt="Gislaine Dias gravando conteúdo com ring light" width="540" height="642" loading="lazy">
     <div>
       <span class="eyebrow reveal">Sobre mim</span>
       <h2 class="sec-title reveal">Oi, eu sou a <span class="hl">Gislaine</span></h2>
