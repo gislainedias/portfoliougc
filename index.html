@@ -108,7 +108,13 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:stretch}
 .about-grid p{text-align:justify}
 .about-photo{aspect-ratio:4/5;max-width:440px;width:100%;transform:rotate(-2deg);box-shadow:0 24px 50px rgba(142,27,58,.2)}
-.about-photo-img{display:block;height:100%;width:auto;max-width:100%;margin:0 auto;object-fit:contain}
+.about-photo-img{display:block;width:100%;height:100%;margin:0 auto;object-fit:contain}
+.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:64px}
+.skill-card{padding:28px 30px}
+.skill-title{font-family:var(--head);font-weight:800;color:var(--vinho);font-size:1.3rem;margin-bottom:16px}
+.skill-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.skill-list li{position:relative;padding-left:22px;color:var(--tinta)}
+.skill-list li::before{content:"";position:absolute;left:0;top:.55em;width:8px;height:8px;border-radius:50%;background:var(--vinho)}
 .about p{color:var(--tinta);margin-bottom:18px}
 .promises{list-style:none;display:grid;gap:12px;margin:26px 0}
 .promises li{display:flex;gap:14px;align-items:center;padding:14px 18px;font-weight:500}
@@ -239,7 +245,7 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
   .nav-links{position:absolute;top:var(--nav-h);left:0;right:0;flex-direction:column;align-items:stretch;gap:4px;padding:14px 20px 20px;background:rgba(251,246,238,.98);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid var(--glass-line);display:none}
   .nav-links.open{display:flex}
   .nav-links a{padding:14px 16px;font-size:1rem}
-  .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr;gap:36px}
+  .hero-grid,.about-grid,.contact-grid,.skills-grid{grid-template-columns:1fr;gap:36px}
   .hero-photo,.about-photo{margin:0 auto}
   .about-photo{order:-1}
   .depo-grid{grid-template-columns:1fr}
@@ -316,14 +322,33 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
     <div>
       <span class="eyebrow reveal">Sobre mim</span>
       <h2 class="sec-title reveal">Oi, eu sou a <span class="hl">Gislaine</span></h2>
-      <p class="reveal">Sou criadora de conteúdo UGC e moro em Guaíra, no Paraná. Meu jeito de ensinar vira o meu jeito de vender: explico o seu produto de forma simples, com cara de conversa entre amigas, para o seu público entender e confiar.</p>
-      <p class="reveal">Cada vídeo nasce de um roteiro pensado com carinho e de um combinado claro com você. Sem correria, sem surpresa e com muito capricho.</p>
-      <ul class="promises">
-        <li class="glass reveal"><span class="ck" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Roteiro aprovado antes de gravar</li>
-        <li class="glass reveal" style="--d:.08s"><span class="ck" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Uma rodada de ajuste inclusa</li>
-        <li class="glass reveal" style="--d:.16s"><span class="ck" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Entrega em até 72 horas úteis</li>
-      </ul>
+      <p class="reveal">Oi, eu sou a Gislaine! Tenho 36 anos, moro no Paraná e sou professora alfabetizadora e UGC Creator, unindo ensinar e criar.</p>
+      <p class="reveal">Minha experiência em sala de aula moldou meu jeito de criar conteúdo: sei explicar com clareza, simplificar o complexo e prender a atenção nos primeiros segundos. Gosto de testar, experimentar e transformar descobertas em histórias que fazem sentido na vida real — com storytelling, autenticidade e uma estética própria.</p>
+      <p class="reveal">Fora das telas, sou casada com outra mulher, mãe de 9 gatos (a maioria resgatados) e 2 cachorros, apaixonada por cultura pop, literatura e por aprender coisas novas. Sou vaidosa e, depois da bariátrica, já emagreci mais de 35kg — uma jornada que também faz parte de quem eu sou.</p>
+      <p class="reveal">Trabalho com beleza, moda, lifestyle, apps e tecnologia, e educação — sempre em busca do ângulo que faz a pessoa querer assistir, se identificar e conhecer a marca.</p>
+      <p class="reveal">Se você procura conteúdo autêntico, estratégico e com personalidade, vamos criar juntas.</p>
       <p class="sign reveal">Gislaine Dias</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="skills-grid">
+      <div class="skill-card glass reveal">
+        <h3 class="skill-title">Soft Skills</h3>
+        <ul class="skill-list">
+          <li>Criatividade consistente.</li>
+          <li>Facilidade para comunicar de forma simples.</li>
+          <li>Atenção aos detalhes visuais.</li>
+          <li>Capacidade de criar conexão sem exageros.</li>
+        </ul>
+      </div>
+      <div class="skill-card glass reveal" style="--d:.08s">
+        <h3 class="skill-title">Hard Skills</h3>
+        <ul class="skill-list">
+          <li>Edição de vídeo.</li>
+          <li>Direção criativa / estética visual.</li>
+          <li>Desenvolvimento de roteiros.</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
