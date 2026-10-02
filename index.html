@@ -109,13 +109,7 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 .about-grid p{text-align:justify}
 .about-photo{aspect-ratio:4/5;max-width:440px;width:100%;transform:rotate(-2deg);box-shadow:0 24px 50px rgba(142,27,58,.2)}
 .about-photo-img{display:block;width:100%;height:100%;margin:0 auto;object-fit:contain}
-.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:64px}
-.skill-card{padding:28px 30px}
-.skill-title{font-family:var(--head);font-weight:800;color:var(--vinho);font-size:1.3rem;margin-bottom:16px}
-.skill-title-img{display:block;width:160px;height:auto;margin:0 0 16px}
-.skill-list{list-style:none;display:flex;flex-direction:column;gap:10px}
-.skill-list li{position:relative;padding-left:22px;color:var(--tinta)}
-.skill-list li::before{content:"";position:absolute;left:0;top:.55em;width:8px;height:8px;border-radius:50%;background:var(--vinho)}
+.skills-img{display:block;width:100%;height:auto;max-width:980px;margin:64px auto 0}
 .about p{color:var(--tinta);margin-bottom:18px}
 .promises{list-style:none;display:grid;gap:12px;margin:26px 0}
 .promises li{display:flex;gap:14px;align-items:center;padding:14px 18px;font-weight:500}
@@ -246,7 +240,7 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
   .nav-links{position:absolute;top:var(--nav-h);left:0;right:0;flex-direction:column;align-items:stretch;gap:4px;padding:14px 20px 20px;background:rgba(251,246,238,.98);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid var(--glass-line);display:none}
   .nav-links.open{display:flex}
   .nav-links a{padding:14px 16px;font-size:1rem}
-  .hero-grid,.about-grid,.contact-grid,.skills-grid{grid-template-columns:1fr;gap:36px}
+  .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr;gap:36px}
   .hero-photo,.about-photo{margin:0 auto}
   .about-photo{order:-1}
   .depo-grid{grid-template-columns:1fr}
@@ -332,25 +326,7 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
     </div>
   </div>
   <div class="wrap">
-    <div class="skills-grid">
-      <div class="skill-card glass reveal">
-        <img class="skill-title-img" src="images/soft-skills-title.png" alt="Soft Skills" width="336" height="143">
-        <ul class="skill-list">
-          <li>Criatividade consistente.</li>
-          <li>Facilidade para comunicar de forma simples.</li>
-          <li>Atenção aos detalhes visuais.</li>
-          <li>Capacidade de criar conexão sem exageros.</li>
-        </ul>
-      </div>
-      <div class="skill-card glass reveal" style="--d:.08s">
-        <h3 class="skill-title">Hard Skills</h3>
-        <ul class="skill-list">
-          <li>Edição de vídeo.</li>
-          <li>Direção criativa / estética visual.</li>
-          <li>Desenvolvimento de roteiros.</li>
-        </ul>
-      </div>
-    </div>
+    <img class="skills-img reveal" src="images/skills-completo.png" alt="Soft Skills: criatividade consistente, facilidade para comunicar de forma simples, atenção aos detalhes visuais, capacidade de criar conexão sem exageros. Hard Skills: edição de vídeo, direção criativa / estética visual, desenvolvimento de roteiros." width="1895" height="1066" loading="lazy">
   </div>
 </section>
 
