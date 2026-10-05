@@ -125,7 +125,7 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 .dest-nav{flex:none;width:48px;height:48px;border-radius:50%;background:var(--creme);border:1.5px solid var(--vinho);color:var(--vinho);cursor:pointer;display:grid;place-items:center;transition:background .2s,color .2s}
 .dest-nav:hover{background:var(--vinho);color:var(--creme)}
 .dest-stage{position:relative;height:580px;width:100%;max-width:640px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.dest-slide{position:absolute;width:300px;max-width:84vw;transition:transform .45s ease,opacity .45s ease,filter .45s ease;transform:translateX(calc(var(--x,0) * 230px)) scale(1);opacity:1;filter:none;z-index:3}
+.dest-slide{position:absolute;width:300px;max-width:84vw;height:533px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:var(--radius);background:var(--glass);transition:transform .45s ease,opacity .45s ease,filter .45s ease;transform:translateX(calc(var(--x,0) * 230px)) scale(1);opacity:1;filter:none;z-index:3}
 .dest-slide.is-side{transform:translateX(calc(var(--x,0) * 230px)) scale(.8);opacity:.4;filter:blur(1.5px);z-index:1;pointer-events:none}
 .dest-slide.is-hidden{opacity:0;pointer-events:none;z-index:0}
 .dest-slide iframe,.dest-slide blockquote{margin:0 auto!important}
@@ -337,7 +337,7 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
   <div class="wrap">
     <span class="eyebrow reveal">Conteúdos de destaque</span>
     <h2 class="sec-title reveal">Vídeos que <span class="hl">performaram</span></h2>
-    <p class="sec-sub reveal">Use as setas para navegar. O vídeo toca aqui mesmo, sem sair do portfólio.</p>
+    <p class="sec-sub reveal">Alterna sozinho a cada poucos segundos, ou use as setas. O vídeo toca aqui mesmo, sem sair do portfólio.</p>
     <div class="dest-carousel reveal">
       <button class="dest-nav" id="destPrev" type="button" aria-label="Conteúdo anterior">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
@@ -483,16 +483,16 @@ const NUMEROS_CAPA = [
 /* Faixa de marcas da capa. */
 const MARCAS = ["Eudora", "Condor", "ElevenLabs", "Cif", "Dove", "Shoppe"];
 
-/* Três conteúdos de destaque: tocam embutidos (embed oficial do Instagram/TikTok), sem sair do portfólio.
-   plataforma = "instagram" ou "tiktok".
-   link       = link do post/reel/vídeo (permalink limpo, sem parâmetros de rastreio).
-   videoId    = só para TikTok: o número do vídeo na URL (depois de "/video/").
+/* Três conteúdos de destaque: tocam embutidos (embed oficial do YouTube/TikTok), sem sair do portfólio.
+   plataforma = "youtube" ou "tiktok".
+   link       = link do vídeo/post (permalink limpo, sem parâmetros de rastreio) — usado só de referência.
+   videoId    = o código do vídeo na URL (no YouTube Shorts, depois de "/shorts/"; no TikTok, depois de "/video/").
    numero/rotulo/titulo = texto mostrado abaixo do carrossel. Deixe numero ou rotulo "" para omitir. */
 const DESTAQUES = [
-  { plataforma: "instagram", link: "https://www.instagram.com/reels/Db9EkEwJedY/",
+  { plataforma: "youtube", link: "https://youtube.com/shorts/cfqwSytiiu8", videoId: "cfqwSytiiu8",
     numero: "+36K", rotulo: "views no reels",
     titulo: "Vídeo para topo de funil (Ads) — perfumaria" },
-  { plataforma: "instagram", link: "https://www.instagram.com/reel/DV_4-3EDc-v/",
+  { plataforma: "youtube", link: "https://youtube.com/shorts/NcOA6RIqp6k", videoId: "NcOA6RIqp6k",
     numero: "+15K", rotulo: "views no reels",
     titulo: "Vídeo orgânico de moda" },
   { plataforma: "tiktok", link: "https://www.tiktok.com/@gislainediasfaria/video/7686999241176190216", videoId: "7686999241176190216",
@@ -588,26 +588,33 @@ function embedDestaque(d) {
   if (d.plataforma === "tiktok") {
     return `<blockquote class="tiktok-embed" cite="${esc(d.link)}" data-video-id="${esc(d.videoId)}" style="max-width:300px;min-width:260px"><section></section></blockquote>`;
   }
+  if (d.plataforma === "youtube") {
+    return `<iframe width="300" height="533" src="https://www.youtube.com/embed/${esc(d.videoId)}" title="${esc(d.titulo)}" style="border:0;border-radius:var(--radius)" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>`;
+  }
   return `<blockquote class="instagram-media" data-instgrm-permalink="${esc(d.link)}" data-instgrm-version="14" style="max-width:300px;min-width:260px"></blockquote>`;
 }
-/* Carrega (uma vez só) os scripts oficiais que transformam os blockquotes acima em players embutidos */
+/* Carrega (uma vez só) os scripts oficiais que transformam os blockquotes acima em players embutidos (TikTok/Instagram; o YouTube já é um iframe pronto) */
 function carregarEmbedsDestaque() {
-  if (!document.getElementById("ig-embed-script")) {
-    const s = document.createElement("script");
-    s.id = "ig-embed-script"; s.async = true; s.src = "https://www.instagram.com/embed.js";
-    s.onload = () => window.instgrm && window.instgrm.Embeds.process();
-    document.body.appendChild(s);
-  } else if (window.instgrm) { window.instgrm.Embeds.process(); }
-  if (!document.getElementById("tiktok-embed-script")) {
-    const s2 = document.createElement("script");
-    s2.id = "tiktok-embed-script"; s2.async = true; s2.src = "https://www.tiktok.com/embed.js";
-    document.body.appendChild(s2);
-  } else if (window.tiktokEmbed && window.tiktokEmbed.lib) { window.tiktokEmbed.lib.render(document.querySelectorAll(".tiktok-embed")); }
+  if (DESTAQUES.some(d => d.plataforma === "instagram")) {
+    if (!document.getElementById("ig-embed-script")) {
+      const s = document.createElement("script");
+      s.id = "ig-embed-script"; s.async = true; s.src = "https://www.instagram.com/embed.js";
+      s.onload = () => window.instgrm && window.instgrm.Embeds.process();
+      document.body.appendChild(s);
+    } else if (window.instgrm) { window.instgrm.Embeds.process(); }
+  }
+  if (DESTAQUES.some(d => d.plataforma === "tiktok")) {
+    if (!document.getElementById("tiktok-embed-script")) {
+      const s2 = document.createElement("script");
+      s2.id = "tiktok-embed-script"; s2.async = true; s2.src = "https://www.tiktok.com/embed.js";
+      document.body.appendChild(s2);
+    } else if (window.tiktokEmbed && window.tiktokEmbed.lib) { window.tiktokEmbed.lib.render(document.querySelectorAll(".tiktok-embed")); }
+  }
 }
 $("#destStage").innerHTML = DESTAQUES.map((d, i) => `<div class="dest-slide" data-i="${i}">${embedDestaque(d)}</div>`).join("");
 carregarEmbedsDestaque();
 
-let destIndex = 0;
+let destIndex = 0, destTimer = null;
 function layoutDestaques() {
   const slides = document.querySelectorAll("#destStage .dest-slide");
   const n = slides.length;
@@ -625,9 +632,19 @@ function layoutDestaques() {
     ${d.rotulo ? `<span class="dest-rot">${esc(d.rotulo)}</span>` : ""}
     <h3>${esc(d.titulo)}</h3>`;
 }
-$("#destPrev").addEventListener("click", () => { destIndex = (destIndex - 1 + DESTAQUES.length) % DESTAQUES.length; layoutDestaques(); });
-$("#destNext").addEventListener("click", () => { destIndex = (destIndex + 1) % DESTAQUES.length; layoutDestaques(); });
+function pararAutoplayDestaques() { if (destTimer) clearInterval(destTimer); destTimer = null; }
+function iniciarAutoplayDestaques() {
+  pararAutoplayDestaques();
+  if (reduzir) return;
+  destTimer = setInterval(() => { destIndex = (destIndex + 1) % DESTAQUES.length; layoutDestaques(); }, 5000);
+}
+$("#destPrev").addEventListener("click", () => { destIndex = (destIndex - 1 + DESTAQUES.length) % DESTAQUES.length; layoutDestaques(); iniciarAutoplayDestaques(); });
+$("#destNext").addEventListener("click", () => { destIndex = (destIndex + 1) % DESTAQUES.length; layoutDestaques(); iniciarAutoplayDestaques(); });
+const destCarousel = $(".dest-carousel");
+destCarousel.addEventListener("mouseenter", pararAutoplayDestaques);
+destCarousel.addEventListener("mouseleave", iniciarAutoplayDestaques);
 layoutDestaques();
+iniciarAutoplayDestaques();
 
 /* Trabalhos: um carrossel por nicho, com prévia em vídeo ao passar o mouse */
 const iconePlayPeq = '<span class="play" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>';
