@@ -12,10 +12,11 @@
 <script>document.documentElement.classList.add('js');</script>
 <style>
 :root{
-  /* Paleta: Vinho cereja, Rosa-pó, Amarelo estrela, Papel creme, Tinta */
+  /* Paleta: Vinho cereja, Rosa-pó, Amarelo estrela, Lilás, Papel creme, Tinta */
   --vinho:#8E1B3A;
   --rosa:#F3C6D3;
   --amarelo:#F7D35E;
+  --lilas:#DAC3DF;
   --creme:#FBF6EE;
   --tinta:#2A1620;
   --muted:#5e3f4d;
@@ -44,6 +45,8 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 .eyebrow{display:inline-block;font-family:var(--head);font-weight:700;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--vinho);margin-bottom:14px}
 .sec{padding:96px 0;position:relative}
 .sec-rosa{background:var(--rosa)}
+.sec-lilas{background:var(--lilas)}
+.sec-lilas .glass{background:rgba(251,246,238,.82)}
 .sec-title{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;margin-bottom:14px}
 .hl{background:linear-gradient(transparent 62%,var(--amarelo) 62%);padding:0 4px;color:var(--vinho)}
 .sec-sub{color:var(--muted);max-width:620px;margin-bottom:44px}
@@ -311,17 +314,16 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
 </header>
 
 <!-- ============ 2. SOBRE MIM ============ -->
-<section class="sec sec-rosa about" id="sobre">
+<section class="sec sec-lilas about" id="sobre">
   <div class="wrap about-grid">
     <img class="about-photo-img reveal" src="images/foto-sobre.png" alt="Gislaine Dias gravando conteúdo com ring light" width="540" height="642" loading="lazy">
     <div>
       <span class="eyebrow reveal">Sobre mim</span>
       <h2 class="sec-title reveal">Oi, eu sou a <span class="hl">Gislaine</span></h2>
-      <p class="reveal">Oi, eu sou a Gislaine! Tenho 36 anos, moro no Paraná e sou professora alfabetizadora e UGC Creator, unindo ensinar e criar.</p>
-      <p class="reveal">Minha experiência em sala de aula moldou meu jeito de criar conteúdo: sei explicar com clareza, simplificar o complexo e prender a atenção nos primeiros segundos. Gosto de testar, experimentar e transformar descobertas em histórias que fazem sentido na vida real — com storytelling, autenticidade e uma estética própria.</p>
-      <p class="reveal">Fora das telas, sou casada com outra mulher, mãe de 9 gatos (a maioria resgatados) e 2 cachorros, apaixonada por cultura pop, literatura e por aprender coisas novas. Sou vaidosa e, depois da bariátrica, já emagreci mais de 35kg — uma jornada que também faz parte de quem eu sou.</p>
-      <p class="reveal">Trabalho com beleza, moda, lifestyle, apps e tecnologia, e educação — sempre em busca do ângulo que faz a pessoa querer assistir, se identificar e conhecer a marca.</p>
-      <p class="reveal">Se você procura conteúdo autêntico, estratégico e com personalidade, vamos criar juntas.</p>
+      <p class="reveal">Olá, me chamo Gislaine! Tenho 36 anos, moro no Paraná e sou professora e UGC Creator, unindo ensinar e criar.</p>
+      <p class="reveal">Minha experiência em sala de aula me ensinou a <span class="hl">explicar com clareza</span> e prender a atenção logo nos primeiros segundos. <span class="hl">Gosto de testar, experimentar e transformar descobertas em histórias reais</span>, com autenticidade e estética própria.</p>
+      <p class="reveal">Fora das telas, sou casada com outra mulher, mãe de 9 gatos (a maioria resgatados) e 2 cachorros, apaixonada por cultura pop, literatura e por aprender coisas novas. Sou vaidosa e, depois da bariátrica, emagreci mais de 35 kg, uma jornada que também faz parte de quem eu sou.</p>
+      <p class="reveal">Crio conteúdo de beleza, moda, lifestyle, apps e educação. Se você procura algo autêntico, estratégico e com personalidade, vamos criar juntas.</p>
       <p class="sign reveal">Gislaine Dias</p>
     </div>
   </div>
