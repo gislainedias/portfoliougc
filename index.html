@@ -80,11 +80,11 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 /* Capa: fundo com a textura holográfica, na horizontal */
 .hero{padding-top:calc(var(--nav-h) + 26px);position:relative;overflow:hidden;background:linear-gradient(rgba(251,246,238,.6),rgba(251,246,238,.6)),url('images/capa-fundo.jpg') center/cover no-repeat}
 .blob{display:none}
-.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding-bottom:24px}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:.95fr 1.05fr;gap:40px;align-items:center;padding-bottom:24px}
 .hero h1{font-family:var(--boho);font-weight:400;font-size:clamp(3rem,9vw,6.4rem);text-transform:none;line-height:1.05;margin-bottom:22px}
 .hero h1 .l2{color:var(--tinta)}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.hero-name{width:100%;max-width:340px;height:auto;margin-bottom:14px}
+.hero-name{width:100%;max-width:480px;height:auto;margin-bottom:14px}
 .hero-lead{font-size:clamp(1rem,2.2vw,1.2rem);max-width:540px;color:var(--tinta);margin-bottom:18px}
 .hero-lead b{color:var(--vinho);font-weight:600}
 .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:22px}
@@ -97,7 +97,7 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 .ph.alt{background:linear-gradient(155deg,var(--amarelo) 0%,#f0b9b0 55%,var(--rosa) 100%)}
 .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .ph .cap{position:relative;margin:0 0 16px;padding:6px 14px;border-radius:999px;background:rgba(251,246,238,.92);font-size:.78rem;font-weight:500;color:var(--tinta)}
-.hero-photo{display:block;max-width:250px;width:100%;height:auto;margin-left:auto;transform:rotate(2.5deg);filter:drop-shadow(0 22px 30px rgba(142,27,58,.3))}
+.hero-photo{display:block;width:125%;max-width:780px;height:auto;filter:drop-shadow(0 22px 30px rgba(142,27,58,.3))}
 
 /* Faixa de marcas */
 .brands{background:var(--vinho);overflow:hidden;position:relative;z-index:1}
@@ -245,7 +245,8 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
   .nav-links.open{display:flex}
   .nav-links a{padding:14px 16px;font-size:1rem}
   .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr;gap:36px}
-  .hero-photo,.about-photo{margin:0 auto}
+  .hero-photo{width:100%;margin:0 auto}
+  .about-photo{margin:0 auto}
   .about-photo{order:-1}
   .depo-grid{grid-template-columns:1fr}
   .sec{padding:72px 0}
@@ -294,7 +295,7 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
     <div>
       <span class="eyebrow reveal">UGC Creator · Guaíra PR</span>
       <h1 class="sr-only">Gislaine Dias</h1>
-      <img class="hero-name reveal" style="--d:.08s" src="images/nome-capa.png" alt="Gislaine Dias" width="1020" height="582">
+      <img class="hero-name reveal" style="--d:.08s" src="images/nome-capa.png" alt="Gislaine Dias" width="1471" height="183">
       <p class="hero-lead reveal" style="--d:.16s"><b>UGC com alma de professora:</b> comunicação clara, criativa e que gera resultado pra sua marca.</p>
       <div class="cta-row reveal" style="--d:.24s">
         <a class="btn btn-lime" href="#contato">Falar comigo</a>
@@ -306,7 +307,7 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
       FOTO DA CAPA: troque o arquivo em images/foto-capa.png por outro PNG com fundo
       transparente (sem caixa, sem borda) para manter esse visual recortado, só com sombra.
     -->
-    <img class="hero-photo reveal" style="--d:.2s" src="images/foto-capa.png" alt="Gislaine Dias, UGC Creator" width="1080" height="1920" loading="eager">
+    <img class="hero-photo reveal" style="--d:.2s" src="images/foto-capa.png" alt="Gislaine Dias, UGC Creator" width="1196" height="865" loading="eager">
   </div>
   <div class="brands" aria-label="Marcas com quem já trabalhei">
     <div class="brands-track" id="brandsTrack"></div>
