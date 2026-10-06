@@ -88,10 +88,9 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 .hero-lead{font-size:clamp(1rem,2.2vw,1.2rem);max-width:540px;color:var(--tinta);margin-bottom:18px}
 .hero-lead b{color:var(--vinho);font-weight:600}
 .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:22px}
-.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:540px}
-.stat{padding:12px 12px}
-.stat b{display:block;font-family:var(--head);font-weight:900;font-size:clamp(1.6rem,4vw,2.3rem);color:var(--vinho);line-height:1}
-.stat span{font-size:.8rem;color:var(--muted);line-height:1.3;display:block;margin-top:6px}
+.hero-stats{display:flex;flex-wrap:wrap;align-items:center;gap:10px;max-width:540px;font-size:.98rem;color:var(--tinta);font-weight:500}
+.hero-stats .stat b{font-family:var(--head);font-weight:900;color:var(--vinho)}
+.hero-stats .stat-sep{color:var(--muted);opacity:.6}
 
 /* Blocos de foto e vídeo */
 .ph{position:relative;overflow:hidden;border-radius:var(--radius);display:flex;align-items:flex-end;justify-content:center;background:linear-gradient(155deg,var(--vinho) 0%,#b4476a 55%,var(--rosa) 100%);border:1px solid var(--glass-line)}
@@ -255,8 +254,7 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
   .serv-grid{grid-template-columns:1fr}
   .work-card{width:160px}
   .nicho-head h3{font-size:1.1rem}
-  .hero-stats{gap:8px}
-  .stat{padding:12px 10px}
+  .hero-stats{gap:8px;font-size:.9rem}
   .cta-row .btn{width:100%}
   .form{padding:24px 18px}
 }
@@ -488,9 +486,8 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
 /* Números da capa (também usados como contador animado).
    valor = número final, prefixo/sufixo = texto antes/depois do número. */
 const NUMEROS_CAPA = [
-  { valor: 100, prefixo: "", sufixo: "",  rotulo: "vídeos entregues" },
-  { valor: 45,  prefixo: "", sufixo: "",  rotulo: "marcas atendidas" },
-  { valor: 1,   prefixo: "", sufixo: "M", rotulo: "views somadas" }
+  { valor: 100, prefixo: "", sufixo: "", rotulo: "vídeos entregues" },
+  { valor: 45,  prefixo: "", sufixo: "", rotulo: "marcas atendidas" }
 ];
 
 /* Faixa de marcas da capa. */
@@ -616,9 +613,9 @@ const reduzir = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const contador = d => `<span class="count" data-alvo="${d.valor}" data-pre="${esc(d.prefixo)}" data-suf="${esc(d.sufixo)}">${esc(d.prefixo)}0${esc(d.sufixo)}</span>`;
 
-/* Capa: números */
+/* Capa: números (texto corrido, sem caixa) */
 $("#heroStats").innerHTML = NUMEROS_CAPA.map(n =>
-  `<div class="stat glass"><b>${contador(n)}</b><span>${esc(n.rotulo)}</span></div>`).join("");
+  `<span class="stat"><b>${contador(n)}</b> ${esc(n.rotulo)}</span>`).join('<span class="stat-sep" aria-hidden="true">|</span>');
 
 /* Capa: faixa de marcas (lista duplicada para o loop contínuo) */
 const faixa = MARCAS.map(m => `<span>${esc(m)}</span>`).join("");
