@@ -156,13 +156,20 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 .work-info p{font-size:.88rem;color:var(--tinta);font-weight:500}
 .tag{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--vinho);margin-bottom:4px}
 
-/* Serviços */
-.serv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.serv{padding:28px 26px;transition:transform .25s,border-color .25s}
-.serv:hover{transform:translateY(-5px);border-color:var(--vinho)}
-.serv .n{font-family:var(--head);font-weight:900;font-size:2.6rem;color:transparent;-webkit-text-stroke:1.5px var(--vinho);line-height:1;margin-bottom:14px;display:block}
-.serv h3{font-size:1.2rem;font-weight:700;margin-bottom:8px}
-.serv p{color:var(--muted);font-size:.95rem}
+/* Serviços: "janelinhas" estilo Y2K/girlie */
+.serv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.serv-win{display:flex;flex-direction:column;background:var(--creme);border:2px solid var(--tinta);border-radius:20px;overflow:hidden;box-shadow:6px 6px 0 var(--tinta);transition:transform .25s,box-shadow .25s}
+.serv-win:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--tinta)}
+.win-bar{flex:none;display:flex;align-items:center;gap:9px;padding:10px 14px;background:var(--rosa);border-bottom:2px solid var(--tinta)}
+.win-x,.win-dash{font-family:var(--head);font-weight:700;color:var(--tinta);font-size:.95rem;line-height:1}
+.win-sq{width:10px;height:10px;border:1.5px solid var(--tinta);border-radius:2px}
+.win-body{flex:1;padding:26px 24px 22px;background:#FCE4EF}
+.win-body .n{font-family:var(--head);font-weight:900;font-size:2.4rem;color:transparent;-webkit-text-stroke:1.5px var(--vinho);line-height:1;margin-bottom:12px;display:block}
+.win-body h3{font-size:1.15rem;font-weight:700;margin-bottom:8px}
+.win-body p{color:var(--muted);font-size:.93rem}
+.win-foot{flex:none;display:flex;align-items:center;gap:12px;padding:10px 16px;background:var(--creme);border-top:2px solid var(--tinta)}
+.win-arrow{font-family:var(--head);font-weight:700;color:var(--tinta);font-size:.85rem;line-height:1}
+.win-pill{flex:1;height:13px;border-radius:999px;background:var(--rosa);border:1.5px solid var(--tinta)}
 
 /* Números e depoimentos */
 .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:64px}
@@ -733,11 +740,23 @@ trabCarousel.addEventListener("click", e => {
 });
 mostrarNicho(nichoAtivo);
 
-/* Serviços */
+/* Serviços: "janelinhas" estilo Y2K */
 $("#servGrid").innerHTML = SERVICOS.map((s, i) => `
-  <article class="serv glass reveal" style="--d:${(i % 3) * .08}s">
-    <span class="n" aria-hidden="true">${String(i + 1).padStart(2, "0")}</span>
-    <h3>${esc(s.titulo)}</h3><p>${esc(s.texto)}</p>
+  <article class="serv-win reveal" style="--d:${(i % 3) * .08}s">
+    <div class="win-bar" aria-hidden="true">
+      <span class="win-x">&times;</span>
+      <span class="win-sq"></span>
+      <span class="win-dash">&minus;</span>
+    </div>
+    <div class="win-body">
+      <span class="n" aria-hidden="true">${String(i + 1).padStart(2, "0")}</span>
+      <h3>${esc(s.titulo)}</h3><p>${esc(s.texto)}</p>
+    </div>
+    <div class="win-foot" aria-hidden="true">
+      <span class="win-arrow">&lsaquo;</span>
+      <span class="win-pill"></span>
+      <span class="win-arrow">&rsaquo;</span>
+    </div>
   </article>`).join("");
 
 /* Números, resultados e depoimentos */
