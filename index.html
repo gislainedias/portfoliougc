@@ -119,6 +119,9 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 .sign{font-family:var(--body);font-style:italic;font-weight:500;font-size:1.6rem;color:var(--vinho)}
 
 /* Destaques */
+.dest-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:24px;align-items:center}
+.dest-main{min-width:0}
+.mascote{width:100%;max-height:580px;object-fit:contain;display:block;pointer-events:none;filter:drop-shadow(0 18px 24px rgba(142,27,58,.22))}
 .play{position:absolute;top:50%;left:50%;width:76px;height:76px;transform:translate(-50%,-50%);border-radius:50%;background:var(--amarelo);color:var(--tinta);display:grid;place-items:center;box-shadow:0 0 0 10px rgba(247,211,94,.35),0 10px 28px rgba(42,22,32,.3);transition:transform .25s}
 .dest-carousel{display:flex;align-items:center;justify-content:center;gap:10px}
 .dest-nav{flex:none;width:48px;height:48px;border-radius:50%;background:var(--creme);border:1.5px solid var(--vinho);color:var(--vinho);cursor:pointer;display:grid;place-items:center;transition:background .2s,color .2s}
@@ -250,6 +253,10 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
 
 /* Responsivo */
 @media (max-width:980px){
+  .dest-wrap{grid-template-columns:1fr}
+  .mascote{max-width:240px;margin:0 auto}
+  .dest-wrap{grid-template-columns:1fr}
+  .mascote{max-width:240px;margin:0 auto}
   .dest-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}
   .serv-grid{grid-template-columns:repeat(2,1fr)}
   .metrics{grid-template-columns:repeat(2,1fr)}
@@ -354,6 +361,9 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
     <span class="eyebrow reveal">Conteúdos de destaque</span>
     <h2 class="sec-title reveal">Vídeos que <span class="hl">performaram</span></h2>
     <p class="sec-sub reveal">Alterna sozinho a cada poucos segundos, ou use as setas. O vídeo toca aqui mesmo, sem sair do portfólio.</p>
+    <div class="dest-wrap">
+      <video class="mascote" src="images/mascote.webm" poster="images/mascote-poster.png" autoplay loop muted playsinline preload="auto" aria-hidden="true"></video>
+      <div class="dest-main">
     <div class="dest-carousel reveal">
       <button class="dest-nav" id="destPrev" type="button" aria-label="Conteúdo anterior">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
@@ -363,7 +373,9 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
       </button>
     </div>
+    </div>
     <div class="dest-caption" id="destCaption"></div>
+    </div>
   </div>
 </section>
 
