@@ -135,6 +135,7 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 .dest-caption h3{font-size:1.2rem;font-weight:700}
 
 /* Trabalhos */
+.trab-titulo{display:block;width:100%;max-width:640px;height:auto;margin:0 auto 40px}
 .nicho-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:30px;margin-bottom:34px}
 .nicho-pill{display:flex;flex-direction:column;align-items:center;gap:8px;width:84px;border:none;background:none;padding:0;cursor:pointer;font-family:var(--head)}
 .nicho-pill img{width:68px;height:auto;transition:transform .2s ease,filter .2s ease}
@@ -370,8 +371,8 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
 <section class="sec sec-rosa" id="trabalhos">
   <div class="wrap">
     <span class="eyebrow reveal">Trabalhos por nicho</span>
-    <h2 class="sec-title reveal">Trabalhos por <span class="hl">nicho</span></h2>
-    <p class="sec-sub reveal">Escolha um nicho e arraste ou use as setas para ver mais. Clique em um vídeo para assistir aqui mesmo, sem sair do portfólio.</p>
+    <h2 class="sr-only">Trabalhos por nicho</h2>
+    <img class="trab-titulo reveal" src="images/trabalhos-titulo.png" alt="Tem um produto bom aí? Vamos fazer ele ser visto. Do tech ao beauty, cada nicho ganha um jeito próprio de contar. Deslize e descubra." width="1566" height="916">
     <div class="nicho-pills reveal" id="nichoPills"></div>
     <div class="nicho-head">
       <h3 id="nichoTitulo"></h3>
