@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Painel | Gislaine Dias</title>
+<meta name="theme-color" content="#FBF6EE">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/painel.css">
+</head>
+<body>
+
+<!-- Enquanto a sessão não é conferida, só aparece isto. O painel fica escondido. -->
+<div class="carregando" id="carregando">
+  <p id="carregandoTxt">Conferindo o seu acesso...</p>
+</div>
+<noscript><p style="padding:20px">Este painel precisa de JavaScript ligado.</p></noscript>
+
+<div class="app" id="app" hidden>
+  <header class="topo-mobile">
+    <button class="icon-btn" id="btnMenu" type="button" aria-label="Abrir menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <span class="marca">GISLAINE DIAS</span>
+  </header>
+  <div class="fundo-menu" id="fundoMenu"></div>
+
+  <aside class="menu" id="menu" aria-label="Menu do painel">
+    <div class="menu-topo"><div class="marca">GISLAINE<span> DIAS</span></div></div>
+    <nav>
+      <div class="menu-sec">Meu site</div>
+      <button class="menu-item" data-aba="portfolio" type="button">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M10 9l5 3-5 3z"/></svg>Portfólio</button>
+      <button class="menu-item" data-aba="marcas" type="button">
+        <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2M3 13h18"/></svg>Marcas</button>
+      <div class="menu-sec">Minha rotina</div>
+      <button class="menu-item" data-aba="calendario" type="button">
+        <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Calendário</button>
+      <button class="menu-item" data-aba="campanhas" type="button">
+        <svg viewBox="0 0 24 24"><path d="M4 14v-4a1 1 0 011-1h3l8-5v16l-8-5H5a1 1 0 01-1-1zM19 9a4 4 0 010 6"/></svg>Campanhas</button>
+      <button class="menu-item" data-aba="checklist" type="button">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 12l3 3 5-6"/></svg>Checklist</button>
+      <button class="menu-item" data-aba="ideias" type="button">
+        <svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0012 3z"/></svg>Ideias de roteiros</button>
+    </nav>
+    <div class="menu-rodape">
+      <div class="quem" id="quemEmail"></div>
+      <button class="btn btn-ghost btn-mini" id="btnSair" type="button">Sair</button>
+    </div>
+  </aside>
+
+  <main class="conteudo" id="conteudo" tabindex="-1">
+    <div class="avisos" id="avisos" aria-live="polite"></div>
+    <div id="aba"></div>
+  </main>
+</div>
+
+<dialog id="dlg"></dialog>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<!-- Supabase por CDN, depois a ligação com o banco, a biblioteca de consulta e o painel -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="../js/banco.js"></script>
+<script src="../js/biblioteca.js"></script>
+<script src="admin.js"></script>
+<script>
+/* Se por algum motivo o painel não abrir, avisa em vez de ficar parado */
+setTimeout(function () {
+  var c = document.getElementById("carregando"), t = document.getElementById("carregandoTxt");
+  if (c && !c.hidden && t) t.textContent = "Está demorando mais que o normal. Confira a internet e recarregue a página.";
+}, 10000);
+</script>
+</body>
+</html>

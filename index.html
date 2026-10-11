@@ -509,6 +509,9 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
   </div>
 </div>
 
+<!-- Supabase por CDN e a ligação com o banco (js/banco.js) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="js/banco.js"></script>
 <script>
 /* =====================================================================
    DADOS EDITÁVEIS: troque os textos e links aqui, sem mexer no HTML.
@@ -560,7 +563,7 @@ const NICHOS = [
    nicho   = precisa ser igual a um dos ids de NICHOS acima.
    titulo  = pequeno texto mostrado abaixo do vídeo.
    videoId = o código do vídeo na URL do YouTube (depois de "youtu.be/", "/shorts/" ou "watch?v="). */
-const TRABALHOS = [
+let TRABALHOS = [
   { nicho: "tech", titulo: "App Moshi Cam", videoId: "kBlY3xtX94g" },
   { nicho: "tech", titulo: "App Dola", videoId: "aUHYWgehZog" },
   { nicho: "tech", titulo: "Site de música personalizada", videoId: "15FNTP0pWz0" },
@@ -856,8 +859,21 @@ $("#contatoForm").addEventListener("submit", e => {
     erro.hidden = false; return;
   }
   erro.hidden = true;
-  f.hidden = true;
-  const ok = $("#contatoOk"); ok.hidden = false; ok.focus();
+  const botao = f.querySelector('button[type="submit"]'), textoBotao = botao.textContent;
+  botao.disabled = true; botao.textContent = "Enviando...";
+  gravarMarca({
+    nome: f.nome.value.trim().slice(0, 200),
+    email: f.email.value.trim().slice(0, 200),
+    obs: f.mensagem.value.trim().slice(0, 2900)
+  }).then(gravou => {
+    botao.disabled = false; botao.textContent = textoBotao;
+    if (!gravou) {
+      erro.textContent = "Não consegui enviar agora. Tente de novo ou me chame pelo WhatsApp ou Instagram.";
+      erro.hidden = false; return;
+    }
+    f.hidden = true;
+    const ok = $("#contatoOk"); ok.hidden = false; ok.focus();
+  });
 });
 
 /* Card de captura: aparece após 7 segundos, uma vez por visita */
@@ -902,7 +918,74 @@ $("#capturaForm").addEventListener("submit", e => {
   erro.hidden = true;
   $("#capForm").hidden = true; $("#capOk").hidden = false;
   setTimeout(fecharCard, 2600);
+  /* O pedido do mídia kit também entra na base de marcas como Lead */
+  gravarMarca({
+    nome: $("#k-nome").value.trim().slice(0, 200),
+    email: $("#k-email").value.trim().slice(0, 200),
+    obs: "Pediu o mídia kit pelo card do site."
+  });
 });
+
+/* =====================================================================
+   LIGAÇÃO COM O PAINEL (Supabase). Se o banco não responder, o site
+   continua funcionando normalmente com os dados fixos acima.
+   ===================================================================== */
+
+/* Grava um contato na tabela marcas, sempre como Lead. Devolve true ou false. */
+function gravarMarca(dados) {
+  if (!window.db) return Promise.resolve(false);
+  const d = new Date();
+  const hoje = d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  return window.db.from("marcas").insert({
+    nome: dados.nome || "Sem nome",
+    email: dados.email || null,
+    obs: dados.obs || null,
+    situacao: "lead",
+    ultimo_contato: hoje
+  }).then(r => !r.error, () => false);
+}
+
+/* Vídeos: se a tabela videos tiver vídeos visíveis, eles substituem a lista fixa.
+   Se estiver vazia ou der erro, fica a lista fixa de cima. */
+function idDoYoutube(link) {
+  const m = String(link || "").match(/(?:youtu\.be\/|\/shorts\/|[?&]v=|\/embed\/)([A-Za-z0-9_-]{11})/);
+  return m ? m[1] : null;
+}
+if (window.db) {
+  window.db.from("videos").select("titulo,link,nicho,ordem").eq("visivel", true).eq("exemplo", false).order("ordem", { ascending: true })
+    .then(r => {
+      if (r.error || !r.data || !r.data.length) return;
+      const lista = [];
+      r.data.forEach(v => {
+        const id = idDoYoutube(v.link);
+        if (id && NICHOS.some(n => n.id === v.nicho)) lista.push({ nicho: v.nicho, titulo: v.titulo, videoId: id });
+      });
+      if (!lista.length) return;
+      TRABALHOS = lista;
+      mostrarNicho(nichoAtivo);
+    }, () => {});
+}
+
+/* Visita: uma por sessão do navegador, sem serviço de fora e sem pedir nada ao visitante.
+   Não conta quando você testa no seu computador (localhost ou arquivo local). */
+(function registrarVisita() {
+  try {
+    if (!window.db) return;
+    if (!/^https?:$/.test(location.protocol) || /^(localhost|127\.0\.0\.1)$/.test(location.hostname)) return;
+    if (sessionStorage.getItem("visitaRegistrada") === "1") return;
+    sessionStorage.setItem("visitaRegistrada", "1");
+    let origem = "direto";
+    const utm = new URLSearchParams(location.search).get("utm_source");
+    if (utm) origem = utm.toLowerCase().slice(0, 60);
+    else if (document.referrer) {
+      const h = new URL(document.referrer).hostname.replace(/^www\./, "");
+      if (h && h !== location.hostname) origem = /instagram\.com$/.test(h) ? "instagram" : /(^|\.)google\./.test(h) ? "google" : h.slice(0, 80);
+    }
+    const d = new Date();
+    const data = d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+    window.db.from("visitas").insert({ data: data, pagina: location.pathname.slice(0, 250), origem: origem }).then(() => {}, () => {});
+  } catch (e) {}
+})();
 </script>
 </body>
 </html>

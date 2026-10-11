@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Entrar | Painel</title>
+<meta name="theme-color" content="#FBF6EE">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/painel.css">
+</head>
+<body class="login-body">
+<main class="login-card">
+  <div class="marca">GISLAINE<span> DIAS</span></div>
+
+  <!-- Tela de entrar -->
+  <section id="telaEntrar">
+    <h1>Entrar no painel</h1>
+    <p class="sub">Só para a dona do portfólio.</p>
+    <div id="faixa" class="faixa" role="alert" hidden></div>
+    <form id="formEntrar" novalidate>
+      <div class="field"><label for="email">E-mail</label><input id="email" type="email" autocomplete="username" required></div>
+      <div class="field"><label for="senha">Senha</label><input id="senha" type="password" autocomplete="current-password" required></div>
+      <button class="btn btn-main" type="submit" id="btnEntrar">Entrar</button>
+    </form>
+    <button class="link-btn" id="btnEsqueci" type="button">Esqueci minha senha</button>
+  </section>
+
+  <!-- Tela de criar nova senha (aparece quando ela volta pelo link do e-mail) -->
+  <section id="telaNova" hidden>
+    <h1>Crie uma senha nova</h1>
+    <p class="sub">Escolha uma senha com pelo menos 8 caracteres.</p>
+    <div id="faixaNova" class="faixa" role="alert" hidden></div>
+    <form id="formNova" novalidate>
+      <div class="field"><label for="novaSenha">Nova senha</label><input id="novaSenha" type="password" autocomplete="new-password" required></div>
+      <button class="btn btn-main" type="submit">Salvar senha</button>
+    </form>
+  </section>
+</main>
+
+<!-- Supabase por CDN, depois a ligação com o banco (usada em todas as páginas) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="../js/banco.js"></script>
+<script>
+(function () {
+  var $ = function (s) { return document.querySelector(s); };
+  var db = window.db;
+  var vindoDeRecuperacao = /type=recovery/.test(location.hash) || /type=recovery/.test(location.search);
+
+  function faixa(el, tipo, texto) {
+    el.className = "faixa " + tipo;
+    el.textContent = texto;
+    el.hidden = false;
+  }
+  function irParaAdmin() { location.replace("../admin/"); }
+
+  if (!db) {
+    faixa($("#faixa"), "aviso", "Não consegui carregar a conexão com o banco. Confira a internet e recarregue a página.");
+    $("#btnEntrar").disabled = true;
+    return;
+  }
+
+  /* Já tem sessão aberta? Vai direto pro painel (menos quando ela está trocando a senha). */
+  if (!vindoDeRecuperacao) {
+    db.auth.getSession().then(function (r) {
+      if (r && r.data && r.data.session) irParaAdmin();
+    });
+  }
+
+  /* Voltou pelo link do e-mail de recuperação: mostra a tela de senha nova. */
+  db.auth.onAuthStateChange(function (evento) {
+    if (evento === "PASSWORD_RECOVERY") {
+      $("#telaEntrar").hidden = true;
+      $("#telaNova").hidden = false;
+    }
+  });
+
+  $("#formEntrar").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var email = $("#email").value.trim(), senha = $("#senha").value;
+    var f = $("#faixa"), btn = $("#btnEntrar");
+    if (!email || !senha) { faixa(f, "erro", "E-mail ou senha incorretos"); return; }
+    btn.disabled = true; btn.textContent = "Entrando...";
+    db.auth.signInWithPassword({ email: email, password: senha }).then(function (r) {
+      if (r.error) {
+        var msg = String(r.error.message || "").toLowerCase();
+        var rede = /fetch|network|failed/.test(msg) || r.error.status === 0;
+        faixa(f, rede ? "aviso" : "erro",
+          rede ? "Não consegui conectar. Confira a internet e tente de novo." : "E-mail ou senha incorretos");
+        btn.disabled = false; btn.textContent = "Entrar";
+        return;
+      }
+      irParaAdmin();
+    }).catch(function () {
+      faixa(f, "aviso", "Não consegui conectar. Confira a internet e tente de novo.");
+      btn.disabled = false; btn.textContent = "Entrar";
+    });
+  });
+
+  $("#btnEsqueci").addEventListener("click", function () {
+    var email = $("#email").value.trim(), f = $("#faixa");
+    if (!email) { faixa(f, "aviso", "Escreva o seu e-mail no campo acima e clique de novo em Esqueci minha senha."); $("#email").focus(); return; }
+    var voltar = location.origin + location.pathname;
+    db.auth.resetPasswordForEmail(email, { redirectTo: voltar }).then(function (r) {
+      if (r.error) { faixa(f, "aviso", "Não consegui enviar agora. Espere um minuto e tente de novo."); return; }
+      faixa(f, "ok", "Pronto. Se esse e-mail estiver cadastrado, você vai receber o link para criar uma senha nova.");
+    }).catch(function () {
+      faixa(f, "aviso", "Não consegui conectar. Confira a internet e tente de novo.");
+    });
+  });
+
+  $("#formNova").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var s = $("#novaSenha").value, f = $("#faixaNova");
+    if (s.length < 8) { faixa(f, "erro", "A senha precisa ter pelo menos 8 caracteres."); return; }
+    db.auth.updateUser({ password: s }).then(function (r) {
+      if (r.error) { faixa(f, "erro", "Não consegui salvar a senha. Peça um novo link de recuperação."); return; }
+      faixa(f, "ok", "Senha salva. Entrando no painel...");
+      setTimeout(irParaAdmin, 900);
+    });
+  });
+})();
+</script>
+</body>
+</html>
