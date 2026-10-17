@@ -1057,7 +1057,7 @@
     var cats = [];
     rad.itens.forEach(function (x) { if (cats.indexOf(x.categoria) < 0) cats.push(x.categoria); });
     if (!rad.itens.length) {
-      h += '<div class="vazio">Ainda não chegou nenhuma novidade. A primeira busca roda sozinha amanhã de manhã. Para rodar agora: no GitHub, abra o repositório, clique em Actions, depois em “Radar de novidades” e em “Run workflow”.</div>';
+      h += '<div class="vazio">Ainda não chegou nenhuma novidade. A busca roda sozinha todo dia de manhã. Para rodar agora: no GitHub, abra o repositório, clique em Actions, depois em “Radar de novidades” e em “Run workflow”. Depois de 1 minuto, clique em Recarregar.</div>';
       $("#aba").innerHTML = h; return;
     }
     h += '<p style="font-size:12px;color:var(--muted);margin-bottom:10px">Última busca: ' + esc(rad.atualizado ? new Date(rad.atualizado).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" }) : "—") + "</p>";

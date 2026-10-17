@@ -4,6 +4,10 @@ on:
   schedule:
     - cron: "0 9 * * *"   # todo dia às 6h da manhã (horário de Brasília)
   workflow_dispatch:        # permite rodar na hora, pelo botão "Run workflow"
+  push:                     # também roda sozinho quando esta rotina é alterada
+    paths:
+      - "radar/buscar.mjs"
+      - ".github/workflows/radar.yml"
 
 permissions:
   contents: write
