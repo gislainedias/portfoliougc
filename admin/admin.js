@@ -102,17 +102,18 @@
   function rotuloTipoCal(v) { for (var i = 0; i < TIPOS_CAL.length; i++) if (TIPOS_CAL[i][0] === v) return TIPOS_CAL[i][1]; return v || ""; }
 
   /* ------------------------ 3. DADOS E AVISOS ------------------------ */
-  var S = { videos: [], marcas: [], calendario: [], campanhas: [], ideias: [], visitas: [], marcados: {}, plays: {} };
+  var S = { videos: [], marcas: [], calendario: [], campanhas: [], ideias: [], visitas: [], marcados: {}, plays: {}, roteiros: [] };
   var faltas = {}; /* tabela -> texto do aviso */
 
   function erroAmigavel(tabela, e) {
     var m = (e && e.message) || "", c = (e && e.code) || "";
-    if (c === "PGRST205" || c === "42P01") return "A tabela “" + tabela + "” ainda não existe no seu Supabase. Rode o arquivo banco.sql.";
+    var arq = tabela === "roteiros" ? "sql-roteiros.sql" : "banco.sql";
+    if (c === "PGRST205" || c === "42P01") return "A tabela “" + tabela + "” ainda não existe no seu Supabase. Rode o arquivo " + arq + ".";
     if (c === "PGRST204" || c === "42703" || /column/i.test(m)) {
       var mm = m.match(/'([^']+)' column/) || m.match(/column "?([a-z_]+)"?/i);
-      return "Falta o campo " + (mm ? "“" + mm[1] + "” " : "") + "na tabela “" + tabela + "”. Rode de novo o arquivo banco.sql.";
+      return "Falta o campo " + (mm ? "“" + mm[1] + "” " : "") + "na tabela “" + tabela + "”. Rode de novo o arquivo " + arq + ".";
     }
-    if (c === "42501" || /row-level|permission denied/i.test(m)) return "O banco não deixou acessar “" + tabela + "”. Confira se você entrou com o seu e-mail e se o banco.sql foi rodado.";
+    if (c === "42501" || /row-level|permission denied/i.test(m)) return "O banco não deixou acessar “" + tabela + "”. Confira se você entrou com o seu e-mail e se o " + arq + " foi rodado.";
     if (c === "23514") return "Algum valor escolhido não é aceito pelo banco. Confira as opções.";
     if (/fetch|network/i.test(m)) return "Sem conexão com o banco agora. Confira a internet.";
     return "Problema na tabela “" + tabela + "”: " + m;
@@ -169,7 +170,7 @@
 
   function carregarTudo() {
     return Promise.all([
-      carregarPlays(),
+      carregarPlays(), carregarTabela("roteiros"),
       carregarTabela("videos"), carregarTabela("marcas"), carregarTabela("calendario"),
       carregarTabela("campanhas"), carregarTabela("ideias"), carregarMarcados(), carregarVisitas()
     ]);
@@ -230,7 +231,7 @@
 
   /* Formulário genérico. campos: {k, r, t, op, req, dica, m} */
   function formulario(cfg) {
-    var html = "<h2>" + esc(cfg.titulo) + "</h2><form id=\"formGen\" novalidate>", grupo = [];
+    var html = "<h2>" + esc(cfg.titulo) + "</h2>" + (cfg.aviso ? '<p class="faixa ok">' + esc(cfg.aviso) + "</p>" : "") + "<form id=\"formGen\" novalidate>", grupo = [];
     function campo(c) {
       var v = cfg.valores && cfg.valores[c.k] != null ? cfg.valores[c.k] : (c.padrao != null ? c.padrao : "");
       var id = "f_" + c.k, h = "";
@@ -1060,7 +1061,7 @@
       h += '<div class="vazio">Ainda não chegou nenhuma novidade. A busca roda sozinha todo dia de manhã. Para rodar agora: no GitHub, abra o repositório, clique em Actions, depois em “Radar de novidades” e em “Run workflow”. Depois de 1 minuto, clique em Recarregar.</div>';
       $("#aba").innerHTML = h; return;
     }
-    h += '<p style="font-size:12px;color:var(--muted);margin-bottom:10px">Última busca: ' + esc(rad.atualizado ? new Date(rad.atualizado).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" }) : "—") + "</p>";
+    h += '<p style="font-size:12px;color:var(--muted);margin-bottom:10px">Última busca: ' + esc(rad.atualizado ? new Date(rad.atualizado).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" }) : "ainda não rodou") + "</p>";
     h += '<div class="chips" style="margin-bottom:14px"><button class="chip' + (rad.filtro === "" ? " on" : "") + '" type="button" data-acao="radar-filtro" data-v="">Tudo</button>' +
       cats.map(function (c) { return '<button class="chip' + (rad.filtro === c ? " on" : "") + '" type="button" data-acao="radar-filtro" data-v="' + esc(c) + '">' + esc(c) + "</button>"; }).join("") + "</div>";
 
@@ -1090,9 +1091,205 @@
       .then(function (r) { if (r) toast("Guardado em Ideias de roteiros"); });
   }
 
+  /* ------------------------ 10c. ABA ROTEIROS ------------------------
+     Biblioteca de roteiros (meus e de outras creators). A transcrição é feita no site do Tokscript:
+     o painel copia o link, abre o Tokscript e recebe o texto de volta. Guarda tudo na tabela roteiros. */
+  var rt = { filtro: "", busca: "", aviso: null };
+  var RT_FONTES = { instagram: ["📸", "Instagram"], tiktok: ["🎵", "TikTok"], youtube: ["▶️", "YouTube"], manual: ["✍️", "Escrito à mão"] };
+
+  function rtAviso(tipo, texto) {
+    rt.aviso = texto ? { tipo: tipo, texto: texto } : null;
+    var el = $("#rtAviso"); if (!el) return;
+    el.innerHTML = rt.aviso ? '<p class="faixa ' + (tipo === "erro" ? "erro" : tipo === "ok" ? "ok" : "aviso") + '">' + esc(texto) + "</p>" : "";
+  }
+
+  function rtAnalisarLink(bruto) {
+    var s = String(bruto || "").trim(), msg = "Esse link não parece certo. Cole o endereço completo do vídeo, começando com https://";
+    if (!/^https?:\/\//i.test(s)) return { erro: msg };
+    var u; try { u = new URL(s); } catch (e) { return { erro: msg }; }
+    var host = u.hostname.replace(/^www\./, "").toLowerCase(), fonte = "";
+    if (/(^|\.)instagram\.com$/.test(host)) fonte = "instagram";
+    else if (/(^|\.)tiktok\.com$/.test(host)) fonte = "tiktok";
+    else if (/(^|\.)youtube\.com$/.test(host) || host === "youtu.be") fonte = "youtube";
+    if (!fonte) return { erro: "Por enquanto eu só transcrevo links do Instagram, TikTok e YouTube." };
+    if (fonte === "instagram") u.pathname = u.pathname.replace(/\/reels\//i, "/reel/");
+    var tirar = [];
+    u.searchParams.forEach(function (v, k) { if (k === "igsh" || /^utm_/i.test(k)) tirar.push(k); });
+    tirar.forEach(function (k) { u.searchParams.delete(k); });
+    u.hash = "";
+    var partes = u.pathname.split("/").filter(Boolean), perfil = "";
+    if (fonte === "instagram" && partes.length >= 3 && /^(reel|p|tv)$/.test(partes[1])) perfil = "@" + partes[0];
+    else if ((fonte === "tiktok" || fonte === "youtube") && partes[0] && partes[0].charAt(0) === "@") perfil = partes[0];
+    return { url: u.toString(), fonte: fonte, perfil: perfil };
+  }
+
+  /* Endereço do player embutido (só carrega quando clicar em ver vídeo) */
+  function rtEmbed(r) {
+    var u = String(r.url || ""), m;
+    if (r.fonte === "instagram") { m = u.match(/instagram\.com\/(?:[^\/]+\/)?(reel|p|tv)\/([A-Za-z0-9_-]+)/i); return m ? "https://www.instagram.com/" + m[1].toLowerCase() + "/" + m[2] + "/embed" : ""; }
+    if (r.fonte === "youtube") { m = u.match(/(?:youtu\.be\/|\/shorts\/|\/embed\/|[?&]v=)([A-Za-z0-9_-]{11})/); return m ? "https://www.youtube.com/embed/" + m[1] : ""; }
+    if (r.fonte === "tiktok") { m = u.match(/\/video\/(\d+)/); return m ? "https://www.tiktok.com/embed/v2/" + m[1] : ""; }
+    return "";
+  }
+  function rtCapaYoutube(r) {
+    var m = r.fonte === "youtube" && String(r.url || "").match(/(?:youtu\.be\/|\/shorts\/|\/embed\/|[?&]v=)([A-Za-z0-9_-]{11})/);
+    return m ? "https://i.ytimg.com/vi/" + m[1] + "/hqdefault.jpg" : "";
+  }
+
+  /* ---- Fluxo do Tokscript (sem chave e sem API: o Tokscript transcreve no site dele) ---- */
+  var RT_SITE = { instagram: "https://tokscript.com/instagram-transcript-generator" };
+  var RT_SITE_PADRAO = "https://tokscript.com";
+
+  function rtTranscreverClique() {
+    var campo = $("#rtLink"), a = rtAnalisarLink(campo ? campo.value : "");
+    if (a.erro) { rtAviso("erro", a.erro); return; }
+    var dq = $("#rtDeQuem") ? $("#rtDeQuem").value : "outra";
+    var igual = S.roteiros.filter(function (x) { return x.url === a.url; })[0];
+    function seguir() {
+      rtCopiar(a.url, null, true);
+      var janela = window.open(RT_SITE[a.fonte] || RT_SITE_PADRAO, "_blank", "noopener");
+      if (campo) campo.value = "";
+      rtAviso("aviso", janela ? "O Tokscript abriu em outra aba e o link já está copiado. Cole lá, copie o texto que ele gerar e cole aqui na caixa Transcrição." : "Não consegui abrir o Tokscript sozinho. Entre em tokscript.com, cole o link (já está copiado) e traga o texto pra cá.");
+      formRoteiro(null, "📋 Link copiado. No Tokscript, cole o link, copie a transcrição que ele gerar e cole aqui embaixo em Transcrição. Depois dê um nome e salve.", { url: a.url, perfil: a.perfil, de_quem: dq });
+    }
+    if (igual) confirmar("Esse link já está na sua biblioteca. Quer guardar de novo mesmo assim?", "Guardar de novo").then(function (s) { if (s) seguir(); });
+    else seguir();
+  }
+
+  /* ---- Tela ---- */
+  function rtNorm(t) { return String(t || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, ""); }
+  function rtTodasTags() {
+    var v = {}, l = [];
+    S.roteiros.forEach(function (r) { (r.tags || []).forEach(function (t) { if (t && !v[t]) { v[t] = 1; l.push(t); } }); });
+    return l.sort(cmpTexto);
+  }
+  function rtFiltrados() {
+    var q = rtNorm(rt.busca.trim());
+    return S.roteiros.filter(function (r) {
+      var f = rt.filtro;
+      if (f === "minha" && r.de_quem !== "minha") return false;
+      if (f === "outra" && r.de_quem !== "outra") return false;
+      if (f.indexOf("tag:") === 0 && (r.tags || []).indexOf(f.slice(4)) < 0) return false;
+      if (!q) return true;
+      return rtNorm([r.transcricao, r.perfil, r.titulo, r.obs, r.legenda, (r.tags || []).join(" ")].join(" ")).indexOf(q) >= 0;
+    }).sort(function (a, b) { return String(b.created_at || "").localeCompare(String(a.created_at || "")); });
+  }
+
+  function renderRoteiros() {
+    var h = cab("📜 Roteiros", "Cole o link de um reel, eu abro o Tokscript pra transcrever e guardo o texto aqui. Serve pros seus e pros das outras, com etiqueta pra você separar.", "");
+    h += '<section class="card rt-bloco">' +
+      '<div class="rt-topo"><input class="in" id="rtLink" type="url" inputmode="url" placeholder="Cole aqui: instagram.com/reel/... · tiktok.com/... · youtube.com/...">' +
+      '<select class="in" id="rtDeQuem" aria-label="De quem é o vídeo"><option value="outra">De outra pessoa</option><option value="minha">Meu</option></select>' +
+      '<button class="btn btn-main" type="button" data-acao="rt-transcrever">🎙️ Transcrever no Tokscript</button>' +
+      '<button class="btn btn-ghost" type="button" data-acao="rt-manual">✍️ + Escrever na mão</button></div>' +
+      '<div id="rtAviso"></div></section>';
+    h += '<div class="cab" style="margin-top:6px"><div><h2 style="font-size:15px;color:var(--vinho)">📚 Minha biblioteca</h2></div>' +
+      '<div class="acoes"><button class="btn btn-ghost" type="button" data-acao="rt-estudar">🧠 Estudar com o Claude</button></div></div>';
+    h += '<input class="in" id="rtBusca" data-ao="rt-busca" type="search" placeholder="🔎 Buscar na transcrição, no perfil, no título e nas notas" value="' + esc(rt.busca) + '" style="margin-bottom:10px">';
+    h += '<div class="chips" id="rtChips" style="margin-bottom:14px"></div><div id="rtLista"></div>';
+    $("#aba").innerHTML = h;
+    rtAviso(rt.aviso ? rt.aviso.tipo : "", rt.aviso ? rt.aviso.texto : "");
+    rtDesenharLista();
+  }
+
+  function rtChip(v, rot) { return '<button class="chip' + (rt.filtro === v ? " on" : "") + '" type="button" data-acao="rt-filtro" data-v="' + esc(v) + '">' + esc(rot) + "</button>"; }
+
+  function rtCard(r) {
+    var f = RT_FONTES[r.fonte] || RT_FONTES.manual, capa = rtCapaYoutube(r), emb = rtEmbed(r);
+    var data = r.postado_em ? "postado em " + dataBR(r.postado_em) : "guardado em " + dataBR(String(r.created_at || "").slice(0, 10));
+    var midia = '<div class="rt-midia" data-midia="' + esc(r.id) + '"' + (capa ? ' style="background-image:url(\'' + esc(capa) + '\')"' : "") + ">" +
+      (emb ? '<button class="btn btn-main btn-mini" type="button" data-acao="rt-ver" data-id="' + esc(r.id) + '">▶ ver vídeo</button>'
+        : '<span class="rt-emoji">' + f[0] + "</span>" + (r.url ? '<a class="btn btn-ghost btn-mini" href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer">↗ abrir link</a>' : "")) + "</div>";
+    var corpo = '<h3>' + esc(r.titulo || "Sem título") + "</h3>" +
+      '<div class="rt-meta"><span class="pill ' + (r.de_quem === "minha" ? "rt-meu" : "rt-outra") + '">' + (r.de_quem === "minha" ? "⭐ Meu" : "👀 De outra") + "</span>" +
+      (r.perfil ? "<b>" + esc(r.perfil) + "</b>" : "") + "<span>" + f[0] + " " + f[1] + "</span><span>" + esc(data) + "</span></div>";
+    if ((r.tags || []).length) corpo += '<div class="rt-tags">' + r.tags.map(function (t) { return '<span class="pill">#' + esc(t) + "</span>"; }).join("") + "</div>";
+    var acoes = "";
+    corpo += '<p class="rt-texto">' + (r.transcricao ? esc(r.transcricao) : "Sem transcrição ainda. Clique em Editar e cole o texto.") + "</p>";
+    acoes += (r.transcricao ? '<button class="btn btn-ghost btn-mini" type="button" data-acao="rt-copiar" data-id="' + esc(r.id) + '">📋 Copiar transcrição</button>' : "") +
+      '<button class="btn btn-ghost btn-mini" type="button" data-acao="rt-editar" data-id="' + esc(r.id) + '">✏️ Editar</button>';
+    acoes += '<button class="btn btn-ghost btn-mini perigo" type="button" data-acao="rt-apagar" data-id="' + esc(r.id) + '">🗑️ Apagar</button>';
+    return '<article class="card rt-card">' + midia + '<div class="rt-corpo">' + corpo + '<div class="rt-acoes">' + acoes + "</div></div></article>";
+  }
+
+  function rtDesenharLista() {
+    var chips = $("#rtChips"), lista = $("#rtLista"); if (!lista) return;
+    if (chips) chips.innerHTML = rtChip("", "Todos") + rtChip("minha", "⭐ Meus") + rtChip("outra", "👀 De outras") + rtTodasTags().map(function (t) { return rtChip("tag:" + t, "#" + t); }).join("");
+    var l = rtFiltrados();
+    if (!l.length) {
+      lista.innerHTML = '<div class="vazio">' + (S.roteiros.length ? "Nenhum roteiro com esse filtro ou busca." : "Sua biblioteca ainda está vazia. Cole um link acima e clique em Transcrever no Tokscript, ou escreva um roteiro na mão.") + "</div>";
+      return;
+    }
+    lista.innerHTML = '<div class="rt-grade">' + l.map(rtCard).join("") + "</div>";
+  }
+
+  /* ---- Editar, escrever na mão, copiar, estudar ---- */
+  function formRoteiro(r, aviso, base) {
+    var v = r ? Object.assign({}, r, { tags: (r.tags || []).join(", ") }) : Object.assign({ de_quem: "outra" }, base || {});
+    formulario({
+      titulo: r ? "✏️ Editar roteiro" : "✍️ Escrever roteiro na mão",
+      aviso: aviso || "",
+      valores: v,
+      campos: [
+        { k: "titulo", r: "Título", ph: "Dê um nome pra achar depois" },
+        { k: "de_quem", r: "De quem", t: "select", op: [["outra", "De outra pessoa"], ["minha", "Meu"]], m: true },
+        { k: "perfil", r: "Perfil", ph: "@perfil", m: true },
+        { k: "url", r: "Link do vídeo", ph: "https://..." },
+        { k: "postado_em", r: "Data de postagem", t: "date", m: true },
+        { k: "tags", r: "Tags (separadas por vírgula)", ph: "gancho, casa, humor", m: true },
+        { k: "legenda", r: "Legenda do post", t: "textarea" },
+        { k: "transcricao", r: "Transcrição", t: "textarea" },
+        { k: "obs", r: "Minhas notas", t: "textarea" }
+      ],
+      onSalvar: function (o) {
+        var a = null;
+        if (o.url) {
+          a = rtAnalisarLink(o.url);
+          if (a.erro) { toast(a.erro, true); return false; }
+          o.url = a.url;
+          if (!o.perfil && a.perfil) o.perfil = a.perfil;
+        }
+        o.fonte = a ? a.fonte : (r && r.fonte) || "manual";
+        o.tags = o.tags.split(",").map(function (t) { return t.trim().replace(/^#/, ""); }).filter(Boolean);
+        o.status = "pronto"; o.erro = null; o.updated_at = new Date().toISOString();
+        return gravar("roteiros", r ? r.id : null, o).then(function (n) { if (n) { toast("Roteiro salvo"); rtDesenharLista(); } return !!n; });
+      },
+      onApagar: r ? function () { return apagar("roteiros", r.id).then(function (ok) { if (ok) { toast("Roteiro apagado"); rtDesenharLista(); } return ok; }); } : null,
+      msgApagar: "Apagar este roteiro da biblioteca?"
+    });
+  }
+
+  function rtCopiar(texto, botao, silencioso) {
+    function feito() { if (botao) { var antes = botao.textContent; botao.textContent = "copiado ✓"; setTimeout(function () { botao.textContent = antes; }, 1700); } else if (!silencioso) toast("Copiado ✓"); }
+    function plano() {
+      var ta = document.createElement("textarea"); ta.value = texto; ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); feito(); } catch (e) { toast("Não consegui copiar. Selecione o texto e copie na mão.", true); }
+      ta.remove();
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(texto).then(feito, plano); else plano();
+  }
+
+  function rtEstudar(botao) {
+    var l = S.roteiros.filter(function (r) { return r.de_quem === "outra" && r.status === "pronto" && r.transcricao; })
+      .sort(function (a, b) { return String(b.created_at || "").localeCompare(String(a.created_at || "")); }).slice(0, 10);
+    if (!l.length) { toast("Guarde primeiro alguns roteiros marcados como De outra pessoa.", true); return; }
+    var p = "Você é uma estrategista de conteúdo para Instagram e TikTok. Sou criadora UGC no Brasil e quero aprender com os vídeos de outras creators.\n\n" +
+      "Abaixo estão as transcrições dos " + l.length + " vídeos mais recentes que eu guardei. Analise todos e me entregue:\n" +
+      "1. Os assuntos que estão em alta nesses vídeos.\n" +
+      "2. As expressões e palavras que mais estão prendendo a atenção.\n" +
+      "3. Os padrões de gancho, cada um com um exemplo real tirado das transcrições.\n" +
+      "4. 5 roteiros novos no MEU assunto, reaproveitando a estrutura dos vídeos (e não o conteúdo), com o gancho, o desenvolvimento e a chamada final de cada um.\n\n" +
+      "Escreva do jeito que uma pessoa fala, sem ficar robotizado, e não copie frases inteiras dos vídeos.\n\nVÍDEOS:\n";
+    l.forEach(function (r, i) { p += "\n--- Vídeo " + (i + 1) + (r.perfil ? " (" + r.perfil + ")" : "") + (r.titulo ? ": " + r.titulo : "") + " ---\n" + r.transcricao + "\n"; });
+    rtCopiar(p, botao);
+    toast("Prompt copiado ✓ Agora é só colar no Claude.");
+  }
+
+
   /* ------------------------ 11. ABAS, MENU E EVENTOS ------------------------ */
   var atual = "portfolio";
-  var ABAS = { portfolio: renderPortfolio, marcas: renderMarcas, calendario: renderCalendario, campanhas: renderCampanhas, checklist: renderChecklist, ideias: renderIdeias, radar: renderRadar };
+  var ABAS = { portfolio: renderPortfolio, marcas: renderMarcas, calendario: renderCalendario, campanhas: renderCampanhas, checklist: renderChecklist, ideias: renderIdeias, radar: renderRadar, roteiros: renderRoteiros };
 
   function abrirAba(id) {
     if (!ABAS[id]) id = "portfolio";
@@ -1197,6 +1394,25 @@
     "rev-limpar": function () { ck.revisao = {}; desenharSub(); },
 
     "ideia-nova": function () { formIdeia(null); },
+    "rt-transcrever": function () { rtTranscreverClique(); },
+    "rt-manual": function () { formRoteiro(null); },
+    "rt-filtro": function (el) { rt.filtro = el.dataset.v; rtDesenharLista(); },
+    "rt-estudar": function (el) { rtEstudar(el); },
+    "rt-editar": function (el) { var r = achar("roteiros", el.dataset.id); if (r) formRoteiro(r); },
+    "rt-copiar": function (el) { var r = achar("roteiros", el.dataset.id); if (r && r.transcricao) rtCopiar(r.transcricao, el); },
+    "rt-apagar": function (el) {
+      var r = achar("roteiros", el.dataset.id); if (!r) return;
+      confirmar("Apagar este roteiro da biblioteca? Não dá para desfazer.").then(function (s) {
+        if (s) apagar("roteiros", r.id).then(function (ok) { if (ok) { toast("Roteiro apagado"); rtDesenharLista(); } });
+      });
+    },
+    "rt-ver": function (el) {
+      var r = achar("roteiros", el.dataset.id), m = el.closest(".rt-midia"); if (!r || !m) return;
+      var src = rtEmbed(r); if (!src) return;
+      m.style.backgroundImage = "none";
+      m.innerHTML = '<iframe src="' + esc(src) + '" title="Vídeo" loading="lazy" allowfullscreen allow="encrypted-media; picture-in-picture"></iframe>';
+      m.closest(".rt-card").classList.add("com-video");
+    },
     "radar-filtro": function (el) { rad.filtro = el.dataset.v; renderRadar(); },
     "radar-atualizar": function () { rad.itens = null; renderRadar(); },
     "radar-ideia": function (el) { radarParaIdeia(+el.dataset.i); },
@@ -1222,6 +1438,7 @@
       var t = e.target, ao = t.dataset && t.dataset.ao;
       if (ao === "mk-busca") { mk.busca = t.value; desenharMarcas(); }
       else if (ao === "cp-busca") { cp.busca = t.value; desenharCampanhas(); }
+      else if (ao === "rt-busca") { rt.busca = t.value; rtDesenharLista(); }
       else if (ao === "roteiro-txt") { ck.roteiro = t.value; atualizarProgressoRevisao(); }
     });
     $("#aba").addEventListener("change", function (e) {

@@ -255,6 +255,44 @@ td.acoes-c .icon-btn{margin-left:4px}
 .ideia p{font-size:13px;color:var(--tinta);white-space:pre-wrap;overflow-wrap:anywhere;flex:1}
 .ideia .rod{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 
+/* ---------- Aba Roteiros ---------- */
+.rt-bloco{margin-bottom:18px}
+.rt-chave{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
+.rt-chave .field{flex:1;min-width:220px;margin-bottom:0}
+#rtConfig{margin-bottom:14px}
+.rt-topo{display:grid;grid-template-columns:minmax(0,1fr) 170px auto auto;gap:8px;align-items:center}
+.rt-topo .in{min-width:0}
+#rtAviso:not(:empty){margin-top:12px}
+#rtAviso .faixa{margin-bottom:0}
+.rt-grade{display:grid;gap:14px}
+.rt-card{display:grid;grid-template-columns:180px minmax(0,1fr);gap:16px;margin:0;padding:14px}
+.rt-card.com-video{grid-template-columns:minmax(0,340px) minmax(0,1fr)}
+.rt-midia{position:relative;min-height:150px;border-radius:var(--r-md);background:linear-gradient(155deg,var(--rosa),var(--lilas));background-size:cover;background-position:center;display:flex;flex-direction:column;gap:8px;align-items:center;justify-content:center;overflow:hidden;border:1px solid var(--linha)}
+.rt-emoji{font-size:34px;line-height:1}
+.rt-midia iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
+.rt-card.com-video .rt-midia{min-height:520px}
+.rt-corpo{min-width:0;display:flex;flex-direction:column;gap:7px}
+.rt-corpo h3{font-size:15px}
+.rt-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.rt-meta b{color:var(--tinta);font-weight:600}
+.rt-meu{background:var(--vinho);color:var(--creme)}
+.rt-outra{background:var(--lilas);color:#5a2f66}
+.rt-tags{display:flex;gap:5px;flex-wrap:wrap}
+.rt-texto{font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;flex:1}
+.rt-estado{font-size:13px;color:var(--muted)}
+.rt-estado.erro{color:#8a1230}
+.rt-relogio{display:inline-block;animation:rtgira 2s linear infinite}
+@keyframes rtgira{to{transform:rotate(360deg)}}
+.rt-acoes{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto}
+.btn.perigo{color:var(--vermelho);border-color:rgba(192,38,63,.5)}
+#f_transcricao{min-height:220px}
+@media (max-width:720px){
+  .rt-topo{grid-template-columns:1fr}
+  .rt-card,.rt-card.com-video{grid-template-columns:1fr}
+  .rt-midia{min-height:130px}
+  .rt-card.com-video .rt-midia{min-height:480px}
+}
+
 /* ---------- Janela de formulário ---------- */
 dialog{border:2px solid var(--tinta);border-radius:var(--radius);background:var(--creme);color:var(--tinta);padding:0;width:min(92vw,520px);max-height:90vh;margin:auto;box-shadow:6px 6px 0 var(--tinta)}
 dialog.larga{width:min(94vw,680px)}
