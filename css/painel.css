@@ -101,7 +101,7 @@ h1,h2,h3{font-family:var(--font);color:var(--vinho);line-height:1.2;letter-spaci
 /* ---------- Cartões, faixa de números ---------- */
 .card{background:var(--card);border:1px solid var(--linha);border-radius:var(--radius);padding:16px 18px;margin-bottom:16px}
 .card h2{font-size:14px;font-weight:700;margin-bottom:10px}
-.strip{display:grid;grid-template-columns:repeat(5,1fr);background:var(--card);border:1px solid var(--linha);border-radius:var(--radius);margin-bottom:16px;overflow:hidden}
+.strip{display:grid;grid-template-columns:repeat(6,1fr);background:var(--card);border:1px solid var(--linha);border-radius:var(--radius);margin-bottom:16px;overflow:hidden}
 .strip.q4{grid-template-columns:repeat(4,1fr)}
 .strip>div{padding:12px 16px;border-left:1px solid var(--linha);min-width:0}
 .strip>div:first-child{border-left:none}

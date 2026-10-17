@@ -773,6 +773,7 @@ trabCarousel.addEventListener("keydown", e => {
 trabCarousel.addEventListener("click", e => {
   const card = e.target.closest(".work-card"); if (!card || card.querySelector("iframe")) return;
   const id = card.dataset.videoId, titulo = card.dataset.titulo;
+  registrarPlay(id, nichoAtivo);
   card.querySelector(".ph").innerHTML = `<iframe src="https://www.youtube.com/embed/${esc(id)}?autoplay=1" title="${esc(titulo)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
 });
 mostrarNicho(nichoAtivo);
@@ -964,6 +965,19 @@ if (window.db) {
       TRABALHOS = lista;
       mostrarNicho(nichoAtivo);
     }, () => {});
+}
+
+/* Play: conta quando alguém aperta play num vídeo (uma vez por vídeo em cada sessão do navegador).
+   Também não conta quando você testa no seu computador. */
+function registrarPlay(videoId, nicho) {
+  try {
+    if (!window.db) return;
+    if (!/^https?:$/.test(location.protocol) || /^(localhost|127\.0\.0\.1)$/.test(location.hostname)) return;
+    const chave = "play_" + videoId;
+    if (sessionStorage.getItem(chave) === "1") return;
+    sessionStorage.setItem(chave, "1");
+    window.db.from("plays").insert({ video_id: String(videoId).slice(0, 40), nicho: String(nicho || "").slice(0, 60) }).then(() => {}, () => {});
+  } catch (e) {}
 }
 
 /* Visita: uma por sessão do navegador, sem serviço de fora e sem pedir nada ao visitante.

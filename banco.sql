@@ -256,4 +256,32 @@ insert into public.ideias (titulo, texto, nicho, status, exemplo)
 select 'EXEMPLO: ideia de roteiro', 'Escreva aqui o gancho e os pontos principais do vídeo.', 'casa', 'ideia', true
 where not exists (select 1 from public.ideias);
 
+-- ---------------------------------------------------------------------
+-- BLOCO 8: plays dos vídeos (quantas vezes cada vídeo foi assistido no site)
+-- O site grava uma linha quando alguém aperta play. Ninguém consegue LER,
+-- só você, logada, pelo painel.
+-- ---------------------------------------------------------------------
+create table if not exists public.plays (
+  id        bigint generated always as identity primary key,
+  video_id  text not null,
+  nicho     text,
+  data      date not null default current_date,
+  criado_em timestamptz not null default now()
+);
+
+alter table public.plays enable row level security;
+revoke all on public.plays from anon;
+grant insert on public.plays to anon;
+grant select, insert, update, delete on public.plays to authenticated;
+
+drop policy if exists "dona total" on public.plays;
+create policy "dona total" on public.plays
+  for all to authenticated
+  using (public.eh_gislaine()) with check (public.eh_gislaine());
+
+drop policy if exists "publico registra play" on public.plays;
+create policy "publico registra play" on public.plays
+  for insert to anon
+  with check (char_length(video_id) between 5 and 40 and char_length(coalesce(nicho, '')) <= 60);
+
 -- FIM. Se chegou aqui sem erro vermelho, está tudo pronto.

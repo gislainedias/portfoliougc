@@ -102,7 +102,7 @@
   function rotuloTipoCal(v) { for (var i = 0; i < TIPOS_CAL.length; i++) if (TIPOS_CAL[i][0] === v) return TIPOS_CAL[i][1]; return v || ""; }
 
   /* ------------------------ 3. DADOS E AVISOS ------------------------ */
-  var S = { videos: [], marcas: [], calendario: [], campanhas: [], ideias: [], visitas: [], marcados: {} };
+  var S = { videos: [], marcas: [], calendario: [], campanhas: [], ideias: [], visitas: [], marcados: {}, plays: {} };
   var faltas = {}; /* tabela -> texto do aviso */
 
   function erroAmigavel(tabela, e) {
@@ -148,8 +148,28 @@
     return pagina(0);
   }
 
+  /* Plays: guarda quantas vezes cada vídeo foi assistido (por código do YouTube) */
+  function carregarPlays() {
+    var contagem = {};
+    function pagina(de) {
+      return db.from("plays").select("video_id").range(de, de + 999).then(function (r) {
+        if (r.error) { faltas.plays = erroAmigavel("plays", r.error); S.plays = {}; return; }
+        (r.data || []).forEach(function (x) { contagem[x.video_id] = (contagem[x.video_id] || 0) + 1; });
+        if ((r.data || []).length === 1000 && de < 199000) return pagina(de + 1000);
+        delete faltas.plays; S.plays = contagem;
+      }, function (e) { faltas.plays = erroAmigavel("plays", e); S.plays = {}; });
+    }
+    return pagina(0);
+  }
+  function idYoutube(link) {
+    var m = String(link || "").match(/(?:youtu\.be\/|\/shorts\/|[?&]v=|\/embed\/)([A-Za-z0-9_-]{11})/);
+    return m ? m[1] : null;
+  }
+  function playsDoVideo(v) { var id = idYoutube(v.link); return id ? (S.plays[id] || 0) : 0; }
+
   function carregarTudo() {
     return Promise.all([
+      carregarPlays(),
       carregarTabela("videos"), carregarTabela("marcas"), carregarTabela("calendario"),
       carregarTabela("campanhas"), carregarTabela("ideias"), carregarMarcados(), carregarVisitas()
     ]);
@@ -331,6 +351,7 @@
       "<div><small>Visitas em 14 dias</small><b>" + total14 + "</b></div>" +
       "<div><small>Visitas hoje</small><b>" + contagem[hoje] + "</b></div>" +
       "<div><small>Vídeos no ar</small><b>" + noAr.length + "</b></div>" +
+      "<div><small>Plays nos vídeos</small><b>" + Object.keys(S.plays).reduce(function (s, k) { return s + S.plays[k]; }, 0) + "</b></div>" +
       "<div><small>Nicho mais forte</small><b>" + esc(topNicho ? nomeNicho(topNicho) : "Nenhum ainda") + "</b>" + (topNicho ? "<em>" + plural(porNicho[topNicho], "vídeo", "vídeos") + "</em>" : "") + "</div>" +
       "<div><small>De onde mais vêm</small><b>" + esc(listaOrig.length ? listaOrig[0] : "Nenhuma ainda") + "</b>" + (listaOrig.length ? "<em>" + plural(origens[listaOrig[0]], "visita", "visitas") + "</em>" : "") + "</div>" +
       "</div>";
@@ -364,7 +385,7 @@
 
     h += '<div class="cab"><div><h2 style="font-size:15px;color:var(--vinho)">Meus vídeos</h2><p>Arraste pela alça para mudar a ordem. O olho mostra ou esconde do site.</p></div>' +
       '<div class="acoes"><button class="btn" data-acao="video-importar" type="button">Importar vídeos do site</button><button class="btn btn-main" data-acao="video-novo" type="button">' + ICON.mais + "Adicionar vídeo</button></div></div>";
-    h += '<div class="tabela-wrap"><table><thead><tr><th style="width:56px"></th><th style="width:44px"></th><th>Título</th><th>Nicho</th><th>Formato</th><th>Marca</th><th>Destaque</th><th></th></tr></thead><tbody id="tbVideos"></tbody></table></div>';
+    h += '<div class="tabela-wrap"><table><thead><tr><th style="width:56px"></th><th style="width:44px"></th><th>Título</th><th>Nicho</th><th>Formato</th><th>Marca</th><th title="Vezes que apertaram play no site">Destaque (views)</th><th></th></tr></thead><tbody id="tbVideos"></tbody></table></div>';
     $("#aba").innerHTML = h;
     desenharVideos();
   }
@@ -380,7 +401,7 @@
         '<span class="mover"><button type="button" data-acao="video-sobe" data-id="' + esc(v.id) + '" aria-label="Subir"' + (i === 0 ? " disabled" : "") + '>▲</button><button type="button" data-acao="video-desce" data-id="' + esc(v.id) + '" aria-label="Descer"' + (i === lista.length - 1 ? " disabled" : "") + ">▼</button></span></td>" +
         '<td><button class="icon-btn" type="button" data-acao="video-olho" data-id="' + esc(v.id) + '" aria-label="' + (visivel ? "Esconder do site" : "Mostrar no site") + '" title="' + (visivel ? "Visível no site" : "Escondido do site") + '">' + (visivel ? ICON.olho : ICON.olhoOff) + "</button></td>" +
         "<td>" + (v.link ? '<a href="' + esc(v.link) + '" target="_blank" rel="noopener noreferrer">' + esc(v.titulo) + "</a>" : esc(v.titulo)) + exTag(v) + "</td>" +
-        "<td>" + esc(nomeNicho(v.nicho)) + "</td><td>" + esc(v.formato) + "</td><td>" + esc(v.marca) + "</td><td>" + esc(v.destaque) + "</td>" +
+        "<td>" + esc(nomeNicho(v.nicho)) + "</td><td>" + esc(v.formato) + "</td><td>" + esc(v.marca) + "</td><td><b>" + plural(playsDoVideo(v), "view", "views") + "</b>" + (v.destaque ? '<br><small style="color:var(--muted)">' + esc(v.destaque) + "</small>" : "") + "</td>" +
         '<td class="acoes-c"><button class="icon-btn" type="button" data-acao="video-editar" data-id="' + esc(v.id) + '" aria-label="Editar">' + ICON.editar + "</button>" +
         '<button class="icon-btn perigo" type="button" data-acao="video-apagar" data-id="' + esc(v.id) + '" aria-label="Apagar">' + ICON.lixo + "</button></td></tr>";
     }).join("");
