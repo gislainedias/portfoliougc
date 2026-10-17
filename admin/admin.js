@@ -1094,7 +1094,7 @@
   /* ------------------------ 10c. ABA ROTEIROS ------------------------
      Biblioteca de roteiros (meus e de outras creators). A transcrição é feita no site do Tokscript:
      o painel copia o link, abre o Tokscript e recebe o texto de volta. Guarda tudo na tabela roteiros. */
-  var rt = { filtro: "", busca: "", aviso: null };
+  var rt = { filtro: "", busca: "", aviso: null, tok: null };
   var RT_FONTES = { instagram: ["📸", "Instagram"], tiktok: ["🎵", "TikTok"], youtube: ["▶️", "YouTube"], manual: ["✍️", "Escrito à mão"] };
 
   function rtAviso(tipo, texto) {
@@ -1147,13 +1147,41 @@
     var igual = S.roteiros.filter(function (x) { return x.url === a.url; })[0];
     function seguir() {
       rtCopiar(a.url, null, true);
-      var janela = window.open(RT_SITE[a.fonte] || RT_SITE_PADRAO, "_blank", "noopener");
       if (campo) campo.value = "";
-      rtAviso("aviso", janela ? "O Tokscript abriu em outra aba e o link já está copiado. Cole lá, copie o texto que ele gerar e cole aqui na caixa Transcrição." : "Não consegui abrir o Tokscript sozinho. Entre em tokscript.com, cole o link (já está copiado) e traga o texto pra cá.");
-      formRoteiro(null, "📋 Link copiado. No Tokscript, cole o link, copie a transcrição que ele gerar e cole aqui embaixo em Transcrição. Depois dê um nome e salve.", { url: a.url, perfil: a.perfil, de_quem: dq });
+      rt.tok = { site: RT_SITE[a.fonte] || RT_SITE_PADRAO, base: { url: a.url, perfil: a.perfil, de_quem: dq } };
+      rtAviso("aviso", "O link já está copiado. Cole no Tokscript aqui embaixo. Quando o texto aparecer, copie e clique em Guardar transcrição.");
+      rtDesenharTok(true);
     }
     if (igual) confirmar("Esse link já está na sua biblioteca. Quer guardar de novo mesmo assim?", "Guardar de novo").then(function (s) { if (s) seguir(); });
     else seguir();
+  }
+
+  /* Painel com o Tokscript aberto dentro da página (iframe). rolar = true leva a tela até ele. */
+  function rtDesenharTok(rolar) {
+    var el = $("#rtTok"); if (!el) return;
+    if (!rt.tok) { el.innerHTML = ""; return; }
+    el.innerHTML = '<section class="card rt-tok"><div class="rt-tok-bar"><b>🎙️ Tokscript</b>' +
+      '<span class="rt-tok-dica">Cole o link (já copiado), espere o texto e copie.</span>' +
+      '<span style="flex:1"></span>' +
+      '<button class="btn btn-main btn-mini" type="button" data-acao="rt-guardar">💾 Guardar transcrição</button>' +
+      '<a class="btn btn-ghost btn-mini" href="' + esc(rt.tok.site) + '" target="_blank" rel="noopener noreferrer">↗ Abrir em outra aba</a>' +
+      '<button class="btn btn-ghost btn-mini" type="button" data-acao="rt-tok-fechar">✕ Fechar</button></div>' +
+      '<iframe src="' + esc(rt.tok.site) + '" title="Tokscript" allow="clipboard-read; clipboard-write"></iframe>' +
+      '<p class="dica">Se o Tokscript não aparecer aqui dentro, use o botão Abrir em outra aba e depois volte e clique em Guardar transcrição.</p></section>';
+    if (rolar) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  /* Abre o formulário já com o texto que estiver copiado (se o navegador deixar ler) */
+  function rtGuardarTranscricao() {
+    if (!rt.tok) return;
+    var base = rt.tok.base;
+    function abrir(texto) {
+      var b = Object.assign({}, base);
+      if (texto && texto.trim() && texto.trim() !== base.url && texto.length > 20) b.transcricao = texto.trim();
+      formRoteiro(null, "📋 Confira a transcrição, dê um nome e salve. Se o campo estiver vazio, cole o texto que você copiou do Tokscript.", b);
+    }
+    if (navigator.clipboard && navigator.clipboard.readText) navigator.clipboard.readText().then(abrir, function () { abrir(""); });
+    else abrir("");
   }
 
   /* ---- Tela ---- */
@@ -1182,13 +1210,14 @@
       '<select class="in" id="rtDeQuem" aria-label="De quem é o vídeo"><option value="outra">De outra pessoa</option><option value="minha">Meu</option></select>' +
       '<button class="btn btn-main" type="button" data-acao="rt-transcrever">🎙️ Transcrever no Tokscript</button>' +
       '<button class="btn btn-ghost" type="button" data-acao="rt-manual">✍️ + Escrever na mão</button></div>' +
-      '<div id="rtAviso"></div></section>';
+      '<div id="rtAviso"></div></section><div id="rtTok"></div>';
     h += '<div class="cab" style="margin-top:6px"><div><h2 style="font-size:15px;color:var(--vinho)">📚 Minha biblioteca</h2></div>' +
       '<div class="acoes"><button class="btn btn-ghost" type="button" data-acao="rt-estudar">🧠 Estudar com o Claude</button></div></div>';
     h += '<input class="in" id="rtBusca" data-ao="rt-busca" type="search" placeholder="🔎 Buscar na transcrição, no perfil, no título e nas notas" value="' + esc(rt.busca) + '" style="margin-bottom:10px">';
     h += '<div class="chips" id="rtChips" style="margin-bottom:14px"></div><div id="rtLista"></div>';
     $("#aba").innerHTML = h;
     rtAviso(rt.aviso ? rt.aviso.tipo : "", rt.aviso ? rt.aviso.texto : "");
+    rtDesenharTok(false);
     rtDesenharLista();
   }
 
@@ -1252,7 +1281,10 @@
         o.fonte = a ? a.fonte : (r && r.fonte) || "manual";
         o.tags = o.tags.split(",").map(function (t) { return t.trim().replace(/^#/, ""); }).filter(Boolean);
         o.status = "pronto"; o.erro = null; o.updated_at = new Date().toISOString();
-        return gravar("roteiros", r ? r.id : null, o).then(function (n) { if (n) { toast("Roteiro salvo"); rtDesenharLista(); } return !!n; });
+        return gravar("roteiros", r ? r.id : null, o).then(function (n) {
+          if (n) { toast("Roteiro salvo"); if (!r && rt.tok) { rt.tok = null; rtAviso("", ""); rtDesenharTok(false); } rtDesenharLista(); }
+          return !!n;
+        });
       },
       onApagar: r ? function () { return apagar("roteiros", r.id).then(function (ok) { if (ok) { toast("Roteiro apagado"); rtDesenharLista(); } return ok; }); } : null,
       msgApagar: "Apagar este roteiro da biblioteca?"
@@ -1396,6 +1428,8 @@
     "ideia-nova": function () { formIdeia(null); },
     "rt-transcrever": function () { rtTranscreverClique(); },
     "rt-manual": function () { formRoteiro(null); },
+    "rt-guardar": function () { rtGuardarTranscricao(); },
+    "rt-tok-fechar": function () { rt.tok = null; rtAviso("", ""); rtDesenharTok(false); },
     "rt-filtro": function (el) { rt.filtro = el.dataset.v; rtDesenharLista(); },
     "rt-estudar": function (el) { rtEstudar(el); },
     "rt-editar": function (el) { var r = achar("roteiros", el.dataset.id); if (r) formRoteiro(r); },

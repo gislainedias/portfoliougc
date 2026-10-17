@@ -264,6 +264,11 @@ td.acoes-c .icon-btn{margin-left:4px}
 .rt-topo .in{min-width:0}
 #rtAviso:not(:empty){margin-top:12px}
 #rtAviso .faixa{margin-bottom:0}
+.rt-tok{margin-bottom:18px;padding:12px}
+.rt-tok-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.rt-tok-dica{font-size:12px;color:var(--muted)}
+.rt-tok iframe{display:block;width:100%;height:min(720px,80vh);border:1.5px solid var(--linha);border-radius:var(--r-md);background:#fff}
+.rt-tok .dica{margin-top:8px}
 .rt-grade{display:grid;gap:14px}
 .rt-card{display:grid;grid-template-columns:180px minmax(0,1fr);gap:16px;margin:0;padding:14px}
 .rt-card.com-video{grid-template-columns:minmax(0,340px) minmax(0,1fr)}
