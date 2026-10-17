@@ -363,7 +363,7 @@
     h += "</section></div>";
 
     h += '<div class="cab"><div><h2 style="font-size:15px;color:var(--vinho)">Meus vídeos</h2><p>Arraste pela alça para mudar a ordem. O olho mostra ou esconde do site.</p></div>' +
-      '<div class="acoes"><button class="btn btn-main" data-acao="video-novo" type="button">' + ICON.mais + "Adicionar vídeo</button></div></div>";
+      '<div class="acoes"><button class="btn" data-acao="video-importar" type="button">Importar vídeos do site</button><button class="btn btn-main" data-acao="video-novo" type="button">' + ICON.mais + "Adicionar vídeo</button></div></div>";
     h += '<div class="tabela-wrap"><table><thead><tr><th style="width:56px"></th><th style="width:44px"></th><th>Título</th><th>Nicho</th><th>Formato</th><th>Marca</th><th>Destaque</th><th></th></tr></thead><tbody id="tbVideos"></tbody></table></div>';
     $("#aba").innerHTML = h;
     desenharVideos();
@@ -372,7 +372,7 @@
   function desenharVideos() {
     var tb = $("#tbVideos"); if (!tb) return;
     var lista = videosOrdenados();
-    if (!lista.length) { tb.innerHTML = '<tr><td colspan="8"><div class="vazio">Nenhum vídeo ainda. Clique em Adicionar vídeo.</div></td></tr>'; return; }
+    if (!lista.length) { tb.innerHTML = '<tr><td colspan="8"><div class="vazio">Nenhum vídeo ainda. Clique em “Importar vídeos do site” para trazer os que já estão no portfólio, ou em Adicionar vídeo.</div></td></tr>'; return; }
     tb.innerHTML = lista.map(function (v, i) {
       var visivel = v.visivel !== false;
       return '<tr data-id="' + esc(v.id) + '" class="' + (visivel ? "" : "escondido") + '">' +
@@ -409,6 +409,45 @@
       msgApagar: "Apagar este vídeo? Ele some do painel e do site."
     });
   }
+  /* Os vídeos que já estão no portfólio (mesma lista fixa do index.html). */
+  var VIDEOS_SITE = [
+    ["App Moshi Cam", "kBlY3xtX94g", "tech"], ["App Dola", "aUHYWgehZog", "tech"],
+    ["Site de música personalizada", "15FNTP0pWz0", "tech"], ["App My All", "zOr4TN2z0Ro", "tech"],
+    ["App Elevenlabs", "QVqnXFI-BDQ", "tech"], ["Maquiagem barata na Shopee", "cXZtHrNhmBc", "tech"],
+    ["Compras na Shopee", "ZnrLUMW4f0c", "tech"], ["Agência de viagens", "xy-JqfQb0Zg", "tech"],
+    ["Ads para agência de viagens", "a4EcRNqCqX0", "tech"], ["Rotina de limpeza - Condor", "UJ-tmN2JG7U", "casa"],
+    ["Mesa para notebook - Shopee", "H9gcKBocwVk", "casa"], ["Compras para casa", "ZnrLUMW4f0c", "casa"],
+    ["Cif Limpeza Milagrosa", "nLxJLM_b4bA", "casa"], ["Mop Autotorção", "-g_QYjpNeD8", "casa"],
+    ["Lip Combo - Love Rain", "GPRa7I_S27E", "maquiagem"], ["Maquiagem barata na Shopee", "cXZtHrNhmBc", "maquiagem"],
+    ["Blush Love Rain", "LxWZzMeWbjQ", "maquiagem"], ["Rímel", "sYlJj7Et69M", "maquiagem"],
+    ["Batom Matte Sace Lady", "rc1w6u109d8", "maquiagem"], ["Esfoliante Corporal", "L27_u7gNY-g", "autocuidado"],
+    ["Vitaxonn - Vitamina C", "ZaXOyj8mPeE", "autocuidado"], ["Topo de funil", "cfqwSytiiu8", "perfumaria"],
+    ["Apresentação de perfume", "1sVGBVopSvk", "perfumaria"], ["Skintone - antimanchas", "7vin4BpjIuo", "skincare"],
+    ["Spicule PDRN - Yesstyle", "R72Ra8-g0aA", "skincare"], ["Simple Organic - PDRN", "IECKVkFnUQw", "skincare"],
+    ["Sérum Pantene Bambu", "9ocZkAq158g", "cabelo"], ["DKA Força Bruta", "lnK2Qjk7hU0", "cabelo"],
+    ["Unboxing Eudora", "xtfPfcx6BQ4", "cabelo"], ["Ultra Bond Reset", "1QkieqtJm7M", "cabelo"],
+    ["Óculos Saint Germain", "U-D5_LTn5w0", "moda"], ["Macacão Use By Me", "NcOA6RIqp6k", "moda"]
+  ];
+
+  /* Traz para a tabela os vídeos do site que ainda não estão nela. Não duplica. */
+  function importarVideosDoSite() {
+    var base = 0;
+    S.videos.forEach(function (x) { if (num(x.ordem) > base) base = num(x.ordem); });
+    var novos = [];
+    VIDEOS_SITE.forEach(function (v) {
+      var link = "https://youtube.com/shorts/" + v[1];
+      var existe = S.videos.some(function (x) { return x.link === link && x.nicho === v[2]; });
+      if (!existe) novos.push({ titulo: v[0], link: link, nicho: v[2], ordem: ++base, visivel: true });
+    });
+    if (!novos.length) { toast("Todos os vídeos do site já estão aqui"); return; }
+    db.from("videos").insert(novos).select().then(function (r) {
+      if (r.error) { toast(erroAmigavel("videos", r.error), true); return; }
+      S.videos = S.videos.concat(r.data || []);
+      toast(novos.length + " vídeos importados");
+      renderPortfolio();
+    }, function (e) { toast(erroAmigavel("videos", e), true); });
+  }
+
   function atualizarTopoPortfolio() { if (atual === "portfolio") renderPortfolio(); }
 
   function salvarOrdem(lista) {
@@ -994,6 +1033,7 @@
 
   var ACOES = {
     "video-novo": function () { formVideo(null); },
+    "video-importar": function () { importarVideosDoSite(); },
     "video-editar": function (el) { var v = achar("videos", el.dataset.id); if (v) formVideo(v); },
     "video-apagar": function (el) {
       var v = achar("videos", el.dataset.id); if (!v) return;
