@@ -1,5 +1,5 @@
 -- =====================================================================
--- ABA ROTEIROS: biblioteca de transcrições
+-- ABA ROTEIROS: biblioteca de transcrições + configurações (chave da Supadata)
 --
 -- ONDE COLAR: no Supabase, abra o seu projeto, clique em "SQL Editor",
 -- "New query", cole TODO este arquivo e aperte "Run". Se aparecer
@@ -29,15 +29,27 @@ create table if not exists public.roteiros (
   segmentos   jsonb
 );
 
+create table if not exists public.configuracoes (
+  chave       text primary key,
+  valor       text,
+  updated_at  timestamptz not null default now()
+);
+
 create index if not exists roteiros_created_at_idx on public.roteiros (created_at desc);
 
-alter table public.roteiros enable row level security;
+alter table public.roteiros      enable row level security;
+alter table public.configuracoes enable row level security;
 
-revoke all on public.roteiros from anon;
-grant select, insert, update, delete on public.roteiros to authenticated;
+revoke all on public.roteiros, public.configuracoes from anon;
+grant select, insert, update, delete on public.roteiros, public.configuracoes to authenticated;
 
 drop policy if exists "dona total" on public.roteiros;
 create policy "dona total" on public.roteiros
+  for all to authenticated
+  using (public.eh_gislaine()) with check (public.eh_gislaine());
+
+drop policy if exists "dona total" on public.configuracoes;
+create policy "dona total" on public.configuracoes
   for all to authenticated
   using (public.eh_gislaine()) with check (public.eh_gislaine());
 
