@@ -1033,9 +1033,66 @@
     });
   }
 
+  /* ------------------------ 10b. ABA RADAR DE NOVIDADES ------------------------
+     Lê radar/novidades.json, que o GitHub atualiza sozinho todo dia (radar/buscar.mjs). */
+  var rad = { itens: null, atualizado: "", erro: "", filtro: "" };
+
+  function carregarRadar() {
+    return fetch("../radar/novidades.json?v=" + Date.now(), { cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(function (j) { rad.itens = j.itens || []; rad.atualizado = j.atualizado_em || ""; rad.erro = ""; })
+      .catch(function (e) { rad.itens = rad.itens || []; rad.erro = "Não consegui abrir as novidades agora (" + (e && e.message) + ")."; });
+  }
+
+  function renderRadar() {
+    if (rad.itens === null) {
+      $("#aba").innerHTML = cab("Radar de novidades", "Buscando as novidades...", "");
+      carregarRadar().then(function () { if (atual === "radar") renderRadar(); });
+      return;
+    }
+    var h = cab("Radar de novidades", "Notícias, assuntos em alta e tendências para você criar conteúdo para Instagram e TikTok. Atualiza sozinho todo dia de manhã.",
+      '<button class="btn" data-acao="radar-atualizar" type="button">Recarregar</button>');
+    if (rad.erro) h += '<div class="faixa aviso">' + esc(rad.erro) + "</div>";
+
+    var cats = [];
+    rad.itens.forEach(function (x) { if (cats.indexOf(x.categoria) < 0) cats.push(x.categoria); });
+    if (!rad.itens.length) {
+      h += '<div class="vazio">Ainda não chegou nenhuma novidade. A primeira busca roda sozinha amanhã de manhã. Para rodar agora: no GitHub, abra o repositório, clique em Actions, depois em “Radar de novidades” e em “Run workflow”.</div>';
+      $("#aba").innerHTML = h; return;
+    }
+    h += '<p style="font-size:12px;color:var(--muted);margin-bottom:10px">Última busca: ' + esc(rad.atualizado ? new Date(rad.atualizado).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" }) : "—") + "</p>";
+    h += '<div class="chips" style="margin-bottom:14px"><button class="chip' + (rad.filtro === "" ? " on" : "") + '" type="button" data-acao="radar-filtro" data-v="">Tudo</button>' +
+      cats.map(function (c) { return '<button class="chip' + (rad.filtro === c ? " on" : "") + '" type="button" data-acao="radar-filtro" data-v="' + esc(c) + '">' + esc(c) + "</button>"; }).join("") + "</div>";
+
+    var hojeStr = hojeISO(), ultimoDia = "";
+    rad.itens.forEach(function (x, i) {
+      if (rad.filtro && x.categoria !== rad.filtro) return;
+      if (x.dia !== ultimoDia) {
+        if (ultimoDia) h += "</div>";
+        ultimoDia = x.dia;
+        h += '<h2 style="font-size:14px;color:var(--vinho);margin:18px 0 8px">' + (x.dia === hojeStr ? "Hoje" : esc(dataBR(x.dia))) + '</h2><div class="ideias">';
+      }
+      h += '<article class="card ideia"><h3>' + esc(x.titulo) + "</h3>" +
+        (x.resumo ? "<p>" + esc(x.resumo) + "</p>" : "<p></p>") +
+        '<div class="rod"><span class="pill">' + esc(x.categoria) + "</span>" + (x.fonte ? '<span class="pill">' + esc(x.fonte) + "</span>" : "") +
+        '<span style="flex:1"></span><a class="btn btn-mini" href="' + esc(x.link) + '" target="_blank" rel="noopener noreferrer">Abrir</a>' +
+        '<button class="btn btn-mini btn-main" type="button" data-acao="radar-ideia" data-i="' + i + '">Guardar como ideia</button></div></article>';
+    });
+    if (ultimoDia) h += "</div>";
+    if (!ultimoDia) h += '<div class="vazio">Nada nesta categoria ainda.</div>';
+    $("#aba").innerHTML = h;
+  }
+
+  function radarParaIdeia(i) {
+    var x = rad.itens[i]; if (!x) return;
+    var texto = (x.resumo ? x.resumo + "\n" : "") + "Fonte: " + (x.fonte || "") + "\n" + x.link;
+    gravar("ideias", null, { titulo: x.titulo.slice(0, 200), texto: texto, status: "ideia" })
+      .then(function (r) { if (r) toast("Guardado em Ideias de roteiros"); });
+  }
+
   /* ------------------------ 11. ABAS, MENU E EVENTOS ------------------------ */
   var atual = "portfolio";
-  var ABAS = { portfolio: renderPortfolio, marcas: renderMarcas, calendario: renderCalendario, campanhas: renderCampanhas, checklist: renderChecklist, ideias: renderIdeias };
+  var ABAS = { portfolio: renderPortfolio, marcas: renderMarcas, calendario: renderCalendario, campanhas: renderCampanhas, checklist: renderChecklist, ideias: renderIdeias, radar: renderRadar };
 
   function abrirAba(id) {
     if (!ABAS[id]) id = "portfolio";
@@ -1140,6 +1197,9 @@
     "rev-limpar": function () { ck.revisao = {}; desenharSub(); },
 
     "ideia-nova": function () { formIdeia(null); },
+    "radar-filtro": function (el) { rad.filtro = el.dataset.v; renderRadar(); },
+    "radar-atualizar": function () { rad.itens = null; renderRadar(); },
+    "radar-ideia": function (el) { radarParaIdeia(+el.dataset.i); },
     "ideia-editar": function (el) { var i = achar("ideias", el.dataset.id); if (i) formIdeia(i); },
     "ideia-filtro": function (el) { id_.filtro = el.dataset.v; renderIdeias(); },
 
