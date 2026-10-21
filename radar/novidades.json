@@ -1,6 +1,447 @@
 {
- "atualizado_em": "2026-10-20T09:30:41.563Z",
+ "atualizado_em": "2026-10-21T09:30:17.158Z",
  "itens": [
+  {
+   "categoria": "Tecnologia e apps",
+   "titulo": "Fim dos cargos? Os 5 modos de trabalho na era da IA",
+   "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPNXRoWEhzRUE2YUVVSmNhRXBTdGdtVWFBQ0xiN2ZtcGJGNzdYZkFVaTdYOVRQU25OQ1VFbGdlekFXLXI4MTgtcFVkbXN0OUF0REtOS0hGQWJjWFlKdEpiaTdnVnNjT0ZzcmJTYkdYeUNhMkVlckpMU3ZlMUxBZUJWQ20wTGJJLWFucmtqa3VhZWxwVnNKS0dDT1BBRGUzSmxRLTdmQdIBpAFBVV95cUxNdDJ2VlFRSm9DZUwyaVlROC1mczR4c0lRMWxSYWJpOWZxNWlwT2c0M1FSTnltZE9ZaEF6cXZPWU1VN1d1Q3g4SGw0M2dlRnpDWW9hUm04b0hkaVNhWWs1ancwSUxFdGZxQkhqX2l0ZGlMVjJfV1J5UTRWRDFvUkJaTDZZMFd6S3JWWUFQbFZoVXh0NDFSX1djSnhsT09oal9FX1FaUA?oc=5",
+   "fonte": "Campo Grande News",
+   "pub": "2026-10-21T09:10:00.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Criadores e UGC",
+   "titulo": "Mercado aumenta uso de influenciadores digitais para atrair investidores",
+   "link": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNX2I3emdYbnJsQ1pMRzQwRWdpcF95S1hpRkFKOXJiMjB5WUdQM1dFVlZhRkk4YlBtYUs2ZVlyRExJenFhNXRWdGU3WGpBb1hJenRQYWNNc3FSUzV2eFdHNXVNN2dSeHA5LWlfdmxkVUlmeEdKOUlzb1dtV0dyQkE0SFpaV3hxRHpKUmNydHFMbjNYdzIzTGdrYUM5Q2NfZkk4enZreUlBdWt0SlEwRmlQb2poM3B3MEgwSTlnZExCNWpESW0xV2pEMmxHZW5PQQ?oc=5",
+   "fonte": "UOL Economia",
+   "pub": "2026-10-21T08:32:22.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Em alta no Brasil",
+   "titulo": "restituição",
+   "link": "https://g1.globo.com/economia/noticia/2026/10/20/receita-federal-imposto-de-renda-2026.ghtml",
+   "fonte": "G1",
+   "pub": "2026-10-21T08:20:00.000Z",
+   "resumo": "200+ buscas · Receita devolve valor recorde de R$ 41 bilhões em restituições do IR 2026",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Em alta no Brasil",
+   "titulo": "xuxa",
+   "link": "https://f5.folha.uol.com.br/colunistas/outro-canal/2026/10/virginia-fonseca-volta-ao-sbt-apos-nove-meses-para-participar-do-teleton-2026.shtml",
+   "fonte": "UOL",
+   "pub": "2026-10-21T08:10:00.000Z",
+   "resumo": "500+ buscas · Outro Canal: Virginia Fonseca volta ao SBT após nove meses para participar do Teleton 2026",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Em alta no Brasil",
+   "titulo": "nintendo",
+   "link": "https://news.ubisoft.com/en-us/article/7g0kbRirX5WXZFJrDHx186/riders-republic-coming-to-nintendo-switch-2-hosts-free-weekend-premieres-henri-pfr-ingame-concert-and-more-to-celebrate-5th-anniversary",
+   "fonte": "Ubisoft",
+   "pub": "2026-10-21T08:00:00.000Z",
+   "resumo": "200+ buscas · Riders Republic Coming to Nintendo Switch 2, Hosts Free Weekend, Premieres Henri PFR In-Game Concert, and More to Celebrate 5th Anniversary",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Em alta no Brasil",
+   "titulo": "starlink",
+   "link": "https://www.wsj.com/world/ukraine-starlink-elon-musk-trump-dbc49193",
+   "fonte": "WSJ",
+   "pub": "2026-10-21T07:50:00.000Z",
+   "resumo": "200+ buscas · Exclusive | Musk Ordered Starlink Slowdown That Blindsided Ukraine",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Em alta no Brasil",
+   "titulo": "xbox",
+   "link": "https://veja.abril.com.br/tecnologia/novo-xbox-pode-custar-quase-2-mil-dolares-e-chegar-em-2028/",
+   "fonte": "VEJA",
+   "pub": "2026-10-21T07:50:00.000Z",
+   "resumo": "200+ buscas · Novo Xbox pode custar quase 2 mil dólares e chegar em 2028",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Em alta no Brasil",
+   "titulo": "petróleo",
+   "link": "https://www1.folha.uol.com.br/mercado/2026/10/petroleo-impulsiona-exportacoes-e-leva-comercio-brasil-china-a-recorde.shtml",
+   "fonte": "Folha de S.Paulo",
+   "pub": "2026-10-21T07:50:00.000Z",
+   "resumo": "100+ buscas · Petróleo impulsiona exportações e leva comércio Brasil-China a recorde",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Em alta no Brasil",
+   "titulo": "bárbara palvin",
+   "link": "https://www.nytimes.com/2026/10/19/style/barbara-palvin-victorias-secret-postpartum.html",
+   "fonte": "The New York Times",
+   "pub": "2026-10-21T07:50:00.000Z",
+   "resumo": "100+ buscas · Barbara Palvin Walked the Victoria’s Secret Show Six Weeks Postpartum",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Em alta no Brasil",
+   "titulo": "luís castro",
+   "link": "https://ge.globo.com/rs/futebol/times/gremio/noticia/2026/10/20/gremio-ainda-costura-oferta-para-pagar-rescisao-a-luis-castro-veja-bastidores-da-situacao.ghtml",
+   "fonte": "ge",
+   "pub": "2026-10-21T07:40:00.000Z",
+   "resumo": "200+ buscas · Grêmio ainda costura oferta para pagar rescisão a Luís Castro; veja bastidores e valor",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Em alta no Brasil",
+   "titulo": "weather tomorrow",
+   "link": "https://www.wdrbwave.com/2026/10/20/forecast-another-pleasant-afternoon-underway/",
+   "fonte": "WDRB",
+   "pub": "2026-10-21T07:30:00.000Z",
+   "resumo": "200+ buscas · FORECAST: Another pleasant afternoon underway",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Em alta no Brasil",
+   "titulo": "greve de onibus em sp hoje",
+   "link": "https://www.cnnbrasil.com.br/nacional/sudeste/sp/greve-de-onibus-em-sp-recomeca-apos-demissao-de-grevista-por-justa-causa/",
+   "fonte": "CNN Brasil",
+   "pub": "2026-10-21T07:20:00.000Z",
+   "resumo": "1000+ buscas · Greve de ônibus em SP recomeça após demissão de grevista por justa causa",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Casa e achadinhos",
+   "titulo": "Shopee libera novo cupom de R$ 50 OFF para compras acima de R$ 249",
+   "link": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFBxUFZ4QXoyYllhcU8wSUpFSVNJb3BNdVVrRzhqQm11cEMyODN2cnNhdnRyczNuRUM0bEZyNjJLcnNobThmT29PaTVwRjJhZWlVMUpwblNJQTBvNW1xNDc0QnJfRkhtLS1P?oc=5",
+   "fonte": "Seletronic",
+   "pub": "2026-10-21T01:35:05.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "TikTok",
+   "titulo": "Ager instala internet via satélite em 12 viaturas para reforçar fiscalizações em MT",
+   "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOb3JSY00yMHRWWllmSTBRNGFZQmdrTHhxTnBJd0F3MHNvLVZtV3MyVUEtak9rdEgzcmpweUc4dFJrRC1LblBaSGUyWnc1elRrNmNPZzEzZDktMDVJcEM0QmVnSmNuWnRtMmhkTzFVOVVrMWcxMnpudFl2clV4dWRzb1YtdW1kVmFvSElLTE83SGVnUG9iNUh6MDliOHZNSmgwMXpaNS1IamgtWDA0?oc=5",
+   "fonte": "O Mato Grosso",
+   "pub": "2026-10-21T01:30:00.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Tecnologia e apps",
+   "titulo": "Pornô gerado por IA: entenda os perigos por trás do DeepNude",
+   "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQeWJkNVpFMWItSFdCSTd5UzA3ZElhMmE0VzFwNUJTOUJNTTUwTGhwLXBjTE9oQ2ZJdkF0TUJHQkdqQk5QcUhlVHhxMnZnV0ZiR3oxaDRGbVllV0NpN2pQLTdSbl9oNVUxUm5KczNCdnBhM2RpX1JybVc2dTN4eUp0bUJRckllWTY0RExBaHdGamJyQ1FJS2VtZV9hUC0tVjVsX0pGQjdKRmpHdDVyUVHSAbMBQVVfeXFMUGNxSWRXdE8wSnVGYWctQ05sWGVpTks2ZF91NlRVR3BDUWUyTE1lUGhQX0RrZVk2SFd0ZUJGYzZQRzQtWktHbVMxeXNVSnBRSlBhck9NV1djdlRIUEU0dW1DUFRtSEthbnl3MWFfallvejB0b2VEOC1MLTdNcFl5WktkdjZ2WllvZ2xVcUVPS1pFc0hBbFdycWlKLXFrRW00c1lZeG5lamhaOWt1VFBuUG9fYUk?oc=5",
+   "fonte": "Estadão",
+   "pub": "2026-10-20T23:15:00.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Beleza e skincare",
+   "titulo": "Longe de Hollywood, Amanda Seyfried transforma fazenda em Nova York em refúgio para animais resgatados",
+   "link": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxNLXhGdERsemVYdlFvNF9vZlpvVFpURGU5Q1VLbU42RldnVjJVOERRRDd0VjgtLTFrZllpYVJWWjJrM2FlU3RXUFRqVzREdTRoRVM5SEN6X3Y5WVotbC05cEN1WU1rajk1TDBXdDdlcUNuSmVzY0Q2aUhQUGE5TmlzVkpyT0ZELTdFRTUtbjF2c0lMMm9jOTBhYkl4QTBoZzRnSGdZdkQzdFZQUl91dWVUb2lHMS05NFl2eFBjTGxMN1B4Ym1fRXNaWVJfNXhlcWNENGoyOVZGREM1YTV2VEo1QW5JOHZ6bDZGUm5BbU5vY1QyZ9IBgAJBVV95cUxNSlZzWVJmMTNKNUg5LTJTTjQycjVGbTZGS01ZYnFxMTZlQ0V4bXVOTEFtbTA0RXV2Nzc1bUhoUjhzX3VRQk9RbUFVbHVoWTFxNFViZ09GOWw1ZTB5MVlTcVhxLW10bTFPNnJvY2VkakpUSVBTak43cTBsVGJ6VGRRSjZXWjFiX0tHXzU4Szl2VmNJS3JuZ0FidFB3X2dfMmw4NlIyOGxvTXlVVnI4TElhMXQ1Ym9sQmNiNUp2M2NFUGI1d3VibnJUN3pyQ3NzY2xMMGl4cF9PNkhwV0lSYVZCelJJRnpPanBzcWRpbDBCa1JRa29WSGg5VFpDQksyUmVJ?oc=5",
+   "fonte": "Globo",
+   "pub": "2026-10-20T22:39:30.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Beleza e skincare",
+   "titulo": "Vogue reúne grandes nomes da moda e da beleza em projeto especial durante o SPFW",
+   "link": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNVXpTN09QOHRGaFlGaUFuYTNCa0JITlZGQ3lfWF9mQl85TWppbTRIY3NCRkRJVnpkWnFjMkgxQW5kYnFwUjE2QlFsQmVvUFdQVWhQVTF1bGxpdy1uTUNhUVAxT3JScnV5TWRDb0xRbDhLeGFNaDlkbWpObFVzMUhFdldTdmJFdDJIRjA1Ri1wRldEMGp3T2NudXdBUi1POGoxbTg0TU05bzd3Zm9pOUtRc1lvMlp1RVN3OVVjdTMyZUNDaV9LekhZaXQtbzdXclRld2g4RGVLaTI0M3fSAeoBQVVfeXFMT0g2NEl1RE5wc0VMM01lTk9RN21KcGJ5eU5uN1FqT0dSYUZFbEVHNWJPaVlBbEtsbGFObjUyVHlkbGJ4QkdVa0hRRTZfWTVkNWJnakttdFhfd2FkQ0VBcUFPeGFqX3I2SlFCYTdkLXVXNGp6bnVwMlVXQ1hWT1JzdG4zbjlzS2UxQzRKMGI0SVpKSElXRTBXeWd6NG01QWRBZ1BoY1Q5VVh3RVVTRHI4eUQ2cXEwTnBrOVZtUmFnM2JpUGpPcmZ4aUdEZVA5WEJzU0xYVVNpNVE3YVQxSElaWUJfTzB4MmdtVzRB?oc=5",
+   "fonte": "Globo",
+   "pub": "2026-10-20T22:22:32.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "TikTok",
+   "titulo": "TIM resgata o plano Beta e anuncia lançamento do BetaCreator; veja como funcionará",
+   "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOTlFaY2ZfRm9rT0VFVFJpcDFGbndHam5wOS1FdDgxWlpQSDBfZWJtWTJ3Tl9YVGZuVW5Xa1dQZTY1b3dtNGpZUDZlNmNWVmhDRWpvZGgzMzc0Tm42TUN0a1hxX3JvLXVBeWtQMGI0Rm5BQTJuQmNfYWNIanl6TGd4Z0NpYzRUcS1oaXM1VVhaQ2czSWhuNHNoWGt1N2VOVnZ1NF9XbDlyTVRrMXJVVGp3NUd30gGyAUFVX3lxTE5OUVpjZl9Gb2tPRUVUUmlwMUZud0dqbnA5LUV0ODFaWlBIMF9lYm1ZMndOX1hUZm5VbldrV1BlNjVvd200allQNmU2Y1ZWaENFam9kaDMzNzRObjZNQ3RrWHFfcm8tdUF5a1AwYjRGbkFBMm5CY19hY0hqeXpMZ3hnQ2ljNFRxLWhpczVVWFpDZzNJaG40c2hYa3U3ZU5WdnU0X1dsOXJNVGsxclVUanc1R3c?oc=5",
+   "fonte": "Folha PE",
+   "pub": "2026-10-20T21:07:31.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Tecnologia e apps",
+   "titulo": "Fala Creator 2026 destaca profissionalização e novas estratégias para criadores de conteúdo em Alagoas",
+   "link": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxQQnV6VmFNTE83VXJ6YThHc21pOVplWjhFSHEwbG9heWV3amVGRkpyN3l1a2FoOHFYUGxqVkQwZlhEc0hmLXBSRHhyR2JtbmtKQ004c0tKQ2x2Vk1jdzlkNG5UTy1UQzVUYlZ2WVhhRmljcjA0QUkzV2JrV0hTeTVJSHpkMXdObm1GWV9USzdKeUFlemlXMHJVV21KLW1sc2VTMU9hdXlnU2dkLW14SW94bE51bVBOOVdNekw4N1g4ZjRTejBRNzZlY0daMHptNjJEa0o5TWpjUWhrelU2X1pDQU5kT2ZVUQ?oc=5",
+   "fonte": "Cadaminuto",
+   "pub": "2026-10-20T21:06:39.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "TikTok",
+   "titulo": "Novidade de luxo: Lancôme lança body mists e estreia no TikTok Shop",
+   "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE51WU9Qd280ODZaaUU2TDJQMUJpdlo5WHBIWUdjR2pFY3lDenJidFMxdTZzRDZiNEptMmYyZGQya1oxQUoySTlyT3p6R280UWpR?oc=5",
+   "fonte": "CLAUDIA - o sentido feminino",
+   "pub": "2026-10-20T21:00:00.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Beleza e skincare",
+   "titulo": "Novidade de luxo: Lancôme lança body mists e estreia no TikTok Shop",
+   "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQUWY4WFoxVVpYVzUwM2Y3SjB5Z0VuWFNNTFZEenRTQVREQWxrUXdEX3BiNFNBUEE1UFItSnJveW4xVG81ZzV4WXJFejNyeERJbHk5VHRTZjZISmRsMUdzSGhoWEZhRG5sNk5GcUZDTUFlSmt3a29zNHdDdGdyV2RfcWU0WVdMSUtiVElCTGw3UQ?oc=5",
+   "fonte": "CLAUDIA - o sentido feminino",
+   "pub": "2026-10-20T21:00:00.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Beleza e skincare",
+   "titulo": "Adrianne Curry, ex “America’s Next Top Model”, critica Kylie Jenner após desfile da Victoria’s Secret: “Não é modelo”",
+   "link": "https://news.google.com/rss/articles/CBMi-wFBVV95cUxPSDhHeXk4eFp3a19VMnF3bGt3eUtjanQ2MUlVMU9nbGRGR2dueXFucVgtX0VreGFxUVUtS1FnWkt5M1JEc1V4QVh5TmF3aDgwSEo4cFVIdE9mZFNjZGo0LVpSb1l2ejFyTnY1YnlrNXg4aFJHXzkwSkcyTTk2R2h5Z2NYUDVkX0wxUE1sd0JtZHd5WXBqaS12VUtOa01sRG5PTk1zV3lKWW8xMVI5aXNBRHVsWUE4VmRmTHR3XzJnaHBQQkZzRnNFUl9kS2x4MlZQR1hNRGg4bHZhQVo4TmRFMy1zVDhqZncza3pqNFVnSFJSTUtuNjdreXNJd9IBigJBVV95cUxOeVQtRnVxNGNtaVlvLW1oZm1VWTlWUk5QTVRJZ0g3bU9GaE5HX0o1SXEtM0F1cGtybXlMOUlyUy15MGI0RkRiOWlfOThWUDNqVUZfdjZpUU1QZGl2Vjh2MEJzV3hiVlpLdzV2eEVIUnpqUlk0TXpnTDBxZDIxUXFxSE5BdzFTcXVTdlFYdGFTNEtEajlRaWxKQ0pOX1N3bEhLbC05dG1pR3BrT2w2a0NpamdyNXF4RnM5RTFOMkg0ZWwwQnNSLW5yRUhkR1I3cXdyS01ib2sxaUFYV1NjOFdvOFlwaFg0TGR6NEtTcHp2dWdVREpYWnZxaTVhczY5NUNOM2RrLU5iRy11QQ?oc=5",
+   "fonte": "Globo",
+   "pub": "2026-10-20T20:45:39.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Criadores e UGC",
+   "titulo": "TIM relança plano para abocanhar fatia do mercado de criadores de conteúdo",
+   "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPN2R5bU5TZmNyR3MxX0FvUDUtbDhfMTZTX3ZKMTBXSGlzcHNReC1CSUZrWFAtLTlmLWl6TUhweWRUMnlFWVRNUmZzUHRMbkI2VHFYaGV0Q0VlU2o5VWF1Tm5ZYzE3SElTc0dOQnNiMUlicmpOb05XQkVGU2JIcXlCeVNmOFVodUd1MXV2U01aRGFhbjF1d0tXa0JVaHVTQWt5OWFoODhBNDVvWFRURzlWREU3NklLVDJxWENPbGNHZE9wR2hRSFdF?oc=5",
+   "fonte": "CNN Brasil",
+   "pub": "2026-10-20T19:34:16.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Beleza e skincare",
+   "titulo": "Alimentação para uma pele saudável vira tendência de beleza",
+   "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPMVdZOFh4SWRzUlRGaHNsTTdsOGVNbDQtcDFYSXBpSlp3SGVsM2tZaG1Ed0h1Um1Rb2FULV94WW9fX2I0QXB2NzloMU4tT2JCMUtwbkQ2UE5QSUVTVnBKc0ZYRUU4ZVhQN3ZzdU9rX2tLME1wZ0M3YUtrLUI5TE1DU3dPODZfVFNLdm1lalFiRjU0dnB0aktXcFlod283WTREUjRTY3VMQQ?oc=5",
+   "fonte": "Rádio Itatiaia",
+   "pub": "2026-10-20T19:00:15.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Criadores e UGC",
+   "titulo": "Flávio reúne influenciadores para ampliar alcance da campanha nas redes",
+   "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOWDY4N2tNOV91MkJNbW1idVNHZ3BJRnJWcDliMkt0ZFE2em5aS2JtM19mRkxiWDFLVWwyS3dGR2VLckN0LWR1Y3BNVm10RThMTlN3QUU2b09sNDJPOC15SDBWZmlVZjN6bkxpZEVoQ1VBSDVxSEZRcmV0Znl1ZlFQRFlDVnJMYTU3UXJuc0NQQnd2aU96ZWkzQzRVbWdaTHpwM3RpUlhWd3c?oc=5",
+   "fonte": "Metrópoles",
+   "pub": "2026-10-20T18:20:00.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Criadores e UGC",
+   "titulo": "TIM aposta em influenciadores para distribuir novo plano BetaCreator",
+   "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE41ejdUdVNFeU1lQndUQ3owV1BSV3NiV2YyQktwdURxanJWZFE3em02TUNlMklHZ0pRSUNNY2ZmUHNIa3dSbjBQYjRTWFdhdXVaQS11WXl4X09FNVpVUjV6Sm1vZW50YkU?oc=5",
+   "fonte": "TELETIME News",
+   "pub": "2026-10-20T18:11:36.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Beleza e skincare",
+   "titulo": "Marca internacional de autocuidado Method anuncia chegada ao Brasil",
+   "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1mMHUwWGVaNHpYaHJIZnBocGhNLXJHX1liSTU4LXAyTnNIWFNsUE9MdDcyQVM2bEZuUURvYXhjSldCQmVGSFk4QWFOQWp2dzZoeGRxYWh1Ti10OHdBZzVndm1iREtCcXNvS3FKRkRiVHBacmto?oc=5",
+   "fonte": "GPS Brasília",
+   "pub": "2026-10-20T18:00:00.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Instagram",
+   "titulo": "Chega de perder tempo! Google Chat agora cria resumos inteligentes de reuniões",
+   "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxOZVRFaU5kaGNkVjdHQzgxbkI0WDRJOXRQTkNEYTc3V0hVNWprWjNVbUVkSnQ4X3c1ckFpUjRodzdUZTdRVUpRajM5UzVzc19YWHpyVjRoRnRPNnNTOExCdWFoVHlVX0IwaHBKZEYxQjJKaFFHb2hTa21PaXhlVmc3eEhHUVlKSDdiRXNpZ3k5OWZELW5FYzJWX2pKMWp0dw?oc=5",
+   "fonte": "TudoCelular.com",
+   "pub": "2026-10-20T17:59:24.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Instagram",
+   "titulo": "XRP Ledger encontra falhas em novo sistema de empréstimos antes mesmo do lançamento",
+   "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPU0lIbU9FaUNxTUVoODE5R1phNl9mX1k2YW9ES09lTTNnX1I2OUNvVEs0RVhIS2lHdHVhVTBjdXpNZ29kaU95UmZPbU16OURGbU9LcUtiR0tydURYOW43d19aR1dRNnJOYklKNWlodlhWRGEtZGtDeTZ4NU5vTTZsRXR0M1FoMW1Ed29RcHlWLTYtUVBXd21jeUpxY2hPd2hxRzI4M01yekpHaVlIN1VjdjVJdFRCaXVUbjlB0gHAAUFVX3lxTE5wcFR5Rl9fWGJWU1ZHamxtZ1NMUlA4eHI0QnpsWkpvZHJzNXpaSnpnWWFGUno5dG04R2tmQUFTSGhCWUNOY2tXTzI1V0RsNG1MbjFTc0V0WU1WSURJS1NuMXFiX2ZDWi1lQWMxS2lzWXRpQUtPS2xKcmV6SUhOcDMyd0Q2WTQ0YjBVYkI5THFDd0JFZkNHa0NIalNteHRpU2Jwdm03VGxsbW5zSEhBU2FhN25oZS1hQ1FyUGZQWTlTSQ?oc=5",
+   "fonte": "Portal do Bitcoin",
+   "pub": "2026-10-20T17:57:00.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Criadores e UGC",
+   "titulo": "Marçal reúne 500 influencers por \"onda espontânea\" pró-Flávio e contra PT",
+   "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNRkpVN1BfQmdQdl94SnEwblJLTFNRal9RY2llVDNZaEtFUS14bkZxM1Zqc2h0SjQ3S0NkbXBEbWI4TFpFMUhmN1E2ZlFfclhLZW1Ndi1IZXY4cUc2RnFpQjc2cko3dXRkclZWc1Q0ZWRCNFJuSFE1TVRkd0k4Z0ZGaC1lY3g2WncwT2J2bnc4SzNZeXhDZ3FuZ2phcnMwSUlfclVBRk9EcUFqTXdwc3M1WFJmZw?oc=5",
+   "fonte": "Band",
+   "pub": "2026-10-20T17:55:00.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Instagram",
+   "titulo": "Perplexity no Mac: novo modo roda IA local e offline",
+   "link": "https://news.google.com/rss/articles/CBMic0FVX3lxTE5vc0JJTmlmOUppZ09YbXNtRzNqTXNMMS1NVGVGeUhzRi1tTDRZaE8zd2lPUGdrNjZQbUl0VDVGTW5FSjZpT01PWll0X1FZcXZSLVZ1cms2aloxT3RCNzh6NFpaMFhKbWJ0ajFndVJSMWs2Tms?oc=5",
+   "fonte": "SempreUpdate",
+   "pub": "2026-10-20T16:42:09.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "TikTok",
+   "titulo": "EMPRESA TRANSFORMA TENDÊNCIA EM OPORTUNIDADES IMOBILIÁRIAS",
+   "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQVElXcHNEUUhZZ0tkejduWUNGNV9kblU3d0pzVnFJUnZFX2NGWjBDRldEalRlWG9fckZDRGc1UlFNZHdkWnlyUWtUdlU5bGJmQzl4Uk9XSWxSNGEwNFpFZFhtMkNZajU0UWlLNHhWMmktTnhIM0tOQXJfczVXSms0NmphZXpMUjBNT0xtSExpN0FTWFh4SXJGUW1hRTVDR2tSUGxPV0lRRQ?oc=5",
+   "fonte": "Bahia Econômica",
+   "pub": "2026-10-20T15:54:33.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Tecnologia e apps",
+   "titulo": "O cofundador da Figma, Dylan Field, acha que o MCP não é um protocolo perfeito",
+   "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQZ3VFUmdMSFFmcklNa0xnMWtHNWtBb1Q3Ymx5Q0VZMlNLSUNEcWtTc2hHMjRPRHpFZkJMRUV6WkIxdnVaNkF6SXVpc1dHRlN2elM2eVQweF9EMjltTFpMNjFmM1dSS0hEejJWaXpxWjJFVFVuc0hzYXRUV1g3Nll5bnphN0FQTXBYR0p0WFVKS0Yxb2pDbXBPajItWmhnMVZMOE1Gc180VUZzbHhqT0Y5ejJ3SmY?oc=5",
+   "fonte": "Boa Informação",
+   "pub": "2026-10-20T15:30:05.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Instagram",
+   "titulo": "Life360 lança Percurso ao Vivo primeiro na América Latina",
+   "link": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxNZHJaWDRJbVRTOXVmMENfNW02M29wS3ZBemRvTWRTNjZqQS1LSWpSZFBhNy12UUtpd09OMnFCbmR6YTRERE8yMW0xam5qU0dTWnQyZkRVcVV0bTg4UWQyaFBtM1VJM0NrZUkwNkhnQW0wU1ZEUmVuSmUwS3J6YW1yWXlnNkFyWW8tNC1VR0RYcnpfZ25ocWtuNndYUXZvdmpaU0EzUV94a01aRXE3SlI2cmhBZ3hhdm5OZE5wU1RVQjQxRk9BQndUZDU5Zy10MExBc0I0?oc=5",
+   "fonte": "Terra",
+   "pub": "2026-10-20T14:57:00.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "TikTok",
+   "titulo": "'Vou fazer faculdade de IA': número de graduações na área cresce; veja o que alunos aprendem e quanto ganham depois do diploma",
+   "link": "https://news.google.com/rss/articles/CBMirgJBVV95cUxOaXFvSnpIenhsVDhzU05uMUJzYzMzSEx4X01pWkZudXJHTTJkQnVHQTV0QkJTV2NaZHBNWVdnaUhOVC1hV2E0OWtQNUJ1NHJkdXFRaEpLZmZfZXZTamxySE5Ka0M5dkhwS1o5em5TZmJXWmhsWmNTelpMWUsybkNxR1d1VDJqUFN6d3BUZFFBejh2Snl4SmRNWklselFRbjh2bDZrSzNXYks5a2NfZVQ2S0RlSTg0S19jQTB5WVRiMHZZUXp2dEhCdUQtVXVVMzNZOThsV0pLOFA0YXVscXZyY1dtb3ItT0c1ZTRDcTZ1MnRIanByRFo2R3VWLXA2UmVNMF9kN0JiYjVoaDJBR0tfVVl2OVFBRXN6bl9FWVZVeTI5bmJobWJtTnMyQnQwUdIBswJBVV95cUxNOHZWMVV1QVZhdml0MTdGdU9XdWRJMnU3NHloSzZ0amszNE51UXVvOWlSNEZwWWQ5UjlqdjJPZUMtMUVzT0dNWEVyNWRja3liVzFaWlFOb2xkNUhyOVc1TVp5NUZicXBpVXU3R29kU0ZOM0lUVzB3MU1JSFNiZFZudjZrR1BybnFMUllZczAxMUxZZEdvLXdmbGx4VFMyYWFXVFVzUUxTa1k0bVgtZkFtVFdFVlV0dGV3enJNUVNYX05sdkpTeGRENDFvLXA5eFA4MGFRVk5DNXd4eFhUdk02Q3Fzb1o4b3NEZ3lIX3NKXzcwMEgyTGpueVlQRlNKYlotTWctMXA2bEw4NXZ1Qi1JSGZLVkZFM1JSXzNibjRlbVdXZ2FPdGROSks3bzlYVENmdG9v?oc=5",
+   "fonte": "Grupo Jota Sidney",
+   "pub": "2026-10-20T14:53:25.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Tecnologia e apps",
+   "titulo": "Steam Next Fest: jogos com IA estão a dominar",
+   "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNeVpFR2d0aGx1SUlvMDBMaFh5bGltVzh4ZW5xb0RyOUt2Wk1WMEN3aTVsc3YwZmpFSUgyOFZucWlKbmJKaFVqak5QMDljOGJVWVVVREQ5R2pjZDdXMzBKLWlNWnVWMFdPSDJmWWhiR3RPV0FXVTlJejVMaUctcFhhdnNR?oc=5",
+   "fonte": "MaisTecnologia",
+   "pub": "2026-10-20T14:18:43.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "TikTok",
+   "titulo": "Bigode fino volta ao rosto masculino como tendência de beleza",
+   "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOX2RwWEhEQTJkZVpUYkJlY2NkVmxPWnA2eG1mTjY1TjlTTmc1TGVNbkNPMXpZUk5QaWE3dHQ3bFJGY0Zlb3Jza3FCZVdxZ0dGZllOUFF0eC10aElMQXhHa0FJQm1SeHdMWGFFSUUzX2I1VHdPYURlOUYyWFJuTDZtZ1FTbVhLN3l0WFZPcG5ZU0c?oc=5",
+   "fonte": "Exame",
+   "pub": "2026-10-20T13:29:56.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Beleza e skincare",
+   "titulo": "Kendall Jenner deu dicas a Kylie antes de desfile na Victoria's Secret com sutiã de mais de R$ 250 milhões, diz site",
+   "link": "https://news.google.com/rss/articles/CBMiggJBVV95cUxOclJ2eUNXc3BhTERERWMycE52YzB2RWdORWI5c1NDTGsySThFZ2JFRlFwTVZNT2J4OE10VTctcUdGYW5FeEdWTEZmRWViVTE1YmFKS29PVDA5UmVYZ0l4MmpBU2Q2eWV2amJGRXFnZHhwVHVheHVmVFh1OWNyUXdWU1JRcVhBaURNU3dxcDQ2YS1LbTFtNDcwV3k5a3NpejFaUGFkNFBXdGdneHZxUDFWN2tVMjNqQW5UeFdaZ0dJeC0wTHEtb2dsdXd6UHpZMlg3S2dNTFlUREJwNGZUOVBEVFQwUGNTX1B4bkRTU3ZjU3NRbXVLTTBvaEY5Zk9ub2JMaFHSAZACQVVfeXFMUFB2U08tQ255U2xrYjFOWVNsNUVYU25OMjZmSWlBVTE4d3gtWk41TzNnWlZpcHZ6MERhYkpsZmQ3RTh0Q3dMN1d0RlpHdzhpOVZidlA4bnNDclJOVFVhNXlTZVVzek8yR2kzOTU1VmhCWFNNODY1Mzl4NHozMll0dURfcTZFTURaMVdMM2pPYm5xejJ6TE8walBrMXF0VzB0MW1HUUhjMDI0LXBwVFlvUlk4a2gtQ3pyRlFiQUlfZWh4azRyOHNhYkt2T2pRNXEzVVg0Z3I5Q3JjbW5Xcy1xZFJlYTZ2bXRyVUh5djZaakdUZEdxSk1rT1M1d2o1djhfQk5Xbmc2dE9FV1c4d1hYWXc?oc=5",
+   "fonte": "Globo",
+   "pub": "2026-10-20T13:05:05.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Instagram",
+   "titulo": "WhatsApp vai ter filtro de chamadas igual do iPhone, que pergunta por que a pessoa está ligando",
+   "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPaE9NY1F2ZXpUcU1rRC11YXlkbHRxLUMzaVpPVHl0bGpJTjBNX1BDYjZDZWtXcjVQNm43Nnd1c2p2SnRvaUEtZl9iSlc0Sk5mZlRmYktYd0wzUVZ3V2hsYzlsYnA5Q21OaDJNN0dfTkRlODVEalpLVmppVUU0NE1DUWY5cUlYWnJsclg5dkVoZ0F1WDUxLWlIYWY1S0RYX0xPM2lF?oc=5",
+   "fonte": "Oficina da Net",
+   "pub": "2026-10-20T12:37:00.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Instagram",
+   "titulo": "Adobe Lightroom ganha recurso de IA que vai abrir seus olhos com um toque",
+   "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPUFJSbXVqUVpBT2VmdUw1SVM3ZGZfaU1QRkt2MDU2OHUxenEzamNYZWRrWVdEbzN0dDJkdG9MWmRPNURiWEJoUUVwSWs4VFBzbDlOTURDNUlpdlA3RTVROFl2NDM0M0ZrdVRPYTBlMGF4dHJ6WmlCVC00V1hDY2M0LUdnVzJuZURfV2Q4bGdDRkRRZ3VEMi01Z21ES09sT1hq?oc=5",
+   "fonte": "TudoCelular.com",
+   "pub": "2026-10-20T12:29:15.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Tecnologia e apps",
+   "titulo": "Joia: IA gratuita ajuda produtor rural pelo WhatsApp",
+   "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQOU82RkJNLXNNb1NPZk1aYV8tSWkyYTBGRDFiOVJJWERvR2p6ZlFRSXh2RmJyTGctUXdncXNCajZFSm50NWNFcGYyUFlQREE2ZGtTdmpGNFZGWV9vZ3B2V2tFWkpFRF9KMFJzV3p0bGN0eXhZemhGbjE3czJqa2NOaXpESXFjUFRiVVUwYlRRRXhNTWItNEREcXkteHFmWXRJQVBmeWR1U3p3TnFJbUNxOE1WUjFpdnpmMlRKYVZaUQ?oc=5",
+   "fonte": "Revista Oeste",
+   "pub": "2026-10-20T12:00:00.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Tecnologia e apps",
+   "titulo": "A IA já influencia 1 em cada 5 pedidos: o que muda para o varejo?",
+   "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQV3YzQWh2cG9sR1FiRmZLOVdZNWJXVWtaVGhkX1NqOGVlOFJEZ1VUVy1OQS1uZlhoWVA3ejY4RWx0QjViOHd1eHR6SkFSejVKT0ZfRGx2bHJsY3hKYkstdGpjN1VaTnNGWnNOY1ZjSjJkOElicW1NNC1IckhVT0hGa1Zib1hpYTBKMHF3TUVpQzBzSzREN193d19QMVFtVUE?oc=5",
+   "fonte": "Economia SC",
+   "pub": "2026-10-20T10:26:35.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Tecnologia e apps",
+   "titulo": "Meta One: a Meta criou uma assinatura para quem leva o negócio a sério. Entenda os planos e o que muda para empresas e criadores",
+   "link": "https://news.google.com/rss/articles/CBMiigJBVV95cUxNbnM1UXJTVHI3Nm5pQkFJYUJZbmVDMGMxd2o5aE5ZaFYxQ2ZtRFJLYmVTVF9jZ1Fza2Q3cUtNRW40Q3A1XzNhYVp3TlhoYTktam53am1JZnc4cE53WFZvNlM3MlZoLUloczVrVjFBYUFIWUpMWnZrZnl4M25vM25sdTBadXhhd2tjRE5hMmwxSE1CU3BiLUpxc3pDSG5wZWhsNWlfR3VpdmZWTXQ0LVRGU2tILTV1RUlZUERKZ2VBYTZfNmU4bnRoVUZQcWxZM2tYT0dXYXE3VTl6d2Q4akprckxGY01zTlYtUnl5MTJWdHk1OVRQVHZibzBBdFdHN095ODI0VXFEd0JiUdIBkgJBVV95cUxPTTA4ci0zT3dFSGltd0t6OUxVbmpnMVUwNWZEcU4yTmFSd25qV195SndyWmhmZHd6bUR1Qjhzb2J3Q1lnV3VVVGdGRHhfTjJTd2FaUWwtdDJjNGdseFZoNEZnTFByazFCd1VBSy11bjJycDAtQjVTTWVFUW5tRXNNZERjbHZEREpkR0FKNXE4XzIwZ1dsQ3pQZmItYVpwMkVsYmZlS3JYT1NPSGk0ZlBsWUVodXR6R3hQNFNhbmlyM1Q4SHVRcjRxLWZHZEtEeUNfYkpBT0hRMWtDdUpUU0hSUThreWV3OUlfdUN4REFqRzU1UWVzc0F3LUMtX2xoSi1VbVc2c0N6cWxZc0loU3g3LWNn?oc=5",
+   "fonte": "GazetaWeb",
+   "pub": "2026-10-20T10:22:39.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Tecnologia e apps",
+   "titulo": "Gemini Notebook ganha recursos de cocriação para slides e vídeos",
+   "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNdmdPdV9xNUZDZlF0c0VRemNNb1JTSkdqeUk1a0NXcVpZbnNLZzdtTi1BX1M1a3QtX01vb3dSNkNoMVJqYm0zc1JLbC1tc2RCcVR6MkRMYU5kWUZUYkk0ZU5VY1d2V25pbXMxUU9zRm51ZDZQUnc2RzRndFYyUTdoaG1mQQ?oc=5",
+   "fonte": "SempreUpdate",
+   "pub": "2026-10-20T10:00:00.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Criadores e UGC",
+   "titulo": "'Tudo é política': pesquisadora analisa o papel dos influenciadores na campanha eleitoral brasileira",
+   "link": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxQZmo3TUNvTGFCZVNfeWVMUjR6Mm1nRzN1VW9tV3hMVTRrVWpXWE1pbThmWVZBb2xIM3hDNUthTkVHU2pFQnhMT2NhaEhucjd1LXV3MmZwSWRadEpRREVSVGdBWWxrZkJWT3JLQWV4alA0cTVZLURzWnhCajlwRHZVaU5pd1VwdmtUYXd4SlBENG9acnJwdGx1QXFIR0ItQWcyMnUtNnRVQ2RlY1F1T05mVld2aExPc05DV3FMRkJiWHB2eTdsWWlKbTlWeUdfdnp6cjVHTmFkVUFvaVZYbE5sMlI3RmVEcjJ2XzROTXVBUm5mR2s?oc=5",
+   "fonte": "UOL Notícias",
+   "pub": "2026-10-20T09:29:54.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Beleza e skincare",
+   "titulo": "Miranda Kerr revela motivo de ter recusado desfile da Victoria's Secret 20 anos após sua estreia",
+   "link": "https://news.google.com/rss/articles/CBMiggJBVV95cUxPbFZQSTM5NTVraE9lWEFfcW1KV3BBM3h6amltam5HNXc0OEF5MUM4enVsVEVVZFEyNTI2TzM2WXg1X3A3cE5ocVl5OHhVQVYxSUtQWDI0ejNYQmcwTi1KUkpvaVF0b3BOR0lYVkV1NXZFZ2htcFpJQjh6TVpqVTlERWY0WXNRQ29iYnFRRjBjZnFySmQycUVRdzlpNklaWDhLNXFCQjdtSG1zdElZM0xIY1c5clN3Q0FLWUVMMTUxaV9ESUF4aEJLUUNubGdvdVZmdXhaRm5sck45M1FndDFXT3lZRVY1QnhpVkNxLXFKUHdiNE5vRXF5SUNNU3RxRUZrMVHSAYICQVVfeXFMT2xWUEkzOTU1a2hPZVhBX3FtSldwQTN4emppbWpuRzV3NDhBeTFDOHp1bFRFVWRRMjUyNk8zNll4NV9wN3BOaHFZeTh4VUFWMUlLUFgyNHozWEJnME4tSlJKb2lRdG9wTkdJWFZFdTV2RWdobXBaSUI4ek1aalU5REVmNFlzUUNvYmJxUUYwY2ZxckpkMnFFUXc5aTZJWlg4SzVxQkI3bUhtc3RJWTNMSGNXOXJTd0NBS1lFTDE1MWlfRElBeGhCS1FDbmxnb3VWZnV4WkZubHJOOTNRZ3QxV095WUVWNUJ4aVZDcS1xSlB3YjROb0VxeUlDTVN0cUVGazFR?oc=5",
+   "fonte": "Globo",
+   "pub": "2026-10-20T09:08:54.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Beleza e skincare",
+   "titulo": "João Braga lança livro com análises históricas sobre as transformações da moda",
+   "link": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQd2h3TUp2WkRsZXlaXzdPVXEtUGltV2l3QXRxN0RWdGV5M0dlejZ2bEIyRFlYUU51RHBHWlRFWTlNUHgyNHZGTmJocFdsQ0ZEdUVrYUhuUnBRdTk5dENzcUdIb1h6ZVdBLUFBT3FCYmpCY3hxdERFSVNYRUJ5ZjZDYmFUb21tSDFEbnk4bXBnX1dYbndiejFsNFNKdmZjWjd1RXdYR2k3M3pQY1lQX0phVVBkdHR4b19FQ3UtYVA4a3Zmb1R4YU9rNTYzZFBqMFBNYXpmZDlR0gHkAUFVX3lxTE5Cbm9uSDZkbGNYOWhiQS1QaE1XZXhseEdVak5jWGR6dWR5bGE1eXd5SEQzTEZCWWlDOXB6UVV1QWUxSkMtUlpXX1BUb21jT3JoVi1IUEJEbUNjX0lOVDNHbi05UUY0LWN2anJlQm9fR2hHTl80QWNmN1VWLVg1bWltbHFrYy01c0VLTEU5alp1Y3MxdWFOTUZ3VlNyOHlCT3lzOUk3bW9PRXIwQlI4UjNqT1hDd2w2ejlFdXRMb3NqYmo5RDNLaHFXRmtuSG9pYllzYl94VkFrYzhKaFdlN3NNeEhHRA?oc=5",
+   "fonte": "Globo",
+   "pub": "2026-10-20T06:00:00.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Criadores e UGC",
+   "titulo": "Influenciadores rurais disputam prêmio internacional",
+   "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQSHVNYS10OTVFdmZLSTRjVTFqNGpvdHpoQjBldHVfeVBBY193cm0zNmo3ckxzQTg4Y1pyZ1V3bG8tek45YUVoanlOcm5pOFVQaFIxbFdqT2hhdkNuUzhfOUhIa040VEFNeE5XX0FkMUtDZnYyZUZmd3BwOE9iUmdxMHJSWXdrY3RKQ2ltOWV0Yl9XLU1xbWsxNUl6RzdnOVJoXzVoUXQ4anZzaURZTTcwS0E0cDdScDg1VTl6WDJKeWk?oc=5",
+   "fonte": "Agrolink",
+   "pub": "2026-10-19T18:51:00.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
+  {
+   "categoria": "Instagram",
+   "titulo": "Por que Flávio Bolsonaro defende assassino de Ana Clara? Estadão vincula candidato às milícias",
+   "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQVHNWVFAxUmNHR2tTdVlPYm9YNWp0d2l5cWRTcFdSZnFpQWZveUlMUklsbXdwcDhqNWtnenB3dkI0TjV4Rl9fUVJ2dWstRHloSTlZS25hMHFKd0dnT3EtNVpkMzVWYmZxdlY2REU3VVVCZmE3UWZhT1g3dWxISXJ1VzZHVi1HaUVtLXBYQTR1cThoT3dUZldDRkFfMlBIRE9kZzBkNUo4b2lyUFJrdTFCOHBJRDRNc1I5UlJ2MjRvX3duZ3EzVzdN?oc=5",
+   "fonte": "Vermelho",
+   "pub": "2026-10-19T13:31:00.000Z",
+   "resumo": "",
+   "dia": "2026-10-21"
+  },
   {
    "categoria": "Beleza e skincare",
    "titulo": "Miranda Kerr revela motivo de ter recusado desfile da Victoria's Secret 20 anos após sua estreia",
@@ -408,7 +849,7 @@
   },
   {
    "categoria": "Beleza e skincare",
-   "titulo": "Negócios: Feira da Beleza espera receber 90 mil pessoas em Fortaleza Evento reúne mais de 500 marcas no Centro de Eventos do Ceará e destaca lançamentos, tendências e oportunidades de negócios",
+   "titulo": "Feira da Beleza espera 90 mil visitantes em Fortaleza",
    "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOUlJzcEpyUUpKbzhCbTN1LVJpOEM2V1RBeTB5YzYySDF3Mm1JeURxc2ltdWRJdzE1S2haQTRBMzZreFFua01TLUVGZXV5QXZKUm9kSmpqcnlYTEp0c2JJZmlidGVTU1RxUkI2cFYwVnJyNmw0RFpuUWxUWDdwcmFXQ3BtVHpDZ1JlLWp5QUpQN2tqeFR4QThBUUVoWUxZMkMwblJlYlptdll3bkg5Q0piLWs5b3ppdGtFOUE?oc=5",
    "fonte": "Portal Terra da Luz",
    "pub": "2026-10-19T14:30:32.000Z",
@@ -879,7 +1320,7 @@
    "titulo": "Patch de 6 GB alivia Silent Hill 2 no PS5 Pro, mas escancara novo bug e ciclo de remendos",
    "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxONmF5b2ZuMnNvb1JvUlpKdWJMTElWOTFtbG1KZEtSb282MWJVOXRrV1I0dE5ORmhpd2lUU2ZRd2dMU0F0VHFYWkc4MVAtUHpEdG5vazFGSzdPb2kySHdGdjRaTkFrYVYwWHBPQnRvZ213R0VOb0V4NllZdVhHZHA0SnJybU5IUQ?oc=5",
    "fonte": "Rádio Geek",
-   "pub": "2026-10-19T22:26:28.000Z",
+   "pub": "2026-10-20T22:26:05.000Z",
    "resumo": "",
    "dia": "2026-10-18"
   },
