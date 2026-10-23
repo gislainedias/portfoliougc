@@ -102,12 +102,12 @@
   function rotuloTipoCal(v) { for (var i = 0; i < TIPOS_CAL.length; i++) if (TIPOS_CAL[i][0] === v) return TIPOS_CAL[i][1]; return v || ""; }
 
   /* ------------------------ 3. DADOS E AVISOS ------------------------ */
-  var S = { videos: [], marcas: [], calendario: [], campanhas: [], ideias: [], visitas: [], marcados: {}, plays: {}, roteiros: [] };
+  var S = { videos: [], marcas: [], calendario: [], campanhas: [], ideias: [], historias: [], visitas: [], marcados: {}, plays: {}, roteiros: [] };
   var faltas = {}; /* tabela -> texto do aviso */
 
   function erroAmigavel(tabela, e) {
     var m = (e && e.message) || "", c = (e && e.code) || "";
-    var arq = (tabela === "roteiros" || tabela === "configuracoes") ? "sql-roteiros.sql" : "banco.sql";
+    var arq = (tabela === "roteiros" || tabela === "configuracoes") ? "sql-roteiros.sql" : tabela === "historias" ? "sql-historias.sql" : "banco.sql";
     if (c === "PGRST205" || c === "42P01") return "A tabela “" + tabela + "” ainda não existe no seu Supabase. Rode o arquivo " + arq + ".";
     if (c === "PGRST204" || c === "42703" || /column/i.test(m)) {
       var mm = m.match(/'([^']+)' column/) || m.match(/column "?([a-z_]+)"?/i);
@@ -172,7 +172,7 @@
     return Promise.all([
       carregarPlays(), carregarTabela("roteiros"),
       carregarTabela("videos"), carregarTabela("marcas"), carregarTabela("calendario"),
-      carregarTabela("campanhas"), carregarTabela("ideias"), carregarMarcados(), carregarVisitas()
+      carregarTabela("campanhas"), carregarTabela("ideias"), carregarTabela("historias"), carregarMarcados(), carregarVisitas()
     ]);
   }
 
@@ -1034,6 +1034,110 @@
     });
   }
 
+  /* ------------------------ 10a. ABA CAIXA DE HISTÓRIAS ------------------------
+     Guarda as histórias vividas e monta um prompt para cruzar com um tema (colar no Claude). */
+  var TIPOS_HIST = [["fracasso", "💀 Fracasso / Erro"], ["case", "🏆 Case de cliente"], ["opiniao", "🔥 Opinião forte"],
+    ["virada", "⚡ Virada / Transformação"], ["bastidor", "🎬 Bastidor"], ["inusitado", "🌀 Momento inusitado"]];
+  var hi = { vista: "banco", filtro: "", tema: "", marcadas: {}, prompt: "" };
+  function rotuloHist(v) { for (var i = 0; i < TIPOS_HIST.length; i++) if (TIPOS_HIST[i][0] === v) return TIPOS_HIST[i][1]; return v || ""; }
+  function historiasOrdenadas() {
+    return S.historias.slice().sort(function (a, b) { return String(b.criado_em || "").localeCompare(String(a.criado_em || "")); });
+  }
+
+  function renderHistorias() {
+    var h = cab("Caixa de histórias", "Registre o que viveu e transforme em ângulos de conteúdo.",
+      '<button class="btn btn-main" data-acao="hist-nova" type="button">' + ICON.mais + "Nova história</button>");
+    h += '<div class="subabas">' + [["banco", "Banco (" + S.historias.length + ")"], ["cruzar", "Cruzar com tema"]].map(function (s) {
+      return '<button class="chip' + (hi.vista === s[0] ? " on" : "") + '" type="button" data-acao="hist-vista" data-v="' + s[0] + '">' + s[1] + "</button>";
+    }).join("") + "</div>";
+    h += '<div id="histCorpo"></div>';
+    $("#aba").innerHTML = h;
+    if (hi.vista === "cruzar") desenharCruzar(); else desenharBancoHist();
+  }
+
+  function desenharBancoHist() {
+    var el = $("#histCorpo"); if (!el) return;
+    var h = '<div class="chips" style="margin-bottom:14px"><button class="chip' + (hi.filtro === "" ? " on" : "") + '" type="button" data-acao="hist-filtro" data-v="">Todas</button>' +
+      TIPOS_HIST.map(function (t) { return '<button class="chip' + (hi.filtro === t[0] ? " on" : "") + '" type="button" data-acao="hist-filtro" data-v="' + t[0] + '">' + t[1] + "</button>"; }).join("") + "</div>";
+    var lista = historiasOrdenadas().filter(function (x) { return !hi.filtro || x.tipo === hi.filtro; });
+    if (!lista.length) h += '<div class="vazio">' + (S.historias.length ? "Nenhuma história desse tipo." : "Sua caixa está vazia. Clique em Nova história para guardar a primeira.") + "</div>";
+    else {
+      h += '<div class="hist-lista">' + lista.map(function (x) {
+        return '<article class="card hist" data-acao="hist-editar" data-id="' + esc(x.id) + '"><h3>' + esc(x.titulo) + "</h3>" +
+          '<p class="corpo-h">' + esc(x.aconteceu) + "</p>" +
+          (x.aprendizado ? '<div class="aprend">💡 ' + esc(x.aprendizado) + "</div>" : "") +
+          '<div class="rod"><span class="pill h-' + esc(x.tipo) + '">' + esc(rotuloHist(x.tipo)) + "</span><span>" + esc(dataBR(x.criado_em)) + "</span></div></article>";
+      }).join("") + "</div>";
+    }
+    el.innerHTML = h;
+  }
+
+  function desenharCruzar() {
+    var el = $("#histCorpo"); if (!el) return;
+    var h = '<section class="card"><h2>Cruzar histórias com um tema</h2>' +
+      '<div class="field"><label for="hiTema">Tema ou nicho do conteúdo</label>' +
+      '<input id="hiTema" data-ao="hist-tema" placeholder="ex: UGC para iniciantes, rotina de professora, produtividade..." value="' + esc(hi.tema) + '"></div>' +
+      '<div class="dica" style="margin-bottom:8px">Escolha quais histórias usar como base:</div>';
+    var lista = historiasOrdenadas();
+    if (!lista.length) h += '<div class="vazio">Adicione histórias primeiro.</div>';
+    else h += lista.map(function (x) {
+      var on = hi.marcadas[x.id] === true;
+      return '<label class="h-escolha' + (on ? " on" : "") + '"><input type="checkbox" data-ao="hist-marcar" data-id="' + esc(x.id) + '"' + (on ? " checked" : "") + '>' +
+        "<span><b>" + esc(x.titulo) + "</b><small>" + esc(rotuloHist(x.tipo)) + " · " + esc(dataBR(x.criado_em)) + "</small></span></label>";
+    }).join("");
+    h += '<div class="acoes" style="margin-top:12px"><button class="btn btn-main" type="button" data-acao="hist-gerar">Montar prompt</button></div></section>';
+    h += '<section class="card" id="histSaida"' + (hi.prompt ? "" : " hidden") + "><h2>Prompt pronto</h2>" +
+      '<textarea class="h-prompt" id="histPrompt" readonly>' + esc(hi.prompt) + "</textarea>" +
+      '<div class="acoes" style="margin-top:10px"><button class="btn btn-ghost" type="button" data-acao="hist-copiar">Copiar prompt</button></div>' +
+      '<p class="dica">Cole no Claude para receber 3 ângulos com título, formato e gancho.</p></section>';
+    el.innerHTML = h;
+  }
+
+  function montarPromptHist() {
+    var tema = hi.tema.trim();
+    var escolhidas = historiasOrdenadas().filter(function (x) { return hi.marcadas[x.id] === true; });
+    if (!tema) { toast("Informe o tema.", true); return; }
+    if (!escolhidas.length) { toast("Selecione ao menos uma história.", true); return; }
+    var historias = escolhidas.map(function (x) {
+      return 'HISTÓRIA: "' + x.titulo + '"\nTipo: ' + rotuloHist(x.tipo) + "\nO que aconteceu: " + x.aconteceu + (x.aprendizado ? "\nAprendizado: " + x.aprendizado : "");
+    }).join("\n---\n");
+    hi.prompt = "Você é uma estrategista de conteúdo especialista em UGC e marketing de conteúdo autêntico para o mercado brasileiro.\n\n" +
+      "CONTEXTO DO CRIADOR:\nGislaine é professora de alfabetização e criadora de UGC. Ela faz conteúdo para mulheres de 25-45 anos, tem estética Y2K, ama acessórios (especialmente anéis), tem 6 gatos e 1 cachorro, vai à academia e usa apps de delivery. Voz: direta, confiante, real, fala \"como pessoa, não como anúncio\".\n\n" +
+      "TEMA QUE ELA QUER ABORDAR: " + tema + "\n\nHISTÓRIAS DO BANCO DELA:\n" + historias + "\n\n" +
+      "SUA TAREFA:\nGere 3 ângulos de conteúdo cruzando as histórias com o tema. Para cada ângulo:\n1. Dê um TÍTULO chamativo para o conteúdo\n2. Explique o ÂNGULO (a perspectiva, a virada, o insight)\n3. Sugira o FORMATO ideal (Reels talking head, carrossel, vídeo lo-fi no sofá, etc.)\n4. Dê a primeira frase / GANCHO do conteúdo\n\n" +
+      "Use linguagem fluida, sem traços (—), no estilo dela: direta, com personalidade, autêntica. Responda em português brasileiro.";
+    var saida = $("#histSaida"), area = $("#histPrompt");
+    area.value = hi.prompt; saida.hidden = false;
+    saida.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+
+  function copiarPromptHist() {
+    var area = $("#histPrompt"); if (!area || !area.value) return;
+    function ok() { toast("Prompt copiado ✓ Agora é só colar no Claude."); }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(area.value).then(ok, function () { area.select(); document.execCommand("copy"); ok(); });
+    else { area.select(); document.execCommand("copy"); ok(); }
+  }
+
+  function formHistoria(x) {
+    formulario({
+      titulo: x ? "Editar história" : "Nova história",
+      valores: x || { tipo: "bastidor" },
+      campos: [
+        { k: "titulo", r: "Título da história", req: true, ph: "ex: O dia que gaguejei na frente de 200 alunos..." },
+        { k: "aconteceu", r: "O que aconteceu", t: "textarea", req: true, dica: "Conte com detalhes: o contexto, o que sentiu, o que deu errado ou certo." },
+        { k: "tipo", r: "Tipo de história", t: "select", op: TIPOS_HIST },
+        { k: "aprendizado", r: "Aprendizado ou sentimento (opcional)", t: "textarea", dica: "Qual a virada de chave? O que isso te ensinou?" }
+      ],
+      onSalvar: function (o) {
+        return gravar("historias", x ? x.id : null, o).then(function (r) { if (r) { toast("História guardada"); renderHistorias(); } return !!r; });
+      },
+      onApagar: x ? function () {
+        return apagar("historias", x.id).then(function (ok) { if (ok) { toast("História apagada"); renderHistorias(); } return ok; });
+      } : null,
+      msgApagar: "Apagar esta história da caixa?"
+    });
+  }
+
   /* ------------------------ 10b. ABA RADAR DE NOVIDADES ------------------------
      Lê radar/novidades.json, que o GitHub atualiza sozinho todo dia (radar/buscar.mjs). */
   var rad = { itens: null, atualizado: "", erro: "", filtro: "" };
@@ -1443,7 +1547,7 @@
 
   /* ------------------------ 11. ABAS, MENU E EVENTOS ------------------------ */
   var atual = "portfolio";
-  var ABAS = { portfolio: renderPortfolio, marcas: renderMarcas, calendario: renderCalendario, campanhas: renderCampanhas, checklist: renderChecklist, ideias: renderIdeias, radar: renderRadar, roteiros: renderRoteiros };
+  var ABAS = { portfolio: renderPortfolio, marcas: renderMarcas, calendario: renderCalendario, campanhas: renderCampanhas, checklist: renderChecklist, ideias: renderIdeias, historias: renderHistorias, radar: renderRadar, roteiros: renderRoteiros };
 
   function abrirAba(id) {
     if (!ABAS[id]) id = "portfolio";
@@ -1548,6 +1652,12 @@
     "rev-limpar": function () { ck.revisao = {}; desenharSub(); },
 
     "ideia-nova": function () { formIdeia(null); },
+    "hist-nova": function () { formHistoria(null); },
+    "hist-editar": function (el) { var x = achar("historias", el.dataset.id); if (x) formHistoria(x); },
+    "hist-vista": function (el) { hi.vista = el.dataset.v; renderHistorias(); },
+    "hist-filtro": function (el) { hi.filtro = el.dataset.v; desenharBancoHist(); },
+    "hist-gerar": function () { montarPromptHist(); },
+    "hist-copiar": function () { copiarPromptHist(); },
     "rt-transcrever": function () { rtTranscreverClique(); },
     "rt-manual": function () { formRoteiro(null); },
     "rt-chave-salvar": function () { rtSalvarChave(); },
@@ -1596,10 +1706,15 @@
       else if (ao === "cp-busca") { cp.busca = t.value; desenharCampanhas(); }
       else if (ao === "rt-busca") { rt.busca = t.value; rtDesenharLista(); }
       else if (ao === "roteiro-txt") { ck.roteiro = t.value; atualizarProgressoRevisao(); }
+      else if (ao === "hist-tema") hi.tema = t.value;
     });
     $("#aba").addEventListener("change", function (e) {
       var t = e.target, ao = t.dataset && t.dataset.ao;
       if (ao === "mk-sit") { mk.sit = t.value; desenharMarcas(); }
+      else if (ao === "hist-marcar") {
+        hi.marcadas[t.dataset.id] = t.checked;
+        var cx = t.closest(".h-escolha"); if (cx) cx.classList.toggle("on", t.checked);
+      }
       else if (ao === "ck-marcar") marcar(t.dataset.chave, t.checked, t);
       else if (ao === "rev-marcar") {
         ck.revisao[t.dataset.chave] = t.checked;

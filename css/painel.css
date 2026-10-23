@@ -255,6 +255,27 @@ td.acoes-c .icon-btn{margin-left:4px}
 .ideia p{font-size:13px;color:var(--tinta);white-space:pre-wrap;overflow-wrap:anywhere;flex:1}
 .ideia .rod{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 
+/* ---------- Aba Caixa de histórias ---------- */
+.hist-lista{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.hist{margin:0;display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:transform .15s,border-color .15s}
+.hist:hover{transform:translateY(-2px);border-color:rgba(142,27,58,.45)}
+.hist h3{font-size:14px}
+.hist .corpo-h{font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.hist .aprend{font-size:12.5px;color:var(--muted);background:rgba(247,211,94,.22);border-radius:var(--r-md);padding:7px 10px}
+.hist .rod{display:flex;align-items:center;gap:8px;margin-top:auto;font-size:12px;color:var(--muted)}
+.h-fracasso{background:var(--rosa);color:var(--vinho)}
+.h-case{background:var(--verde);color:var(--verde-t)}
+.h-opiniao{background:#fbe9a6;color:#6b5200}
+.h-virada{background:var(--lilas);color:#5a2f66}
+.h-bastidor{background:#eadcc4;color:#5e3f4d}
+.h-inusitado{background:#f7c6b8;color:#8a3a22}
+.h-escolha{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--linha);border-radius:var(--r-md);margin-bottom:8px;cursor:pointer;background:var(--card)}
+.h-escolha:hover,.h-escolha.on{border-color:var(--vinho);background:var(--suave)}
+.h-escolha input{width:17px;height:17px;accent-color:var(--vinho);flex:none}
+.h-escolha b{display:block;font-size:13.5px}
+.h-escolha small{color:var(--muted);font-size:12px}
+.h-prompt{width:100%;min-height:240px;padding:12px;border-radius:var(--r-md);background:var(--card);border:1.5px solid rgba(142,27,58,.3);font-size:13px;line-height:1.6;resize:vertical}
+
 /* ---------- Aba Roteiros ---------- */
 .rt-bloco{margin-bottom:18px}
 .rt-chave{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
