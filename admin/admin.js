@@ -102,12 +102,12 @@
   function rotuloTipoCal(v) { for (var i = 0; i < TIPOS_CAL.length; i++) if (TIPOS_CAL[i][0] === v) return TIPOS_CAL[i][1]; return v || ""; }
 
   /* ------------------------ 3. DADOS E AVISOS ------------------------ */
-  var S = { videos: [], marcas: [], calendario: [], campanhas: [], ideias: [], historias: [], visitas: [], marcados: {}, plays: {}, roteiros: [] };
+  var S = { videos: [], marcas: [], calendario: [], campanhas: [], ideias: [], historias: [], fichas_triagem: [], visitas: [], marcados: {}, plays: {}, roteiros: [] };
   var faltas = {}; /* tabela -> texto do aviso */
 
   function erroAmigavel(tabela, e) {
     var m = (e && e.message) || "", c = (e && e.code) || "";
-    var arq = (tabela === "roteiros" || tabela === "configuracoes") ? "sql-roteiros.sql" : tabela === "historias" ? "sql-historias.sql" : "banco.sql";
+    var arq = (tabela === "roteiros" || tabela === "configuracoes") ? "sql-roteiros.sql" : tabela === "historias" ? "sql-historias.sql" : tabela === "fichas_triagem" ? "sql-triagem.sql" : "banco.sql";
     if (c === "PGRST205" || c === "42P01") return "A tabela “" + tabela + "” ainda não existe no seu Supabase. Rode o arquivo " + arq + ".";
     if (c === "PGRST204" || c === "42703" || /column/i.test(m)) {
       var mm = m.match(/'([^']+)' column/) || m.match(/column "?([a-z_]+)"?/i);
@@ -172,7 +172,7 @@
     return Promise.all([
       carregarPlays(), carregarTabela("roteiros"),
       carregarTabela("videos"), carregarTabela("marcas"), carregarTabela("calendario"),
-      carregarTabela("campanhas"), carregarTabela("ideias"), carregarTabela("historias"), carregarMarcados(), carregarVisitas()
+      carregarTabela("campanhas"), carregarTabela("ideias"), carregarTabela("historias"), carregarTabela("fichas_triagem"), carregarMarcados(), carregarVisitas()
     ]);
   }
 
@@ -1138,6 +1138,194 @@
     });
   }
 
+  /* ------------------------ 10a2. ABA FICHA DE TRIAGEM ------------------------
+     Analisa a marca antes do roteiro e monta o resumo e a direção (gancho, problema x solução, prova social, CTA). */
+  var TG_TAG_CAT = {
+    Humor: ["curiosidade", "compra"], Divertido: ["curiosidade", "compra"], "Descontraído": ["curiosidade", "tempo"],
+    Jovem: ["compra", "curiosidade"], "Sério": ["storytelling", "visual"], Elegante: ["visual", "storytelling"],
+    Formal: ["storytelling", "visual"], Luxo: ["visual", "storytelling"], Minimalista: ["visual"],
+    "Lo-fi": ["tempo", "curiosidade"], Cinema: ["visual", "storytelling"], Criativo: ["visual", "curiosidade"],
+    Praticidade: ["tempo", "compra"], Acessibilidade: ["compra", "tempo"], Sustentabilidade: ["storytelling"],
+    "Inovação": ["curiosidade"], "Tradição": ["storytelling"]
+  };
+  var TG_CAT_ROTULO = { visual: "Ganchos Visuais", tempo: "Ganchos de Tempo", compra: "Ganchos de Compra", problema: "Ganchos Problema x Solução", curiosidade: "Ganchos de Curiosidade", storytelling: "Ganchos de Storytelling" };
+  var TG_CAT_EX = {
+    visual: ["Antes e depois do produto", "Resultado final já no início, pra gerar curiosidade", "Expressão de surpresa ou alívio ao usar o produto"],
+    tempo: ['"Como fiz para ter [resultado] em 30 dias"', '"Dia X testando [produto]"', '"Em [X segundos] vou te mostrar..."'],
+    compra: ['"Tudo o que eu usei para criar esse look"', '"O que eu pedi vs. o que eu recebi na [marca]"', '"Comprei o [produto] que todo mundo tá comentando, vale o hype?"'],
+    problema: ['"Sabe quando [problema]? Eu já sofri muito, foi quando descobri o [produto]"', '"Se você sofre de [problema], deixa eu te mostrar o que tem me ajudado"'],
+    curiosidade: ['"Aposto que você não sabia que tava fazendo isso errado"', '"Por que ninguém tá falando disso?"', '"Posso te contar um truque que quase ninguém conhece?"'],
+    storytelling: ['"Sempre pensei que produtos assim nunca davam certo, até que..."', '"Há um ano, eu tava exatamente onde você provavelmente tá agora..."']
+  };
+  var TG_CTA_ROTULO = { direta: "CTA direta", desejo: "CTA de desejo/imaginação", humor: "CTA criativa/com humor", engajamento: "CTA de engajamento" };
+  var TG_CTA_EX = {
+    direta: ['"Corre lá no site da [marca] e garante o seu!"', '"Pra ter um igual ao meu, é só ir conferir no site da [marca]."'],
+    desejo: ['"Já imaginou como seria incluir o [produto] na sua rotina?"', '"Foi uma das melhores experiências que já vivi! Vem conhecer no site da [marca]."'],
+    humor: ['"Desculpa se esse vídeo causar sintomas de clique no botão abaixo, tá?"'],
+    engajamento: ['"Me conta aqui nos comentários: você já conhecia esse produto?"', '"Já salva esse post pra lembrar depois!"']
+  };
+
+  function tgVazio() {
+    return {
+      id: null, marca: "",
+      redesSociais: { formato: "", formatoRefs: [""], estilo: [], interacao: "", tomVoz: [], tomVozLivre: "" },
+      perguntas: { publico: "", problemas: "", posicionamento: [], posicionamentoLivre: "" },
+      interesses: { conexao: "", refs: [""] }
+    };
+  }
+  var tg = { f: tgVazio() };
+  function tgGet(p) { return p.split(".").reduce(function (o, k) { return o[k]; }, tg.f); }
+  function tgSet(p, v) { var k = p.split("."), ult = k.pop(); k.reduce(function (o, key) { return o[key]; }, tg.f)[ult] = v; }
+
+  /* Monta o formulário a partir do que veio do banco, completando o que faltar */
+  function tgDaFicha(r) {
+    var b = tgVazio(), d = r.dados || {};
+    Object.keys(b).forEach(function (s) {
+      if (typeof b[s] !== "object" || b[s] === null || Array.isArray(b[s])) return;
+      Object.keys(b[s]).forEach(function (k) { if (d[s] && d[s][k] != null) b[s][k] = d[s][k]; });
+    });
+    ["redesSociais.formatoRefs", "interesses.refs"].forEach(function (p) {
+      var k = p.split("."); if (!b[k[0]][k[1]].length) b[k[0]][k[1]] = [""];
+    });
+    b.id = r.id; b.marca = r.marca || "";
+    return b;
+  }
+
+  function tgCampo(rotulo, dica, path, linhas, ph) {
+    return '<div class="field"><label>' + esc(rotulo) + "</label>" + (dica ? '<div class="dica" style="margin:0 0 6px">' + esc(dica) + "</div>" : "") +
+      '<textarea rows="' + linhas + '" data-ao="tr-campo" data-path="' + path + '" placeholder="' + esc(ph) + '">' + esc(tgGet(path)) + "</textarea></div>";
+  }
+  function tgChips(rotulo, path, opcoes, livre, phLivre) {
+    return '<div class="field"><label>' + esc(rotulo) + '</label><div class="chips" data-chips="' + path + '" data-opcoes="' + esc(opcoes) + '"></div>' +
+      (livre ? '<input class="in" data-ao="tr-campo" data-path="' + livre + '" placeholder="' + esc(phLivre) + '" value="' + esc(tgGet(livre)) + '">' : "") + "</div>";
+  }
+  function tgLinks(rotulo, dica, path) {
+    return '<div class="field"><label>' + esc(rotulo) + "</label>" + (dica ? '<div class="dica" style="margin:0 0 6px">' + esc(dica) + "</div>" : "") + '<div data-links="' + path + '"></div></div>';
+  }
+
+  function renderTriagem() {
+    var salvas = S.fichas_triagem.slice().sort(function (a, b) { return String(b.atualizado_em || "").localeCompare(String(a.atualizado_em || "")); });
+    var h = cab("Ficha de triagem", "Preencha antes de escrever o roteiro: analisa a marca, monta o resumo e já indica o gancho.",
+      '<select class="in" data-ao="tr-abrir" style="width:auto;min-width:190px"><option value="">Fichas salvas (' + salvas.length + ")</option>" +
+      salvas.map(function (r) { return '<option value="' + esc(r.id) + '"' + (String(tg.f.id) === String(r.id) ? " selected" : "") + ">" + esc(r.marca || "(sem nome)") + "</option>"; }).join("") + "</select>" +
+      '<button class="btn btn-ghost" data-acao="tr-nova" type="button">Nova ficha</button>' +
+      (tg.f.id ? '<button class="btn btn-ghost perigo" data-acao="tr-apagar" type="button">Apagar</button>' : "") +
+      '<button class="btn btn-main" data-acao="tr-salvar" type="button">Salvar ficha</button>');
+    h += '<div class="tg"><input class="in tg-marca" data-ao="tr-marca" placeholder="Nome da marca (ex: Salon Line)" value="' + esc(tg.f.marca) + '">';
+
+    h += '<div class="tg-sec"><div class="tg-no">1</div><section class="card"><h2>Redes sociais</h2><p class="tg-desc">Como a marca se comunica hoje</p>' +
+      tgCampo("Formato de conteúdo predominante", "Como são os vídeos e posts dela hoje?", "redesSociais.formato", 3, "Ex: vídeos curtos de demonstração, carrossel educativo...") +
+      tgLinks("Referências de formato", "Contas parecidas ou concorrentes que valem estudar", "redesSociais.formatoRefs") +
+      tgChips("Estilo de conteúdo", "redesSociais.estilo", "Minimalista|Luxo|Humor|Lo-fi|Cinema|Criativo") +
+      tgCampo("Como é a interação do público", "Olhe os comentários e quem marca a marca", "redesSociais.interacao", 3, "Ex: público pergunta muito sobre preço, marca poucos amigos...") +
+      tgChips("Tom de voz", "redesSociais.tomVoz", "Sério|Elegante|Formal|Jovem|Descontraído|Divertido", "redesSociais.tomVozLivre", "outro tom (opcional)") +
+      "</section></div>";
+
+    h += '<div class="tg-sec"><div class="tg-no">2</div><section class="card"><h2>Perguntas estratégicas</h2><p class="tg-desc">Quem é o público e o que a marca resolve</p>' +
+      tgCampo("Público-alvo", "Idade, gênero, estilo de vida", "perguntas.publico", 3, "Ex: mulheres 25-40, rotina corrida, cabelo cacheado...") +
+      tgCampo("Quais problemas a marca resolve", "Ex: venda de produtos anti-idade, produtos para acne", "perguntas.problemas", 4, "Um problema por linha ajuda na hora de montar o gancho") +
+      tgChips("Onde a marca se posiciona", "perguntas.posicionamento", "Luxo|Acessibilidade|Sustentabilidade|Praticidade|Inovação|Tradição", "perguntas.posicionamentoLivre", "outro posicionamento (opcional)") +
+      "</section></div>";
+
+    h += '<div class="tg-sec ultima"><div class="tg-no">3</div><section class="card"><h2>Interesses</h2><p class="tg-desc">O que liga esse público a esse produto</p>' +
+      tgCampo("O que conecta as pessoas ao produto", "Ex: beleza natural, viagens, minimalismo, criatividade", "interesses.conexao", 3, "Descreva o gatilho emocional ou prático por trás da compra") +
+      tgLinks("Perfis de referência / inspiração", "", "interesses.refs") +
+      "</section></div>";
+
+    h += '<div class="tg-box"><div class="topo-b"><h2>Resumo pra roteiro</h2><button class="btn btn-ghost btn-mini" type="button" data-acao="tr-copiar" data-alvo="resumo">Copiar</button></div><pre id="tgResumo"></pre></div>';
+    h += '<div class="tg-box dir"><div class="topo-b"><h2>Direção pro roteiro</h2><button class="btn btn-main btn-mini" type="button" data-acao="tr-copiar" data-alvo="direcao">Copiar</button></div>' +
+      '<p class="dica">Já organizado nas 4 etapas do roteiro, com sugestão de gancho e CTA baseada no que você preencheu acima.</p><pre id="tgDirecao"></pre></div></div>';
+    $("#aba").innerHTML = h;
+    tgDesenharChips(); tgDesenharLinks(); tgAtualizar();
+  }
+
+  function tgDesenharChips() {
+    $$("[data-chips]").forEach(function (el) {
+      var path = el.dataset.chips, sel = tgGet(path);
+      el.innerHTML = el.dataset.opcoes.split("|").map(function (o) {
+        return '<button type="button" class="chip' + (sel.indexOf(o) >= 0 ? " on" : "") + '" data-acao="tr-chip" data-path="' + path + '" data-v="' + esc(o) + '">' + esc(o) + "</button>";
+      }).join("");
+    });
+  }
+  function tgDesenharLinks() {
+    $$("[data-links]").forEach(function (el) {
+      var path = el.dataset.links;
+      el.innerHTML = tgGet(path).map(function (v, i) {
+        return '<div class="tg-link"><input class="in" data-ao="tr-link" data-path="' + path + '" data-i="' + i + '" placeholder="instagram.com/..." value="' + esc(v) + '">' +
+          '<button class="icon-btn" type="button" data-acao="tr-link-del" data-path="' + path + '" data-i="' + i + '" aria-label="Remover referência">✕</button></div>';
+      }).join("") + '<button class="tg-add" type="button" data-acao="tr-link-add" data-path="' + path + '">+ adicionar referência</button>';
+    });
+  }
+
+  function tgResumo() {
+    var rs = tg.f.redesSociais, pe = tg.f.perguntas, it = tg.f.interesses, L = [];
+    L.push("FICHA DE TRIAGEM: " + (tg.f.marca || "[marca sem nome]"), "");
+    L.push("REDES SOCIAIS");
+    if (rs.formato) L.push("Formato de conteúdo: " + rs.formato);
+    var fr = rs.formatoRefs.filter(Boolean); if (fr.length) L.push("Referências de formato: " + fr.join(", "));
+    if (rs.estilo.length) L.push("Estilo de conteúdo: " + rs.estilo.join(", "));
+    if (rs.interacao) L.push("Interação do público: " + rs.interacao);
+    var tom = rs.tomVoz.concat([rs.tomVozLivre]).filter(Boolean).join(", "); if (tom) L.push("Tom de voz: " + tom);
+    L.push("", "PERGUNTAS ESTRATÉGICAS");
+    if (pe.publico) L.push("Público-alvo: " + pe.publico);
+    if (pe.problemas) L.push("Problemas que a marca resolve: " + pe.problemas);
+    var po = pe.posicionamento.concat([pe.posicionamentoLivre]).filter(Boolean).join(", "); if (po) L.push("Posicionamento: " + po);
+    L.push("", "INTERESSES");
+    if (it.conexao) L.push("O que conecta o público ao produto: " + it.conexao);
+    var ir = it.refs.filter(Boolean); if (ir.length) L.push("Perfis de referência: " + ir.join(", "));
+    L.push("", "Próximo passo do roteiro: Gancho, Problema x Solução, Proposta de Valor e Prova Social, CTA");
+    return L.join("\n");
+  }
+  function tgCategorias() {
+    var tags = tg.f.redesSociais.tomVoz.concat(tg.f.redesSociais.estilo, tg.f.perguntas.posicionamento), score = {};
+    tags.forEach(function (t) { (TG_TAG_CAT[t] || []).forEach(function (c) { score[c] = (score[c] || 0) + 1; }); });
+    if (tg.f.perguntas.problemas.trim()) score.problema = (score.problema || 0) + 2;
+    var ord = Object.keys(score).sort(function (a, b) { return score[b] - score[a]; });
+    return ord.length ? ord.slice(0, 2) : ["problema", "curiosidade"];
+  }
+  function tgCTA() {
+    var po = tg.f.perguntas.posicionamento, tom = tg.f.redesSociais.tomVoz;
+    if (po.indexOf("Acessibilidade") >= 0 || po.indexOf("Praticidade") >= 0) return "direta";
+    if (po.indexOf("Luxo") >= 0 || po.indexOf("Sustentabilidade") >= 0) return "desejo";
+    if (tom.indexOf("Humor") >= 0 || tom.indexOf("Divertido") >= 0) return "humor";
+    return "engajamento";
+  }
+  function tgDirecao() {
+    var pe = tg.f.perguntas, it = tg.f.interesses, L = [], cats = tgCategorias(), cta = tgCTA();
+    L.push("DIREÇÃO PRO ROTEIRO: " + (tg.f.marca || "[marca sem nome]"), "");
+    L.push("1. GANCHO");
+    L.push("Público: " + (pe.publico || "[defina o público-alvo antes de gravar]"));
+    L.push("Categorias de gancho recomendadas pra essa marca: " + cats.map(function (c) { return TG_CAT_ROTULO[c]; }).join(" + "));
+    cats.forEach(function (c) { L.push("  " + TG_CAT_ROTULO[c] + ":"); TG_CAT_EX[c].slice(0, 2).forEach(function (e) { L.push("   - " + e); }); });
+    L.push("", "2. PROBLEMA X SOLUÇÃO");
+    L.push("Problema central: " + (pe.problemas || "[preencha os problemas que a marca resolve]"));
+    L.push("Conexão emocional/prática: " + (it.conexao || "[o que liga esse público ao produto ainda não foi preenchido]"));
+    L.push("Pergunta pra desenvolver: você tem alguma vivência pessoal que conecta com esse problema?");
+    L.push("", "3. PROPOSTA DE VALOR + PROVA SOCIAL");
+    L.push("Posicionamento da marca: " + (pe.posicionamento.concat([pe.posicionamentoLivre]).filter(Boolean).join(", ") || "[defina o posicionamento na triagem]"));
+    L.push("Pergunta pra desenvolver: quais os maiores benefícios do produto e o que diferencia dos concorrentes?");
+    L.push("Pergunta pra desenvolver: que exemplo real (resultado, número, depoimento) posso usar como prova social?");
+    L.push("", "4. CTA");
+    L.push("Estilo recomendado: " + TG_CTA_ROTULO[cta] + " (baseado no tom e posicionamento escolhidos)");
+    TG_CTA_EX[cta].forEach(function (e) { L.push("  - " + e); });
+    L.push("", "Lembrete: câmera traseira, ângulos variados, 2-3s por cena, sem logos de outra marca.");
+    return L.join("\n");
+  }
+  function tgAtualizar() {
+    var a = $("#tgResumo"), b = $("#tgDirecao");
+    if (a) a.textContent = tgResumo();
+    if (b) b.textContent = tgDirecao();
+  }
+
+  function tgSalvar() {
+    if (!tg.f.marca.trim()) { toast("Dê um nome para a marca antes de salvar.", true); return; }
+    var f = tg.f, dados = { redesSociais: f.redesSociais, perguntas: f.perguntas, interesses: f.interesses };
+    gravar("fichas_triagem", f.id, { marca: f.marca.trim(), dados: dados, atualizado_em: new Date().toISOString() }).then(function (r) {
+      if (!r) return;
+      tg.f.id = r.id; toast("Ficha salva"); renderTriagem();
+    });
+  }
+
   /* ------------------------ 10b. ABA RADAR DE NOVIDADES ------------------------
      Lê radar/novidades.json, que o GitHub atualiza sozinho todo dia (radar/buscar.mjs). */
   var rad = { itens: null, atualizado: "", erro: "", filtro: "" };
@@ -1547,7 +1735,7 @@
 
   /* ------------------------ 11. ABAS, MENU E EVENTOS ------------------------ */
   var atual = "portfolio";
-  var ABAS = { portfolio: renderPortfolio, marcas: renderMarcas, calendario: renderCalendario, campanhas: renderCampanhas, checklist: renderChecklist, ideias: renderIdeias, historias: renderHistorias, radar: renderRadar, roteiros: renderRoteiros };
+  var ABAS = { portfolio: renderPortfolio, marcas: renderMarcas, calendario: renderCalendario, campanhas: renderCampanhas, checklist: renderChecklist, ideias: renderIdeias, historias: renderHistorias, triagem: renderTriagem, radar: renderRadar, roteiros: renderRoteiros };
 
   function abrirAba(id) {
     if (!ABAS[id]) id = "portfolio";
@@ -1652,6 +1840,31 @@
     "rev-limpar": function () { ck.revisao = {}; desenharSub(); },
 
     "ideia-nova": function () { formIdeia(null); },
+    "tr-nova": function () { tg.f = tgVazio(); renderTriagem(); toast("Nova ficha em branco"); },
+    "tr-salvar": function () { tgSalvar(); },
+    "tr-apagar": function () {
+      var r = achar("fichas_triagem", tg.f.id); if (!r) return;
+      confirmar("Apagar a ficha de “" + r.marca + "”? Não dá para desfazer.").then(function (s) {
+        if (s) apagar("fichas_triagem", r.id).then(function (ok) { if (ok) { tg.f = tgVazio(); toast("Ficha apagada"); renderTriagem(); } });
+      });
+    },
+    "tr-chip": function (el) {
+      var arr = tgGet(el.dataset.path), v = el.dataset.v, i = arr.indexOf(v);
+      if (i >= 0) arr.splice(i, 1); else arr.push(v);
+      tgDesenharChips(); tgAtualizar();
+    },
+    "tr-link-add": function (el) { tgGet(el.dataset.path).push(""); tgDesenharLinks(); tgAtualizar(); },
+    "tr-link-del": function (el) {
+      var a = tgGet(el.dataset.path); a.splice(+el.dataset.i, 1);
+      if (!a.length) a.push("");
+      tgDesenharLinks(); tgAtualizar();
+    },
+    "tr-copiar": function (el) {
+      var txt = el.dataset.alvo === "resumo" ? tgResumo() : tgDirecao();
+      function ok() { toast("Copiado ✓"); }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(ok, function () { toast("Não deu para copiar. Selecione o texto e copie.", true); });
+      else toast("Não deu para copiar. Selecione o texto e copie.", true);
+    },
     "hist-nova": function () { formHistoria(null); },
     "hist-editar": function (el) { var x = achar("historias", el.dataset.id); if (x) formHistoria(x); },
     "hist-vista": function (el) { hi.vista = el.dataset.v; renderHistorias(); },
@@ -1707,10 +1920,17 @@
       else if (ao === "rt-busca") { rt.busca = t.value; rtDesenharLista(); }
       else if (ao === "roteiro-txt") { ck.roteiro = t.value; atualizarProgressoRevisao(); }
       else if (ao === "hist-tema") hi.tema = t.value;
+      else if (ao === "tr-marca") { tg.f.marca = t.value; tgAtualizar(); }
+      else if (ao === "tr-campo") { tgSet(t.dataset.path, t.value); tgAtualizar(); }
+      else if (ao === "tr-link") { tgGet(t.dataset.path)[+t.dataset.i] = t.value; tgAtualizar(); }
     });
     $("#aba").addEventListener("change", function (e) {
       var t = e.target, ao = t.dataset && t.dataset.ao;
       if (ao === "mk-sit") { mk.sit = t.value; desenharMarcas(); }
+      else if (ao === "tr-abrir") {
+        var fi = achar("fichas_triagem", t.value);
+        if (fi) { tg.f = tgDaFicha(fi); renderTriagem(); }
+      }
       else if (ao === "hist-marcar") {
         hi.marcadas[t.dataset.id] = t.checked;
         var cx = t.closest(".h-escolha"); if (cx) cx.classList.toggle("on", t.checked);

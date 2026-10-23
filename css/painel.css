@@ -276,6 +276,27 @@ td.acoes-c .icon-btn{margin-left:4px}
 .h-escolha small{color:var(--muted);font-size:12px}
 .h-prompt{width:100%;min-height:240px;padding:12px;border-radius:var(--r-md);background:var(--card);border:1.5px solid rgba(142,27,58,.3);font-size:13px;line-height:1.6;resize:vertical}
 
+/* ---------- Aba Ficha de triagem ---------- */
+.tg{max-width:760px}
+.tg-marca{font-weight:700;font-size:16px;border:2px solid var(--vinho)!important;margin-bottom:18px}
+.tg-sec{position:relative;padding-left:34px;padding-bottom:18px}
+.tg-sec:not(.ultima)::before{content:"";position:absolute;left:12px;top:28px;bottom:-2px;width:2px;background:var(--rosa)}
+.tg-no{position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;background:var(--vinho);color:var(--creme);font-size:12px;font-weight:700;display:grid;place-items:center;z-index:1}
+.tg-sec .card{margin-bottom:0}
+.tg-sec .card h2{font-size:15px;margin-bottom:2px}
+.tg-desc{color:var(--muted);font-size:12px;margin-bottom:14px}
+.tg .field textarea{min-height:0}
+.tg .chips{margin-bottom:8px}
+.tg-link{display:flex;gap:8px;margin-bottom:8px;align-items:center}
+.tg-link input{flex:1}
+.tg-add{background:none;border:none;color:var(--vinho);font-weight:600;font-size:12.5px;padding:0}
+.tg-box{background:var(--card);border:1px solid var(--linha);border-radius:var(--radius);padding:16px 18px;margin-bottom:16px}
+.tg-box.dir{border:2px solid var(--amarelo)}
+.tg-box .topo-b{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.tg-box h2{font-size:14px;font-weight:700}
+.tg-box p.dica{margin:0 0 10px}
+.tg-box pre{margin:0;white-space:pre-wrap;word-break:break-word;font:13px/1.6 var(--font);background:var(--creme);border:1px solid var(--linha);border-radius:var(--r-md);padding:12px 14px}
+
 /* ---------- Aba Roteiros ---------- */
 .rt-bloco{margin-bottom:18px}
 .rt-chave{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
