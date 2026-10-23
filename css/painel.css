@@ -335,6 +335,19 @@ td.acoes-c .icon-btn{margin-left:4px}
 .cd-idea .lin p{font-size:13px;margin:0}
 .cd-idea .obs{font-size:12.5px;color:var(--muted);border-left:3px solid var(--rosa);padding-left:9px}
 .cd-idea .quando{margin-top:auto;padding-top:8px;border-top:1px dashed var(--linha);font-size:12px;color:var(--muted)}
+.cd-nav{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.cd-post{cursor:pointer}
+.cd-post[draggable="true"]{cursor:grab}
+.cd-post.cd-arrastando{opacity:.4}
+.cd-dia{position:relative}
+.cd-dia.cd-hoje{background:rgba(247,211,94,.16)}
+.cd-alvo{outline:2px dashed var(--vinho);outline-offset:-2px;background:var(--suave)}
+.cd-add{position:absolute;top:6px;right:6px;width:22px;height:22px;border-radius:50%;border:1px solid var(--linha);background:var(--card);color:var(--vinho);font-size:15px;line-height:1;display:grid;place-items:center;padding:0}
+.cd-add:hover{background:var(--vinho);color:var(--creme)}
+.cd-banco{margin-top:6px;border:1.5px dashed rgba(142,27,58,.4);border-radius:var(--radius);padding:14px;background:var(--card)}
+.cd-banco h3{font-size:14px;margin-bottom:3px}
+.cd-banco-lista{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.cd-idea .quando{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .cd-sem{margin-bottom:22px}
 .cd-sem-cab{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-bottom:8px}
 .cd-sem-cab h3{font-size:15px}

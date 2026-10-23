@@ -102,12 +102,12 @@
   function rotuloTipoCal(v) { for (var i = 0; i < TIPOS_CAL.length; i++) if (TIPOS_CAL[i][0] === v) return TIPOS_CAL[i][1]; return v || ""; }
 
   /* ------------------------ 3. DADOS E AVISOS ------------------------ */
-  var S = { videos: [], marcas: [], calendario: [], campanhas: [], ideias: [], historias: [], fichas_triagem: [], visitas: [], marcados: {}, plays: {}, roteiros: [] };
+  var S = { videos: [], marcas: [], calendario: [], campanhas: [], ideias: [], historias: [], fichas_triagem: [], pautas: [], visitas: [], marcados: {}, plays: {}, roteiros: [] };
   var faltas = {}; /* tabela -> texto do aviso */
 
   function erroAmigavel(tabela, e) {
     var m = (e && e.message) || "", c = (e && e.code) || "";
-    var arq = (tabela === "roteiros" || tabela === "configuracoes") ? "sql-roteiros.sql" : tabela === "historias" ? "sql-historias.sql" : tabela === "fichas_triagem" ? "sql-triagem.sql" : "banco.sql";
+    var arq = (tabela === "roteiros" || tabela === "configuracoes") ? "sql-roteiros.sql" : tabela === "historias" ? "sql-historias.sql" : tabela === "fichas_triagem" ? "sql-triagem.sql" : tabela === "pautas" ? "sql-pautas.sql" : "banco.sql";
     if (c === "PGRST205" || c === "42P01") return "A tabela “" + tabela + "” ainda não existe no seu Supabase. Rode o arquivo " + arq + ".";
     if (c === "PGRST204" || c === "42703" || /column/i.test(m)) {
       var mm = m.match(/'([^']+)' column/) || m.match(/column "?([a-z_]+)"?/i);
@@ -172,7 +172,7 @@
     return Promise.all([
       carregarPlays(), carregarTabela("roteiros"),
       carregarTabela("videos"), carregarTabela("marcas"), carregarTabela("calendario"),
-      carregarTabela("campanhas"), carregarTabela("ideias"), carregarTabela("historias"), carregarTabela("fichas_triagem"), carregarMarcados(), carregarVisitas()
+      carregarTabela("campanhas"), carregarTabela("ideias"), carregarTabela("historias"), carregarTabela("fichas_triagem"), carregarTabela("pautas"), carregarMarcados(), carregarVisitas()
     ]);
   }
 
@@ -1327,7 +1327,8 @@
   }
 
   /* ------------------------ 10a3. ABA CADERNO DE PAUTAS ------------------------
-     Calendário editorial do Instagram (26/10 a 28/11): editorias, calendário de 5 semanas e quinzena de Black Friday. */
+     Calendário editorial do Instagram. As pautas ficam na tabela "pautas": dá para editar, apagar,
+     criar e arrastar de um dia para outro. As 27 pautas iniciais (CD_SEMENTE) entram pelo botão "Carregar pautas iniciais". */
   var CD_DOW = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
   var CD_ST = {
     T: { n: "Topo", d: "Descoberta", who: "Quem ainda não te conhece vê, para e compartilha.", look: "Olhe: visualizações, compartilhamentos e novos seguidores." },
@@ -1340,49 +1341,42 @@
     crio: { name: "Eu Crio", sub: "Bastidores de creator e como trabalhar com marcas", promise: "Eu mostro como a ideia vira vídeo, e vira trabalho.", kicker: "Pilar Eu crio" },
     bf: { name: "Black Friday para marcas", sub: "Série especial dentro de Eu Crio", promise: "", kicker: "" }
   };
-  var CD_IDEAS = [
-    { id: "exp-t1", ed: "exp", st: "T", fmt: "Reels", hook: "Coisas que parecem make cara, mas custam menos de R$30", gain: "Descobre opções acessíveis sem precisar testar às cegas.", cta: "Salva e manda para a amiga que gasta demais em make." },
-    { id: "exp-t2", ed: "exp", st: "T", fmt: "Reels", hook: "Look de trabalho com 5 peças: monto 5 dias e mostro o preço total na tela", gain: "Copia a fórmula com o que já tem no guarda-roupa.", cta: "Comenta LOOK que eu mando a lista das peças." },
-    { id: "exp-t3", ed: "exp", st: "T", fmt: "Reels", hook: "Mito ou verdade: pele oleosa não precisa de hidratante?", gain: "Evita um erro comum de rotina e entende o porquê.", cta: "Qual mito de pele você quer que eu desmonte? Conta aqui.", note: "Confirme a resposta numa fonte de dermatologia antes de gravar." },
-    { id: "exp-m1", ed: "exp", st: "M", fmt: "Reels", hook: "Usei por 14 dias: o que mudou de verdade, sem filtro", gain: "Decide se o produto serve para a rotina dela, com prova real.", cta: "Qual produto você quer que eu teste? Comenta aqui.", note: "Comece o teste na segunda (26/10) para publicar em 10/11." },
-    { id: "exp-m2", ed: "exp", st: "M", fmt: "Carrossel", hook: "Teste do rodízio: 3 produtos de preços diferentes, qual aguenta o dia inteiro?", gain: "Vê a comparação lado a lado, com preço e resultado.", cta: "Salva para consultar antes de comprar." },
-    { id: "exp-f1", ed: "exp", st: "F", fmt: "Reels", hook: "Vale a pena? Veredito em 15 segundos: para quem serve e para quem não serve", gain: "Ganha uma resposta direta antes de gastar.", cta: "Link ou cupom na bio. Se for parceria, sinalize como publi." },
-    { id: "exp-f2", ed: "exp", st: "F", fmt: "Stories + Reels", hook: "Rotina de 5 minutos para dias corridos, com a lista de todos os produtos", gain: "Monta uma rotina rápida com tudo listado e fácil de achar.", cta: "Comenta ROTINA para receber a lista no direct." },
-    { id: "exp-bf1", ed: "exp", st: "F", fmt: "Reels", esp: true, hook: "Vale a pena? 5 achados de beleza para a Black Friday", gain: "Recebe uma lista curta com veredito de cada item.", cta: "Links nos Stories. Se for parceria, sinalize como publi." },
-    { id: "exp-bf2", ed: "exp", st: "M", fmt: "Reels", esp: true, hook: "O que eu não compraria na Black Friday e por quê", gain: "Evita gastar com o que parece oferta e não é.", cta: "Qual item você está em dúvida? Me conta que eu respondo." },
-    { id: "desc-t1", ed: "desc", st: "T", fmt: "Reels", hook: "3 coisas que você ainda faz na mão e a IA resolve em 1 minuto", gain: "Ganha tempo ainda hoje, sem instalar nada difícil.", cta: "Qual você vai testar primeiro? Conta aqui." },
-    { id: "desc-t2", ed: "desc", st: "T", fmt: "Reels", hook: "Me manda o seu problema de rotina e eu resolvo com IA, ao vivo", gain: "Vê a IA resolvendo um problema parecido com o dela.", cta: "Deixa o seu problema nos comentários.", note: "O conteúdo nasce dos comentários, então responda os 3 melhores em vídeo." },
-    { id: "desc-t3", ed: "desc", st: "T", fmt: "Reels", hook: "Não, pera: o recurso que já está no seu celular e quase ninguém usa", gain: "Descobre algo útil que já tem, sem gastar nada.", cta: "Você já conhecia? Conta aqui.", note: "Escolha na hora um recurso que você realmente usa." },
-    { id: "desc-m1", ed: "desc", st: "M", fmt: "Carrossel", hook: "Prompt pronto: copie e cole para escrever aquele e-mail difícil de trabalho", gain: "Resolve uma tarefa real com um texto pronto para adaptar.", cta: "Salva para a próxima segunda-feira." },
-    { id: "desc-m2", ed: "desc", st: "M", fmt: "Reels (tela)", hook: "Planejar a semana inteira com IA em 5 minutos, passo a passo na tela", gain: "Aprende o método e repete sozinha.", cta: "Salva e me conta se funcionou." },
-    { id: "desc-f1", ed: "desc", st: "F", fmt: "Reels + Carrossel", hook: "Kit de 10 prompts para o trabalho: comenta PROMPT", gain: "Recebe um material pronto e gratuito.", cta: "Comenta PROMPT para receber no direct.", note: "Boa isca para mostrar às marcas que o seu conteúdo gera ação." },
-    { id: "desc-f2", ed: "desc", st: "F", fmt: "Reels", hook: "Esse app vale pagar? Versão grátis contra versão paga", gain: "Decide onde gastar e onde não gastar.", cta: "Link do app na bio. Se for parceria, sinalize como publi." },
-    { id: "desc-bf1", ed: "desc", st: "M", fmt: "Carrossel", esp: true, hook: "Pegadinhas de preço na Black Friday: 4 checagens antes de comprar", gain: "Compra com mais segurança e menos impulso.", cta: "Salva e manda para quem compra por impulso.", note: "Confirme cada checagem (histórico de preço, frete, troca, cupom) antes de publicar." },
-    { id: "crio-t1", ed: "crio", st: "T", fmt: "Reels", hook: "Coisas que ninguém te conta antes da sua primeira publi", gain: "Chega mais preparada para a primeira proposta.", cta: "Marca uma amiga que quer trabalhar com marcas." },
-    { id: "crio-t2", ed: "crio", st: "T", fmt: "Reels", hook: "Escolha um produto da sua casa e eu crio 3 ideias de vídeo para ele", gain: "Aprende a enxergar ideia em qualquer produto.", cta: "Comenta o produto que eu crio uma ideia para ele." },
-    { id: "crio-t3", ed: "crio", st: "T", fmt: "Reels + Carrossel", hook: "Pare de abrir o vídeo com “oi gente, tudo bem?”: 5 aberturas para copiar", gain: "Copia aberturas e prende mais gente nos primeiros segundos.", cta: "Qual abertura você vai testar? Conta aqui." },
-    { id: "crio-m1", ed: "crio", st: "M", fmt: "Carrossel", hook: "Guia de referências: as fotos e vídeos de UGC que as marcas realmente compram", gain: "Sabe o que colocar no portfólio.", cta: "Salva antes do próximo ensaio de fotos." },
-    { id: "crio-m2", ed: "crio", st: "M", fmt: "Reels", hook: "Roteiro em 10 minutos: o passo a passo que eu uso", gain: "Ganha um método rápido para nunca começar do zero.", cta: "Comenta ROTEIRO que eu mando o modelo.", note: "Mostre a estrutura Gancho, Problema x Solução, Proposta de valor e prova social, CTA." },
-    { id: "crio-f1", ed: "crio", st: "F", fmt: "Carrossel", hook: "Checklist do perfil antes de chamar uma marca: bio, destaques, portfólio e mídia kit", gain: "Sabe exatamente o que arrumar antes da primeira mensagem.", cta: "Comenta CHECKLIST para receber." },
-    { id: "crio-f2", ed: "crio", st: "F", fmt: "Carrossel", hook: "Mensagem pronta para mandar para uma marca, com modelo e hora certa de enviar", gain: "Perde o medo de abordar a marca.", cta: "Salva e testa hoje.", note: "Use o seu CVA: Conexão, Valor, Ação." },
-    { id: "crio-bf1", ed: "crio", st: "F", fmt: "Reels", esp: true, hook: "Black Friday passou: agenda de Natal e janeiro aberta para marcas", gain: "A marca sabe que ainda dá tempo de planejar o próximo pico de vendas.", cta: "Comenta NATAL ou chama no direct.", note: "Ajuste a mensagem às vagas que você realmente tem." },
-    { id: "bf1", ed: "bf", st: "T", fmt: "Reels", hook: "Faltam 32 dias para a Black Friday: a conta do tempo de um vídeo UGC", gain: "Entende o prazo real de briefing, envio do produto, roteiro, gravação, edição e ajustes.", cta: "Marca ou agência? Comenta BLACK que eu mando o meu mídia kit." },
-    { id: "bf2", ed: "bf", st: "M", fmt: "Carrossel", hook: "Os 3 vídeos que preparam o cliente antes da oferta", gain: "Ganha um plano de criativos em vez de um vídeo só de desconto: apresentar o produto, mostrar por que vale e responder a dúvida que trava a compra.", cta: "Salva para o próximo briefing.", note: "Último slide: a oferta entra como o motivo para comprar agora." },
-    { id: "bf3", ed: "bf", st: "M", fmt: "Reels", hook: "Uma dúvida de cliente vira gancho: faço ao vivo com um produto do dia a dia", gain: "Vê como uma objeção de compra vira o começo de um vídeo.", cta: "Qual dúvida mais trava a compra da sua marca? Conta aqui." },
-    { id: "bf4", ed: "bf", st: "M", fmt: "Carrossel", hook: "5 formatos de vídeo que toda marca precisa no feed antes da Black Friday", gain: "Recebe um menu de formatos para pedir no próximo briefing: uso real, como funciona, resposta de objeção, antes e depois, primeira impressão.", cta: "Salva para consultar no próximo briefing." },
-    { id: "bf5", ed: "bf", st: "M", fmt: "Reels", hook: "O que eu pesquiso antes de escrever um roteiro para uma marca", gain: "Vê a base estratégica por trás do roteiro: produto, perfil da marca e anúncios que já performaram na Biblioteca de Anúncios da Meta.", cta: "Quer o meu checklist de pesquisa? Comenta PESQUISA." },
-    { id: "bf6", ed: "bf", st: "F", fmt: "Reels", hook: "Última chamada: agenda aberta para entregar antes da Black Friday", gain: "Sabe até quando ainda dá tempo de contratar e o que precisa enviar: briefing, produto e prazo.", cta: "Comenta BLACK ou chama no direct. Mídia kit na hora.", note: "Ajuste a data limite e o número de vagas à sua agenda real. Só prometa o que dá para entregar." }
+  var CD_OPC_ED = [["exp", "Eu Experimento"], ["desc", "Eu Descubro e Ensino"], ["crio", "Eu Crio"], ["bf", "Black Friday para marcas"]];
+  var CD_OPC_ST = [["T", "Topo (descoberta)"], ["M", "Meio (confiança)"], ["F", "Fundo (ação)"]];
+  /* Pautas iniciais: [data, editoria, etapa, formato, especial, título, ganho, chamada final, observação] */
+  var CD_SEMENTE = [
+    ["2026-10-27", "exp", "T", "Reels", 0, "Coisas que parecem make cara, mas custam menos de R$30", "Descobre opções acessíveis sem precisar testar às cegas.", "Salva e manda para a amiga que gasta demais em make.", ""],
+    ["2026-11-13", "exp", "T", "Reels", 0, "Look de trabalho com 5 peças: monto 5 dias e mostro o preço total na tela", "Copia a fórmula com o que já tem no guarda-roupa.", "Comenta LOOK que eu mando a lista das peças.", ""],
+    ["2026-11-03", "exp", "T", "Reels", 0, "Mito ou verdade: pele oleosa não precisa de hidratante?", "Evita um erro comum de rotina e entende o porquê.", "Qual mito de pele você quer que eu desmonte? Conta aqui.", "Confirme a resposta numa fonte de dermatologia antes de gravar."],
+    ["2026-11-10", "exp", "M", "Reels", 0, "Usei por 14 dias: o que mudou de verdade, sem filtro", "Decide se o produto serve para a rotina dela, com prova real.", "Qual produto você quer que eu teste? Comenta aqui.", "Comece o teste na segunda (26/10) para publicar em 10/11."],
+    ["2026-11-17", "exp", "M", "Carrossel", 0, "Teste do rodízio: 3 produtos de preços diferentes, qual aguenta o dia inteiro?", "Vê a comparação lado a lado, com preço e resultado.", "Salva para consultar antes de comprar.", ""],
+    [null, "exp", "F", "Reels", 0, "Vale a pena? Veredito em 15 segundos: para quem serve e para quem não serve", "Ganha uma resposta direta antes de gastar.", "Link ou cupom na bio. Se for parceria, sinalize como publi.", ""],
+    [null, "exp", "F", "Stories + Reels", 0, "Rotina de 5 minutos para dias corridos, com a lista de todos os produtos", "Monta uma rotina rápida com tudo listado e fácil de achar.", "Comenta ROTINA para receber a lista no direct.", ""],
+    ["2026-11-24", "exp", "F", "Reels", 1, "Vale a pena? 5 achados de beleza para a Black Friday", "Recebe uma lista curta com veredito de cada item.", "Links nos Stories. Se for parceria, sinalize como publi.", ""],
+    ["2026-11-27", "exp", "M", "Reels", 1, "O que eu não compraria na Black Friday e por quê", "Evita gastar com o que parece oferta e não é.", "Qual item você está em dúvida? Me conta que eu respondo.", ""],
+    ["2026-10-30", "desc", "T", "Reels", 0, "3 coisas que você ainda faz na mão e a IA resolve em 1 minuto", "Ganha tempo ainda hoje, sem instalar nada difícil.", "Qual você vai testar primeiro? Conta aqui.", ""],
+    ["2026-11-16", "desc", "T", "Reels", 0, "Me manda o seu problema de rotina e eu resolvo com IA, ao vivo", "Vê a IA resolvendo um problema parecido com o dela.", "Deixa o seu problema nos comentários.", "O conteúdo nasce dos comentários, então responda os 3 melhores em vídeo."],
+    [null, "desc", "T", "Reels", 0, "Não, pera: o recurso que já está no seu celular e quase ninguém usa", "Descobre algo útil que já tem, sem gastar nada.", "Você já conhecia? Conta aqui.", "Escolha na hora um recurso que você realmente usa."],
+    ["2026-11-19", "desc", "M", "Carrossel", 0, "Prompt pronto: copie e cole para escrever aquele e-mail difícil de trabalho", "Resolve uma tarefa real com um texto pronto para adaptar.", "Salva para a próxima segunda-feira.", ""],
+    ["2026-11-06", "desc", "M", "Reels (tela)", 0, "Planejar a semana inteira com IA em 5 minutos, passo a passo na tela", "Aprende o método e repete sozinha.", "Salva e me conta se funcionou.", ""],
+    ["2026-11-12", "desc", "F", "Reels + Carrossel", 0, "Kit de 10 prompts para o trabalho: comenta PROMPT", "Recebe um material pronto e gratuito.", "Comenta PROMPT para receber no direct.", "Boa isca para mostrar às marcas que o seu conteúdo gera ação."],
+    ["2026-11-26", "desc", "F", "Reels", 0, "Esse app vale pagar? Versão grátis contra versão paga", "Decide onde gastar e onde não gastar.", "Link do app na bio. Se for parceria, sinalize como publi.", ""],
+    ["2026-11-23", "desc", "M", "Carrossel", 1, "Pegadinhas de preço na Black Friday: 4 checagens antes de comprar", "Compra com mais segurança e menos impulso.", "Salva e manda para quem compra por impulso.", "Confirme cada checagem (histórico de preço, frete, troca, cupom) antes de publicar."],
+    ["2026-11-20", "crio", "T", "Reels", 0, "Coisas que ninguém te conta antes da sua primeira publi", "Chega mais preparada para a primeira proposta.", "Marca uma amiga que quer trabalhar com marcas.", ""],
+    [null, "crio", "T", "Reels", 0, "Escolha um produto da sua casa e eu crio 3 ideias de vídeo para ele", "Aprende a enxergar ideia em qualquer produto.", "Comenta o produto que eu crio uma ideia para ele.", ""],
+    ["2026-11-14", "crio", "T", "Reels + Carrossel", 0, "Pare de abrir o vídeo com “oi gente, tudo bem?”: 5 aberturas para copiar", "Copia aberturas e prende mais gente nos primeiros segundos.", "Qual abertura você vai testar? Conta aqui.", ""],
+    ["2026-11-09", "crio", "M", "Carrossel", 0, "Guia de referências: as fotos e vídeos de UGC que as marcas realmente compram", "Sabe o que colocar no portfólio.", "Salva antes do próximo ensaio de fotos.", ""],
+    [null, "crio", "M", "Reels", 0, "Roteiro em 10 minutos: o passo a passo que eu uso", "Ganha um método rápido para nunca começar do zero.", "Comenta ROTEIRO que eu mando o modelo.", "Mostre a estrutura Gancho, Problema x Solução, Proposta de valor e prova social, CTA."],
+    [null, "crio", "F", "Carrossel", 0, "Checklist do perfil antes de chamar uma marca: bio, destaques, portfólio e mídia kit", "Sabe exatamente o que arrumar antes da primeira mensagem.", "Comenta CHECKLIST para receber.", ""],
+    ["2026-11-21", "crio", "F", "Carrossel", 0, "Mensagem pronta para mandar para uma marca, com modelo e hora certa de enviar", "Perde o medo de abordar a marca.", "Salva e testa hoje.", "Use o seu CVA: Conexão, Valor, Ação."],
+    ["2026-11-28", "crio", "F", "Reels", 1, "Black Friday passou: agenda de Natal e janeiro aberta para marcas", "A marca sabe que ainda dá tempo de planejar o próximo pico de vendas.", "Comenta NATAL ou chama no direct.", "Ajuste a mensagem às vagas que você realmente tem."],
+    ["2026-10-26", "bf", "T", "Reels", 0, "Faltam 32 dias para a Black Friday: a conta do tempo de um vídeo UGC", "Entende o prazo real de briefing, envio do produto, roteiro, gravação, edição e ajustes.", "Marca ou agência? Comenta BLACK que eu mando o meu mídia kit.", ""],
+    ["2026-10-29", "bf", "M", "Carrossel", 0, "Os 3 vídeos que preparam o cliente antes da oferta", "Ganha um plano de criativos em vez de um vídeo só de desconto: apresentar o produto, mostrar por que vale e responder a dúvida que trava a compra.", "Salva para o próximo briefing.", "Último slide: a oferta entra como o motivo para comprar agora."],
+    ["2026-10-31", "bf", "M", "Reels", 0, "Uma dúvida de cliente vira gancho: faço ao vivo com um produto do dia a dia", "Vê como uma objeção de compra vira o começo de um vídeo.", "Qual dúvida mais trava a compra da sua marca? Conta aqui.", ""],
+    ["2026-11-02", "bf", "M", "Carrossel", 0, "5 formatos de vídeo que toda marca precisa no feed antes da Black Friday", "Recebe um menu de formatos para pedir no próximo briefing: uso real, como funciona, resposta de objeção, antes e depois, primeira impressão.", "Salva para consultar no próximo briefing.", ""],
+    ["2026-11-05", "bf", "M", "Reels", 0, "O que eu pesquiso antes de escrever um roteiro para uma marca", "Vê a base estratégica por trás do roteiro: produto, perfil da marca e anúncios que já performaram na Biblioteca de Anúncios da Meta.", "Quer o meu checklist de pesquisa? Comenta PESQUISA.", ""],
+    ["2026-11-07", "bf", "F", "Reels", 0, "Última chamada: agenda aberta para entregar antes da Black Friday", "Sabe até quando ainda dá tempo de contratar e o que precisa enviar: briefing, produto e prazo.", "Comenta BLACK ou chama no direct. Mídia kit na hora.", "Ajuste a data limite e o número de vagas à sua agenda real. Só prometa o que dá para entregar."]
   ];
-  var CD_BYID = {}; CD_IDEAS.forEach(function (i) { CD_BYID[i.id] = i; });
-  var CD_CAL = [
-    ["2026-10-26", "bf1"], ["2026-10-27", "exp-t1"], ["2026-10-29", "bf2"], ["2026-10-30", "desc-t1"], ["2026-10-31", "bf3"],
-    ["2026-11-02", "bf4"], ["2026-11-03", "exp-t3"], ["2026-11-05", "bf5"], ["2026-11-06", "desc-m2"], ["2026-11-07", "bf6"],
-    ["2026-11-09", "crio-m1"], ["2026-11-10", "exp-m1"], ["2026-11-12", "desc-f1"], ["2026-11-13", "exp-t2"], ["2026-11-14", "crio-t3"],
-    ["2026-11-16", "desc-t2"], ["2026-11-17", "exp-m2"], ["2026-11-19", "desc-m1"], ["2026-11-20", "crio-t1"], ["2026-11-21", "crio-f2"],
-    ["2026-11-23", "desc-bf1"], ["2026-11-24", "exp-bf1"], ["2026-11-26", "desc-f2"], ["2026-11-27", "exp-bf2"], ["2026-11-28", "crio-bf1"]
-  ];
-  var CD_CALOF = {}, CD_POSTOF = {};
-  CD_CAL.forEach(function (c) { CD_CALOF[c[1]] = c[0]; CD_POSTOF[c[0]] = c[1]; });
   var CD_FERIADO = { "2026-11-02": "Finados", "2026-11-20": "Consciência Negra", "2026-11-27": "Black Friday" };
   var CD_ROT = [
     ["2026-10-26", "Contagem regressiva “32 dias” e caixinha: “Marca, qual dúvida mais trava a compra do seu cliente?”", "Listar 10 marcas de beleza, apps e moda que costumam fazer Black Friday e observar o tom de voz de cada uma."],
@@ -1409,37 +1403,44 @@
     "2026-11-25": "Contagem regressiva e lista de desejos inteligente.",
     "2026-11-29": "O que valeu a pena e o que ficou de aprendizado."
   };
-  var cd = { tab: "editorias", ed: "exp", filtro: "all" };
+  var cd = { tab: "editorias", ed: "exp", filtro: "all", inicio: "2026-10-26" };
 
   function cdStories(d) { return (CD_ROTBY[d] && CD_ROTBY[d].stories) || CD_STORIES_EXTRA[d] || ""; }
   function cdParts(d) { var a = d.split("-").map(Number); return { y: a[0], m: a[1], d: a[2] }; }
-  function cdDow(d) { var p = cdParts(d); return new Date(Date.UTC(p.y, p.m - 1, p.d)).getUTCDay(); }
+  function cdMs(d) { var p = cdParts(d); return Date.UTC(p.y, p.m - 1, p.d); }
+  function cdDow(d) { return new Date(cdMs(d)).getUTCDay(); }
   function cdDm(d) { var p = cdParts(d); return p.d + "/" + p.m; }
   function cdIso(ms) { var x = new Date(ms); return x.getUTCFullYear() + "-" + dois(x.getUTCMonth() + 1) + "-" + dois(x.getUTCDate()); }
+  function cdDataDe(p) { return p.data ? String(p.data).slice(0, 10) : ""; }
+  function cdPorData(d) { return S.pautas.filter(function (p) { return cdDataDe(p) === d; }); }
   function cdIcon(s) {
     var idx = { T: 0, M: 1, F: 2 }[s], w = [16, 11, 6], h = "", i;
     for (i = 0; i < 3; i++) h += '<rect x="' + ((16 - w[i]) / 2) + '" y="' + (i * 4) + '" width="' + w[i] + '" height="2.6" rx="1.3" fill="currentColor" opacity="' + (i === idx ? 1 : 0.28) + '"/>';
     return '<svg viewBox="0 0 16 11" width="16" height="11" aria-hidden="true" style="flex:none">' + h + "</svg>";
   }
-  function cdBadge(s) { return '<span class="cd-badge">' + cdIcon(s) + CD_ST[s].n + "</span>"; }
-  function cdQuando(id) { var d = CD_CALOF[id]; return d ? "No calendário: " + CD_DOW[cdDow(d)] + " " + cdDm(d) : "Banco de reserva (fora do calendário)"; }
+  function cdBadge(s) { return '<span class="cd-badge">' + cdIcon(s) + (CD_ST[s] ? CD_ST[s].n : "") + "</span>"; }
+  function cdQuando(p) { var d = cdDataDe(p); return d ? "No calendário: " + CD_DOW[cdDow(d)] + " " + cdDm(d) : "Banco de reserva (sem data)"; }
 
-  function cdIdeia(i) {
-    var rot = i.ed === "bf" ? "O que a marca ganha" : "O que a pessoa ganha";
-    return '<article class="cd-idea"><div class="meta">' + cdBadge(i.st) + '<span class="cd-badge plain">' + esc(i.fmt) + "</span>" + (i.esp ? '<span class="cd-badge esp">Especial Black Friday</span>' : "") + "</div>" +
-      "<h3>" + esc(i.hook) + "</h3>" +
-      '<div class="lin"><b>' + rot + "</b><p>" + esc(i.gain) + "</p></div>" +
-      '<div class="lin"><b>Chamada final</b><p>' + esc(i.cta) + "</p></div>" +
-      (i.note ? '<p class="obs">' + esc(i.note) + "</p>" : "") +
-      '<div class="quando">' + cdQuando(i.id) + "</div></article>";
+  function cdIdeia(p) {
+    var rot = p.editoria === "bf" ? "O que a marca ganha" : "O que a pessoa ganha";
+    return '<article class="cd-idea"><div class="meta">' + cdBadge(p.etapa) + '<span class="cd-badge plain">' + esc(p.formato) + "</span>" + (p.especial ? '<span class="cd-badge esp">Especial Black Friday</span>' : "") + "</div>" +
+      "<h3>" + esc(p.titulo) + "</h3>" +
+      '<div class="lin"><b>' + rot + "</b><p>" + esc(p.ganho) + "</p></div>" +
+      '<div class="lin"><b>Chamada final</b><p>' + esc(p.cta) + "</p></div>" +
+      (p.obs ? '<p class="obs">' + esc(p.obs) + "</p>" : "") +
+      '<div class="quando"><span>' + cdQuando(p) + '</span><button class="icon-btn" type="button" data-acao="cd-editar" data-id="' + esc(p.id) + '" aria-label="Editar pauta">' + ICON.editar + "</button></div></article>";
   }
-  function cdBotaoPost(id, extra) {
-    var i = CD_BYID[id];
-    return '<button type="button" class="cd-post cd-on cd-' + i.ed + (extra || "") + '" data-acao="cd-post" data-id="' + id + '"><span class="pm"><span>' + cdIcon(i.st) + CD_ST[i.st].n + "</span><span>" + esc(i.fmt) + "</span></span><span>" + esc(i.hook) + "</span></button>";
+  function cdBotaoPost(p, arrastavel) {
+    return '<div role="button" tabindex="0" class="cd-post cd-on cd-' + esc(p.editoria) + '"' + (arrastavel ? ' draggable="true"' : "") + ' data-acao="cd-post" data-id="' + esc(p.id) + '"><span class="pm"><span>' + cdIcon(p.etapa) + (CD_ST[p.etapa] ? CD_ST[p.etapa].n : "") + "</span><span>" + esc(p.formato) + "</span></span><span>" + esc(p.titulo) + "</span></div>";
   }
 
   function renderPautas() {
-    var h = cab("Caderno de pautas", "Calendário editorial do Instagram, de 26/10 a 28/11: três editorias, " + CD_CAL.length + " posts em cinco semanas e a série de Black Friday para atrair marcas.", "");
+    var h = cab("Caderno de pautas", "Calendário editorial do Instagram. Arraste um post para outro dia, edite, apague ou crie uma nova pauta.",
+      '<button class="btn btn-main" data-acao="cd-novo" data-data="" type="button">' + ICON.mais + "Nova pauta</button>");
+    if (!S.pautas.length && !faltas.pautas) {
+      h += '<div class="faixa ok" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span style="flex:1;min-width:220px">Seu caderno está vazio. Quer começar com as ' + CD_SEMENTE.length + ' pautas iniciais (26/10 a 28/11)? Depois você muda o que quiser.</span>' +
+        '<button class="btn btn-main btn-mini" type="button" data-acao="cd-semear">Carregar pautas iniciais</button></div>';
+    }
     h += '<div class="subabas">' + [["editorias", "Editorias"], ["calendario", "Calendário"], ["bf", "Black Friday para marcas"]].map(function (s) {
       return '<button class="chip' + (cd.tab === s[0] ? " on" : "") + '" type="button" data-acao="cd-tab" data-v="' + s[0] + '">' + s[1] + "</button>";
     }).join("") + '</div><div id="cdCorpo"></div>';
@@ -1459,42 +1460,52 @@
     h += '</div><h2 class="cd-titulo">Toque numa editoria para ver as pautas</h2><p class="cd-nota">Todas as pautas começam pelo que a pessoa que assiste ganha, não pelo que eu fiz no meu dia.</p><div class="cd-eds">';
     ["exp", "desc", "crio"].forEach(function (k) {
       var e = CD_ED[k], c = { T: 0, M: 0, F: 0 }, aberto = cd.ed === k;
-      CD_IDEAS.forEach(function (i) { if (i.ed === k) c[i.st]++; });
+      S.pautas.forEach(function (p) { if (p.editoria === k && c[p.etapa] != null) c[p.etapa]++; });
       h += '<button type="button" class="cd-ed cd-on cd-' + k + '" data-acao="cd-ed" data-v="' + k + '" aria-expanded="' + aberto + '"><span class="kicker">' + e.kicker + "</span><h2>" + e.name + '</h2><p class="sub">' + e.sub + '</p><p class="promessa">“' + e.promise + '”</p>' +
         '<span class="contas"><span>' + cdIcon("T") + "Topo " + c.T + "</span><span>" + cdIcon("M") + "Meio " + c.M + "</span><span>" + cdIcon("F") + "Fundo " + c.F + '</span></span><span class="ir">' + (aberto ? "Fechar pautas ▲" : "Ver pautas ▼") + "</span></button>";
     });
     h += "</div>";
     if (cd.ed) {
       var e2 = CD_ED[cd.ed], ordem = { T: 0, M: 1, F: 2 };
-      var lista = CD_IDEAS.filter(function (i) { return i.ed === cd.ed && (cd.filtro === "all" || i.st === cd.filtro); }).sort(function (a, b) { return ordem[a.st] - ordem[b.st]; });
+      var lista = S.pautas.filter(function (p) { return p.editoria === cd.ed && (cd.filtro === "all" || p.etapa === cd.filtro); }).sort(function (a, b) { return (ordem[a.etapa] - ordem[b.etapa]) || cdDataDe(a).localeCompare(cdDataDe(b)); });
       h += '<div class="cd-painel"><div class="cd-painel-cab"><div><h2>' + e2.name + "</h2><p>" + e2.sub + '</p></div><div class="chips">' +
         [["all", "Todas"], ["T", "Topo"], ["M", "Meio"], ["F", "Fundo"]].map(function (c) {
           return '<button type="button" class="chip' + (cd.filtro === c[0] ? " on" : "") + '" data-acao="cd-filtro" data-v="' + c[0] + '">' + c[1] + "</button>";
-        }).join("") + '</div></div><div class="cd-ideias">' + lista.map(cdIdeia).join("") + "</div></div>";
+        }).join("") + "</div></div>" +
+        (lista.length ? '<div class="cd-ideias">' + lista.map(cdIdeia).join("") + "</div>" : '<div class="vazio">Nenhuma pauta aqui. Use o botão Nova pauta.</div>') + "</div>";
     }
     return h + cdRodape();
   }
 
   function cdCalendario() {
-    var h = '<h2 class="cd-titulo">Calendário de 5 semanas</h2><p class="cd-nota">Cinco posts por semana (segunda, terça, quinta, sexta e sábado). Quarta e domingo ficam para Stories. Toque num post para ver gancho, chamada final e Stories do dia.</p>' +
+    var h = '<h2 class="cd-titulo">Calendário de 5 semanas</h2><p class="cd-nota">Arraste um post para outro dia para mudar a data. No celular, abra o post e toque em Editar para trocar a data. O + em cada dia cria uma pauta para ele.</p>' +
+      '<div class="cd-nav"><button class="icon-btn" type="button" data-acao="cd-semana" data-v="-1" aria-label="Semana anterior">' + ICON.esq + '</button><button class="icon-btn" type="button" data-acao="cd-semana" data-v="1" aria-label="Próxima semana">' + ICON.dir + "</button>" +
+      '<button class="btn btn-ghost btn-mini" type="button" data-acao="cd-hoje">Esta semana</button><span class="dica" style="margin:0">' + cdDm(cd.inicio) + " a " + cdDm(cdIso(cdMs(cd.inicio) + 34 * 86400000)) + "</span></div>" +
       '<div class="cd-leg"><span><i class="cd-sw cd-exp"></i>Eu Experimento</span><span><i class="cd-sw cd-desc"></i>Eu Descubro e Ensino</span><span><i class="cd-sw cd-crio"></i>Eu Crio</span><span><i class="cd-sw cd-bf"></i>Black Friday para marcas</span></div>';
-    var ini = Date.UTC(2026, 9, 26), w, k;
+    var ini = cdMs(cd.inicio), w, k, hoje = hojeISO();
     for (w = 0; w < 5; w++) {
       var dias = [];
       for (k = 0; k < 7; k++) dias.push(cdIso(ini + (w * 7 + k) * 86400000));
-      var posts = dias.filter(function (d) { return CD_POSTOF[d]; }), c = { T: 0, M: 0, F: 0 };
-      posts.forEach(function (d) { c[CD_BYID[CD_POSTOF[d]].st]++; });
-      var bfSem = posts.some(function (d) { return CD_BYID[CD_POSTOF[d]].ed === "bf"; });
+      var posts = [], c = { T: 0, M: 0, F: 0 };
+      dias.forEach(function (d) { cdPorData(d).forEach(function (p) { posts.push(p); if (c[p.etapa] != null) c[p.etapa]++; }); });
+      var bfSem = posts.some(function (p) { return p.editoria === "bf"; });
       h += '<div class="cd-sem"><div class="cd-sem-cab"><h3>Semana ' + (w + 1) + '</h3><span class="datas">' + cdDm(dias[0]) + " a " + cdDm(dias[6]) + '</span><span class="cd-badge plain">' + posts.length + " posts</span>" +
         '<span class="cd-badge plain">' + cdIcon("T") + c.T + '</span><span class="cd-badge plain">' + cdIcon("M") + c.M + '</span><span class="cd-badge plain">' + cdIcon("F") + c.F + "</span>" +
-        (bfSem ? '<span class="cd-badge esp">Quinzena Black Friday para marcas</span>' : "") + '</div><div class="cd-dias">';
+        (bfSem ? '<span class="cd-badge esp">Black Friday para marcas</span>' : "") + '</div><div class="cd-dias">';
       dias.forEach(function (d) {
-        var id = CD_POSTOF[d], fer = CD_FERIADO[d];
-        h += '<div class="cd-dia"><div class="cd-dn">' + CD_DOW[cdDow(d)] + "<b>" + cdParts(d).d + "</b>" + (fer ? "<i>" + fer + "</i>" : "") + '</div><div class="corpo">' +
-          (id ? cdBotaoPost(id) : '<p class="cd-story">' + (cdStories(d) ? "<b>Stories:</b> " + esc(cdStories(d)) : "Stories do dia") + "</p>") + "</div></div>";
+        var fer = CD_FERIADO[d], ps = cdPorData(d);
+        h += '<div class="cd-dia' + (d === hoje ? " cd-hoje" : "") + '" data-solta="' + d + '"><div class="cd-dn">' + CD_DOW[cdDow(d)] + "<b>" + cdParts(d).d + "</b>" + (fer ? "<i>" + fer + "</i>" : "") +
+          '<button class="cd-add" type="button" data-acao="cd-novo" data-data="' + d + '" aria-label="Nova pauta neste dia">+</button></div><div class="corpo">' +
+          ps.map(function (p) { return cdBotaoPost(p, true); }).join("") +
+          (!ps.length ? '<p class="cd-story">' + (cdStories(d) ? "<b>Stories:</b> " + esc(cdStories(d)) : "Stories do dia") + "</p>" : "") + "</div></div>";
       });
       h += "</div></div>";
     }
+    var reserva = S.pautas.filter(function (p) { return !cdDataDe(p); });
+    var fim = cdIso(ini + 35 * 86400000), fora = S.pautas.filter(function (p) { var d = cdDataDe(p); return d && (d < cd.inicio || d >= fim); }).length;
+    h += '<div class="cd-banco" data-solta=""><h3>Banco de reserva</h3><p class="dica" style="margin:0 0 8px">Pautas sem data. Arraste para um dia do calendário, ou solte um post aqui para tirar a data dele.</p><div class="cd-banco-lista">' +
+      (reserva.length ? reserva.map(function (p) { return cdBotaoPost(p, true); }).join("") : '<span class="dica" style="margin:0">Nenhuma pauta no banco de reserva.</span>') + "</div></div>";
+    if (fora) h += '<p class="dica">' + plural(fora, "pauta está", "pautas estão") + " fora destas 5 semanas. Use as setas para navegar.</p>";
     return h + cdRodape();
   }
 
@@ -1502,14 +1513,15 @@
     var h = '<div class="cd-hero"><div class="kicker">Série especial dentro de Eu Crio</div><h2>Quinzena para atrair marcas antes da Black Friday</h2>' +
       "<p>A Black Friday de 2026 cai em 27/11. Antes da oferta, a marca precisa escolher creator, enviar briefing e produto, aprovar roteiro, gravar, editar e ajustar. Por isso o conteúdo que atrai marcas precisa estar no ar agora, e cada post resolve um problema delas: prazo, criativo e dúvida do cliente.</p>" +
       '<div class="cd-tl"><div class="seg s1"><b>26/10 a 8/11</b>Quinzena para atrair marcas</div><div class="seg s2"><b>9/11 a 26/11</b>Janela de produção das marcas</div><div class="seg s3"><b>27/11</b>Black Friday</div></div></div>';
-    h += '<h2 class="cd-titulo">6 posts para marcas</h2><p class="cd-nota">Três na primeira semana, três na segunda. Nas duas semanas, beleza e IA continuam no feed para o perfil não virar só proposta.</p><div class="cd-ideias">' +
-      CD_IDEAS.filter(function (i) { return i.ed === "bf"; }).map(cdIdeia).join("") + "</div>";
-    h += '<h2 class="cd-titulo" style="margin-top:24px">Rotina dos 14 dias</h2><p class="cd-nota">Além do feed, 15 minutos por dia em ações que colocam o perfil no radar das marcas.</p>' +
+    var bf = S.pautas.filter(function (p) { return p.editoria === "bf"; }).sort(function (a, b) { return cdDataDe(a).localeCompare(cdDataDe(b)); });
+    h += '<h2 class="cd-titulo">Posts para marcas</h2><p class="cd-nota">Três na primeira semana, três na segunda. Nas duas semanas, beleza e IA continuam no feed para o perfil não virar só proposta. Para criar mais um, use Nova pauta e escolha a editoria Black Friday para marcas.</p>' +
+      (bf.length ? '<div class="cd-ideias">' + bf.map(cdIdeia).join("") + "</div>" : '<div class="vazio">Nenhuma pauta de Black Friday ainda.</div>');
+    h += '<h2 class="cd-titulo" style="margin-top:24px">Rotina dos 14 dias</h2><p class="cd-nota">Além do feed, 15 minutos por dia em ações que colocam o perfil no radar das marcas. O post do feed vem do calendário.</p>' +
       '<div class="cd-rot-cab"><span>Dia</span><span>Feed</span><span>Stories</span><span>Ação de 15 minutos</span></div>';
     CD_ROT.forEach(function (r) {
-      var d = r[0], id = CD_POSTOF[d], fer = CD_FERIADO[d];
+      var d = r[0], ps = cdPorData(d), fer = CD_FERIADO[d];
       h += '<div class="cd-rot-lin"><div class="d">' + CD_DOW[cdDow(d)] + " " + cdDm(d) + (fer ? "<small>" + fer + "</small>" : "") + "</div>" +
-        '<div data-l="Feed">' + (id ? cdBotaoPost(id) : '<p class="cd-story">Sem post no feed, só Stories.</p>') + "</div>" +
+        '<div data-l="Feed">' + (ps.length ? ps.map(function (p) { return cdBotaoPost(p, false); }).join("") : '<p class="cd-story">Sem post no feed, só Stories.</p>') + "</div>" +
         '<div data-l="Stories"><p>' + esc(r[1]) + '</p></div><div data-l="Ação de 15 minutos"><p>' + esc(r[2]) + "</p></div></div>";
     });
     h += '<div class="cd-duas"><div class="card"><h2>Chamada final para marcas</h2><p class="cd-cta">“Marca ou agência? Comenta BLACK que eu mando o meu mídia kit.”</p>' +
@@ -1522,16 +1534,65 @@
   }
 
   function cdDetalhe(id) {
-    var i = CD_BYID[id]; if (!i) return;
-    var d = CD_CALOF[id], rot = d && CD_ROTBY[d], lbl = i.ed === "bf" ? "O que a marca ganha" : "O que a pessoa ganha";
-    abrirJanela('<div class="cd-dhead cd-on cd-' + i.ed + '"><span class="quando">' + (d ? CD_DOW[cdDow(d)] + ", " + cdDm(d) + " · " : "") + CD_ED[i.ed].name + "</span><h2>" + esc(i.hook) + '</h2><div class="meta">' +
-      cdBadge(i.st) + '<span class="cd-badge">' + esc(i.fmt) + "</span>" + (i.esp ? '<span class="cd-badge">Especial Black Friday</span>' : "") + "</div></div>" +
-      '<div class="cd-dcorpo"><div class="lin"><b>' + lbl + "</b><p>" + esc(i.gain) + "</p></div>" +
-      '<div class="lin"><b>Chamada final</b><p>' + esc(i.cta) + "</p></div>" +
-      (i.note ? '<p class="dica" style="margin:0">' + esc(i.note) + "</p>" : "") +
-      '<div class="lin"><b>Etapa do funil</b><p><b style="display:inline;text-transform:none;font-size:inherit;color:inherit">' + CD_ST[i.st].n + " · " + CD_ST[i.st].d + ".</b> " + CD_ST[i.st].look + "</p></div>" +
+    var p = achar("pautas", id); if (!p) return;
+    var d = cdDataDe(p), rot = d && CD_ROTBY[d], lbl = p.editoria === "bf" ? "O que a marca ganha" : "O que a pessoa ganha", st = CD_ST[p.etapa] || { n: "", d: "", look: "" };
+    abrirJanela('<div class="cd-dhead cd-on cd-' + esc(p.editoria) + '"><span class="quando">' + (d ? CD_DOW[cdDow(d)] + ", " + cdDm(d) + " · " : "Sem data · ") + esc((CD_ED[p.editoria] || {}).name || "") + "</span><h2>" + esc(p.titulo) + '</h2><div class="meta">' +
+      cdBadge(p.etapa) + '<span class="cd-badge">' + esc(p.formato) + "</span>" + (p.especial ? '<span class="cd-badge">Especial Black Friday</span>' : "") + "</div></div>" +
+      '<div class="cd-dcorpo"><div class="lin"><b>' + lbl + "</b><p>" + esc(p.ganho) + "</p></div>" +
+      '<div class="lin"><b>Chamada final</b><p>' + esc(p.cta) + "</p></div>" +
+      (p.obs ? '<p class="dica" style="margin:0">' + esc(p.obs) + "</p>" : "") +
+      '<div class="lin"><b>Etapa do funil</b><p><span style="font-weight:700">' + st.n + " · " + st.d + ".</span> " + st.look + "</p></div>" +
       (rot ? '<div class="lin"><b>Stories do dia</b><p>' + esc(rot.stories) + '</p></div><div class="lin"><b>Ação de 15 minutos</b><p>' + esc(rot.acao) + "</p></div>" : "") + "</div>" +
-      '<div class="dlg-rod"><button class="btn btn-ghost" type="button" data-acao="fechar-janela">Fechar</button></div>');
+      '<div class="dlg-rod"><button class="btn btn-ghost esq perigo" type="button" data-acao="cd-apagar" data-id="' + esc(p.id) + '">Apagar</button>' +
+      '<button class="btn btn-ghost" type="button" data-acao="fechar-janela">Fechar</button>' +
+      '<button class="btn btn-main" type="button" data-acao="cd-editar" data-id="' + esc(p.id) + '">Editar</button></div>');
+  }
+
+  function formPauta(p, dataPadrao) {
+    formulario({
+      titulo: p ? "Editar pauta" : "Nova pauta",
+      valores: p ? { titulo: p.titulo, editoria: p.editoria, etapa: p.etapa, formato: p.formato, ganho: p.ganho, cta: p.cta, obs: p.obs, data: cdDataDe(p), especial: p.especial === true }
+        : { editoria: "exp", etapa: "T", formato: "Reels", data: dataPadrao || "", especial: false },
+      campos: [
+        { k: "titulo", r: "Gancho (título da pauta)", req: true, ph: "Ex: Coisas que parecem make cara, mas custam menos de R$30" },
+        { k: "editoria", r: "Editoria", t: "select", op: CD_OPC_ED, m: true },
+        { k: "etapa", r: "Etapa do funil", t: "select", op: CD_OPC_ST, m: true },
+        { k: "formato", r: "Formato", m: true, ph: "Reels, Carrossel..." },
+        { k: "data", r: "Data no calendário", t: "date", m: true, dica: "Deixe vazio para guardar no banco de reserva." },
+        { k: "ganho", r: "O que quem assiste ganha", t: "textarea" },
+        { k: "cta", r: "Chamada final", t: "textarea" },
+        { k: "obs", r: "Observação (opcional)", t: "textarea" },
+        { k: "especial", r: "Especial Black Friday", t: "check" }
+      ],
+      onSalvar: function (o) {
+        return gravar("pautas", p ? p.id : null, o).then(function (r) { if (r) { toast("Pauta salva"); renderPautas(); } return !!r; });
+      },
+      onApagar: p ? function () {
+        return apagar("pautas", p.id).then(function (ok) { if (ok) { toast("Pauta apagada"); renderPautas(); } return ok; });
+      } : null,
+      msgApagar: "Apagar esta pauta do caderno?"
+    });
+  }
+
+  function cdSemear() {
+    var linhas = CD_SEMENTE.map(function (s) {
+      return { data: s[0], editoria: s[1], etapa: s[2], formato: s[3], especial: s[4] === 1, titulo: s[5], ganho: s[6], cta: s[7], obs: s[8] || null };
+    });
+    db.from("pautas").insert(linhas).select().then(function (r) {
+      if (r.error) { toast(erroAmigavel("pautas", r.error), true); return; }
+      S.pautas = S.pautas.concat(r.data || []);
+      toast(linhas.length + " pautas carregadas");
+      renderPautas();
+    }, function (e) { toast(erroAmigavel("pautas", e), true); });
+  }
+
+  function cdSoltar(id, data) {
+    var p = achar("pautas", id); if (!p || cdDataDe(p) === data) return;
+    gravar("pautas", p.id, { data: data || null }).then(function (r) {
+      if (!r) return;
+      toast(data ? "Movida para " + CD_DOW[cdDow(data)] + " " + cdDm(data) : "Movida para o banco de reserva");
+      renderPautas();
+    });
   }
 
   /* ------------------------ 10b. ABA RADAR DE NOVIDADES ------------------------
@@ -2052,6 +2113,17 @@
     "cd-ed": function (el) { cd.ed = cd.ed === el.dataset.v ? null : el.dataset.v; cd.filtro = "all"; cdDesenhar(); },
     "cd-filtro": function (el) { cd.filtro = el.dataset.v; cdDesenhar(); },
     "cd-post": function (el) { cdDetalhe(el.dataset.id); },
+    "cd-novo": function (el) { formPauta(null, el.dataset.data); },
+    "cd-editar": function (el) { var p = achar("pautas", el.dataset.id); if (p) formPauta(p); },
+    "cd-apagar": function (el) {
+      var p = achar("pautas", el.dataset.id); if (!p) return;
+      confirmar("Apagar a pauta “" + p.titulo + "”? Não dá para desfazer.").then(function (s) {
+        if (s) apagar("pautas", p.id).then(function (ok) { if (ok) { fecharJanela(); toast("Pauta apagada"); renderPautas(); } });
+      });
+    },
+    "cd-semear": function () { cdSemear(); },
+    "cd-semana": function (el) { cd.inicio = cdIso(cdMs(cd.inicio) + (+el.dataset.v) * 7 * 86400000); cdDesenhar(); },
+    "cd-hoje": function () { var h = hojeISO(); cd.inicio = cdIso(cdMs(h) - ((cdDow(h) + 6) % 7) * 86400000); cdDesenhar(); },
     "tr-nova": function () { tg.f = tgVazio(); renderTriagem(); toast("Nova ficha em branco"); },
     "tr-salvar": function () { tgSalvar(); },
     "tr-apagar": function () {
@@ -2166,6 +2238,32 @@
     });
     db.auth.onAuthStateChange(function (evento) { if (evento === "SIGNED_OUT") paraLogin(); });
     ligarArrastar();
+    ligarArrastarPautas();
+  }
+
+  /* arrastar uma pauta de um dia para outro (ou para o banco de reserva) */
+  function ligarArrastarPautas() {
+    var aba = $("#aba"), arrasto = null;
+    function limpar() { $$(".cd-alvo").forEach(function (x) { x.classList.remove("cd-alvo"); }); }
+    aba.addEventListener("dragstart", function (e) {
+      var p = e.target.closest && e.target.closest(".cd-post[draggable]"); if (!p) return;
+      arrasto = p.dataset.id; p.classList.add("cd-arrastando");
+      try { e.dataTransfer.effectAllowed = "move"; e.dataTransfer.setData("text/plain", arrasto); } catch (x) {}
+    });
+    aba.addEventListener("dragover", function (e) {
+      var alvo = e.target.closest && e.target.closest("[data-solta]"); if (!alvo || arrasto == null) return;
+      e.preventDefault(); limpar(); alvo.classList.add("cd-alvo");
+    });
+    aba.addEventListener("drop", function (e) {
+      var alvo = e.target.closest && e.target.closest("[data-solta]"); if (!alvo || arrasto == null) return;
+      e.preventDefault();
+      var id = arrasto; arrasto = null; limpar();
+      cdSoltar(id, alvo.dataset.solta);
+    });
+    aba.addEventListener("dragend", function () {
+      arrasto = null; limpar();
+      $$(".cd-arrastando").forEach(function (x) { x.classList.remove("cd-arrastando"); });
+    });
   }
 
   /* ------------------------ 12. COMEÇAR ------------------------ */
