@@ -149,6 +149,8 @@ td.acoes-c .icon-btn{margin-left:4px}
 .alca{cursor:grab;color:var(--muted);display:inline-grid;place-items:center;width:26px;height:26px;border-radius:8px;background:none;border:none}
 .alca svg{width:16px;height:16px}
 .mover{display:none}
+.miniatura{display:block;width:40px;height:62px;object-fit:cover;border-radius:8px;border:1px solid var(--linha);background:var(--rosa)}
+.miniatura.vazia{background:var(--suave)}
 .estrela{background:none;border:none;color:#c9b7be;width:28px;height:28px;display:inline-grid;place-items:center}
 .estrela svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8}
 .estrela.on{color:#d9a400}

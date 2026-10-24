@@ -330,6 +330,34 @@
     return S.videos.slice().sort(function (a, b) { return (num(a.ordem) - num(b.ordem)) || (num(a.id) - num(b.id)); });
   }
 
+  /* Filtro por nicho: a ordem continua sendo uma só, então reordenar dentro de um nicho
+     só troca os vídeos entre as posições que esse nicho já ocupa. */
+  var vf = { nicho: "" };
+  function videosVisiveis() {
+    var todos = videosOrdenados();
+    return vf.nicho ? todos.filter(function (v) { return v.nicho === vf.nicho; }) : todos;
+  }
+  function ordemComSubconjunto(novaSub) {
+    var todos = videosOrdenados(), ids = {}, j = 0;
+    novaSub.forEach(function (v) { ids[v.id] = true; });
+    return todos.map(function (v) { return ids[v.id] ? novaSub[j++] : v; });
+  }
+  function desenharFiltroVideos() {
+    var el = $("#vFiltro"); if (!el) return;
+    var cont = {};
+    S.videos.forEach(function (v) { cont[v.nicho || ""] = (cont[v.nicho || ""] || 0) + 1; });
+    var itens = [["", "Todos", S.videos.length]].concat(NICHOS_SITE.map(function (n) { return [n[0], n[1], cont[n[0]] || 0]; }));
+    el.innerHTML = itens.map(function (n) {
+      return '<button class="chip' + (vf.nicho === n[0] ? " on" : "") + '" type="button" data-acao="video-filtro" data-v="' + esc(n[0]) + '">' + esc(n[1]) + " (" + n[2] + ")</button>";
+    }).join("");
+  }
+  function miniaturaVideo(v) {
+    var id = idYoutube(v.link);
+    if (!id) return '<span class="miniatura vazia" aria-hidden="true"></span>';
+    var img = '<img class="miniatura" src="https://i.ytimg.com/vi/' + id + '/mqdefault.jpg" alt="Miniatura de ' + esc(v.titulo) + '" draggable="false" loading="lazy" onerror="this.style.visibility=\'hidden\'">';
+    return '<a href="' + esc(v.link) + '" target="_blank" rel="noopener noreferrer" tabindex="-1">' + img + "</a>";
+  }
+
   function renderPortfolio() {
     var hoje = hojeISO(), dias = [], contagem = {}, i;
     for (i = 13; i >= 0; i--) { var d = somarDias(hoje, -i); dias.push(d); contagem[d] = 0; }
@@ -386,21 +414,24 @@
 
     h += '<div class="cab"><div><h2 style="font-size:15px;color:var(--vinho)">Meus vídeos</h2><p>Arraste pela alça para mudar a ordem. O olho mostra ou esconde do site.</p></div>' +
       '<div class="acoes"><button class="btn" data-acao="video-importar" type="button">Importar vídeos do site</button><button class="btn btn-main" data-acao="video-novo" type="button">' + ICON.mais + "Adicionar vídeo</button></div></div>";
-    h += '<div class="tabela-wrap"><table><thead><tr><th style="width:56px"></th><th style="width:44px"></th><th>Título</th><th>Nicho</th><th>Formato</th><th>Marca</th><th title="Vezes que apertaram play no site">Destaque (views)</th><th></th></tr></thead><tbody id="tbVideos"></tbody></table></div>';
+    h += '<div class="chips" id="vFiltro" style="margin-bottom:12px"></div>';
+    h += '<div class="tabela-wrap"><table><thead><tr><th style="width:56px"></th><th style="width:44px"></th><th style="width:64px"></th><th>Título</th><th>Nicho</th><th>Formato</th><th>Marca</th><th title="Vezes que apertaram play no site">Destaque (views)</th><th></th></tr></thead><tbody id="tbVideos"></tbody></table></div>';
     $("#aba").innerHTML = h;
     desenharVideos();
   }
 
   function desenharVideos() {
     var tb = $("#tbVideos"); if (!tb) return;
-    var lista = videosOrdenados();
-    if (!lista.length) { tb.innerHTML = '<tr><td colspan="8"><div class="vazio">Nenhum vídeo ainda. Clique em “Importar vídeos do site” para trazer os que já estão no portfólio, ou em Adicionar vídeo.</div></td></tr>'; return; }
+    desenharFiltroVideos();
+    var lista = videosVisiveis();
+    if (!lista.length) { tb.innerHTML = '<tr><td colspan="9"><div class="vazio">' + (S.videos.length ? "Nenhum vídeo neste nicho." : "Nenhum vídeo ainda. Clique em “Importar vídeos do site” para trazer os que já estão no portfólio, ou em Adicionar vídeo.") + "</div></td></tr>"; return; }
     tb.innerHTML = lista.map(function (v, i) {
       var visivel = v.visivel !== false;
       return '<tr data-id="' + esc(v.id) + '" class="' + (visivel ? "" : "escondido") + '">' +
         '<td><span class="alca" data-alca title="Arraste para mudar a ordem">' + ICON.alca + "</span>" +
         '<span class="mover"><button type="button" data-acao="video-sobe" data-id="' + esc(v.id) + '" aria-label="Subir"' + (i === 0 ? " disabled" : "") + '>▲</button><button type="button" data-acao="video-desce" data-id="' + esc(v.id) + '" aria-label="Descer"' + (i === lista.length - 1 ? " disabled" : "") + ">▼</button></span></td>" +
         '<td><button class="icon-btn" type="button" data-acao="video-olho" data-id="' + esc(v.id) + '" aria-label="' + (visivel ? "Esconder do site" : "Mostrar no site") + '" title="' + (visivel ? "Visível no site" : "Escondido do site") + '">' + (visivel ? ICON.olho : ICON.olhoOff) + "</button></td>" +
+        "<td>" + miniaturaVideo(v) + "</td>" +
         "<td>" + (v.link ? '<a href="' + esc(v.link) + '" target="_blank" rel="noopener noreferrer">' + esc(v.titulo) + "</a>" : esc(v.titulo)) + exTag(v) + "</td>" +
         "<td>" + esc(nomeNicho(v.nicho)) + "</td><td>" + esc(v.formato) + "</td><td>" + esc(v.marca) + "</td><td><b>" + plural(playsDoVideo(v), "view", "views") + "</b>" + (v.destaque ? '<br><small style="color:var(--muted)">' + esc(v.destaque) + "</small>" : "") + "</td>" +
         '<td class="acoes-c"><button class="icon-btn" type="button" data-acao="video-editar" data-id="' + esc(v.id) + '" aria-label="Editar">' + ICON.editar + "</button>" +
@@ -483,11 +514,11 @@
     });
   }
   function moverVideo(id, delta) {
-    var lista = videosOrdenados(), i = -1, k;
+    var lista = videosVisiveis(), i = -1, k;
     for (k = 0; k < lista.length; k++) if (String(lista[k].id) === String(id)) i = k;
     var j = i + delta; if (i < 0 || j < 0 || j >= lista.length) return;
     var t = lista[i]; lista[i] = lista[j]; lista[j] = t;
-    salvarOrdem(lista);
+    salvarOrdem(ordemComSubconjunto(lista));
   }
 
   /* arrastar e soltar pela alça */
@@ -512,7 +543,7 @@
     aba.addEventListener("drop", function (e) {
       var tr = e.target.closest && e.target.closest("#tbVideos tr"); if (!tr || arrastandoId == null) return;
       e.preventDefault();
-      var lista = videosOrdenados(), de = -1, para = -1;
+      var lista = videosVisiveis(), de = -1, para = -1;
       lista.forEach(function (v, i) {
         if (String(v.id) === String(arrastandoId)) de = i;
         if (String(v.id) === String(tr.dataset.id)) para = i;
@@ -520,7 +551,7 @@
       arrastandoId = null;
       if (de < 0 || para < 0 || de === para) { desenharVideos(); return; }
       var item = lista.splice(de, 1)[0]; lista.splice(para, 0, item);
-      salvarOrdem(lista);
+      salvarOrdem(ordemComSubconjunto(lista));
     });
     aba.addEventListener("dragend", function () {
       arrastandoId = null;
@@ -2035,6 +2066,7 @@
       var v = achar("videos", el.dataset.id); if (!v) return;
       gravar("videos", v.id, { visivel: v.visivel === false }).then(function (r) { if (r) { toast(r.visivel === false ? "Escondido do site" : "Visível no site"); renderPortfolio(); } });
     },
+    "video-filtro": function (el) { vf.nicho = el.dataset.v; desenharVideos(); },
     "video-sobe": function (el) { moverVideo(el.dataset.id, -1); },
     "video-desce": function (el) { moverVideo(el.dataset.id, 1); },
 
