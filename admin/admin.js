@@ -841,10 +841,10 @@
     }).join("");
   }
 
-  function formCampanha(c) {
+  function formCampanha(c, previa) {
     formulario({
       titulo: c ? "Editar campanha" : "Adicionar campanha",
-      valores: c || { tipo: "Conteúdo", status: "Briefing", qtd: 1, valor: 0, pagamento: "pendente", ativa: true },
+      valores: c || previa || { tipo: "Conteúdo", status: "Briefing", qtd: 1, valor: 0, pagamento: "pendente", ativa: true },
       campos: [
         { k: "campanha", r: "Campanha", req: true },
         { k: "cliente", r: "Cliente" },
@@ -859,7 +859,10 @@
       ],
       onSalvar: function (o) {
         if (c && o.status === "Entregue" && c.status !== "Entregue") o.ativa = false; /* entregou, finalizou */
-        return gravar("campanhas", c ? c.id : null, o).then(function (r) { if (r) { toast("Campanha salva"); renderCampanhas(); } return !!r; });
+        return gravar("campanhas", c ? c.id : null, o).then(function (r) {
+          if (r) { toast("Campanha salva"); if (previa) location.hash = "campanhas"; else renderCampanhas(); }
+          return !!r;
+        });
       },
       onApagar: c ? function () {
         return apagar("campanhas", c.id).then(function (ok) { if (ok) { toast("Campanha apagada"); renderCampanhas(); } return ok; });
@@ -1201,10 +1204,12 @@
       id: null, marca: "",
       redesSociais: { formato: "", formatoRefs: [""], estilo: [], interacao: "", tomVoz: [], tomVozLivre: "" },
       perguntas: { publico: "", problemas: "", posicionamento: [], posicionamentoLivre: "" },
-      interesses: { conexao: "", refs: [""] }
+      interesses: { conexao: "", refs: [""] },
+      briefing: { texto: "", arquivo: null, produto: "", objetivo: "", publico: "", problemas: "", mensagem: "", diferenciais: "", entregaveis: "", quantidade: "", valor: "", prazo: "", prazos: "", pagamento: "", obrigatorios: "", proibidos: "", referencias: "", direitos: "", observacoes: "" }
     };
   }
-  var tg = { f: tgVazio() };
+  var tg = { f: tgVazio(), vista: "triagem", prompt: "", resposta: "", arq: null };
+  function tgTrocarFicha(f) { tg.f = f; tg.arq = null; tg.prompt = ""; tg.resposta = ""; }
   function tgGet(p) { return p.split(".").reduce(function (o, k) { return o[k]; }, tg.f); }
   function tgSet(p, v) { var k = p.split("."), ult = k.pop(); k.reduce(function (o, key) { return o[key]; }, tg.f)[ult] = v; }
 
@@ -1243,6 +1248,10 @@
       (tg.f.id ? '<button class="btn btn-ghost perigo" data-acao="tr-apagar" type="button">Apagar</button>' : "") +
       '<button class="btn btn-main" data-acao="tr-salvar" type="button">Salvar ficha</button>');
     h += '<div class="tg"><input class="in tg-marca" data-ao="tr-marca" placeholder="Nome da marca (ex: Salon Line)" value="' + esc(tg.f.marca) + '">';
+    h += '<div class="subabas">' + [["triagem", "Triagem"], ["briefing", "Briefing da campanha"]].map(function (s) {
+      return '<button class="chip' + (tg.vista === s[0] ? " on" : "") + '" type="button" data-acao="tr-vista" data-v="' + s[0] + '">' + s[1] + "</button>";
+    }).join("") + "</div>";
+    if (tg.vista === "briefing") h += tgBriefingHtml() + "</div>"; else {
 
     h += '<div class="tg-sec"><div class="tg-no">1</div><section class="card"><h2>Redes sociais</h2><p class="tg-desc">Como a marca se comunica hoje</p>' +
       tgCampo("Formato de conteúdo predominante", "Como são os vídeos e posts dela hoje?", "redesSociais.formato", 3, "Ex: vídeos curtos de demonstração, carrossel educativo...") +
@@ -1266,6 +1275,7 @@
     h += '<div class="tg-box"><div class="topo-b"><h2>Resumo pra roteiro</h2><button class="btn btn-ghost btn-mini" type="button" data-acao="tr-copiar" data-alvo="resumo">Copiar</button></div><pre id="tgResumo"></pre></div>';
     h += '<div class="tg-box dir"><div class="topo-b"><h2>Direção pro roteiro</h2><button class="btn btn-main btn-mini" type="button" data-acao="tr-copiar" data-alvo="direcao">Copiar</button></div>' +
       '<p class="dica">Já organizado nas 4 etapas do roteiro, com sugestão de gancho e CTA baseada no que você preencheu acima.</p><pre id="tgDirecao"></pre></div></div>';
+    }
     $("#aba").innerHTML = h;
     tgDesenharChips(); tgDesenharLinks(); tgAtualizar();
   }
@@ -1304,6 +1314,11 @@
     L.push("", "INTERESSES");
     if (it.conexao) L.push("O que conecta o público ao produto: " + it.conexao);
     var ir = it.refs.filter(Boolean); if (ir.length) L.push("Perfis de referência: " + ir.join(", "));
+    var bf = tg.f.briefing, bl = [];
+    [["produto", "Produto"], ["objetivo", "Objetivo"], ["entregaveis", "Entregáveis"], ["prazos", "Prazos"], ["valor", "Valor"], ["obrigatorios", "Obrigatórios"], ["proibidos", "Proibidos"], ["direitos", "Direitos de uso"], ["observacoes", "Observações"]].forEach(function (c) {
+      if (String(bf[c[0]] || "").trim()) bl.push(c[1] + ": " + String(bf[c[0]]).trim());
+    });
+    if (bl.length) L.push("", "BRIEFING DA CAMPANHA"), bl.forEach(function (x) { L.push(x); });
     L.push("", "Próximo passo do roteiro: Gancho, Problema x Solução, Proposta de Valor e Prova Social, CTA");
     return L.join("\n");
   }
@@ -1339,6 +1354,12 @@
     L.push("", "4. CTA");
     L.push("Estilo recomendado: " + TG_CTA_ROTULO[cta] + " (baseado no tom e posicionamento escolhidos)");
     TG_CTA_EX[cta].forEach(function (e) { L.push("  - " + e); });
+    var bd = tg.f.briefing;
+    if (String(bd.obrigatorios || "").trim() || String(bd.proibidos || "").trim()) {
+      L.push("", "REGRAS DO BRIEFING");
+      if (String(bd.obrigatorios || "").trim()) L.push("Precisa aparecer: " + bd.obrigatorios.trim());
+      if (String(bd.proibidos || "").trim()) L.push("Não pode: " + bd.proibidos.trim());
+    }
     L.push("", "Lembrete: câmera traseira, ângulos variados, 2-3s por cena, sem logos de outra marca.");
     return L.join("\n");
   }
@@ -1350,10 +1371,175 @@
 
   function tgSalvar() {
     if (!tg.f.marca.trim()) { toast("Dê um nome para a marca antes de salvar.", true); return; }
-    var f = tg.f, dados = { redesSociais: f.redesSociais, perguntas: f.perguntas, interesses: f.interesses };
-    gravar("fichas_triagem", f.id, { marca: f.marca.trim(), dados: dados, atualizado_em: new Date().toISOString() }).then(function (r) {
+    var f = tg.f, aviso = "";
+    tgEnviarArquivo().then(function (msg) {
+      aviso = msg || "";
+      var dados = { redesSociais: f.redesSociais, perguntas: f.perguntas, interesses: f.interesses, briefing: f.briefing };
+      return gravar("fichas_triagem", f.id, { marca: f.marca.trim(), dados: dados, atualizado_em: new Date().toISOString() });
+    }).then(function (r) {
       if (!r) return;
-      tg.f.id = r.id; toast("Ficha salva"); renderTriagem();
+      tg.f.id = r.id; toast(aviso || "Ficha salva", !!aviso); renderTriagem();
+    });
+  }
+
+  /* ----- Briefing da campanha: arquivo, prompt para o Claude e campos extraídos ----- */
+  var TG_BRIEF = [
+    ["produto", "Produto ou serviço", "i"], ["quantidade", "Quantidade de vídeos", "i"],
+    ["objetivo", "Objetivo da campanha", "t"], ["publico", "Público e persona", "t"], ["problemas", "Problemas que a marca resolve", "t"],
+    ["mensagem", "Mensagem-chave", "t"], ["diferenciais", "Diferenciais do produto", "t"],
+    ["entregaveis", "Entregáveis (formato, duração)", "t"], ["prazo", "Prazo final (AAAA-MM-DD)", "i"], ["prazos", "Datas e etapas (roteiro, aprovação, postagem)", "t"],
+    ["valor", "Valor (R$)", "i"], ["pagamento", "Forma e prazo de pagamento", "i"],
+    ["obrigatorios", "Obrigatório (hashtags, menções, falas)", "t"], ["proibidos", "Proibido (o que não dizer ou mostrar)", "t"],
+    ["referencias", "Links e referências", "t"], ["direitos", "Direitos de uso e exclusividade", "t"], ["observacoes", "Outras observações", "t"]
+  ];
+  var TG_TOM = ["Sério", "Elegante", "Formal", "Jovem", "Descontraído", "Divertido"];
+  var TG_POSIC = ["Luxo", "Acessibilidade", "Sustentabilidade", "Praticidade", "Inovação", "Tradição"];
+  var TG_PDFJS = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
+  var TG_PDFJS_WORKER = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+  var TG_MAMMOTH = "https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js";
+  var tgScripts = {};
+
+  function tgCarregarScript(src) {
+    if (!tgScripts[src]) tgScripts[src] = new Promise(function (ok, falha) {
+      var s = document.createElement("script");
+      s.src = src; s.onload = ok;
+      s.onerror = function () { delete tgScripts[src]; falha(new Error("Não consegui carregar o leitor de arquivos. Confira a internet.")); };
+      document.head.appendChild(s);
+    });
+    return tgScripts[src];
+  }
+
+  /* Lê o texto do arquivo no próprio navegador (nada é enviado para fora) */
+  function tgLerArquivo(file) {
+    var nome = file.name.toLowerCase();
+    if (/\.(txt|md)$/.test(nome)) return file.text();
+    if (/\.pdf$/.test(nome)) {
+      return tgCarregarScript(TG_PDFJS).then(function () {
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = TG_PDFJS_WORKER;
+        return file.arrayBuffer();
+      }).then(function (buf) { return window.pdfjsLib.getDocument({ data: buf }).promise; }).then(function (pdf) {
+        var paginas = [];
+        function pagina(n) {
+          if (n > pdf.numPages) return Promise.resolve(paginas.join("\n\n"));
+          return pdf.getPage(n).then(function (p) { return p.getTextContent(); }).then(function (c) {
+            paginas.push(c.items.map(function (i) { return i.str; }).join(" ")); return pagina(n + 1);
+          });
+        }
+        return pagina(1);
+      });
+    }
+    if (/\.docx$/.test(nome)) {
+      return tgCarregarScript(TG_MAMMOTH).then(function () { return file.arrayBuffer(); }).then(function (buf) {
+        return window.mammoth.extractRawText({ arrayBuffer: buf });
+      }).then(function (r) { return r.value; });
+    }
+    return Promise.reject(new Error("Esse formato eu não consigo ler. Use PDF, Word (.docx) ou TXT, ou cole o texto do briefing."));
+  }
+
+  /* Guarda o arquivo no Supabase Storage. Devolve um aviso (texto) se algo deu errado, nunca trava o salvar. */
+  function tgEnviarArquivo() {
+    var file = tg.arq; if (!file) return Promise.resolve("");
+    var antigo = tg.f.briefing.arquivo, seguro = file.name.replace(/[^A-Za-z0-9._-]+/g, "_");
+    var caminho = "fichas/" + Date.now() + "-" + seguro;
+    var falha = "A ficha foi salva, mas não consegui guardar o arquivo. Rode o arquivo sql-briefings.sql no Supabase.";
+    return db.storage.from("briefings").upload(caminho, file, { contentType: file.type || undefined, upsert: false }).then(function (r) {
+      if (r.error) return falha;
+      tg.f.briefing.arquivo = { path: caminho, nome: file.name };
+      tg.arq = null;
+      if (antigo && antigo.path) db.storage.from("briefings").remove([antigo.path]);
+      return "";
+    }, function () { return falha; });
+  }
+
+  function tgInputBrief(rotulo, path) {
+    return '<div class="field"><label>' + esc(rotulo) + '</label><input class="in" data-ao="tr-campo" data-path="' + path + '" value="' + esc(tgGet(path)) + '"></div>';
+  }
+
+  function tgBriefingHtml() {
+    var b = tg.f.briefing, arq = b.arquivo;
+    var h = '<section class="card"><h2>1. Briefing da marca</h2><p class="tg-desc">Anexe o arquivo ou cole o texto que a marca mandou.</p>' +
+      '<div class="field"><label for="tgArquivo">Arquivo (PDF, Word .docx ou TXT)</label><input id="tgArquivo" type="file" accept=".pdf,.docx,.txt,.md" data-ao="tr-arquivo">' +
+      '<div class="dica">' + (tg.arq ? "Lido: " + esc(tg.arq.name) + ". Ele é guardado quando você clicar em Salvar ficha." : arq ? "Guardado: " + esc(arq.nome) : "Nenhum arquivo anexado.") +
+      (arq && !tg.arq ? ' <button class="tg-add" type="button" data-acao="tr-arquivo-abrir">abrir arquivo</button>' : "") + "</div></div>" +
+      tgCampo("Texto do briefing", "O texto lido do arquivo aparece aqui. Você também pode colar direto, por exemplo uma mensagem de WhatsApp ou e-mail.", "briefing.texto", 8, "Cole aqui o briefing...") + "</section>";
+
+    h += '<section class="card" style="margin-top:14px"><h2>2. Extrair com o Claude</h2><p class="tg-desc">O painel monta o prompt. Você cola no Claude e traz a resposta de volta.</p>' +
+      '<div class="acoes"><button class="btn btn-main" type="button" data-acao="tr-prompt">Montar prompt</button>' +
+      (tg.prompt ? '<button class="btn btn-ghost" type="button" data-acao="tr-prompt-copiar">Copiar prompt</button>' : "") + "</div>" +
+      (tg.prompt ? '<textarea class="h-prompt" id="tgPrompt" readonly style="margin-top:10px">' + esc(tg.prompt) + "</textarea>" : "") +
+      '<div class="field" style="margin-top:14px"><label for="tgResposta">Resposta do Claude</label><div class="dica" style="margin:0 0 6px">Cole aqui o que o Claude devolveu (o JSON inteiro).</div>' +
+      '<textarea id="tgResposta" rows="6" data-ao="tr-resposta" placeholder="{ ... }">' + esc(tg.resposta) + "</textarea></div>" +
+      '<button class="btn btn-main" type="button" data-acao="tr-aplicar">Preencher os campos</button></section>';
+
+    h += '<section class="card" style="margin-top:14px"><h2>3. Informações da campanha</h2><p class="tg-desc">Confira e corrija o que precisar. Tudo é salvo junto com a ficha.</p>';
+    TG_BRIEF.forEach(function (c) {
+      h += c[2] === "i" ? tgInputBrief(c[1], "briefing." + c[0]) : tgCampo(c[1], "", "briefing." + c[0], 3, "");
+    });
+    h += '<div class="acoes"><button class="btn btn-ghost" type="button" data-acao="tr-levar">Levar para a triagem</button>' +
+      '<button class="btn btn-main" type="button" data-acao="tr-campanha">Criar campanha</button></div>' +
+      '<p class="dica">“Levar para a triagem” preenche público, problemas e o que conecta ao produto (só onde estiver vazio). “Criar campanha” abre o formulário de Campanhas já preenchido.</p></section>';
+    return h;
+  }
+
+  function tgMontarPrompt() {
+    var texto = (tg.f.briefing.texto || "").trim();
+    if (!texto) { toast("Anexe um arquivo ou cole o texto do briefing primeiro.", true); return; }
+    tg.prompt = "Você é assistente de uma criadora de conteúdo UGC. Leia o briefing abaixo e extraia as informações principais da campanha.\n\n" +
+      "Responda SOMENTE com um JSON válido (sem texto antes ou depois, sem markdown), exatamente com estas chaves. Se uma informação não estiver no briefing, use \"\" e não invente nada.\n\n" +
+      '{\n  "marca": "",\n  "produto": "",\n  "objetivo": "",\n  "publico": "",\n  "problemas": "",\n  "mensagem": "",\n  "diferenciais": "",\n  "entregaveis": "",\n  "quantidade": "",\n  "valor": "",\n  "prazo": "",\n  "prazos": "",\n  "pagamento": "",\n  "obrigatorios": "",\n  "proibidos": "",\n  "referencias": "",\n  "direitos": "",\n  "observacoes": "",\n  "tom_voz": [],\n  "posicionamento": []\n}\n\n' +
+      "O que vai em cada chave:\n" +
+      "- marca: nome da marca. produto: produto ou serviço da campanha. objetivo: o que a marca quer com a campanha.\n" +
+      "- publico: público e persona. problemas: problemas que a marca resolve para esse público. mensagem: mensagem-chave. diferenciais: diferenciais do produto.\n" +
+      "- entregaveis: o que precisa ser entregue (formatos, duração). quantidade: número de vídeos, só o número.\n" +
+      "- valor: só o número em reais (ex: 800). pagamento: forma e prazo de pagamento.\n" +
+      "- prazo: data final de entrega no formato AAAA-MM-DD. prazos: todas as datas e etapas (roteiro, aprovação, postagem), uma por linha.\n" +
+      "- obrigatorios: hashtags, menções, falas e elementos que precisam aparecer. proibidos: o que não pode ser dito ou mostrado.\n" +
+      "- referencias: links e referências. direitos: uso de imagem, exclusividade e tempo de uso. observacoes: o que não couber nas outras chaves.\n" +
+      "- tom_voz: lista com itens escolhidos entre Sério, Elegante, Formal, Jovem, Descontraído, Divertido (vazia se não der para saber).\n" +
+      "- posicionamento: lista com itens escolhidos entre Luxo, Acessibilidade, Sustentabilidade, Praticidade, Inovação, Tradição (vazia se não der para saber).\n" +
+      "- Textos curtos e objetivos, em português.\n\nBRIEFING:\n\"\"\"\n" + texto + "\n\"\"\"";
+    renderTriagem();
+    toast("Prompt pronto. Copie e cole no Claude.");
+  }
+
+  function tgAplicarResposta() {
+    var txt = tg.resposta || "", i = txt.indexOf("{"), j = txt.lastIndexOf("}"), o;
+    if (i < 0 || j <= i) { toast("Não encontrei o JSON na resposta. Cole a resposta inteira do Claude.", true); return; }
+    try { o = JSON.parse(txt.slice(i, j + 1)); } catch (e) { toast("O JSON veio com algum erro. Peça ao Claude para responder só com o JSON e cole de novo.", true); return; }
+    var n = 0, b = tg.f.briefing;
+    TG_BRIEF.forEach(function (c) {
+      var v = o[c[0]];
+      if (Array.isArray(v)) v = v.join("\n");
+      if (v == null || String(v).trim() === "") return;
+      b[c[0]] = String(v).trim(); n++;
+    });
+    if (o.marca && !tg.f.marca.trim()) { tg.f.marca = String(o.marca).trim(); n++; }
+    function juntar(destino, lista, permitidos) {
+      (Array.isArray(lista) ? lista : []).forEach(function (x) { if (permitidos.indexOf(x) >= 0 && destino.indexOf(x) < 0) { destino.push(x); n++; } });
+    }
+    juntar(tg.f.redesSociais.tomVoz, o.tom_voz, TG_TOM);
+    juntar(tg.f.perguntas.posicionamento, o.posicionamento, TG_POSIC);
+    tg.resposta = "";
+    renderTriagem();
+    toast(n ? n + " campos preenchidos. Confira e salve a ficha." : "Não achei nenhuma informação na resposta.", !n);
+  }
+
+  function tgLevar() {
+    var b = tg.f.briefing, n = 0;
+    [["publico", "perguntas.publico"], ["problemas", "perguntas.problemas"], ["mensagem", "interesses.conexao"]].forEach(function (m) {
+      if (String(b[m[0]] || "").trim() && !String(tgGet(m[1]) || "").trim()) { tgSet(m[1], b[m[0]].trim()); n++; }
+    });
+    toast(n ? "Levei " + n + (n === 1 ? " campo" : " campos") + " para a triagem." : "Nada para levar: os campos da triagem já têm texto, ou o briefing está vazio.", !n);
+  }
+
+  function tgCriarCampanha() {
+    var b = tg.f.briefing, v = String(b.valor || "").replace(/[^\d,.-]/g, "");
+    if (v.indexOf(",") >= 0) v = v.replace(/\./g, "").replace(",", ".");
+    var prazo = "", m = String(b.prazo || "").match(/(\d{4})-(\d{2})-(\d{2})/) || String(b.prazo || "").match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+    if (m) prazo = m[1].length === 4 ? m[0] : m[3] + "-" + dois(+m[2]) + "-" + dois(+m[1]);
+    formCampanha(null, {
+      campanha: (b.produto || tg.f.marca || "").trim(), cliente: tg.f.marca.trim(), tipo: "Publicidade", status: "Briefing",
+      qtd: parseInt(b.quantidade, 10) || 1, valor: parseFloat(v) || 0, prazo: prazo, pagamento: "pendente", ativa: true
     });
   }
 
@@ -2156,12 +2342,30 @@
     "cd-semear": function () { cdSemear(); },
     "cd-semana": function (el) { cd.inicio = cdIso(cdMs(cd.inicio) + (+el.dataset.v) * 7 * 86400000); cdDesenhar(); },
     "cd-hoje": function () { var h = hojeISO(); cd.inicio = cdIso(cdMs(h) - ((cdDow(h) + 6) % 7) * 86400000); cdDesenhar(); },
-    "tr-nova": function () { tg.f = tgVazio(); renderTriagem(); toast("Nova ficha em branco"); },
+    "tr-nova": function () { tgTrocarFicha(tgVazio()); renderTriagem(); toast("Nova ficha em branco"); },
+    "tr-vista": function (el) { tg.vista = el.dataset.v; renderTriagem(); },
+    "tr-prompt": function () { tgMontarPrompt(); },
+    "tr-prompt-copiar": function () {
+      var a = $("#tgPrompt"); if (!a) return;
+      function ok() { toast("Prompt copiado ✓ Agora é só colar no Claude."); }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(a.value).then(ok, function () { a.select(); document.execCommand("copy"); ok(); });
+      else { a.select(); document.execCommand("copy"); ok(); }
+    },
+    "tr-aplicar": function () { tgAplicarResposta(); },
+    "tr-levar": function () { tgLevar(); },
+    "tr-campanha": function () { tgCriarCampanha(); },
+    "tr-arquivo-abrir": function () {
+      var a = tg.f.briefing.arquivo; if (!a) return;
+      db.storage.from("briefings").createSignedUrl(a.path, 300).then(function (r) {
+        if (r.error || !r.data) toast("Não consegui abrir o arquivo agora.", true);
+        else window.open(r.data.signedUrl, "_blank", "noopener");
+      }, function () { toast("Não consegui abrir o arquivo agora.", true); });
+    },
     "tr-salvar": function () { tgSalvar(); },
     "tr-apagar": function () {
       var r = achar("fichas_triagem", tg.f.id); if (!r) return;
       confirmar("Apagar a ficha de “" + r.marca + "”? Não dá para desfazer.").then(function (s) {
-        if (s) apagar("fichas_triagem", r.id).then(function (ok) { if (ok) { tg.f = tgVazio(); toast("Ficha apagada"); renderTriagem(); } });
+        if (s) apagar("fichas_triagem", r.id).then(function (ok) { if (ok) { tgTrocarFicha(tgVazio()); toast("Ficha apagada"); renderTriagem(); } });
       });
     },
     "tr-chip": function (el) {
@@ -2236,6 +2440,7 @@
       else if (ao === "rt-busca") { rt.busca = t.value; rtDesenharLista(); }
       else if (ao === "roteiro-txt") { ck.roteiro = t.value; atualizarProgressoRevisao(); }
       else if (ao === "hist-tema") hi.tema = t.value;
+      else if (ao === "tr-resposta") tg.resposta = t.value;
       else if (ao === "tr-marca") { tg.f.marca = t.value; tgAtualizar(); }
       else if (ao === "tr-campo") { tgSet(t.dataset.path, t.value); tgAtualizar(); }
       else if (ao === "tr-link") { tgGet(t.dataset.path)[+t.dataset.i] = t.value; tgAtualizar(); }
@@ -2245,7 +2450,19 @@
       if (ao === "mk-sit") { mk.sit = t.value; desenharMarcas(); }
       else if (ao === "tr-abrir") {
         var fi = achar("fichas_triagem", t.value);
-        if (fi) { tg.f = tgDaFicha(fi); renderTriagem(); }
+        if (fi) { tgTrocarFicha(tgDaFicha(fi)); renderTriagem(); }
+      }
+      else if (ao === "tr-arquivo") {
+        var arq = t.files && t.files[0]; if (!arq) return;
+        if (arq.size > 10 * 1024 * 1024) { toast("Arquivo grande demais (máximo 10 MB).", true); t.value = ""; return; }
+        toast("Lendo o arquivo...");
+        tg.arq = arq;
+        tgLerArquivo(arq).then(function (texto) {
+          texto = String(texto || "").trim();
+          if (texto) { tg.f.briefing.texto = texto; toast("Arquivo lido. Agora monte o prompt."); }
+          else toast("Não achei texto no arquivo (pode ser um PDF escaneado). Cole o texto do briefing.", true);
+          renderTriagem();
+        }, function (e) { toast((e && e.message) || "Não consegui ler o arquivo.", true); renderTriagem(); });
       }
       else if (ao === "hist-marcar") {
         hi.marcadas[t.dataset.id] = t.checked;
