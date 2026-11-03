@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#FBF6EE">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&family=Poppins:ital,wght@0,400;0,500;0,600;1,500&family=Berkshire+Swash&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&family=Poppins:ital,wght@0,400;0,500;0,600;1,500&family=Berkshire+Swash&family=Pixelify+Sans:wght@600;700&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js');</script>
 <style>
 :root{
@@ -26,6 +26,7 @@
   --head:'Montserrat',system-ui,sans-serif;
   --body:'Poppins',system-ui,sans-serif;
   --boho:'Berkshire Swash',cursive; /* fonte com curvas e ligaturas, estilo boho, para o nome */
+  --y2k:'Pixelify Sans',system-ui,sans-serif; /* fonte pixel y2k para o logo */
   --nav-h:68px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -66,7 +67,7 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 /* Menu */
 .nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:100;background:rgba(251,246,238,.82);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid var(--glass-line)}
 .nav .wrap{height:100%;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.logo{font-family:var(--boho);font-weight:400;font-size:1.4rem;text-decoration:none;letter-spacing:.01em;color:var(--tinta)}
+.logo{font-family:var(--y2k);font-weight:700;font-size:1.5rem;text-decoration:none;letter-spacing:.04em;color:var(--tinta)}
 .logo span{color:var(--vinho)}
 .nav-links{display:flex;gap:6px;list-style:none;align-items:center}
 .nav-links a{display:block;padding:8px 14px;border-radius:999px;text-decoration:none;font-size:.9rem;font-weight:500;color:var(--muted);transition:color .2s,background .2s}
@@ -119,20 +120,13 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 .sign{font-family:var(--body);font-style:italic;font-weight:500;font-size:1.6rem;color:var(--vinho)}
 
 /* Destaques */
-.dest-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:24px;align-items:center}
-.dest-main{min-width:0}
-.mascote{width:100%;max-height:580px;object-fit:contain;display:block;pointer-events:none;filter:drop-shadow(0 18px 24px rgba(142,27,58,.22))}
+.dest-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:32px;margin-top:40px}
+.dest-item{width:300px;max-width:100%}
 .play{position:absolute;top:50%;left:50%;width:76px;height:76px;transform:translate(-50%,-50%);border-radius:50%;background:var(--amarelo);color:var(--tinta);display:grid;place-items:center;box-shadow:0 0 0 10px rgba(247,211,94,.35),0 10px 28px rgba(42,22,32,.3);transition:transform .25s}
-.dest-carousel{display:flex;align-items:center;justify-content:center;gap:10px}
-.dest-nav{flex:none;width:48px;height:48px;border-radius:50%;background:var(--creme);border:1.5px solid var(--vinho);color:var(--vinho);cursor:pointer;display:grid;place-items:center;transition:background .2s,color .2s}
-.dest-nav:hover{background:var(--vinho);color:var(--creme)}
-.dest-stage{position:relative;height:580px;width:100%;max-width:640px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.dest-slide{position:absolute;width:300px;max-width:84vw;height:533px;display:flex;flex-direction:column;overflow:hidden;border-radius:20px;border:2px solid var(--tinta);box-shadow:6px 6px 0 var(--tinta);background:var(--creme);transition:transform .45s ease,opacity .45s ease,filter .45s ease;transform:translateX(calc(var(--x,0) * 230px)) scale(1);opacity:1;filter:none;z-index:3}
-.dest-slide.is-side{transform:translateX(calc(var(--x,0) * 230px)) scale(.8);opacity:.4;filter:blur(1.5px);z-index:1;pointer-events:none}
-.dest-slide.is-hidden{opacity:0;pointer-events:none;z-index:0}
+.dest-slide{width:100%;height:533px;display:flex;flex-direction:column;overflow:hidden;border-radius:20px;border:2px solid var(--tinta);box-shadow:6px 6px 0 var(--tinta);background:var(--creme)}
 .dest-embed{flex:1;position:relative;background:#FCE4EF}
 .dest-embed iframe,.dest-embed blockquote{position:absolute!important;inset:0;width:100%!important;height:100%!important;max-width:none!important;min-width:0!important;margin:0!important;border:0}
-.dest-caption{text-align:center;max-width:460px;margin:22px auto 0}
+.dest-caption{text-align:center;margin:22px auto 0}
 .dest-num{display:block;font-family:var(--head);font-weight:900;font-size:clamp(2.2rem,4vw,3rem);color:var(--vinho);line-height:1}
 .dest-rot{display:inline-block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tinta);background:var(--amarelo);padding:3px 10px;border-radius:999px;font-weight:600;margin:10px 0 14px}
 .dest-caption h3{font-size:1.2rem;font-weight:700}
@@ -253,8 +247,6 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
 
 /* Responsivo */
 @media (max-width:980px){
-  .dest-wrap{grid-template-columns:1fr}
-  .mascote{max-width:240px;margin:0 auto}
   .dest-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}
   .serv-grid{grid-template-columns:repeat(2,1fr)}
   .metrics{grid-template-columns:repeat(2,1fr)}
@@ -385,7 +377,7 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
     </div>
   </div>
   <div class="wrap">
-    <img class="skills-img reveal" src="images/skills-completo.png" alt="Celular Nokia retrô com a mensagem 'Saiba mais sobre minhas habilidades'. Soft Skills: criatividade consistente, facilidade para comunicar de forma simples, atenção aos detalhes visuais, capacidade de criar conexão sem exageros. Hard Skills: edição de vídeo, direção criativa / estética visual, desenvolvimento de roteiros." width="1920" height="975" loading="lazy">
+    <img class="skills-img reveal" src="images/skills-completo.png" alt="Celular Nokia retrô com a mensagem 'Saiba mais sobre minhas habilidades'. Soft Skills: criatividade consistente, facilidade para comunicar de forma simples, atenção aos detalhes visuais, capacidade de criar conexão sem exageros. Hard Skills: edição de vídeo, direção criativa / estética visual, desenvolvimento de roteiros." width="1920" height="1080" loading="lazy">
   </div>
 </section>
 
@@ -394,22 +386,7 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
   <div class="wrap">
     <span class="eyebrow reveal">Conteúdos de destaque</span>
     <h2 class="sec-title reveal">Vídeos que <span class="hl">performaram</span></h2>
-    <p class="sec-sub reveal">Alterna sozinho a cada poucos segundos, ou use as setas. O vídeo toca aqui mesmo, sem sair do portfólio.</p>
-    <div class="dest-wrap">
-      <video class="mascote" src="images/mascote.webm" poster="images/mascote-poster.png" autoplay loop muted playsinline preload="auto" aria-hidden="true"></video>
-      <div class="dest-main">
-    <div class="dest-carousel reveal">
-      <button class="dest-nav" id="destPrev" type="button" aria-label="Conteúdo anterior">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-      </button>
-      <div class="dest-stage" id="destStage"></div>
-      <button class="dest-nav" id="destNext" type="button" aria-label="Próximo conteúdo">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-      </button>
-    </div>
-    <div class="dest-caption" id="destCaption"></div>
-    </div>
-    </div>
+    <div class="dest-row reveal" id="destStage"></div>
   </div>
 </section>
 
@@ -747,43 +724,19 @@ function carregarEmbedsDestaque() {
   }
 }
 $("#destStage").innerHTML = DESTAQUES.map((d, i) => `
-  <div class="dest-slide" data-i="${i}">
-    ${winBar}
-    <div class="dest-embed">${embedDestaque(d)}</div>
+  <div class="dest-item">
+    <div class="dest-slide" data-i="${i}">
+      ${winBar}
+      <div class="dest-embed">${embedDestaque(d)}</div>
+    </div>
+    <div class="dest-caption">
+      ${d.numero ? `<strong class="dest-num">${esc(d.numero)}</strong>` : ""}
+      ${d.rotulo ? `<span class="dest-rot">${esc(d.rotulo)}</span>` : ""}
+      <h3>${esc(d.titulo)}</h3>
+    </div>
   </div>`).join("");
 carregarEmbedsDestaque();
 
-let destIndex = 0, destTimer = null;
-function layoutDestaques() {
-  const slides = document.querySelectorAll("#destStage .dest-slide");
-  const n = slides.length;
-  slides.forEach((el, i) => {
-    let diff = i - destIndex;
-    if (diff > n / 2) diff -= n;
-    if (diff < -n / 2) diff += n;
-    el.style.setProperty("--x", diff);
-    el.classList.toggle("is-side", Math.abs(diff) === 1);
-    el.classList.toggle("is-hidden", Math.abs(diff) > 1);
-  });
-  const d = DESTAQUES[destIndex];
-  $("#destCaption").innerHTML = `
-    ${d.numero ? `<strong class="dest-num">${esc(d.numero)}</strong>` : ""}
-    ${d.rotulo ? `<span class="dest-rot">${esc(d.rotulo)}</span>` : ""}
-    <h3>${esc(d.titulo)}</h3>`;
-}
-function pararAutoplayDestaques() { if (destTimer) clearInterval(destTimer); destTimer = null; }
-function iniciarAutoplayDestaques() {
-  pararAutoplayDestaques();
-  if (reduzir) return;
-  destTimer = setInterval(() => { destIndex = (destIndex + 1) % DESTAQUES.length; layoutDestaques(); }, 5000);
-}
-$("#destPrev").addEventListener("click", () => { destIndex = (destIndex - 1 + DESTAQUES.length) % DESTAQUES.length; layoutDestaques(); iniciarAutoplayDestaques(); });
-$("#destNext").addEventListener("click", () => { destIndex = (destIndex + 1) % DESTAQUES.length; layoutDestaques(); iniciarAutoplayDestaques(); });
-const destCarousel = $(".dest-carousel");
-destCarousel.addEventListener("mouseenter", pararAutoplayDestaques);
-destCarousel.addEventListener("mouseleave", iniciarAutoplayDestaques);
-layoutDestaques();
-iniciarAutoplayDestaques();
 
 /* Trabalhos: um carrossel por nicho. Capa real do YouTube; clique troca a capa pelo player embutido. */
 const iconePlayPeq = '<span class="play" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>';
