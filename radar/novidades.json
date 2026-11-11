@@ -1,6 +1,474 @@
 {
- "atualizado_em": "2026-11-10T16:54:42.612Z",
+ "atualizado_em": "2026-11-11T16:59:35.863Z",
  "itens": [
+  {
+   "categoria": "Em alta no Brasil",
+   "titulo": "aneis do poder",
+   "link": "https://www1.folha.uol.com.br/ilustrada/2026/11/serie-de-o-senhor-do-aneis-retorna-e-busca-impacto-na-tv-sob-a-sombra-dos-filmes.shtml",
+   "fonte": "Folha de S.Paulo",
+   "pub": "2026-11-11T16:20:00.000Z",
+   "resumo": "200+ buscas · Série de 'O Senhor dos Anéis' retorna e busca impacto na TV sob a sombra dos filmes",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Em alta no Brasil",
+   "titulo": "aracaju",
+   "link": "https://g1.globo.com/se/sergipe/video/pre-caju-2026-trios-eletricos-comecam-a-chegar-na-orla-15176535.ghtml",
+   "fonte": "G1",
+   "pub": "2026-11-11T16:10:00.000Z",
+   "resumo": "200+ buscas · Pré-Caju 2026: trios elétricos começam a chegar na orla",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Em alta no Brasil",
+   "titulo": "karina milei",
+   "link": "https://es-us.noticias.yahoo.com/vuelos-afectados-ezeiza-despedida-papa-103624939.html",
+   "fonte": "Yahoo",
+   "pub": "2026-11-11T16:00:00.000Z",
+   "resumo": "200+ buscas · ¿Hay vuelos afectados en Ezeiza por la despedida del Papa hoy?",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Em alta no Brasil",
+   "titulo": "ary fontoura",
+   "link": "https://www.terra.com.br/diversao/ary-fontoura-vai-a-justica-cobrar-inquilina-apos-divida-de-aluguel-chegar-a-r-131-mil,3f834b34ea48f4af9d4a5a9e590ca261qvt2b6lv.html",
+   "fonte": "Terra",
+   "pub": "2026-11-11T16:00:00.000Z",
+   "resumo": "100+ buscas · Ary Fontoura vai à Justiça cobrar inquilina após dívida de aluguel chegar a R$ 131 mil",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Em alta no Brasil",
+   "titulo": "joão gomes",
+   "link": "https://revistaquem.globo.com/entretenimento/musica/noticia/2026/11/joao-gomes-rebate-criticas-sobre-estar-fantasiado-de-vaqueiro.ghtml",
+   "fonte": "Globo",
+   "pub": "2026-11-11T15:50:00.000Z",
+   "resumo": "2000+ buscas · João Gomes responde Tuca Andrada após comentário: 'Eu não preciso da amizade de famoso'",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Em alta no Brasil",
+   "titulo": "samsung s25 ultra black friday",
+   "link": "https://www.tudocelular.com/samsung/noticias/n266933/galaxy-s25-ultra-oferta-cupom-amazon-2.html",
+   "fonte": "TudoCelular.com",
+   "pub": "2026-11-11T15:50:00.000Z",
+   "resumo": "200+ buscas · Top de linha absoluto! Samsung Galaxy S25 Ultra fica mais barato com cupom na Amazon",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Em alta no Brasil",
+   "titulo": "felipe aranda",
+   "link": "https://revistaquem.globo.com/noticias/noticia/2026/11/karoline-lima-e-flagrada-de-maos-dadas.ghtml",
+   "fonte": "Globo",
+   "pub": "2026-11-11T15:40:00.000Z",
+   "resumo": "500+ buscas · Karoline Lima é vista de mãos dadas em Salvador, dias após fim de noivado com Léo Pereira",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Em alta no Brasil",
+   "titulo": "arnold vosloo",
+   "link": "https://www.omelete.com.br/filmes/a-mumia-4-arnold-vosloo-confirma-retorno-imhotep",
+   "fonte": "Omelete",
+   "pub": "2026-11-11T15:40:00.000Z",
+   "resumo": "200+ buscas · A Múmia 4 | Ator importante dos filmes originais confirma retorno",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Em alta no Brasil",
+   "titulo": "fallen",
+   "link": "https://www.dust2.com.br/noticias/79751/fallen-elege-os-dois-momentos-mais-importantes-de-sua-carreira",
+   "fonte": "Dust2",
+   "pub": "2026-11-11T15:20:00.000Z",
+   "resumo": "500+ buscas · FalleN elege os dois momentos mais importantes de sua carreira",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Em alta no Brasil",
+   "titulo": "taylor fritz",
+   "link": "https://tennishead.net/british-tennis-history-has-been-made-for-the-first-time-in-almost-50-years/",
+   "fonte": "Tennishead",
+   "pub": "2026-11-11T15:20:00.000Z",
+   "resumo": "500+ buscas · British tennis history has been made for the first time in almost 50 years",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Tecnologia e apps",
+   "titulo": "A febre da IA está criando outro problema: precisamos de toneladas de metal para alimentá-la com eletricidade",
+   "link": "https://news.google.com/rss/articles/CBMizwFBVV95cUxQWnhLZE9seUUxUktaejBLejZUZXBvN05TZ2J5UzhMcVdaRlRhRFRWSFloYWpaa1pXREZmZFZfUmtveVFKcVRQUFZ5UmN5bTYxSGJ0THdYUXRtZFFFNWdzLXhOa0ZlaDZJRUp1Z2ZrUmhLUkFEUXVIUlZhR1o2alBJWGJqbEcxSE9jZjJPaldhSjF3eXcwMWhYS0FRdWtncWdvNGJVaVFCQ19IT2FIQjBGVmIyY0lVNFluMFphTDFsSVBnS1hkSjVJaTBPRDVxX0U?oc=5",
+   "fonte": "Xataka Brasil",
+   "pub": "2026-11-11T15:01:51.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Tecnologia e apps",
+   "titulo": "Mais de 35 mil apps feitos com Grok ficam abertos e senhas expostas",
+   "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNaUdRWjdVaDVZM2luaUxMaFR5S1oxMjJ5Nm9DT2hzdG9kSVF2ZGxVekZYbDEtREVydXVhbFhXblJVaFBuLXlEWHNlUE94a3JYWDFOU25oVGRXMTQxeFdib2N4ZmdQQTZjd1I1ZXBNSm83d1lNMEpwX2EzNUlZSm9fV3RWU2RQVGpXTFRJYVJIN3B4b0RvYnlrZjQtNHVfTFdyWXNjWmxfbWVJTHVBUEpWMmhFNDY3Q24tQ3J2dGkxZTItNWM4VC13UmJR?oc=5",
+   "fonte": "UOL",
+   "pub": "2026-11-11T14:00:37.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Instagram",
+   "titulo": "Instagram usa inteligência artificial para detectar idade real de jovens",
+   "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQZk9oR2pUdHpPMHdOTmgtOHJiT0ppcGptVUFXaEIzWkJ4d0FURHNsWXNEUnotYVFmZlBLR09IWUNiRWh4aWtuWGxPWUlLZjFrVFI1X21XaDd4bmhnekZkOVJGaElqYlg5S0VNRVF3UW9EUHVPMG9wR1dKM0dLRl8zeW93dXRsYm9ETmpLeEIyNzlyMFNyT0pqM1hjb3hPQWI4bnhTc1FIR2hGVlBSN2JVNUd3?oc=5",
+   "fonte": "Agora Litoral",
+   "pub": "2026-11-11T13:48:25.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Beleza e skincare",
+   "titulo": "Gabriela Bahia lança O’HRA e estreia no mercado de suplementos de beleza e bem-estar",
+   "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPbVh3REdid2x6V2h2X0V5T2RIX3ljaEZqcDl1WGhrMGtDLTRlZVZTM2lXNFhweEhGTW44TnlxQW9ZWVBHVEwxTzVfTTMzQ3VrLW9NV2s0VVFycnEtYTZFSkxrSDZNY0doRDhqMndXU01fX1NJV0dlZFA3ODhMOTcyenhFa0V4WmpYeVNMOENBcE9TRjVJMi0zeUlSUmpQN0dLcE5MSEw2V2ViQ3I1eE15ZnJOUjV1dEQtVzZkQ0o0ZkpNZ9IBxwFBVV95cUxOWDFyV1NRVTZKN3ZHTjl4WW5paUFDWTVyeWdHVW1UMnVnY0x0MER1WkpUY0xDUGIyMElUZmZfRXdkb0R2QWxsZG40bnp2SFJOQVI0RDNTUFkxSml3WU5aSkRjU0NlU3IxMDJYUi1BeEVHdlpLZmxmUmYySFg0eVZybHpMVi1ReEN5THhmbDc3cmE1d0tmU2V0a2dkTkthMnQxaHplN0ZHM1dPaV9hOHkyNS0tTTZDRjRCOXRTbGQ1dVRhclBIbFRZ?oc=5",
+   "fonte": "UOL",
+   "pub": "2026-11-11T13:03:10.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Tecnologia e apps",
+   "titulo": "Orkut quer voltar com ajuda da inteligência artificial para resgatar o lado humano da internet",
+   "link": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQbWtXWFJoMEpETG1TS0Ytb3I0dDFsNG4takpMWUVaQnNtc1dMWUtIcG13NXZuTFFLNVBUd25SRDJFZmpKZ0lSVmRUdDFaakRja3Y3dEtlYVNhS004N25vUUVSUUpiNTFsRnZaLTYzb2V6TUlKdjVQVi10cm1vVVVYV1lsOG5VRWFvX29IVkZxXy1sUXFCZTNraXZNa2VkdHJzeVRINUVzb2ptUVFfYWk2U3NIanJmYm9MTF9Qa29ySUUwTF9fZFFqQlFCX0I?oc=5",
+   "fonte": "Google Discovery",
+   "pub": "2026-11-11T12:59:34.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Casa e achadinhos",
+   "titulo": "Cupom Shopee libera R$ 15 OFF em Moda e Vestuário no festival 11.11",
+   "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPUUkxNkI5dHBPVnRXNS1oWjBhenUzd1hTejB3V2p6SEZkcVAzZHVxMHphUXFjdTRZQ3VnV0FZRGR3Um1TelRxQkcyeGZHZ3ZrM2lyNjNidmwyX0xXREg4TmlxbHBXYkE2cVFhb3FEQURBa0tMVXZhandCOXdQY0ZEOVlOVWV1enln?oc=5",
+   "fonte": "Seletronic",
+   "pub": "2026-11-11T12:18:48.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Instagram",
+   "titulo": "UEMS divulga lista preliminar de inscritos no Vestibular 2027",
+   "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOQ3NQTlJZZVFYemFfdThDLXFFMUtYVzhDNXZlNnNoYjNkdjFYazE1dEM3QnYyakRkazduSmZ1XzJZYVZzUUgwR2VjYUdobTRoV1Q4TVg3ekl5cktQb1NjNGZuN1JXN0RWSktzTHRTb1JTMk1pRXBrY05kSFptc1Y5UG9IMEhWUEYzV0VBMTBSZ2VpYmZnS2VUd0Q0T00wNmhWWTJ2UURqS2lXclEwZ0VRLXdn?oc=5",
+   "fonte": "Midiamax",
+   "pub": "2026-11-11T12:04:00.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Casa e achadinhos",
+   "titulo": "Cupom Shopee libera R$ 20 OFF em compras acima de R$ 60 no festival 11.11",
+   "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPMnA4UGRvNXNSM1ozd1BzWUc3b204ZHFUOFo3SlNyX0NIYmtUQjFRYnRleV9JZmdNYzhWWEtTRE5hNXkwTTNHNjd6WXUzaWRva0pKbmFveXFlSk1SN0ExaDVUdVlXeHJTWWtfQW1uRFVVWHRCQnBJRjFUN3N5Y2xEQk1WSQ?oc=5",
+   "fonte": "Seletronic",
+   "pub": "2026-11-11T12:01:45.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Instagram",
+   "titulo": "As startups de recursos humanos brasileiras (HRTechs) captaram R$ 334 milhões com fundos de capital de risco entre janeiro e outubro, superando os R$ 272 milhões de todo o ano passado, mostra levantamento da Liga Ventures. Apesar da recuperação,",
+   "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE80c0JESXJmQ1VwRkgtMng1eDgzTDNWbVFoUHlqSjdPaHRwdms1QmdVc2NrUE1XNDQzMFY1LXFPbHE0MmZoTWtXelB2bDdHSUpYTkE?oc=5",
+   "fonte": "Instagram",
+   "pub": "2026-11-11T11:46:41.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "TikTok",
+   "titulo": "Tendência \"misturinha\" no TikTok: combinação de óleo capilar e máscara promove ultranutrição aos fios",
+   "link": "https://news.google.com/rss/articles/CBMikAJBVV95cUxNbkZuYnNaS1F5TllyZUNpTDkwb2dwVnBaZUdUOVpPUkhfV0NNVUIwMXlINGRfS2hZSGdPVkVSU2FnUFpOU3VaUktGR0EybUR3UGZEU0NON2hiQVQ5eE15bGQ4T3M3M3pQanJlTTM1Vl9naUY2WWJyRUZHVC1ITVJMM08zUkNwYUR2WS1zT0ZRZ1RqR0FuOWRLRl9vU1NIMENleE9seDBKSlpjTi1XNVQ0b09VQW5TS0c2VWgta0o3MmkwVWdBMTY4Wk1pZUF4UU9HRWFSUVZiOHR5VExJVVVWV3Vjd1hhMFExclZSV1FsbHJBaUpTajhscFNVbDQwYnhrTFY1OEllVGtmbm45ZWRCSQ?oc=5",
+   "fonte": "GZH",
+   "pub": "2026-11-11T11:21:13.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Tecnologia e apps",
+   "titulo": "SIMMARK inicia fase beta com 70 marcas cadastradas e planeja uso de inteligência artificial para marketing de influência",
+   "link": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxPNDJTdUZoUmpOWFc1YnlLcGt2WGx5dm9PcUFSTEszaU00d2dqeDFPbk5DN2hyeUxFV2w5U1dTeTBBV21vUEJCalVmWDdpRUp6Y2xodTdiMGE1cEYxbzA4YmtRQWtpM3hSVjJmbXlnVGxUMHBXaHJJM3lzNWVrWmJYQ1VKMGRTWUVSaFY1c0NUakoycTcwZm5ZdXYtaWZCRU9Cek54d0loaThYakozU0FDdEdtVUl5Y2VqemlPVklBNVlQUnNWVnNCS2kzbzZjbWo1NThaUG0xNHNZOGIwVlE?oc=5",
+   "fonte": "Startupi",
+   "pub": "2026-11-11T06:55:00.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Tecnologia e apps",
+   "titulo": "Disney e Adobe fecham parceria para criar modelos próprios de IA",
+   "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPVl9pY3k4Ui0ybUl2em5jSmRqMDh3YlZ1UHl1UG9yeXFlSEN1cHdWU2U4RUJaRmFmdG8wQlVnTkVwVnJJeGEzaEkyT0E4SWZDMDhiWmxqSk95aE5iRUJhVTNlcHJpUVdJeDg1Q3VXZFVDQlBIenpPYUNsMmRqdGVLenZ4eUFiRDIxYldOX29pWGNvUjZZWTA3NVJZakh3UVV4Vk8zVkhKNA?oc=5",
+   "fonte": "Agora Litoral",
+   "pub": "2026-11-11T05:02:43.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "TikTok",
+   "titulo": "Unhas de geleia: entenda por que as jelly nails são a grande tendência do verão",
+   "link": "https://news.google.com/rss/articles/CBMi9gFBVV95cUxQSTR5a3VhUExXQlJndUxHeUk5cjFLeE5QOVZKM3lBWHdKWWFKanpNRlZ5cGpMNXNkV05admxvSGM1Z2lIQTd6ME1FdWducHVjelNYUjNyTzV6b242UWx5a1RYRVZvSFhaZGVhaUVfb1pReFFhMUZjM0dNOEFHS0o1QXd0eTFxSThjbmhtcGVKb3hXcTJDdzNDdUJIZHlwc3VVTU9lM2F0dkxtVzRwbmctY0c3RXNGQldlU01WWEFDNmhmcnlYcWlxdzRKcnc3SEpMMHNuSDBrY2NrRmJMcEdnMTFqNmk4NVhSSS1pLS1UckM4UTNsN1E?oc=5",
+   "fonte": "Terra",
+   "pub": "2026-11-11T01:27:00.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Instagram",
+   "titulo": "Google libera Gemini 4 Carbon ao público com recurso para equipes de agentes de IA",
+   "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOX1J2UENQSXlpdnNJUjNsUExHaWtxTnp3N05oVnhxUWJHYTJJYk9GVFBydC1TZXJ1RkRXVDNqTHE3TFZQTXVOVjJMREo5TUVCcHNDdTFaMFZ1YmhJRER4Nkh4MDg3N1lKb2I2eHA1NkVPa3J0c0VQeVM2Z05CQTRwbUdsWHFDaHBtQ2FPOGs3NlhIQjd6MUVLbFFKWHJMdjA4N2xULWRlWFdFa3JuZlFISS04Vjg?oc=5",
+   "fonte": "Tecnoblog",
+   "pub": "2026-11-11T01:20:00.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Casa e achadinhos",
+   "titulo": "100% OFF na Shopee! Novo cupom relâmpago garante até R$ 60 de desconto nesta noite de 11.11",
+   "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE4tLThpMDhhRUpCM2M3V1U0a3hPaTdGa3Y4RnBCanV2RThCcUtRWnhxQmtPTFBGM2VqX2Q1REIyVWJlWDRBSklNUl9iRzIwU2dqeDFTdjVsbFpNUDZuZ2lYT29PZUdaMlVsbDVSek1aLXF2VFRXejl4RFRCWQ?oc=5",
+   "fonte": "Seletronic",
+   "pub": "2026-11-10T23:44:59.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Instagram",
+   "titulo": "Apple TV 4K: Novo recurso do Siri Remote requer iPhone 17 ou posterior",
+   "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNS1N0VDZieXdaSWRFaFM3V2pkZ050WjJ4ajRtTzdINmNTTFJTWHlRUjk3Nnh3aHc1Qzc1VGpieHBxc0hOcTgwQWhqUGxHRHhZYXB4eF9YQ3BVejVqdENKQl9iVkR5YVhYSXQyRktiNFRCSVotN25CYVNpaWt3RUpTZUV3YmY2OVFLcUFmR0FCTDRmUnVDZ0lUYU5uUjVhTV9oOTlHNlJ5YWdQRkVBSmZTaXNuamQ2dw?oc=5",
+   "fonte": "Notebookcheck.info",
+   "pub": "2026-11-10T23:36:00.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "TikTok",
+   "titulo": "Trend do perfume leva “Flash”, de Hugo & Guilherme, ao Top 3 do Spotify Brasil",
+   "link": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNZWVJcXhKSUJYMVBpRW9FSEdFdDhhYVVmdno4aklFYmdUYlgtOWl5TnVRX0NSNzBiLXRNdlRaT051YVhCblIybUh5VDEycEVEV3BMUGdFSXpjUWNjc0k1MUFwa3NJakVMVEM1bXI2TEM5b2RvV25xT3U4XzQybWNoM203aURjLW1Ba1RPOXF6VlBKZVA1S21UV0pqYUVEOVhRV1FPQlphZS1aLTl5bjRHNTdHY2hJMTRxbEZhbGxBUlVZLU9IMWc?oc=5",
+   "fonte": "Jornal Noroeste",
+   "pub": "2026-11-10T23:35:00.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Casa e achadinhos",
+   "titulo": "Cupom Shopee garante 100% de cashback na Shopee Live nesta noite de 11.11",
+   "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPNnNsaWNkSFNFLXpWZEVPRGF6WFh5MjZhVFhMUTZPS1ZaWkdkUHlZQWpOOWFlbGFxbHoyVnFRQS1Ic0UtV2NtRXhadjVwNUdMZGRjcUh3OFUzTkZpR1dyV0JJTjByUFFoY0FiR3ZuZ080NnVhTlVyMkUwNG90T1FmTGpLbnJYSlhQ?oc=5",
+   "fonte": "Seletronic",
+   "pub": "2026-11-10T22:51:08.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "TikTok",
+   "titulo": "Paulistão sorteia os confrontos da edição 2027; veja como ficou",
+   "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNTkxnb1AyMUM3Z0liZTlsVXl3RU44RTlCYmFYMXkzUlltYS1IZENvUENiWXdleFlkVDVOMzRXMC1HZTlpTHZJcmhGUEpkcE1yNVJMT2ZFU245U1MxX2huUWN1bkIzWUFmYUI1Q3BybnFmVW1VNm0tMzBwZ3FDTzlGZ21vUTY1alNQaEhpOGUtS3lLaVZKQmZOdjYxRjV0Y1Z1SF9GcFNTS0c4QzlfNzFkWg?oc=5",
+   "fonte": "Diário da Amazônia",
+   "pub": "2026-11-10T22:50:00.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "TikTok",
+   "titulo": "TikTok Awards 2026: conheça os indicados e saiba tudo sobre a premiação",
+   "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOSDhBX21ZcXdqankwZWNHM0k3SFlUQXZLRVNuZGkzWTZpV2o0NnRsVUlLSm1jY3VuNTQ1cHVrcHJLSEZxUE41YmhRaTF5X21aYmdtSmJiZFBEcWRJWlFwMVQ2UDhCczF6a3UtODNZNXZiWjA2eVBwai1MaEFQcFhfSFU5c1NVMmViLVlpbTc4TGRFdkNhV045NXM1OW5BdjBxV1N5WmI5LXloWjdJZlFndmJSdlU?oc=5",
+   "fonte": "Rádio Itatiaia",
+   "pub": "2026-11-10T22:17:06.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Casa e achadinhos",
+   "titulo": "Cupom Shopee garante 50% de cashback em moedas com até R$ 15 de volta nesta noite",
+   "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTFB2RmNLQW5nQTU4VzBKV3p1OFBscnFqTEhNS3FuSVlGSHhkSkwwSDEzbjNiZjIxajFMQnBMaFNGSTNXZW81ODBHRkhqZzlfOUE2aUF1b3c2aUN2VFJyV3J5TVpMLWktQ2hwRDh6M3Z2LUVyR25PcXNRVkFoTzRTVlU?oc=5",
+   "fonte": "Seletronic",
+   "pub": "2026-11-10T22:02:53.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Beleza e skincare",
+   "titulo": "Em sintonia com a “newstalgia”, Avon atende fãs e traz de volta o lendário perfume em formato de boca",
+   "link": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxOSWJPc3MxcC1mZmd2dWhtSDNCTnpxcXRwWkl4TFBpYmZ0MXUwSlNHQ0wzMGlXaXZwNFBEUjhVbjRhaHpQWEJXR25WeTA0LUhlZlVvS2ZMd1g3dWNyMGNDUnNpUUNlN3A0WTE3YldEZk5fZE9CSnVNLTNFS2t1eDZyZUJDcEZKdHNVYzFqekRicVJoMFYwWlRHblFhYXA2MzZnRkYxcjZfUTlMZXh2bzdteDhIajRjWXNJd3g4c0xSeDNlRHVRdUFuWWtvU3dKeWY2ZWExWHJrUjV5dw?oc=5",
+   "fonte": "al1.com.br",
+   "pub": "2026-11-10T20:37:40.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "TikTok",
+   "titulo": "Será que o relacionamento tem futuro? Conheça a regra 3-6-9",
+   "link": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxNcXltcmp0T2dVRnE1dmtUM2ZmbXdSdkhTRnlkT2VvenQ4eXQ5UkNrcmtBNzJDX20xZ3FLV1Ntc1ZVTS1vWFRUZS1DNWh4dFNWcEVneTZtOFNrOXg0Y2U4S3cxbVpsOEdyQlFrbmpCUnJNa1ZTV0FSS2xfTFN3TFFqOW5VUXh5TGJ2T0RROGpkbHpTTGotUGJUeU9UR3ZBbl9tSXFXSzR2eWh6ZGdmbzJsWFl2Y0RodHFaeWdBNXh0a3BoM3VBLXBweHI4NUEyZkFNMlBhWWgyeXBXVDNicC1Nd052akVtQnZnUUVKVHJR?oc=5",
+   "fonte": "Terra",
+   "pub": "2026-11-10T20:09:00.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "TikTok",
+   "titulo": "Palmolive aposta em TV, influenciadores e TikTok Shop para lançamento de novo sabonete líquido Smoothie no…",
+   "link": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxQMFdCUkJyS3NpX0ZOSEJqUmg0blYycUljQ0U1MjhpSUJfc2oyQ0VCQzV2MFZzTVhIN1RqejV5VUZfMjFkdmRfX3NyNmNpSzFycDZjVmxTSndlVE9QaDRYNXJia0JxWm1tTmRLUWl6OGNKdkozLUlZQnRYTndDX29xRTZHamZEN1BhVm5ackNNQ0pWcjVQVkNrVHcyR1MwZmkxeXFsdmdhaDEtd3NYRS1Pa2l1Qkh5SWwtUHZDcllyQnI5NWlnREZyMXJiN3FhcFpndTJIMGNxbEdWTk1lWE9ZWF83ODJxd0F5RlFjZ3JVM1RoREYyZFNXbnVn?oc=5",
+   "fonte": "Sala da Notícia",
+   "pub": "2026-11-10T19:50:10.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Instagram",
+   "titulo": "O golfe tem um novo padrinho: o algoritmo",
+   "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE0wZWU5VmlHQmp1cU9Hb083ZFVzc25aZm1ERldiSjZIa2pPVV83d1I3bTNJWU45NEkzVVFyQkRKWUFXYUhkTFFLRDFzQnFyNWczNEVBeGtUZVRhaWljbVcxaDBWUWpJUEhWNWlScGcwQXhCYkc1?oc=5",
+   "fonte": "Exame",
+   "pub": "2026-11-10T19:16:08.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Tecnologia e apps",
+   "titulo": "Adobe anuncia novos agentes de IA e ferramentas para Firefly, Creative Cloud e GenStudio",
+   "link": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxOTExCOUhpNTVtV1N1cDVfR2NIQ2hETWZMdDJ5aU1kalNGdHB6a3p4TVI0YVRjQ25VOWlodnlaemx4c28tZjdxTTJXUHpWOE9nd2xrQm9MQXNPUEcyaU9MbVNOeWlkMDNSdEtUb3V1N3A0dzZqTDRXZGxFVko1RDEyQWdaT0NuTnBYNHpZeG9aX0daUFhHaDZyLXBwOXRIdWVMWnVEamVBekw1U3p2QUdfREJnR1NiaEhpYkc3VHBGeXNJRFFjSERLM05lN3NDNmRiWG9pM0IxUFZ6dXdmSXVFWGhldldqWlJCNlhJMVV3?oc=5",
+   "fonte": "Times Brasil | CNBC",
+   "pub": "2026-11-10T19:13:00.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Casa e achadinhos",
+   "titulo": "Evento gratuito reunirá especialistas do Mercado Livre, Shopee e Shein em Osasco",
+   "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQTlgzMXp4TU1QOWFqTXBPVHI1YXNYLUNPQlczdEhiX1c5LWY0azB4SVN4QVlhTElJcnFuSzRpVUwyYjZRN1ZmcEFhWHJSZ1UwbWNSQkFwaXcwbkxZNDcxcHJ6XzNCODRsYTAxd1E1cmZ4T1VncEtiTlBKX0NwX1VpYjdLVHVfYm9zYnZVQU52bUc2N3R5YzV2TUM2QWN5T09DYzluNFlMQ25qUdIBrwFBVV95cUxQdnJaRUZ3M2VuczUyX1RRc1RqUjBSZkEtS3MzVm51Q0lSd24tTTdkbVZfUGZ2VGs4QlZlTVpGT2NJeUZ3YWpYeWxpRk1QWi0tSEJ4VU5ka2R5TXVEVXNVN1J6OWNkTjRQeFZjZVJHbktIQTlERFFyanRFS0tOb3dvLXljZmNrS28zTF85eWE1UmpyN1BZVENtNjkzdjZGN09JVDhaTUdyejRyOWp3endB?oc=5",
+   "fonte": "Visão Oeste",
+   "pub": "2026-11-10T18:32:01.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Tecnologia e apps",
+   "titulo": "Inteligência artificial Transforma lança IA para guiar criadores e produtores da criação ao negócio",
+   "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOcS1rVmFmX0lQUjhXN0hjUU8wZVltYkIxeE5LWDlJWVFoRHRCVlRNdGMtOVdCU1NfOEF3MThIRHJxMFdsaDRDWGs4WU50UlVHaXVVTFNRMFhtSTdfTDd1QnVqTTk3ZUVkN3pFN2UtWXJUZGxpYlVOTFhfWW80VHRCTTVBeHR3eWFHeUQ5VF9fbXNSN3NRTmk0RTdNZ29SZ0tNeHd0amN1NG9YOEJYcjhnejBTSGtjOFBjNk5QZG8tSzBua0sw?oc=5",
+   "fonte": "Portal Exibidor -",
+   "pub": "2026-11-10T18:29:31.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Instagram",
+   "titulo": "Instagram está compartilhando localização do seu iPhone? Confira",
+   "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPeGdweXRvQzQtSTlaYjZiQXlXTVM2bThBRVp5QnpKM0lMZW5pQVZvYW5YYjJGbFZPcXpSMVhjaGtjdFN4T1JFNlVmZy1XQjNmdG1kaWt3clR1LVYyOURCZEszZ3AxZHNteElKWUg1cnhzRHZ5WGYtemMzbzJuT1lxdV85RWJ2SmlzcENSMGRzdUFFdlFMRTZneThBdnRpWk9YXzlNNE8zZEnSAa4BQVVfeXFMT25UUkxsNU44T2VaQ0dReWpDNGMzTEpCQWJwYk9tbU5xcklDSXhUSE5mTEhEVk0tM0pKUEV3QnpKbnZ3Q2xmSnY0ZmlnbXFkVzFnQmM4V3p2YmsyUzdxT3VuS0tUbVp5SWwzMTRaSEVORm90b0k1cUpjN0VqcDN1aTVSWlJFV2tRaFphdkpxVTlzd3c3MHJKejNfYmV0N080bE9zQU9jVUpNd1BnXzh3?oc=5",
+   "fonte": "Estadão",
+   "pub": "2026-11-10T17:44:54.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Criadores e UGC",
+   "titulo": "Governo pede queda de 348 perfis de influenciadores por divulgarem bets ilegais",
+   "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPZWVIOElnVnpINDZMRE1Lc1pmSHI5OFBBM05CeVBYUHZkYWc4SDBrOG5JLVhaa0c3ckg5WTlkNWhHN09XNUY4MUdhUUR1RGREdzFTWXI3djE2OTI2azR2ZEdqbkw2anlyekhrUmdjcThwcmRpRXI1RWdKaG01RnM3a2xMbmhoYzUwMUxFZ252WQ?oc=5",
+   "fonte": "Alma Preta Jornalismo",
+   "pub": "2026-11-10T17:15:44.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "TikTok",
+   "titulo": "Prática viral nas redes sociais incentiva jovens a martelar o próprio rosto para mudar aparência; veja os riscos",
+   "link": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxNNkxQODNvTjV0U29WZlR0ZTlxbXN3bk5LX2xxUWFBa2owS0dDeTZwUEJxNUxMV0N5V0l5QWd0eGppUnlfUkdqRmE3VDEwRm5GUWRNLUplbHRJcmh1enlvcFhUTlhBNncyVGxsQlpCSHpSTzFzajJQZ2VMRTdLT2RMNzBSZDVpOURmVnhMc1A3TFZPOWo4Vk1haUduZXpUNVZJWGxFUWQ2cENGZzVIR1ZMMWE5RWtMNFFsX1pLMXRkTUI1dnZHQWRSVE0wVmNRYTk4bFhrQWNJZ2tpcFRjUWFKaFpwZTYtaU9kWGh3OURSRks4QQ?oc=5",
+   "fonte": "Francês News",
+   "pub": "2026-11-10T17:15:00.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Casa e achadinhos",
+   "titulo": "Cupom Shopee garante 50% de cashback em moedas com até R$ 10 de volta nesta terça",
+   "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOUWZycHBsOVg3QTlDM0FRdF9kOFNYRHI4M01nSXRFOG9SUTZrbGVmS3ZqVnpZeHIzM0lJdVNoWkZuVW1vczltWERVQTRFSGZyLVFKTWNPVGIzZkg3dFZ4WjByMnNGMHAxM1ZiUG1BTDlmWmhkQkp3alc1Z2RXNGIxTQ?oc=5",
+   "fonte": "Seletronic",
+   "pub": "2026-11-10T17:14:07.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Beleza e skincare",
+   "titulo": "SHEGLAM lança coleção Wizards’ Vault de Harry Potter com maquiagens inspiradas em Hogwarts",
+   "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9ya1BYT2lfay1RQlBGOW01RjFxSlRaNTdUZmJhdVV3T1M4RTQ5WXVRbElqQVotc090VlpKY2RPQ0xLcWFxb0d2SXZHZmFROWdOWktqcVBHWjEwSGhwbnhuZFluZVNNQ2gtZURKREQ0QkNFajRpQ1FN?oc=5",
+   "fonte": "Portal G",
+   "pub": "2026-11-10T16:55:11.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "TikTok",
+   "titulo": "Bambi print: conheça a estampa que promete renovar o animal print",
+   "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBlQjlnUlpnMHcwZS1uREJicmNwYUVVN3Mwa1NRYjBNLXBwQW5YMFMyMW9OSTAxdE5kVmp5TW0xSFVnWjJqZ2VCZFlLcW53NFpILTJlR3FqdnlXdXNobml4a19FbUVXNkgzcmlLcGpaMVRsc2RkY3c?oc=5",
+   "fonte": "GPS Brasília",
+   "pub": "2026-11-10T15:40:07.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "TikTok",
+   "titulo": "“Ler junto é muito mais divertido”: amigas fundam Clube do Livro na Capital, inspiradas no TikTok",
+   "link": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQdmdXOTY3ZEVfdE03azdzRmdlbHVPWFFJYVBPYmt6Zjk0SWJlWERuWHlUUmkzWlpEcDRBQkNZMnIzSjA5M3BsX0N1dDJ0MHprTGkwYWxoRk9Jd3lsS2ZpUEk3UUVFZ1ZpWTRyb0lFWUtzeU90bk0yN2dRNzhCR1E5QjFpTW5ZQm5wR1NXT1NyeTlYc2NTamk5SWdOV1RCUmtXekItVFJiNVRGYUVGNWFqSXhTc3RvdG4yZHRoTEU5TVJTYzREanJ2UUVCaTBqMFN4M0E?oc=5",
+   "fonte": "O Estado Online",
+   "pub": "2026-11-10T15:15:00.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Tecnologia e apps",
+   "titulo": "IA ajuda pecuarista a escolher touros e planejar acasalamentos na raça Brangus",
+   "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQUVVhbzh0UUZQVkMxV20xd01sZXNEdWhLdWN6cXJkMW9ncmliZUR2bi1PVjdsb3NxVDBTRHdLS2ZObEh1SWdTZ21aSVJrdVpMMVFVTndiRzNwdG9ZOUFlZ2lyQWZBaEI4VTFzczhTVndrVjdkTXprMEQ2VWFKNURaekprQllVcDB0dVgycGtSVVJEQnRUWTJfbUZ2a0pRUXpKeGNKM0pCTXNSSUF4TldrbWk2YndoenFvcXhtOW9RMDdKdw?oc=5",
+   "fonte": "Giro do Boi - Canal Rural",
+   "pub": "2026-11-10T14:00:00.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Beleza e skincare",
+   "titulo": "TOP Beauty lança dupla com jojoba para cuidar das unhas e das cutículas",
+   "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPaS1aV29OakpIa3JESlhWVXptWml6d3BDTUU1SS1BdkFSSFpvMUtzeDBZSWtEN1h1OEtmM3J6a3ZfVEtLOXp1aDQ4S2NRQUxOa0RNTkZZM2pnYnhrSFFZZUNtNGRiR3Q4amRsME5JUDg0eW5jN2ViSzFzQ01zVXVFX1ZCNFFoVDdFaEgtVzVzVjB3V2s4Mk1md1JtNDJWbnhpbVF5Wko0bk5pUmVqN0pFUllEZ0jSAbQBQVVfeXFMT2ktWldvTmpKSGtyREpYVlV6bVppendwQ01FNUktQXZBUkhabzFLc3gwWUlrRDdYdThLZjNyemt2X1RLSzl6dWg0OEtjUUFMTmtETU5GWTNqZ2J4a0hRWWVDbTRkYkd0OGpkbDBOSVA4NHluYzdlYksxc0NNc1V1RV9WQjRRaFQ3RWhILVc1c1Ywd1drODJNZndSbTQyVm54aW1ReVpKNG5OaVJlajdKRVJZRGdI?oc=5",
+   "fonte": "TodaTeen",
+   "pub": "2026-11-10T13:20:00.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Beleza e skincare",
+   "titulo": "Palmolive aposta em TV, influenciadores e TikTok Shop para lançamento de novo sabonete líquido Smoothie no…",
+   "link": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxQX29EakxPMmJOUllLRmw3SWtsRGFQMXVtSHFhMHpfaTJFckdMMkFHMmpoZEUteDRfNVRiX2JjQVN4QklBSHFONWRWeHNUOWgxWGhUM2tVdUxUVkMzdDV6NUhWSk5QOXVrM09OcEZyLWJpUjhiWFJGYWdYSFZhN3lyNXg0VHV2RGliZ3ZjbU12QWotSVUzNlR1TnNpWWw3T2dRS3U2Z2JtaE1CS0poRHlKcUZETTQyOVdzYmc1RDhheFJ2eXFhZExZQ2Y1YXJ3Z3Q2dHdIMmVCb3pSUU1oaU5wbkJYSURMcUY0WVRmeV93?oc=5",
+   "fonte": "Gazeta da Semana",
+   "pub": "2026-11-10T11:13:55.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Beleza e skincare",
+   "titulo": "Avon e Beats lançam gloss Pink Lemonade em collab para o verão",
+   "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOOWVvVFowQXZXXzNnUWhTdXdscnpUR1dack1qMTVtSkJWc2M4dHRrTU01YUFPMkl1b1JoT2djZW1yQW5xS0p0TUdzaEpmSWNWck9oNGNjeThiajBUWG01c09uR2JFcm5GV0dMRWFrb0RwZi0xMHB2MXc2U2xhMHdwT0gwWGt1THY0SWFyZDZoX05PMjJlWG1rQm1mc0VrWlpLcy1STkNQQS1CTXEyclZrbg?oc=5",
+   "fonte": "Tribuna da Bahia",
+   "pub": "2026-11-10T09:01:00.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Instagram",
+   "titulo": "Instagram usa IA para descobrir adolescentes que mentem sobre a idade; saiba como",
+   "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQX1EzanJCcElPWjZ2bGlvbUJkTlV1WVhPUWFMSzhmSWhyTkRiWmN6azJDVmw5bjVNZDBRNlYxaHM1MzVPYWxRYklFeDZocEpGM0JCa0xEbm5Cc0Z5a1Z4YTBaSFpWb3RLWFgya1R1U05Yb3VYb2tzT1ByRThtUEE5Y1VISQ?oc=5",
+   "fonte": "Game Overdrive",
+   "pub": "2026-11-09T22:00:39.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "TikTok",
+   "titulo": "Os Hawaianos viralizam com \"Embrasando, Envolvendo\" e levam clássico do funk carioca à trend dos famosos",
+   "link": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxPNkdMU1cxSWxZcjY4Ym1OZ2RlYnVHdU9OM1Z4eEZsaVlDN0VzSWRfajFKakxDbmVSQVhoMmlZZm9sOWl3bnV5ZE4teUlHQUN1X1ZVV0VOVW1LbXZJaGpFRHRmdGdUU1NzWENsZEo2M0pvR0FOeUo5UFZyQmplNFF4eF8yWm1GY21NSjZYcEdDZVNpNG9aUy1GYW9sODBDQ0tfZDFEVG54TGQ2aFFQZU9VamhPeVhRNFJLUnJYd1lUTEhWaGVSbU85aFYxVU8wVW1iZFJYWlhqd3ZXYkpxd19vQlpRcTFiYXpEbGtV?oc=5",
+   "fonte": "Sala da Notícia",
+   "pub": "2026-11-09T20:29:57.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
+  {
+   "categoria": "Beleza e skincare",
+   "titulo": "Crocs e Carmed unem moda, beleza e personalização em collab inédita",
+   "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQU3gxYU1pUUFpaC1sT1R4RUFoNFB2UUZpTGNQTVNWUklCbzFoUXhaVjBiblJIbTgxNEVxZUkwcW55YVcxbWE4RHZkSzRYYi1qbHVMTWE3cHFpYTVDeVlNd0FCTVU2RGo3NmV0MkRLSkRlWGZZSy1pbkdSOEpaOVZkZE5mQ1JFSU5oNTVMRkFGMFI0dHhPejVyX1lBWG9MbEhxREdyalF5MjbSAa4BQVVfeXFMT3pOZXFWWDBveW1GMTRlODE4dk1WRlhhZU1pY1RZbDF3eHgzS2FQX1hocmRqWTlzdTRkTlZJSXE5ZWtiY0NiV00yTHRDalU0b3VlQmd6bmpPdUxQTzlPeFZjNjBrUEl5QUpaUVVrSmpKSTJVQVI5OEpXdEtVcWpyMldNZ1Q4UTdqLW1fUk9KYXhCclFveThXWm5qam5zbTlJWHh1WEFKdHo0Y0F0SE1R?oc=5",
+   "fonte": "TodaTeen",
+   "pub": "2026-11-09T17:01:00.000Z",
+   "resumo": "",
+   "dia": "2026-11-11"
+  },
   {
    "categoria": "Instagram",
    "titulo": "Waze e Garmin se unem para lançar novo recurso de segurança em tempo real para ciclistas",
@@ -435,6 +903,24 @@
   },
   {
    "categoria": "Instagram",
+   "titulo": "Instagram: saiba como funcionará o novo formato de anúncios para transmissões ao vivo",
+   "link": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxQQUkzeExPZWxTaVc5M1YyRmMzZnZqa0VnS0paSnNGdWF4cGJjNlg0elVrWV9sWlAtM19yU3JUY3VQYzlOWk9QcUFVSlFud1U5VWFmTVJVakFDQmhzNlVRZFJTUFVkS0FVa09GeThhMno0Vm42bVVjNkxYX0trNHVNSFhQNHFQZVhTYkt1NXdoLVo5TG1jWExBX3hDTkN2TE95SUlkTmNTcTdNMzRxTGFTdVNheHlIUW56ZGt6SWFvbWVyOEY1bTVjeHBUS0pzb0ZTbHRodFdiU0lJc1hVbTFTaUMzNnVBNmZqWnc?oc=5",
+   "fonte": "Times Brasil | CNBC",
+   "pub": "2026-11-11T03:34:24.000Z",
+   "resumo": "",
+   "dia": "2026-11-09"
+  },
+  {
+   "categoria": "Tecnologia e apps",
+   "titulo": "Instagram: saiba como funcionará o novo formato de anúncios para transmissões ao vivo",
+   "link": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxQQUkzeExPZWxTaVc5M1YyRmMzZnZqa0VnS0paSnNGdWF4cGJjNlg0elVrWV9sWlAtM19yU3JUY3VQYzlOWk9QcUFVSlFud1U5VWFmTVJVakFDQmhzNlVRZFJTUFVkS0FVa09GeThhMno0Vm42bVVjNkxYX0trNHVNSFhQNHFQZVhTYkt1NXdoLVo5TG1jWExBX3hDTkN2TE95SUlkTmNTcTdNMzRxTGFTdVNheHlIUW56ZGt6SWFvbWVyOEY1bTVjeHBUS0pzb0ZTbHRodFdiU0lJc1hVbTFTaUMzNnVBNmZqWnc?oc=5",
+   "fonte": "Times Brasil | CNBC",
+   "pub": "2026-11-11T03:34:24.000Z",
+   "resumo": "",
+   "dia": "2026-11-09"
+  },
+  {
+   "categoria": "Instagram",
    "titulo": "Rua Coberta Sicredi. Esse deve ser o novo nome oficial de um dos principais pontos turísticos da Serra gaúcha. A Prefeitura de Gramado está prestes a finalizar a licitação e confirmar, ainda nesta segunda-feira, dia 9, a Sicredi Pioneira RS como empresa re",
    "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBkUnc0Zk1tSXdMQzdVYnlxUVlEZXREZFdoUGw3LUc5Y2hwT0FGbndaLUxPTlZaNjhxYWRRdmNSaFN3Y3J0NXh1dXRuTm51anV1Q0E?oc=5",
    "fonte": "Instagram",
@@ -709,24 +1195,6 @@
    "link": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPc1UxbWJNSG83SktfT0hjbWRIeDlldThJX2NYS1Z4VWtxZHNULU9CeVJSdVhjVnZ3Z3hqd1phR3dtQ25tbmk0WEkzWVR1cGctUEpvNFFvMjF1Rzl2WllyaFBTaS1HclVzaUtjN01sX0E3emdKQUYxWkloU1FYR3JZQ2FJRllBRHVFU1dPU2lRUXRCZlRBQ1pnSEtPb2otZDJUelFrNk93V3lrS283a05ZVFU0QmNyOWpsT3Y3eFRmWDQyUjRUclUyeGM4bjZSLWvSAc8BQVVfeXFMT3NVMW1iTUhvN0pLX09IY21kSHg5ZXU4SV9jWEtWeFVrcWRzVC1PQnlSUnVYY1Z2d2d4andaYUd3bUNubW5pNFhJM1lUdXBnLVBKbzRRbzIxdUc5dlpZcmhQU2ktR3JVc2lLYzdNbF9BN3pnSkFGMVpJaFNRWEdyWUNhSUZZQUR1RVNXT1NpUVF0QmZUQUNaZ0hLT29qLWQyVHpRazZPd1d5a0tvN2tOWVRVNEJjcjlqbE92N3hUZlg0MlI0VHJVMnhjOG42Ui1r?oc=5",
    "fonte": "Campo Grande News",
    "pub": "2026-11-09T12:30:00.000Z",
-   "resumo": "",
-   "dia": "2026-11-09"
-  },
-  {
-   "categoria": "Instagram",
-   "titulo": "Instagram: saiba como funcionará o novo formato de anúncios para transmissões ao vivo",
-   "link": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxQQUkzeExPZWxTaVc5M1YyRmMzZnZqa0VnS0paSnNGdWF4cGJjNlg0elVrWV9sWlAtM19yU3JUY3VQYzlOWk9QcUFVSlFud1U5VWFmTVJVakFDQmhzNlVRZFJTUFVkS0FVa09GeThhMno0Vm42bVVjNkxYX0trNHVNSFhQNHFQZVhTYkt1NXdoLVo5TG1jWExBX3hDTkN2TE95SUlkTmNTcTdNMzRxTGFTdVNheHlIUW56ZGt6SWFvbWVyOEY1bTVjeHBUS0pzb0ZTbHRodFdiU0lJc1hVbTFTaUMzNnVBNmZqWnc?oc=5",
-   "fonte": "Times Brasil | CNBC",
-   "pub": "2026-11-09T11:05:35.000Z",
-   "resumo": "",
-   "dia": "2026-11-09"
-  },
-  {
-   "categoria": "Tecnologia e apps",
-   "titulo": "Instagram: saiba como funcionará o novo formato de anúncios para transmissões ao vivo",
-   "link": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxQQUkzeExPZWxTaVc5M1YyRmMzZnZqa0VnS0paSnNGdWF4cGJjNlg0elVrWV9sWlAtM19yU3JUY3VQYzlOWk9QcUFVSlFud1U5VWFmTVJVakFDQmhzNlVRZFJTUFVkS0FVa09GeThhMno0Vm42bVVjNkxYX0trNHVNSFhQNHFQZVhTYkt1NXdoLVo5TG1jWExBX3hDTkN2TE95SUlkTmNTcTdNMzRxTGFTdVNheHlIUW56ZGt6SWFvbWVyOEY1bTVjeHBUS0pzb0ZTbHRodFdiU0lJc1hVbTFTaUMzNnVBNmZqWnc?oc=5",
-   "fonte": "Times Brasil | CNBC",
-   "pub": "2026-11-09T11:05:35.000Z",
    "resumo": "",
    "dia": "2026-11-09"
   },
@@ -4032,474 +4500,6 @@
    "pub": "2026-10-31T12:16:00.000Z",
    "resumo": "",
    "dia": "2026-10-31"
-  },
-  {
-   "categoria": "TikTok",
-   "titulo": "Trend do desculpa com IA: como fazer a Perdón Trend",
-   "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE9BbXRLTlNpa0NkWG5pbUZBYkZ6T1VVS0d5aDNndjZsamV2QlVSQ1UxNnAtb0x5a1J0TkIxc3NORXZYSDNXck5vSlNGM0UxeGc2UEJNaXVGNkFhamhnNFlpVHRqM0FOQTJHN2M5LUZEcFVROWFtRVZnNXBvTWxMbzg?oc=5",
-   "fonte": "www.perfectcorp.com",
-   "pub": "2026-10-31T12:04:12.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "Tecnologia e apps",
-   "titulo": "A inteligência artificial está sendo usada para enganar pessoas. Quem vai assumir a responsabilidade?",
-   "link": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxQOWN2MEtacEZGc3FRR1pDZUpOeGZoTkExMjhZMkswS2RZRHItVnBkR0YtMGptQXlzWmc0VmVydVNubFdyc3NrcmtzRW9DSzVIMXFiMWZsV3lVWG9MRjFhY2ZSVmNiZmNMdkExbFNneGh6OXpzVE44azR5cVpDVUlpSjJnb2NuWk0zaGFyT1FaMGZWNV9pZ1R2SWVzUXF1ZUZsc1JzUUZVcThUekRwZEllZWt1dE5zLUZLdWRHQmpxVFh1cnZsUWNKUnYtZHBwbkFhWWhtcThGNUM2UUYxVngyOVhHb2prd9IB7gFBVV95cUxOckFDY0lnQ2I4T0xXMDBfMWI0OWh1aFB1bWYzQUV0eEE5X3YzTjJfS2tjZTVZSE1ObWxmNXpEdlMxYjZYb2syQV9KeVVIR2h0dUw4TXR1Z3JvbUdSRjJaWDRVdHBFY29RYnl6cFdJNmRQUHNIeVNEM3BIOXp2YkdjX0prSlZfTHRlM2dzd04yeXFUeTBDcUVYTVo4bzBja1ZfM3otMUtNejI5Ty1SNWhXN3MzNTV2NEFtT1FHNVAzRkx0bDAwdVNFV0ZidjJtaDRqVTJTcFBndGs3WnNSOXBMa2tJZTlvVXVXbHJsLVRn?oc=5",
-   "fonte": "GazetaWeb",
-   "pub": "2026-10-31T10:22:39.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "TikTok",
-   "titulo": "Colírio para crescer cílios que viralizou no TikTok traz riscos à visão",
-   "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNNXg2dkd1QklfSE1DWFQyNFRMNmpNNm5MdExNNHU5bGxEUFljMVpXMXpxcmpQZGxObF9XeS1zNHpHWEkyLTdYTU5tYTBnLXFURnpsQVV4TElUN2MyVXpvZHZheXQteDQtZ0RaUlBTVWk1ZFp3YTNHaGRUSWd6ano1bnJxRUJ0cld0NnFDczhRdXQzeFpUSkM0MUduSE9uVENyVjlN?oc=5",
-   "fonte": "Portal Debate",
-   "pub": "2026-10-31T10:16:11.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "TikTok",
-   "titulo": "Casos de anorexia e bulimia sobem 71% no mundo em 33 anos",
-   "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOMElRVThmOVMycUFwNEsxbm5EUjVheUhCeTFpVEtuVVBWajZ4Y3Z1UTRxZkc4eHM5TUtqWmZXaXV0UmZDTGNzc1ZKQzZkUy01MkRrWkpubFRfeDgwZTZPY3ZfRXJiQ2dPYVU3VkxhN2pIRWk4Q3AzZ2c3a0o3ZDlZVktCRkZ1WVNmSW9fZEF1NkVUY2kxMUlzcHNWTWV1UFpjTXc?oc=5",
-   "fonte": "TV Sim Brasil",
-   "pub": "2026-10-31T07:10:20.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "Instagram",
-   "titulo": "🚨 FLAMENGO PEDE SUSPENSÃO DA VENDA DE INGRESSOS DA FINAL DA LIBERTADORES Segundo a ESPN, o Flamengo recorreu ao CAS pedindo para que a CONMEBOL não inicie a venda de ingressos da final da Libertadores até uma decisão sobr",
-   "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9pbjlhYndtc0V6TVVxRzRadVB3Zy1XcmtKUmJYekdkMlQ0eVd1TlhZZUxsN2VqbWxqUlJtclo5V3dXOHNKa1Z2T2pUblBUTWpVMGc?oc=5",
-   "fonte": "Instagram",
-   "pub": "2026-10-31T07:01:02.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "Beleza e skincare",
-   "titulo": "OX estreia em perfume capilar com Mari Maria em duo colecionável de edição limitada",
-   "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQMm8zeUp4R2JJM3Q1cXh0N01Zci11aFNMdTViZl9BMkQwX3VtM2pUd0VWcE50OVVwckExQlJwUzJPMFN3Zkl6YXBwLS13TTZZZndnTlhPVjBOOFJVRkJrWHVjelVJUHI2OUhURFAwbDNlQkozS082czBxT1NCbkpfc2pNVERNZ0RiSGxOdUtBZHZqWHRmNjdaMmZxY0R4eHF5RGhSSDhXY0Y1YTdKSjQ5WGFTRzVfM3NFaVl4cGtxNGRGRlda?oc=5",
-   "fonte": "Portal Business",
-   "pub": "2026-10-31T03:41:59.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "Tecnologia e apps",
-   "titulo": "Papa Leão XIV se opõe a direitos para inteligência artificial: \"Máquinas são ferramentas, não pessoas\" e defende responsabilidade dos humanos por suas ações.",
-   "link": "https://news.google.com/rss/articles/CBMikAJBVV95cUxPQzRHUjhOYnlFQmpTMnRDRFhLcFBWeG92V25La0JMaWxfNWpaeDdCU0ZEdEdsek0wV0pJSkNoc0xGOFUwaEZONWYwV0V0d0tkTm9pTWtfa2pYSXhwZks5VnVUdWJQV1BuYk5kamxuNXRadU5sakMxZkFHbE16X09rMzYxSVVhUFlycjQ5X3BmYnd3X3lLcmY5NW5mWlJ4QkZ6OXZkUU9fM0xCcW4tZVVIVENMbFlXVXFWTTJBUWVBUW16TGtJVmhieFVTdEVlTkMxNG0xMmktZk51MUJXZ1BBcXJLbTlhOXpFM1prTlBpb1lBRVkyRVhrZXJNTVBRb1NWdDRGRG1SVlJtVGJPWkxMYw?oc=5",
-   "fonte": "Repórter Maceió",
-   "pub": "2026-10-31T02:30:00.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "Beleza e skincare",
-   "titulo": "BAZAAR WEEKLY: As novidades da semana",
-   "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQYUhQSlEzWVIyQnhmSDFPZTVoSnc5TlNsOFNZT0tieXhXanNuTUxLcTVmMDQ5Smt6TElkTlpUT0tEUXh4NzZ3aHlBZ096ekpNUXB1OV9OYU5SR1B5b1VqdjNERkZUaVZickVlZW5NcW5YaE9vQ1VlbWt4TGliQVlOU0xQNGPSAYoBQVVfeXFMTmduRUI1MXcxVVBXV2lEbmVTZXg3eHpTNzQ3RzUxNVNscVN2OXFYUXdxTHBqMHdPU0FUNGpwQWVYSnpPSi1CN0VWd3gzRXh6Q3ptX0FwUHlrd2xXWnpsLXpHclJYNDN0UDNES0NOTUJ0Ty1WeEkxak1pck5PRXNmc201UkdCTkZqU0Rn?oc=5",
-   "fonte": "UOL",
-   "pub": "2026-10-31T01:53:56.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "TikTok",
-   "titulo": "Como fazer a trend 'Essa sou eu quando era criança' com IA",
-   "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE91S3FfcXdoc0NSUTBvR0w4cW41WTBVd3BVWmZ2VFdQNTFmaUhLS0lRMThmWFNmY01DRk9iOUxBT1MzUXB5Tko1VzdWRDdWTEc0Q2dQeERmWkhJLWpKeHB6RnptMzJuY2VWWE9CMEFCclBtaTY2NWxN?oc=5",
-   "fonte": "tmc.com.br",
-   "pub": "2026-10-31T01:45:28.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "TikTok",
-   "titulo": "Curte BTS? Entre no clima! Mineiros descrevem rolê até São Paulo com trend do Tik Tok",
-   "link": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQbHhyR0xZRm0tT2djNmFzQ3lvSVFFdk1lamRWUzJFN1pWSk5CUGNQR1QydWtIaUtITFlGdmZvOVJETmpNN1lLWWpsbm1iNlc4QlBvRmJmY2RhQVViTlc3TmJIenNEdE1CNk5wM2pseHFETHY0T3JqU3hkemJpa2hETDJpMnBfeDlJTDFtODNVRkxSc3dORG5qaEYtYlVOdVlvSlA1Zkk1T085TFdpcnRWYmFNZGxEak9DTkdNTTlGSkRXdFFxQmJKLUQ0SHliV0VZM2pV?oc=5",
-   "fonte": "Hoje em Dia",
-   "pub": "2026-10-31T00:19:00.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "Tecnologia e apps",
-   "titulo": "Shigeru Miyamoto (73 anos), sobre a inteligência artificial generativa: “Mesmo que a IA venha a assumir tudo, sempre haverá um papel para nós”",
-   "link": "https://news.google.com/rss/articles/CBMi-wFBVV95cUxNNV9qeDBUQWlnTjFEU21IcUdzZnN0UmVxVVdlemRVT3NqVGZaSXlINEFiSVBodTZXY2x1RlpTWWkyS25lSk0xLUJXX184UEtpMm40ZTF4d1NRMWRzY3VUcXJLdnRMOTZNejdJa0pVZHo0Qmd3ekdfM1REYnp1VGtnZEhvelNjSzRTLTF2MmtEbzk0eGd0NXZuX2V4bTlUbFgwVnhSRnR2TTh0a0stYTk1ZS1hbzZqR0pMbVBrMzh6NGhlckU5QVF1M3FfeWl4bXE2T0hLWHFpR01hRkY4cXVxMHRvdDBJbjdrV3pDMDZOYk14ZHUwdXJMdkhvdw?oc=5",
-   "fonte": "Xataka Brasil",
-   "pub": "2026-10-30T20:31:24.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "Beleza e skincare",
-   "titulo": "Grands por Bessa na TV destaca lançamento da TOPVIEW AlMare SC e encontro Mustang Pink Edition na Ford Barigüi",
-   "link": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxPYk1jTEk2SjdKQzMtVGdFS3h3WGRGNEJwWGR3aXJyZWZLQ1pfWmprMGg5Q2hZc3NKN3ZnTmFHTzlxeUhuRHdxaEI2WVBrZkVpVHBPZE1FVW5LMzd4YTRHQVdEbE1pT21LODlZbHY0d3ZjVzBiUmRmdDM4Vm1KX2JoaTkxM3BWS2NiTTh5TUwyTWxaaGFLQkttSURvZGhQa1U4YnkzRmlOTS0zR2ZqakwxRTVZXzNnVEd1SHp5Q1Q2Wjg1QnRjQzczeEFlZWRYcGhnaXZrYWpBQXdBY1R3alFKVzVOUXdCbmM0ZnB1NU1aSQ?oc=5",
-   "fonte": "TOPVIEW",
-   "pub": "2026-10-30T20:17:21.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "Beleza e skincare",
-   "titulo": "Como a tendência dos charms movimenta o mercado de beleza?",
-   "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPUzhnSkI3cUhGMnlwTG8zZlFHUTEwLUsyNW5tcnIzWnNzVDVSOHVjZnpBV0FlaHY5anV1UmUxa0c2WXhZdHVZSEFvN3doX05fZ0tzQ2cyN1cwUWtXamNsMDZrbWJoTWowVGF4Skp6eU0waG5EVlFZQXUyeDJxc2Zxel8wU0F2c2RBdUVGRmpZUklkd0RQWTNsb2NJekY1cWpNb0E?oc=5",
-   "fonte": "Meio e Mensagem",
-   "pub": "2026-10-30T20:10:00.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "TikTok",
-   "titulo": "Do TikTok Shop aos carros elétricos: o peso da China na América do sul.",
-   "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPMkVhVVJvLU5oYXFFYmNwWFliWm8tVS13dVpvUUZ6Z2J6VXBoN0hYNk51bENJY2t5UDVQdlRUZDc3RFRnS0cwN0xjQVZGcXMxd2VMbWsyV3F5UURrT2NEY2lJX1B2M0t4UFhZdG9sd1R2SmVvYmZ0bV9kTmZmM2J5TlhfWkV5S0k5bmI4aXNoOERVQ3F4RDJNZEg0VWZKdV9ycjJteHY2YTlCcktGTXBB?oc=5",
-   "fonte": "jornaltribuna.com.br",
-   "pub": "2026-10-30T20:01:32.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "Casa e achadinhos",
-   "titulo": "Roupas baratas, acessórios e novidades: encontro de brechós começa nesta sexta na Serra",
-   "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBUT1JzaGROQWhxZVFmNlh4VHBDRFQzQllpQkVGSm5WZlQxT0lYdDFjRmJXWmhaQVd4dnVZY0xLQUdveG40NjllbDU5aEdXbEZvRHc5djUzQnYwbkhUY2tSb092bnFqQlJnd0lmYmlMVHFuY3BITHV2Y0htcF9GZw?oc=5",
-   "fonte": "Portal Tempo Novo",
-   "pub": "2026-10-30T16:46:00.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "Instagram",
-   "titulo": "WhatsApp libera foto de capa para personalizar perfil; veja como vai funcionar",
-   "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxObzE0UExVMEg2eUZXLTdQZFNobmlaU2UwV0wxQnZwVi1QRzU3MEdKY0FLcEJQbENabGdBZkMwSXNyS2VMc0daMlgzMHNkd2NKRDRtOVFZdEZjMWUzdURFR3FfaFp6SUhHNlNyVU5QOVFxdzFXZUhMaFBDZ0RsVWF6THBSVlZidHF0bTdqNHV6b05CZw?oc=5",
-   "fonte": "Oficina da Net",
-   "pub": "2026-10-30T15:42:00.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "TikTok",
-   "titulo": "KFC desembarca no MorumBIS e entra no clima do K-pop",
-   "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPVUM5Y0EybWxQMzgxcjA3Mmd0OG4xbDBxM3pnR3RzdmlXaWpnWWwyN0ZmMW9XZUlyWEpJd2taa0lESXMtczBUZHhjNWM0NGktZW9WQkNmemlGanJ6TW9HRjdEbE1BMDcyTW8wT0JyRDFRamtHTWZ4cGFRNklnQVNoVURqdmJ1TGFuWlVxcVVyS2psRjJBREdmNUlxYVhPN2lDeGZwUkx6ZDZpb2dHTllBQXEyQdIBswFBVV95cUxPVUM5Y0EybWxQMzgxcjA3Mmd0OG4xbDBxM3pnR3RzdmlXaWpnWWwyN0ZmMW9XZUlyWEpJd2taa0lESXMtczBUZHhjNWM0NGktZW9WQkNmemlGanJ6TW9HRjdEbE1BMDcyTW8wT0JyRDFRamtHTWZ4cGFRNklnQVNoVURqdmJ1TGFuWlVxcVVyS2psRjJBREdmNUlxYVhPN2lDeGZwUkx6ZDZpb2dHTllBQXEyQQ?oc=5",
-   "fonte": "CidadeMarketing",
-   "pub": "2026-10-30T15:25:26.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "Tecnologia e apps",
-   "titulo": "'Máquinas são ferramentas, não pessoas', diz papa Leão XIV",
-   "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNdTFsOU40WGRiRy1rSkpidkZGRjZWNDRVbjlmNGg4S3kwTlozUkJxUjFJdHRiOXlJcS02d0lLbjdOUm9GWHQ4QUNBdG1OeTZIVWhlR09lWG9IRURndDg4bjVneF82QXIxN2ZiQkJUbUg5RkdHblJzUU9uOXM0R3NtN2Q5dmxXZHk2ZnJyaFN2amtkY1E0a0Q1YXpRWXI0MnA0QXRVZnktUzdjTUdWWUFRR2lZbExuUm5zWXfSAboBQVVfeXFMTXUxbDlONFhkYkcta0pKYnZGRkY2VjQ0VW45ZjRoOEt5ME5aM1JCcVIxSXR0Yjl5SXEtNndJS243TlJvRlh0OEFDQXRtTnk2SFVoZUdPZVhvSEVEZ3Q4OG41Z3hfNkFyMTdmYkJCVG1IOUZHR25Sc1FPbjlzNEdzbTdkOXZsV2R5NmZycmhTdmprZGNRNGtENWF6UVlyNDJwNEF0VWZ5LVM3Y01HVllBUUdpWWxMblJuc1l3?oc=5",
-   "fonte": "O Dia",
-   "pub": "2026-10-30T15:15:29.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "Tecnologia e apps",
-   "titulo": "Papa afirma que agentes de IA são ferramentas, não pessoas",
-   "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNZzZsVGROb3RXUlF3eDBjQjhPRUcyWkpRMnFrRTNUdlhlZG1JOGRCTzVhTl9qVVhUNmRYR0lWRkE0N0RIbjkzSTZPNjhkeUd5eVltYkg3RXBPek9uTzVFcGpjY1loYnNWcjZzSFhOREpsYWo4WXZHVDk3a29qYXV6YlNFNDhCT0k0VUhoRW1vNE1WS2d3dnBCWlhmdzlRaXVTUlptY1diWdIBpwFBVV95cUxNZzZsVGROb3RXUlF3eDBjQjhPRUcyWkpRMnFrRTNUdlhlZG1JOGRCTzVhTl9qVVhUNmRYR0lWRkE0N0RIbjkzSTZPNjhkeUd5eVltYkg3RXBPek9uTzVFcGpjY1loYnNWcjZzSFhOREpsYWo4WXZHVDk3a29qYXV6YlNFNDhCT0k0VUhoRW1vNE1WS2d3dnBCWlhmdzlRaXVTUlptY1diWQ?oc=5",
-   "fonte": "Folha PE",
-   "pub": "2026-10-30T15:15:05.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "Criadores e UGC",
-   "titulo": "Vereador propõe entrega de Título de Mérito Comunitário para grupo de influenciadores de Maringá",
-   "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxOS090MzhMNXIzcGs3YWJUZVVEd2o2NHdlR1EzZmhMRXo5bkFGM2Myb2dBb0UyNHBhb2JNZ2tSYzhKX3NXVXhialFuVDlzNjdiTnRmT2FFdTlEQmFBWkliQlozSjFYdEg5MXl6d19Fb3g2ZzJOUTFfbDI5RHNXVmdlcXVuSk9DVU1OUlhIZThGN1pDNThyRHhVZ1VPY2kydzJlMF8tbHRsaUFyYXAzSndacnJlc0g4TDRpdndmUUE1QzR6bW5Ga2d4cVNuckNRY0pM?oc=5",
-   "fonte": "Maringá Post",
-   "pub": "2026-10-30T12:30:00.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "Tecnologia e apps",
-   "titulo": "YouTube Shopping chega aos Emirados e abre novas oportunidades para criadores de conteúdo",
-   "link": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxPZ1dvN3hlNEhXOWVIR1otRGg4VnZ6UTdMSzVfNldGX0gyc09wVllYWnBiTTJVT19QQ1FVdmVuWW5UQU1vWFJQRkdhOWRMMDE2dU5pLTRRT3d3OTNGOE10TzZwb3FFdUlOT0hPcDVSS09Od1RfZDhEa3paZkpmSlFoandGajZabHhBZGFvc2Q2dVJmMkl6OE82Y0NlTnQ1WVg5RkNQSl9HTEpuMjBnLU9vYnAzZ3RZWUpNTlpYRUpRZXVFN3FjT1p3Snd3Ty1sUlFBTWxqRDJoQkVtZWk1UlZMTzRnVHlZUQ?oc=5",
-   "fonte": "Gazeta Brazilian News",
-   "pub": "2026-10-30T09:41:27.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "Tecnologia e apps",
-   "titulo": "Vmake Labs Lança Kit Completo de Ferramentas para Vídeos de Halloween Voltado a Pequenas e Médias Empresas",
-   "link": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxOSklzbGQ2RjdHWFcyaHBvRUcySWpRM2l6N2hOM3JKbHhDYkcxQ2tJVFZCQTFBR0hQdkdZLXdEV3dYMHA1eTE3MmRrR1JtQ2RiaV9hVkVHRzktLU9VZTExRXJqTHB6eG9iMmJib0xHT0ZCNUpUMW1DYmpyYzc2VENyeHBoZGlfMWo1WVBISjhNLUkwRHJQWmZ3SVByZ29Tb09MQlVOVkt4TGNRczhLTWE5Mkc2MGhOcTE5UmhMaHRhdVU1eHdzeEdYYnRBazhtRDluOWhBNEx5SVZfTFJBS1hLR3ZqTFk1NEE?oc=5",
-   "fonte": "www.acreaovivo.com",
-   "pub": "2026-10-30T01:21:31.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "Tecnologia e apps",
-   "titulo": "OpenAI crava ChatGPT no MUNCAB, em Salvador, com aula grátis dia 5 às 16h",
-   "link": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNRGx0TVBGU1Y3M0FteFNJNGxBQm5QN3RQODVhXzBwT1YwRkNCNmw3eVVOTWN1UE5YUW80cmFzNGhscWJQZHM3OVUzNzVneEhKYmwzVDdici1CWWdMODdPRWl2eE5RT0E3VG5SamRwSEVONlNnLVNkd0h4WUh6NXMtWDBoS2ZfRFN1aXNHNks4cmh4Zk45dFZyV1FWdkNScnBKZi1xRXVHVHZWeWNER0N4SnMxUEhPOVk0NVZzVDQ5VWxILUxGX3AzZmN4dFk?oc=5",
-   "fonte": "Jornal de Brasília",
-   "pub": "2026-10-29T20:45:00.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "Beleza e skincare",
-   "titulo": "Nova linha hidratante da Ricca aposta em texturas inéditas para o skincare",
-   "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNZFZ3QlZreXVlVS1VeGNyRTl6SUZpRUg0NXprYXphV2RFeHZ6OVJRbWl5MWtFa2xHWVJDbUpndk96YjdHMTJiREF0Y3FoalJYYWhidjlhWXJKbXRfTWxkUzFaUFg2MnExZGVCcmZiVUdlX3ZDOGhmd0pXS3duRnVpcmtDZ1RjejB2Z3hpbERCOEtyNEpjSk05UDg2aTZGR0ZyaDliZXp6RlFxWHBHZm5JS25fcTViWWlGQTBsLU9pcw?oc=5",
-   "fonte": "João Bidu",
-   "pub": "2026-10-29T12:40:00.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "Instagram",
-   "titulo": "Samsung atualiza Galaxy Watch e Ring com novo algoritmo de IA para detectar apneia do sono",
-   "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQM3NSd3pjazdnb19GcHJqbVp6aWRhRGMycmRxWmxhaEJ5REUyeWJhZmYzbzEtUEtEUFJScV9NMGpEWFRPTlBzQkhnZDY4MHB1My1KZ2JmQ2p6Nm1CVHRqbUttRG1jOHB5dFdjVEF4bjA3NnFYb0daOVFSNGxIcU11RzViR0hOMWZNQWEyYnBjRE4yQ192RDBpMTVEaG5Qb2JyT2l6YzZUWDU?oc=5",
-   "fonte": "TudoCelular.com",
-   "pub": "2026-10-29T02:14:31.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "Criadores e UGC",
-   "titulo": "Google lança ‘Perfis de Busca’ no Brasil para criadores de conteúdo e editores",
-   "link": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQM2tWZENHUElCNEV6NWx4VVB2NWE1S2NJemJ2MWVNUk0wcml6ZWNZWVI3TFpXWnB6S2hBS0tuMjBqNzlOQ2Jmd25heWFwMndDVHFCTzExQ2FQR2lNa3dtNGstWHlrbEcyWW1meTNvREJiTDhBU3RnUEJxTmtnN2ZGcXQ3cGQ0MHc2YUlRenVyN2NsT3Z1OVVONk1HMmViYWdIZDdGZU5rMjRacGlDNWQ0WVZlMGtzcUREMWZLUkNwZlJnT0FhNFYtRkV1UQ?oc=5",
-   "fonte": "Estadão",
-   "pub": "2026-10-28T21:02:50.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "TikTok",
-   "titulo": "TikTok Ad Awards 2026 anuncia finalistas e estreia categorias",
-   "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNekEySU8wWXlYMVB4a0RUcWtjMS02LWZBLWE4dmlXVHAtbUdza18zcXNfUTVIUWZuOGVVUFN0OTNVRC1FcEhPQVBETDNqVUtKbWQwc05LMjdGR1Rld3NueDY0bGlwZXB0MDhhRFlfMkxhUVEycUM5REQzWXFBX0VERF9zVTJneHRPeS1oc3JCVy0yUmxuVU5YdGlB?oc=5",
-   "fonte": "Propmark",
-   "pub": "2026-10-28T17:02:00.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "Criadores e UGC",
-   "titulo": "Do time de 12 principais influenciadores do PT, 4 foram eleitos",
-   "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPWjdDY1hjRkdaTXhKbktENU5CVG5KQW1WZHd1d2loWVhITERpVUZJb0U0Z2tfNjRrLUpaSjYydV93X0Y3UXJqQnhvM0k1UXRqN04xbTd0UEJfQ0FFNzcxd2NnNXNJc2trR19wLWZYVTZxMTZJUy1VUUNUYTVZOG5lNTRNU2hSdXJQWmt2VGJnSXNVNzRsbzYtYy1melNkejJXNlJWeWhya1JmdDBpRzFJ?oc=5",
-   "fonte": "R7",
-   "pub": "2026-10-27T13:55:20.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "Criadores e UGC",
-   "titulo": "Influenciadores aparecem mais do que marcas em fontes consultadas por IA",
-   "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNdDVhSkdjVTBNS1ktb2VCeG1aS3o2MXcxS1BfRS1xNExKRDd0Z0FvM255R2U3Wk5PZ1ZZR0hSRmlYVWdTdXBMRzJWT1NzRXM4cFlRbHRaLTN0OTFxakZJMWFVMVl3SGNyNlZobVAybkpEN0N5ZWJrVHdhMzVLdEVwcUt0bGNOanlWY2poaUtPYVdKSEcwNWJoMTBKRkFfZllSRGc?oc=5",
-   "fonte": "Exame",
-   "pub": "2026-10-25T10:01:33.000Z",
-   "resumo": "",
-   "dia": "2026-10-31"
-  },
-  {
-   "categoria": "TikTok",
-   "titulo": "Trend do “esse sou eu quando era criança”: passo a passo para participar",
-   "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNYk9JYXFmdUplaEdfdEFuQ3FmS2NwaU1kV1NNQVFuaDJ6VDE1NmlsWkY0V3pYY2tmWk5mcmlJUjlLWmE2d2JGUjRsYkh6blBzSktPcmp1bXk2ZkJvd29MLWk4NUFsWG5FNG11NFpDT2g1QnRsRTlFZUdHMGhxdjM4MnVubVFTQ2dGemlEbEdtS2xoZ3NrRDVZVzFVaDRNUi1XWkd5VnhFMmx6OXhKamp1Y0tqdzQ?oc=5",
-   "fonte": "VEJA",
-   "pub": "2026-11-03T08:00:00.000Z",
-   "resumo": "",
-   "dia": "2026-10-30"
-  },
-  {
-   "categoria": "Em alta no Brasil",
-   "titulo": "aviação militar",
-   "link": "https://ndmais.com.br/seguranca/aviao-militar-dos-estados-unidos-e-identificado-no-espaco-aereo-brasileiro-com-pouso-no-rio-de-janeiro/",
-   "fonte": "ND Mais",
-   "pub": "2026-10-30T15:10:00.000Z",
-   "resumo": "5000+ buscas · Avião militar dos Estados Unidos é identificado no espaço aéreo brasileiro com pouso no Rio de Janeiro",
-   "dia": "2026-10-30"
-  },
-  {
-   "categoria": "Em alta no Brasil",
-   "titulo": "charlie kirk",
-   "link": "https://www.expressnews.com/news/education/article/utsa-charlie-kirk-video-mocking-death-22502182.php",
-   "fonte": "San Antonio Express-News",
-   "pub": "2026-10-30T15:10:00.000Z",
-   "resumo": "200+ buscas · Video of UTSA student poem about Charlie Kirk's death draws scrutiny",
-   "dia": "2026-10-30"
-  },
-  {
-   "categoria": "Em alta no Brasil",
-   "titulo": "carlos alcaraz",
-   "link": "https://www.marca.com/tenis/2026/10/30/6ae49286020dbf8b21b17dd7-directo.html",
-   "fonte": "MARCA",
-   "pub": "2026-10-30T15:00:00.000Z",
-   "resumo": "1000+ buscas · Alcaraz - Paul en directo hoy | Última hora del ATP 500 de Viena en vivo",
-   "dia": "2026-10-30"
-  },
-  {
-   "categoria": "Tecnologia e apps",
-   "titulo": "Papa afirma que agentes de IA 'são ferramentas, não pessoas'",
-   "link": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPNGJ0N1BmdUNvNU45WU1EWGsyMFFNLTZwVkhsbks3YS04eDFkNVJlcDFRWi04aEhVMHl6NHEwMk9vZHBpSmhxSXZaQ1A1b0w4MFRxYUE1TFN4QzNTOW1xdERNV2FHcnR5M2p3YWdQdWFLR0doV21tVHFuYlA0TlJLeHdGbHFpeGJMeHpKR2doUDkwZlRuU3Bld2VLY2NicFFnY0xRNzlTSXdRRlYxSnVqY21JeVZiakE4RlYzNU5R?oc=5",
-   "fonte": "UOL Notícias",
-   "pub": "2026-10-30T14:56:05.000Z",
-   "resumo": "",
-   "dia": "2026-10-30"
-  },
-  {
-   "categoria": "Em alta no Brasil",
-   "titulo": "xabi alonso",
-   "link": "https://ge.globo.com/futebol/futebol-internacional/futebol-ingles/noticia/2026/10/30/imprensa-inglesa-analisa-falta-de-oportunidades-de-estevao-no-chelsea-jogador-esquecido.ghtml",
-   "fonte": "ge",
-   "pub": "2026-10-30T14:50:00.000Z",
-   "resumo": "200+ buscas · Imprensa inglesa analisa falta de oportunidades de Estêvão no Chelsea: \"Jogador esquecido\"",
-   "dia": "2026-10-30"
-  },
-  {
-   "categoria": "Em alta no Brasil",
-   "titulo": "pgl masters bucharest 2026",
-   "link": "https://www.pichauarena.com.br/csgo/cs2/pgl-masters-bucharest-finalista/",
-   "fonte": "Pichau Arena",
-   "pub": "2026-10-30T14:20:00.000Z",
-   "resumo": "200+ buscas · CS2: Primeiro finalista da PGL Masters Bucharest 2026 é definido",
-   "dia": "2026-10-30"
-  },
-  {
-   "categoria": "Beleza e skincare",
-   "titulo": "Feira Roraimoda e Beleza reúne pequenos negócios e amplia oportunidades de vendas",
-   "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPdUhWRnAxMW13RUIzSk4wMkZCWFVHaGFibVZnVm5vbmZVam9zVF9LS3FzSF9xR2VLYnVRYVRWM0tCM0I0ZXZBaHhEZVhRTmpTS2gtZUFKNE10UXlTMWo2TVJCMWJYODhqdmlMdGpFcUFneWowRDJFVEhvWDBZLTJDQUV6V1RuVVZUeFh4NG13Z3g2QlFjZFR5azJxcl92NXZLNHdRV21EcGpmaWlOcnBpWU9BcGJnaEYwazln?oc=5",
-   "fonte": "Folha BV",
-   "pub": "2026-10-30T14:11:47.000Z",
-   "resumo": "",
-   "dia": "2026-10-30"
-  },
-  {
-   "categoria": "Em alta no Brasil",
-   "titulo": "meteoritos de marte",
-   "link": "https://www.abc.es/ciencia/piedra-sahara-revela-antiguo-secreto-humedo-marte-20261029200003-nt.html",
-   "fonte": "ABC",
-   "pub": "2026-10-30T14:10:00.000Z",
-   "resumo": "500+ buscas · Una piedra del Sahara revela un antiguo 'secreto húmedo' de Marte",
-   "dia": "2026-10-30"
-  },
-  {
-   "categoria": "Em alta no Brasil",
-   "titulo": "boca de 09",
-   "link": "https://www.metropoles.com/celebridades/boca-de-09-tem-conta-banida-apos-live-com-mulheres-exibindo-partes-intimas",
-   "fonte": "Metrópoles",
-   "pub": "2026-10-30T14:00:00.000Z",
-   "resumo": "500+ buscas · Boca de 09 tem conta banida após live com mulheres exibindo partes íntimas",
-   "dia": "2026-10-30"
-  },
-  {
-   "categoria": "Em alta no Brasil",
-   "titulo": "dorival júnior",
-   "link": "https://ge.globo.com/futebol/times/sao-paulo/noticia/2026/10/29/sao-paulo-evita-cartoes-e-perde-so-um-pendurado-para-o-classico-contra-o-corinthians.ghtml",
-   "fonte": "ge",
-   "pub": "2026-10-30T14:00:00.000Z",
-   "resumo": "200+ buscas · São Paulo evita cartões e perde só um pendurado para o clássico contra o Corinthians",
-   "dia": "2026-10-30"
-  },
-  {
-   "categoria": "Em alta no Brasil",
-   "titulo": "hyrox",
-   "link": "https://www.bbc.com/news/articles/c6gr8l15k744o",
-   "fonte": "BBC",
-   "pub": "2026-10-30T13:50:00.000Z",
-   "resumo": "500+ buscas · 'I made the wrong decision,' Hyrox athlete who soiled herself in race tells BBC",
-   "dia": "2026-10-30"
-  },
-  {
-   "categoria": "TikTok",
-   "titulo": "KFC prepara camarote e produtos exclusivos para fãs de K-pop em São Paulo",
-   "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNMVRVZjI2OE83alZXUzFqOFFjSXBuQ25sTlZTczlNV0Zob1BhQzhKMGdHeF9DRktfZGFQakp4cE01SHNFdXUtUFotc3hrYzNyQ1d5WU5SUHFwQWVZUGNFb1p6TVRLOFVCNFB0bTR5TU1JOVhuWk5KQk56Y1lpOWhRM0cxTzQyNW1Yc3h0eDlpcFBwTkljYURlanVPcURxWjg?oc=5",
-   "fonte": "Marca Pop",
-   "pub": "2026-10-30T13:44:19.000Z",
-   "resumo": "",
-   "dia": "2026-10-30"
-  },
-  {
-   "categoria": "Em alta no Brasil",
-   "titulo": "rani3",
-   "link": "https://economia.uol.com.br/noticias/redacao/2026/10/30/irani-lucra-r-565-milhoes-no-terceiro-trimestre-alta-de-343.ghtm",
-   "fonte": "UOL Economia",
-   "pub": "2026-10-30T13:40:00.000Z",
-   "resumo": "200+ buscas · Irani lucra R$ 56,5 milhões no terceiro trimestre, alta de 34,3%",
-   "dia": "2026-10-30"
-  },
-  {
-   "categoria": "TikTok",
-   "titulo": "KFC celebra K-pop com camarote e ativações no Morumbi",
-   "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPWnQxS1ZJeEZWNHV6OFpWUmRrUDF4NUcwZGtqZko1WUhlOHo4bXNpV0kxTldGSkVKUzIxMXhFNXFTQ2xCdG41dE8xeXZsZVdMbE1kZWthUGxJeXkzeTZnQzZEUzlQOGJGdGx5a0IwMnNjamFqVHE3LWFMSFZ2OURsaDlJTV9fMWJ2LUE?oc=5",
-   "fonte": "Live MKT News",
-   "pub": "2026-10-30T13:22:44.000Z",
-   "resumo": "",
-   "dia": "2026-10-30"
-  },
-  {
-   "categoria": "Instagram",
-   "titulo": "Instagram pretende impulsionar conteúdo de formato longo por meio de acordos com criadores",
-   "link": "https://news.google.com/rss/articles/CBMihAJBVV95cUxQYjNFWEpkVkF1NEFQNVJvQ3JHdHVWZU1iN3F2eGlTdFhPaEdyZW14SGVfWVczc0hTUXp4VE54cnY3enZEbEdaV3lxb1MtNzNYb3VaTkczVGpIM3B2Z3RiQ0ZzQmpaLUhxSE01cFV6c3g2d1k0aU9Rcm1qRVJHVzdjRGlUQVJCZ0ZQLXoxR1lEcENlMVhQb21iVWg3MGVxZlJoaTZyOGVtbWJsZ1cyZnBHdWFtQ1M2RnpxbnQ2N1JVMHk5eGpMeFVxazJPbmt3ODc1alRTWG1kYXlUZDJuaWdwMnQteWNkTWtmanBWcHdIMmxDcWI0UWVKcTVScngxVEh6dU0wSg?oc=5",
-   "fonte": "LeiaJá",
-   "pub": "2026-10-30T12:33:00.000Z",
-   "resumo": "",
-   "dia": "2026-10-30"
-  },
-  {
-   "categoria": "Tecnologia e apps",
-   "titulo": "Publishers transformam conteúdos existentes em novas fontes de receita",
-   "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTFA2WWVfR0ZDNS1LYV94RXhOdE9RcldrQUlubnJ2NkFOdFlUWnRMQjg4cU12OFluNkVzbkpENEZZZVNkSjEzeHZVRkpWZXphRWJhUnpvRTFPSU5nRy02UmNvaFZtblBqU3kyOG5GZmpoa1lNSkk4aEt3OWQ1TjhXR3M?oc=5",
-   "fonte": "Novo Momento",
-   "pub": "2026-10-30T11:15:03.000Z",
-   "resumo": "",
-   "dia": "2026-10-30"
-  },
-  {
-   "categoria": "Beleza e skincare",
-   "titulo": "Lançamentos: as melhores novidades em perfumaria, skincare, make e cabelos",
-   "link": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxOMEV4Sjd2NEVUNW82cEJYNWxCeS1jR0l1MVdkTFBBWEJEMjBRV2F5YXFrQ1c5MU5xbzVMMllzTDJ6MHFPM0pWa0lkWklZbUFLcG9xeGxldzJYSkowTGgyWGdkZFN0VVNMNFhSQUh2bkltbDgyUDVkYlFrc1M4aHlHR0lzelpBR2lhTk1hZDY3Vm02el9vX1NDTldYdmpGNjUxVWp2M20yaU42dUxrWC1FXzhPZmJlaWlTS0Q4OUFPZDM4MW9aTE1tdmx1aDRSbC1MaElUYmdZR0lrTnNVWEZ0WkRR0gHiAUFVX3lxTE4wRXhKN3Y0RVQ1bzZwQlg1bEJ5LWNHSXUxV2RMUEFYQkQyMFFXYXlhcWtDVzkxTnFvNUwyWXNMMnowcU8zSlZrSWRaSVltQUtwb3F4bGV3MlhKSjBMaDJYZ2RkU3RVU0w0WFJBSHZuSW1sODJQNWRiUWtzUzhoeUdHSXN6WkFHaWFOTWFkNjdWbTZ6X29fU0NOV1h2akY2NTFVanYzbTJpTjZ1TGtYLUVfOE9mYmVpaVNLRDg5QU9kMzgxb1pMTW12bHVoNFJsLUxoSVRiZ1lHSWtOc1VYRnRaRFE?oc=5",
-   "fonte": "Globo",
-   "pub": "2026-10-30T09:14:02.000Z",
-   "resumo": "",
-   "dia": "2026-10-30"
-  },
-  {
-   "categoria": "Tecnologia e apps",
-   "titulo": "Vmake Labs Lança Kit Completo de Ferramentas para Vídeos de Halloween Voltado a Pequenas e Médias Empresas",
-   "link": "https://news.google.com/rss/articles/CBMiigJBVV95cUxQa2g4YklGUWRaMmlBSk5xeGphR21rSnpEaWlXbExObmlCSUlUeElKN2VUci1UdGt5ZVIzQkk5cENHMHhhWDk2dnpVNG40elkwZ24wQjNLUnNxRDdaWC1WUUYtNmNqM0c4b3pXQjlkekx6NFlDMlJyR0xFcDVRbjdjLU9wLVdjVXhNSkRzOXk0U1hMVGoxTktKRGkzNmltQmpNMDFjQTlSSFJfUWJBeXR5WjlZWlU4dmw5LWRvRnRrUk1JUXJnWXVhUzc1UlUwY0FrQ2xGX1FvdU40bmJydmZpS29LZFB2VFFMc0J4NmZ3aUdRQ29oeWMwUW1WSEtXbVZJMmlOWi1fc1l5dw?oc=5",
-   "fonte": "Portal UAI",
-   "pub": "2026-10-30T04:09:00.000Z",
-   "resumo": "",
-   "dia": "2026-10-30"
-  },
-  {
-   "categoria": "Tecnologia e apps",
-   "titulo": "Como criar vídeos com IA? Especialistas indicam por onde começar",
-   "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPMHpBZXRUUE5YNGhabFAxTVlIcENaWUhMeEl1Tjk2S0ZaNm5BcEdXR0U1dmdvRk90amhJbnVIa1VGYWFHc0dUbUFOaV9IMWVYdTM3TXd5NG9sek1NV2V3NEZLVjlTZjkybEdjRGN6bnd4ZUFHLTdBaFRnazlmRnZtSU5EajZDM1dxeEt3Nmd5Ql9OQkZIcnZaSHZqSEFsUGZHd18wdzlkbExtT1N5Z0hSWHhreGxaOHBhU2doMkhJQlhYd9IB0AFBVV95cUxOT2Z1eUppNDJYYXNLVHlDT3pOeVh2U2VLbTdTc2NjeHVVWEloR01qUHpJWFplZ2ZrbUI5V3RhR2gzQ1lCV2dQLVlqdzAwSWkteDVlcmE0ZGdfeU5lOEkyVzNPOU9XNEJDQUQtT3RnYV94UmhiZlhpd3lLaGZ6TnN0RGdFWl95SUdacnpqaXhhOE1sWmNBTUl5bVZwRGhpNk9URno5VHFiZnBiMHJDdW5zOUxLVE9jN2Q5b0JJcm5EdC1zMU1MWUk5OXppNVE5S2ky?oc=5",
-   "fonte": "TechTudo",
-   "pub": "2026-10-30T04:00:01.000Z",
-   "resumo": "",
-   "dia": "2026-10-30"
-  },
-  {
-   "categoria": "Tecnologia e apps",
-   "titulo": "AIDetector365: ferramenta gratuita identifica textos produzidos por inteligência artificial e oferece recursos para melhorar a escrita",
-   "link": "https://news.google.com/rss/articles/CBMigAJBVV95cUxQREx2U0ltYk9SVUJ3REc3eE8yc1h4NEQzR0FheFIxNUUzTFhoRkVCLUVCOVFJN2N3NExrQ21zdHE3d05KRGNaWTFtdnJsTWNMSW5hY3RQTTFCYVBoUmVtdTR0b1FfRlhpQWZtQ2tYSVV5Um9xZjRkbjZxQ2N6OEpoZzFGTDNoZE1YMGNtRDU2WjhMNHNoN3ZxZmVvMGpMYW1IMDFxZjhWd3hZdktFbi1nRXFQc1l6OFZDNXNFOWdnNWk1Z3dxRGtDZUhRRGNnNTB5VHVoLTVVQl9hajBZMXZrY2ktU2xJbEN4cGViMDNVaTFwc3o2VHVJQ0xBUHFUaHpv?oc=5",
-   "fonte": "Engenharia é",
-   "pub": "2026-10-30T02:55:22.000Z",
-   "resumo": "",
-   "dia": "2026-10-30"
-  },
-  {
-   "categoria": "TikTok",
-   "titulo": "Exibir seu documento de identidade nacional para seguir a tendência: Cuidado com o risco de vazamento de informações pessoais.",
-   "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQd2hLSE1TNHQ5eHUxUlotRDhucjJodnVrZTlZck8xRjJjVTJmM1dzcHpnU2xIN2NpcGc0c2dneF9LOXpQcnhfa2xpQm1RbldoYlR4anpNRkYtWmQwaWcwcGVaZkd3U3g3WFdaYTJzZmFEeFBENnV6ZWpBZE1GX2hHaXdJY2VNcXpZdEQ3YWlkcDJOdDMwLVRYb3Nrc05LYktv?oc=5",
-   "fonte": "Vietnam.vn",
-   "pub": "2026-10-30T01:52:14.000Z",
-   "resumo": "",
-   "dia": "2026-10-30"
-  },
-  {
-   "categoria": "Instagram",
-   "titulo": "WhatsApp terá nova figurinha de localização em breve",
-   "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPNFBrRlh1amRQMzJIeTZGUE5QZVo3TGlUOHo3OE9Nd2pub1pmajVfUFQxcXM4ckhrVHVVVXVDX0QwM0hpU3ZXZkloV1V0U2lSOUlxUEF2YXZBMk9sZTNmOFF4NWpySEhmVU0xRGNXX1drU0J6ZTdobGJPQldHRE1fZzNUaHdlaFNGT09PYVBtVy1ZZ3BNdFVTT1F4bmF1Wk5fbjNV0gGoAUFVX3lxTE9GRE1QRzUyNFNRR0tpSDlBZ2s3NVJpclJFODU4SkpFdTZEVzBHSm44UHR0YTc2djdVakVyMnA5N0JrV2k2Z1N3SVpQRmxnYXhYQjR1UVd1TVNsMEE5MkFWZF9hME9NTmJGcFJkZG1MUlliZjRMM2tGUFg0TVp0c0JiVHlNQ2xRU2NYSmxCZGdfZ0E3RGJYTHBIdkxadVhacUJWLVluMUtCUQ?oc=5",
-   "fonte": "Estadão",
-   "pub": "2026-10-30T01:09:26.000Z",
-   "resumo": "",
-   "dia": "2026-10-30"
   }
  ]
 }
