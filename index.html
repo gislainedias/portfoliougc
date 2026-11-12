@@ -79,7 +79,9 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 .burger[aria-expanded="true"] i:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
 /* Capa: fundo com a textura holográfica, na horizontal */
-.hero{padding-top:calc(var(--nav-h) + 26px);position:relative;overflow:hidden;background:linear-gradient(rgba(251,246,238,.6),rgba(251,246,238,.6)),url('images/capa-fundo.jpg') center/cover no-repeat}
+.hero{padding-top:calc(var(--nav-h) + 26px);position:relative;overflow:hidden;background:var(--creme)}
+/* Estampa de renda com baixa opacidade, repetida na capa */
+.hero::before{content:"";position:absolute;inset:0;z-index:0;background:url('images/capa-renda.jpg') center top/380px auto repeat;opacity:.16;pointer-events:none}
 .blob{display:none}
 .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:.95fr 1.05fr;gap:40px;align-items:center;padding-bottom:24px}
 .hero h1{font-family:var(--boho);font-weight:400;font-size:clamp(3rem,9vw,6.4rem);text-transform:none;line-height:1.05;margin-bottom:22px}
@@ -108,6 +110,7 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 @keyframes marquee{to{transform:translateX(-50%)}}
 
 /* Sobre */
+.sec.about{background:linear-gradient(rgba(251,246,238,.6),rgba(251,246,238,.6)),url('images/capa-fundo.jpg') center/cover no-repeat}
 .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:stretch}
 .about-grid p{text-align:justify}
 .about-photo{aspect-ratio:4/5;max-width:440px;width:100%;transform:rotate(-2deg);box-shadow:0 24px 50px rgba(142,27,58,.2)}
@@ -126,6 +129,10 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 .dest-slide{width:100%;height:533px;display:flex;flex-direction:column;overflow:hidden;border-radius:20px;border:2px solid var(--tinta);box-shadow:6px 6px 0 var(--tinta);background:var(--creme)}
 .dest-embed{flex:1;position:relative;background:#FCE4EF}
 .dest-embed iframe,.dest-embed blockquote{position:absolute!important;inset:0;width:100%!important;height:100%!important;max-width:none!important;min-width:0!important;margin:0!important;border:0}
+.dest-fallback{position:absolute;inset:0;display:block;background:linear-gradient(160deg,#F3C6D3,#DAC3DF);text-decoration:none;color:var(--tinta)}
+.dest-fallback img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.dest-fallback .dest-go{position:absolute;left:14px;right:14px;bottom:16px;text-align:center;padding:11px 14px;border-radius:999px;background:var(--creme);border:2px solid var(--tinta);font-family:var(--head);font-weight:700;font-size:.92rem}
+.dest-fallback:hover .play{transform:translate(-50%,-50%) scale(1.08)}
 .dest-caption{text-align:center;margin:22px auto 0}
 .dest-num{display:block;font-family:var(--head);font-weight:900;font-size:clamp(2.2rem,4vw,3rem);color:var(--vinho);line-height:1}
 .dest-rot{display:inline-block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tinta);background:var(--amarelo);padding:3px 10px;border-radius:999px;font-weight:600;margin:10px 0 14px}
@@ -177,7 +184,37 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 .win-simple:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--tinta)}
 
 /* Serviços */
-.serv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.serv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px 24px}
+/* Estrelas pixeladas (estilo 16-bit) com o serviço escrito dentro */
+.star{position:relative;width:100%;max-width:390px;margin:0 auto;aspect-ratio:1;container-type:inline-size}
+.star-float{position:absolute;inset:0;animation:flutuar var(--ft,3.6s) ease-in-out var(--fd,0s) infinite}
+@keyframes flutuar{0%,100%{transform:translateY(0)}50%{transform:translateY(-5%)}}
+.star svg{position:absolute;inset:0;width:100%;height:100%}
+.star-txt{position:absolute;left:24%;right:24%;top:34%;bottom:22%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#000;font-weight:800}
+.star-txt .n{font-family:var(--y2k);font-weight:700;font-size:4.6cqw;color:#000;line-height:1;margin-bottom:1.2cqw}
+.star-txt h3{font-size:5cqw;font-weight:900;line-height:1.1;margin-bottom:1.6cqw;color:#000}
+.star-txt p{font-size:3.2cqw;font-weight:700;line-height:1.28;color:#000}
+/* Cenário de videogame antigo atrás das estrelas */
+.sec.game{background:linear-gradient(#C7A6F2,#DCC4F7);padding-bottom:150px}
+.sec.game .eyebrow,.sec.game .sec-title,.sec.game .sec-title .hl{color:#fff}
+.sec.game .eyebrow,.sec.game .sec-title{text-shadow:3px 3px 0 #7A3E9D}
+.sec.game .sec-title .hl{background:none}
+.sec.game .sec-sub{color:#fff;font-weight:500;text-shadow:2px 2px 0 #7A3E9D}
+.sec.game .wrap{position:relative;z-index:1}
+.game-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.cloud{position:absolute;width:130px;animation:nuvem 50s linear infinite alternate}
+.cloud svg,.bush svg{width:100%;height:auto}
+.cloud.c1{top:9%;left:3%}
+.cloud.c2{top:42%;right:4%;width:100px;animation-duration:64s;animation-direction:alternate-reverse}
+.cloud.c3{top:70%;left:8%;width:110px;animation-duration:58s}
+@keyframes nuvem{from{transform:translateX(0)}to{transform:translateX(60px)}}
+.qblock{position:absolute;top:12%;right:9%;width:54px;height:54px;display:grid;place-items:center;background:#FFD21F;border:4px solid #7A3E9D;font-family:var(--y2k);font-weight:700;font-size:1.9rem;color:#7A3E9D;animation:flutuar 2.8s ease-in-out infinite}
+.bush{position:absolute;bottom:72px;width:240px}
+.bush.b1{left:4%}
+.bush.b2{right:6%;width:190px}
+.ground{position:absolute;left:0;right:0;bottom:0;height:72px;border-top:4px solid #7A3E9D;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' shape-rendering='crispEdges'%3E%3Crect width='64' height='64' fill='%23F48FBE'/%3E%3Cpath d='M0 2h64M0 34h64M0 62h64M16 2v32M48 2v32M0 34v28M32 34v28M64 34v28' stroke='%23FFD1E6' stroke-width='2' fill='none'/%3E%3Cpath d='M0 0h64M0 32h64M16 0v32M48 0v32M0 32v32M32 32v32' stroke='%237A3E9D' stroke-width='2' fill='none'/%3E%3C/svg%3E") 0 0/64px 64px}
+@media (max-width:560px){.sec.game{padding-bottom:120px}.ground{height:56px}.bush{bottom:56px;width:160px}.bush.b2{width:130px}.qblock{display:none}}
+@media (prefers-reduced-motion:reduce){.star-float,.cloud,.qblock{animation:none}}
 
 /* Números e depoimentos */
 .proof-grid{display:flex;justify-content:center;align-items:center;gap:56px}
@@ -263,6 +300,7 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 .direct .ic img{width:100%;height:auto}
 .direct strong{display:block;font-family:var(--head);color:var(--vinho)}
 .direct span.t{font-size:.88rem;color:var(--muted);overflow-wrap:anywhere}
+.direct .boneca{width:min(210px,60%);height:auto;margin:6px auto 0;filter:drop-shadow(0 14px 18px rgba(142,27,58,.22))}
 
 /* Rodapé */
 footer.site{padding:40px 0;background:var(--tinta);color:var(--creme)}
@@ -483,7 +521,7 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
   </div>
 </section>
 <!-- ============ 5. COMO EU TE AJUDO ============ -->
-<section class="sec" id="servicos">
+<section class="sec game" id="servicos">
   <div class="wrap">
     <span class="eyebrow reveal">Como eu te ajudo</span>
     <h2 class="sec-title reveal">Seis jeitos de <span class="hl">brilhar</span> juntas</h2>
@@ -562,6 +600,7 @@ footer.site :focus-visible{outline-color:var(--amarelo)}
           <span class="ic" aria-hidden="true"><img src="images/icone-foto-coracao.png" alt=""></span>
           <span><strong>Instagram</strong><span class="t">@giislaaine</span></span>
         </a>
+        <img class="boneca" src="images/boneca-look.webp" alt="Ilustração animada de Gislaine posando com look azul xadrez" width="300" height="646" loading="lazy" decoding="async">
       </div>
     </div>
   </div>
@@ -755,12 +794,22 @@ $("#brandsTrack").innerHTML = faixa + faixa;
 if (reduzir) $("#brandsTrack").innerHTML = faixa;
 
 /* Destaques: carrossel com embed oficial (toca dentro da página, sem redirecionar) */
+/* YouTube (erro 153) e TikTok (server error) recusam tocar quando a página é aberta direto do computador (file://),
+   porque não recebem de qual site o vídeo está sendo pedido. Nesse caso mostramos um cartão com a capa e um link;
+   no site publicado (https) o player embutido funciona normalmente. */
+const emArquivoLocal = location.protocol === "file:";
+const setaPlay = '<svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>';
 function embedDestaque(d) {
+  if (emArquivoLocal && d.plataforma !== "instagram") {
+    const nome = d.plataforma === "tiktok" ? "TikTok" : "YouTube";
+    const capa = d.plataforma === "youtube" ? `<img src="https://i.ytimg.com/vi/${esc(d.videoId)}/hqdefault.jpg" alt="" loading="lazy">` : "";
+    return `<a class="dest-fallback" href="${esc(d.link)}" target="_blank" rel="noopener noreferrer" aria-label="Assistir ${esc(d.titulo)} no ${nome}">${capa}<span class="play">${setaPlay}</span><span class="dest-go">Assistir no ${nome}</span></a>`;
+  }
   if (d.plataforma === "tiktok") {
     return `<blockquote class="tiktok-embed" cite="${esc(d.link)}" data-video-id="${esc(d.videoId)}" style="max-width:300px;min-width:260px"><section></section></blockquote>`;
   }
   if (d.plataforma === "youtube") {
-    return `<iframe width="300" height="533" src="https://www.youtube.com/embed/${esc(d.videoId)}" title="${esc(d.titulo)}" style="border:0;border-radius:var(--radius)" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>`;
+    return `<iframe width="300" height="533" src="https://www.youtube.com/embed/${esc(d.videoId)}" title="${esc(d.titulo)}" style="border:0;border-radius:var(--radius)" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>`;
   }
   return `<blockquote class="instagram-media" data-instgrm-permalink="${esc(d.link)}" data-instgrm-version="14" style="max-width:300px;min-width:260px"></blockquote>`;
 }
@@ -774,7 +823,7 @@ function carregarEmbedsDestaque() {
       document.body.appendChild(s);
     } else if (window.instgrm) { window.instgrm.Embeds.process(); }
   }
-  if (DESTAQUES.some(d => d.plataforma === "tiktok")) {
+  if (!emArquivoLocal && DESTAQUES.some(d => d.plataforma === "tiktok")) {
     if (!document.getElementById("tiktok-embed-script")) {
       const s2 = document.createElement("script");
       s2.id = "tiktok-embed-script"; s2.async = true; s2.src = "https://www.tiktok.com/embed.js";
@@ -845,20 +894,98 @@ trabCarousel.addEventListener("click", e => {
   const card = e.target.closest(".work-card"); if (!card || card.querySelector("iframe")) return;
   const id = card.dataset.videoId, titulo = card.dataset.titulo;
   registrarPlay(id, nichoAtivo);
-  card.querySelector(".ph").innerHTML = `<iframe src="https://www.youtube.com/embed/${esc(id)}?autoplay=1" title="${esc(titulo)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
+  card.querySelector(".ph").innerHTML = `<iframe src="https://www.youtube.com/embed/${esc(id)}?autoplay=1" title="${esc(titulo)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>`;
 });
 mostrarNicho(nichoAtivo);
 
 /* Serviços: "janelinhas" estilo Y2K */
+/* Estrela de pixels: o desenho é gerado em uma grade 24x24 (cada quadradinho é um "pixel") */
+function estrelaPixel() {
+  const N = 24, cx = 11.5, cy = 12.9, R = 11, r = 7.4;
+  const v = [];
+  for (let k = 0; k < 10; k++) {
+    const a = -Math.PI / 2 + k * Math.PI / 5, d = k % 2 ? r : R;
+    v.push([cx + d * Math.cos(a), cy + d * Math.sin(a)]);
+  }
+  const dentro = (px, py) => {
+    let c = false;
+    for (let i = 0, j = 9; i < 10; j = i++) {
+      const [xi, yi] = v[i], [xj, yj] = v[j];
+      if ((yi > py) !== (yj > py) && px < (xj - xi) * (py - yi) / (yj - yi) + xi) c = !c;
+    }
+    return c;
+  };
+  const g = [];
+  for (let y = 0; y < N; y++) { g.push([]); for (let x = 0; x < N; x++) g[y].push(dentro(x + .5, y + .5)); }
+  const on = (x, y) => x >= 0 && y >= 0 && x < N && y < N && g[y][x];
+  let s = "";
+  const px = (x, y, f, o) => { s += `<rect x="${x}" y="${y}" width="1" height="1" fill="${f}"${o ? ` opacity="${o}"` : ""}/>`; };
+  /* contorno laranja, anel dourado por dentro, corpo amarelo e brilho claro no lado de cima/esquerda */
+  for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
+    if (!on(x, y)) continue;
+    const borda = !on(x - 1, y) || !on(x + 1, y) || !on(x, y - 1) || !on(x, y + 1);
+    if (borda) { px(x, y, "#F29220"); continue; }
+    const anel = !on(x - 2, y) || !on(x + 2, y) || !on(x, y - 2) || !on(x, y + 2) || !on(x - 1, y - 1) || !on(x + 1, y - 1) || !on(x - 1, y + 1) || !on(x + 1, y + 1);
+    if (anel) px(x, y, "#FFC81E");
+    else if (y >= 8 && y <= 9 && x >= 6 && x <= 11) px(x, y, "#FFFEC8");
+    else if (x + y < 21 && y < 14) px(x, y, "#FAF45A");
+    else px(x, y, "#FFE02A");
+  }
+  return `<svg viewBox="0 0 ${N} ${N}" shape-rendering="crispEdges" aria-hidden="true" focusable="false">${s}</svg>`;
+}
 $("#servGrid").innerHTML = SERVICOS.map((s, i) => `
-  <article class="win reveal" style="--d:${(i % 3) * .08}s">
-    ${winBar}
-    <div class="win-body">
-      <span class="n" aria-hidden="true">${String(i + 1).padStart(2, "0")}</span>
-      <h3>${esc(s.titulo)}</h3><p>${esc(s.texto)}</p>
+  <article class="star reveal" style="--d:${(i % 3) * .08}s">
+    <div class="star-float" style="--fd:${-(i * 0.7).toFixed(1)}s;--ft:${(3.4 + (i % 3) * 0.5).toFixed(1)}s">
+      ${estrelaPixel()}
+      <div class="star-txt">
+        <span class="n" aria-hidden="true">${String(i + 1).padStart(2, "0")}</span>
+        <h3>${esc(s.titulo)}</h3><p>${esc(s.texto)}</p>
+      </div>
     </div>
-    ${winFoot}
   </article>`).join("");
+
+/* Fundo de videogame antigo (nuvens, moita, tijolos e bloco de interrogação), desenhado em pixels */
+function pixelArt(linhas, paleta) {
+  const w = Math.max(...linhas.map(l => l.length));
+  let s = "";
+  linhas.forEach((l, y) => {
+    let x = 0;
+    while (x < l.length) {
+      const c = l[x];
+      if (c === "." || !paleta[c]) { x++; continue; }
+      let f = x; while (f < l.length && l[f] === c) f++;
+      s += `<rect x="${x}" y="${y}" width="${f - x}" height="1" fill="${paleta[c]}"/>`;
+      x = f;
+    }
+  });
+  return `<svg viewBox="0 0 ${w} ${linhas.length}" shape-rendering="crispEdges" aria-hidden="true" focusable="false">${s}</svg>`;
+}
+const NUVEM = pixelArt([
+  ".....kkkk.......",
+  "...kkwwwwkk.....",
+  "..kwwwwwwwwkkkk.",
+  ".kwwwwwwwwwwwwwk",
+  "kwwwwwwwwwwwwwwk",
+  "kwwwwwwwwwwwwwwk",
+  "kwwbbwwwbbwwbbwk",
+  ".kwwwbbwwwwbwwk.",
+  "..kkkkkkkkkkkk.."
+], { k: "#7A3E9D", w: "#fff", b: "#EBD9FF" });
+const MOITA = pixelArt([
+  "....kkk.......kkk.......kkk....",
+  "...kgggkk....kgggkk....kgggkk..",
+  "..kggGgggkkkkggGgggkkkkggGgggk.",
+  ".kgggggggggggggggggggggggggggggk",
+  "kggGgggggGgggggggGgggggggGggggggk",
+  "kggggggggggggggggggggggggggggggk"
+], { k: "#7A3E9D", g: "#FFA6CE", G: "#F26BAA" });
+$("#servicos").insertAdjacentHTML("afterbegin", `
+  <div class="game-bg" aria-hidden="true">
+    <span class="cloud c1">${NUVEM}</span><span class="cloud c2">${NUVEM}</span><span class="cloud c3">${NUVEM}</span>
+    <span class="qblock">?</span>
+    <span class="bush b1">${MOITA}</span><span class="bush b2">${MOITA}</span>
+    <div class="ground"></div>
+  </div>`);
 
 /* Números, resultados e depoimentos: mesma estetica de janelinha */
 ["#metricL", "#metricR"].forEach((id, i) => {
