@@ -136,6 +136,7 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 .dest-caption{text-align:center;margin:22px auto 0}
 .dest-num{display:block;font-family:var(--head);font-weight:900;font-size:clamp(2.2rem,4vw,3rem);color:var(--vinho);line-height:1}
 .dest-rot{display:inline-block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tinta);background:var(--amarelo);padding:3px 10px;border-radius:999px;font-weight:600;margin:10px 0 14px}
+.dest-extra{font-size:.85rem;font-weight:600;color:var(--vinho);margin:-4px 0 10px}
 .dest-caption h3{font-size:1.2rem;font-weight:700}
 
 /* Trabalhos */
@@ -663,7 +664,7 @@ const NUMEROS_CAPA = [
 const MARCAS = ["Eudora", "Condor", "ElevenLabs", "Cif", "Dove", "Shoppe"];
 
 /* Três conteúdos de destaque: tocam embutidos (embed oficial do YouTube/TikTok), sem sair do portfólio.
-   plataforma = "youtube" ou "tiktok".
+   plataforma = "youtube", "tiktok" ou "instagram".
    link       = link do vídeo/post (permalink limpo, sem parâmetros de rastreio) — usado só de referência.
    videoId    = o código do vídeo na URL (no YouTube Shorts, depois de "/shorts/"; no TikTok, depois de "/video/").
    numero/rotulo/titulo = texto mostrado abaixo do carrossel. Deixe numero ou rotulo "" para omitir. */
@@ -674,9 +675,9 @@ const DESTAQUES = [
   { plataforma: "youtube", link: "https://youtube.com/shorts/NcOA6RIqp6k", videoId: "NcOA6RIqp6k",
     numero: "+15K", rotulo: "views no reels",
     titulo: "Vídeo orgânico de moda" },
-  { plataforma: "tiktok", link: "https://www.tiktok.com/@gislainediasfaria/video/7686999241176190216", videoId: "7686999241176190216",
-    numero: "", rotulo: "estilo que performa muito bem",
-    titulo: "Vídeo educativo para apps" }
+  { plataforma: "instagram", link: "https://www.instagram.com/reel/DfqCB-yzcVD/", videoId: "DfqCB-yzcVD",
+    numero: "+22K", rotulo: "views no reels", extras: "+900 curtidas · +180 salvamentos",
+    titulo: "Tech Canvas para App" }
 ];
 
 /* Nichos que atendo. Clicar em um botão mostra só os trabalhos daquele nicho.
@@ -840,6 +841,7 @@ $("#destStage").innerHTML = DESTAQUES.map((d, i) => `
     <div class="dest-caption">
       ${d.numero ? `<strong class="dest-num">${esc(d.numero)}</strong>` : ""}
       ${d.rotulo ? `<span class="dest-rot">${esc(d.rotulo)}</span>` : ""}
+      ${d.extras ? `<p class="dest-extra">${esc(d.extras)}</p>` : ""}
       <h3>${esc(d.titulo)}</h3>
     </div>
   </div>`).join("");
