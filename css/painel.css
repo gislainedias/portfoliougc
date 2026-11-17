@@ -6,7 +6,7 @@
 :root{
   --vinho:#8E1B3A;
   --rosa:#F3C6D3;
-  --amarelo:#F7D35E;
+  --amarelo:#FBE8A6;
   --lilas:#DAC3DF;
   --creme:#FBF6EE;
   --tinta:#2A1620;
@@ -195,7 +195,7 @@ td.acoes-c .icon-btn{margin-left:4px}
 .dia:hover{background:rgba(243,198,211,.18)}
 .dnum{font-size:12px;font-weight:600;color:var(--muted);display:inline-grid;place-items:center;min-width:24px;height:24px;border-radius:999px}
 .dia.hoje .dnum{background:var(--vinho);color:var(--creme)}
-.dia.hoje{background:rgba(247,211,94,.16)}
+.dia.hoje{background:rgba(251,232,166,.16)}
 .add-dia{position:absolute;top:5px;right:5px;width:22px;height:22px;border-radius:50%;border:none;background:var(--vinho);color:var(--creme);font-size:15px;line-height:1;display:none;place-items:center}
 .dia:hover .add-dia{display:grid}
 .it{display:block;width:100%;text-align:left;font-size:12px;padding:2px 6px;margin-top:3px;border-radius:7px;border:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500}
@@ -228,7 +228,7 @@ td.acoes-c .icon-btn{margin-left:4px}
 .acord.aberto .seta-a{transform:rotate(180deg)}
 .acord .corpo{display:none;padding:0 16px 14px}
 .acord.aberto .corpo{display:block}
-.porque{background:rgba(247,211,94,.22);border-radius:var(--r-md);padding:10px 12px;font-size:13px;margin-bottom:10px}
+.porque{background:rgba(251,232,166,.22);border-radius:var(--r-md);padding:10px 12px;font-size:13px;margin-bottom:10px}
 .item-ck{display:flex;gap:10px;padding:8px 0;border-top:1px solid var(--linha)}
 .item-ck input{width:17px;height:17px;margin-top:3px;accent-color:var(--vinho);flex:none}
 .item-ck label{cursor:pointer;display:block}
@@ -263,7 +263,7 @@ td.acoes-c .icon-btn{margin-left:4px}
 .hist:hover{transform:translateY(-2px);border-color:rgba(142,27,58,.45)}
 .hist h3{font-size:14px}
 .hist .corpo-h{font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.hist .aprend{font-size:12.5px;color:var(--muted);background:rgba(247,211,94,.22);border-radius:var(--r-md);padding:7px 10px}
+.hist .aprend{font-size:12.5px;color:var(--muted);background:rgba(251,232,166,.22);border-radius:var(--r-md);padding:7px 10px}
 .hist .rod{display:flex;align-items:center;gap:8px;margin-top:auto;font-size:12px;color:var(--muted)}
 .h-fracasso{background:var(--rosa);color:var(--vinho)}
 .h-case{background:var(--verde);color:var(--verde-t)}
@@ -342,7 +342,7 @@ td.acoes-c .icon-btn{margin-left:4px}
 .cd-post[draggable="true"]{cursor:grab}
 .cd-post.cd-arrastando{opacity:.4}
 .cd-dia{position:relative}
-.cd-dia.cd-hoje{background:rgba(247,211,94,.16)}
+.cd-dia.cd-hoje{background:rgba(251,232,166,.16)}
 .cd-alvo{outline:2px dashed var(--vinho);outline-offset:-2px;background:var(--suave)}
 .cd-add{position:absolute;top:6px;right:6px;width:22px;height:22px;border-radius:50%;border:1px solid var(--linha);background:var(--card);color:var(--vinho);font-size:15px;line-height:1;display:grid;place-items:center;padding:0}
 .cd-add:hover{background:var(--vinho);color:var(--creme)}
