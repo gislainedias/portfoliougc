@@ -129,6 +129,13 @@ h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;color:var
 .dest-slide{width:100%;height:533px;display:flex;flex-direction:column;overflow:hidden;border-radius:20px;border:2px solid var(--tinta);box-shadow:6px 6px 0 var(--tinta);background:var(--creme)}
 .dest-embed{flex:1;position:relative;background:#FCE4EF}
 .dest-embed iframe,.dest-embed blockquote{position:absolute!important;inset:0;width:100%!important;height:100%!important;max-width:none!important;min-width:0!important;margin:0!important;border:0}
+.dest-embed{overflow:hidden}
+.dest-capa{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:var(--tinta);cursor:pointer;display:block}
+.dest-capa img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.dest-capa:hover .play{transform:translate(-50%,-50%) scale(1.08)}
+.work-card .ph{overflow:hidden}
+/* Player do YouTube ampliado e ancorado embaixo: a barra de título/Shorts que o YouTube desenha no topo fica fora da vista */
+iframe.ytp{position:absolute;inset:0;width:100%;height:100%;border:0;transform:scale(1.17);transform-origin:50% 100%}
 .dest-fallback{position:absolute;inset:0;display:block;background:linear-gradient(160deg,#F3C6D3,#DAC3DF);text-decoration:none;color:var(--tinta)}
 .dest-fallback img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .dest-fallback .dest-go{position:absolute;left:14px;right:14px;bottom:16px;text-align:center;padding:11px 14px;border-radius:999px;background:var(--creme);border:2px solid var(--tinta);font-family:var(--head);font-weight:700;font-size:.92rem}
@@ -795,6 +802,23 @@ $("#brandsTrack").innerHTML = faixa + faixa;
 if (reduzir) $("#brandsTrack").innerHTML = faixa;
 
 /* Destaques: carrossel com embed oficial (toca dentro da página, sem redirecionar) */
+/* Player do YouTube "limpo": sem barra de controles, sem título/Shorts, sem sugestões, sem anotações e sem legenda automática.
+   O vídeo só é carregado no clique (a página abre leve, só com a capa) e toca em loop, na melhor qualidade que o YouTube liberar. */
+function iframeYoutube(id, titulo) {
+  const origem = location.protocol.startsWith("http") ? `&origin=${encodeURIComponent(location.origin)}` : "";
+  const src = `https://www.youtube.com/embed/${encodeURIComponent(id)}?autoplay=1&controls=0&rel=0&modestbranding=1&iv_load_policy=3&cc_load_policy=0&playsinline=1&fs=0&disablekb=1&hl=pt-BR&loop=1&playlist=${encodeURIComponent(id)}&vq=hd1080&enablejsapi=1${origem}`;
+  return `<iframe class="ytp" src="${src}" title="${esc(titulo)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" onload="limparYoutube(this)"></iframe>`;
+}
+/* Depois que o player carrega: desliga a legenda automática e pede a maior qualidade */
+function limparYoutube(f) {
+  const enviar = () => {
+    if (!f.contentWindow) return;
+    const cmd = (func, args) => f.contentWindow.postMessage(JSON.stringify({ event: "command", func, args: args || [] }), "*");
+    f.contentWindow.postMessage(JSON.stringify({ event: "listening", id: 1, channel: "widget" }), "*");
+    cmd("unloadModule", ["captions"]); cmd("unloadModule", ["cc"]); cmd("setPlaybackQuality", ["hd1080"]);
+  };
+  [0, 600, 1500, 3000].forEach(ms => setTimeout(enviar, ms));
+}
 /* YouTube (erro 153) e TikTok (server error) recusam tocar quando a página é aberta direto do computador (file://),
    porque não recebem de qual site o vídeo está sendo pedido. Nesse caso mostramos um cartão com a capa e um link;
    no site publicado (https) o player embutido funciona normalmente. */
@@ -810,7 +834,7 @@ function embedDestaque(d) {
     return `<blockquote class="tiktok-embed" cite="${esc(d.link)}" data-video-id="${esc(d.videoId)}" style="max-width:300px;min-width:260px"><section></section></blockquote>`;
   }
   if (d.plataforma === "youtube") {
-    return `<iframe width="300" height="533" src="https://www.youtube.com/embed/${esc(d.videoId)}" title="${esc(d.titulo)}" style="border:0;border-radius:var(--radius)" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>`;
+    return `<button type="button" class="dest-capa" data-yt="${esc(d.videoId)}" data-titulo="${esc(d.titulo)}" aria-label="Tocar ${esc(d.titulo)}"><img src="https://i.ytimg.com/vi/${esc(d.videoId)}/hqdefault.jpg" alt="" loading="lazy"><span class="play">${setaPlay}</span></button>`;
   }
   return `<blockquote class="instagram-media" data-instgrm-permalink="${esc(d.link)}" data-instgrm-version="14" style="max-width:300px;min-width:260px"></blockquote>`;
 }
@@ -846,6 +870,10 @@ $("#destStage").innerHTML = DESTAQUES.map((d, i) => `
     </div>
   </div>`).join("");
 carregarEmbedsDestaque();
+$("#destStage").addEventListener("click", e => {
+  const b = e.target.closest(".dest-capa"); if (!b) return;
+  b.parentElement.innerHTML = iframeYoutube(b.dataset.yt, b.dataset.titulo);
+});
 
 
 /* Trabalhos: um carrossel por nicho. Capa real do YouTube; clique troca a capa pelo player embutido. */
@@ -896,7 +924,7 @@ trabCarousel.addEventListener("click", e => {
   const card = e.target.closest(".work-card"); if (!card || card.querySelector("iframe")) return;
   const id = card.dataset.videoId, titulo = card.dataset.titulo;
   registrarPlay(id, nichoAtivo);
-  card.querySelector(".ph").innerHTML = `<iframe src="https://www.youtube.com/embed/${esc(id)}?autoplay=1" title="${esc(titulo)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>`;
+  card.querySelector(".ph").innerHTML = iframeYoutube(id, titulo);
 });
 mostrarNicho(nichoAtivo);
 
